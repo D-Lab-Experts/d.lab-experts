@@ -4,6 +4,7 @@
 //   2. public/favicon-16.png          — browser tab favicon (small)
 //   3. public/favicon-32.png          — browser tab favicon (retina)
 //   4. public/apple-touch-icon.png    — iOS / Android home screen icon (180×180)
+//   5. .github/banner.png             — wordmark on dark panel for the README
 //
 // The sources live as large square PNGs (480×480 and 256×256) with significant
 // transparent padding around the actual glyph. Sharp's .trim() crops the
@@ -17,6 +18,7 @@ import { dirname, join } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(__dirname, '..', 'public');
+const GITHUB_DIR = join(__dirname, '..', '.github');
 
 // Dark site background — matches var(--black) in global.css. Used as the
 // opaque fill behind the white glyph so the favicon is legible regardless
@@ -78,10 +80,57 @@ async function buildFavicons() {
   }
 }
 
+/** ─── 3. README banner ────────────────────────────────────────────── */
+// The wordmark is white-on-transparent, so it vanishes on GitHub's light
+// theme. This generates a rectangular PNG with the wordmark centered on a
+// dark panel, suitable for embedding at the top of README.md. The banner
+// goes to .github/ (conventional place for repo meta-assets) so it doesn't
+// pollute the deployed `public/` tree.
+import { mkdir } from 'node:fs/promises';
+
+const BANNER_WIDTH = 860;
+const BANNER_HEIGHT = 240;
+
+async function buildReadmeBanner() {
+  await mkdir(GITHUB_DIR, { recursive: true });
+
+  const src = join(PUBLIC, 'd.lab.png');
+  const trimmed = await sharp(src)
+    .trim({ threshold: 10 })
+    .toBuffer({ resolveWithObject: true });
+  console.log(`[banner] wordmark trimmed to ${trimmed.info.width}×${trimmed.info.height}`);
+
+  // Scale the wordmark to fit a comfortable width inside the banner,
+  // preserving aspect ratio. Leaving ~35% of canvas width as horizontal
+  // padding gives the mark room to breathe.
+  const innerMaxWidth = Math.round(BANNER_WIDTH * 0.62);
+  const aspectRatio = trimmed.info.height / trimmed.info.width;
+  const innerHeight = Math.round(innerMaxWidth * aspectRatio);
+
+  const glyph = await sharp(trimmed.data)
+    .resize(innerMaxWidth, innerHeight, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .toBuffer();
+
+  await sharp({
+    create: {
+      width: BANNER_WIDTH,
+      height: BANNER_HEIGHT,
+      channels: 4,
+      background: DARK_BG,
+    },
+  })
+    .composite([{ input: glyph, gravity: 'center' }])
+    .png({ compressionLevel: 9 })
+    .toFile(join(GITHUB_DIR, 'banner.png'));
+
+  console.log(`[banner] wrote .github/banner.png (${BANNER_WIDTH}×${BANNER_HEIGHT})`);
+}
+
 /** ─── entrypoint ──────────────────────────────────────────────────── */
 async function run() {
   await buildWordmark();
   await buildFavicons();
+  await buildReadmeBanner();
   console.log('\n✓ brand assets regenerated');
 }
 

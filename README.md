@@ -1,10 +1,20 @@
 <div align="center">
 
-# D.Lab
+<img src=".github/banner.png" alt="D.Lab — Data Intelligence & Cybersecurity" width="720" />
 
 **Data Intelligence & Cybersecurity**
 
-[dlabexperts.com](https://dlabexperts.com) · [LinkedIn](https://www.linkedin.com/company/d-lab-intelligence) · [contato@dlabexperts.com](mailto:contato@dlabexperts.com)
+[![Website][website-shield]][website-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Email][email-shield]][email-url]
+
+<br />
+
+[![Astro][astro-shield]][astro-url]
+[![TypeScript][typescript-shield]][typescript-url]
+[![MDX][mdx-shield]][mdx-url]
+[![Chart.js][chartjs-shield]][chartjs-url]
+[![Vercel][vercel-shield]][vercel-url]
 
 </div>
 
@@ -96,3 +106,23 @@ Rigor de laboratório. Aplicação de negócio.
 <sub>São Paulo · Brasil</sub>
 
 </div>
+
+<!-- ─── Reference-style badges ────────────────────────────────── -->
+
+[website-shield]: https://img.shields.io/badge/dlabexperts.com-B18CFF?style=for-the-badge&logo=googlechrome&logoColor=white
+[website-url]: https://dlabexperts.com
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white
+[linkedin-url]: https://www.linkedin.com/company/d-lab-intelligence
+[email-shield]: https://img.shields.io/badge/contato@dlabexperts.com-00E5A0?style=for-the-badge&logo=gmail&logoColor=white
+[email-url]: mailto:contato@dlabexperts.com
+
+[astro-shield]: https://img.shields.io/badge/Astro-BC52EE?style=for-the-badge&logo=astro&logoColor=white
+[astro-url]: https://astro.build
+[typescript-shield]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
+[mdx-shield]: https://img.shields.io/badge/MDX-1B1F24?style=for-the-badge&logo=mdx&logoColor=white
+[mdx-url]: https://mdxjs.com/
+[chartjs-shield]: https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white
+[chartjs-url]: https://www.chartjs.org/
+[vercel-shield]: https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white
+[vercel-url]: https://vercel.com
