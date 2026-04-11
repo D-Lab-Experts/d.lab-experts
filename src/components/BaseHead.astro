@@ -38,12 +38,15 @@ const imageURL = new URL(image, Astro.site);
 <meta name="author" content={author} />
 <link rel="canonical" href={canonicalURL} />
 
-<link rel="icon" type="image/png" href="/d.lab-favicon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="alternate" type="application/rss+xml" title="D.Lab Research · Pesquisas Públicas" href="/rss.xml" />
+
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
 <link
-  href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,900&display=swap"
+  href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap"
   rel="stylesheet"
 />
 

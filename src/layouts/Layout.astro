@@ -52,8 +52,12 @@ const {
     <Footer />
 
     <script>
+      // ══ REDUCED MOTION: skip all decorative animations ══════════════════
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       // ══ GEOMETRIC INTELLIGENCE CANVAS ══════════════════════════════════
       (function () {
+        if (reducedMotion) return;
         const canvas = document.getElementById('geo-canvas') as HTMLCanvasElement | null;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
@@ -282,6 +286,7 @@ const {
 
       // ══ SECTION FLOATING PARTICLES ════════════════════════════════════
       (function () {
+        if (reducedMotion) return;
         const colors: Record<string, { r: number; g: number; b: number }> = {
           lilac: { r: 177, g: 140, b: 255 },
           blue:  { r: 77,  g: 163, b: 255 },
@@ -374,7 +379,7 @@ const {
       (function () {
         const el = document.getElementById('rotate-word');
         if (!el) return;
-        const words = ['críticas.', 'impactantes.', 'lucrativas.'];
+        const words = ['críticas.', 'irreversíveis.', 'sem ensaio.'];
         const typeSpeed = 90;
         const deleteSpeed = 60;
         const pauseAfterType = 2000;
@@ -410,6 +415,14 @@ const {
         }
         setTimeout(tick, 1200);
       })();
+    </script>
+
+    <!-- Vercel Analytics + Speed Insights (only active when deployed on Vercel) -->
+    <script>
+      import { inject } from '@vercel/analytics';
+      import { injectSpeedInsights } from '@vercel/speed-insights';
+      inject();
+      injectSpeedInsights();
     </script>
   </body>
 </html>

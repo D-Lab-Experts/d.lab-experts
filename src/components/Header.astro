@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  active?: 'home' | 'about' | 'segments' | 'products' | 'blog';
+  active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato';
 }
 const { active } = Astro.props;
 
@@ -10,13 +10,14 @@ const links: Array<{ href: string; label: string; key: Props['active'] }> = [
   { href: '/#segments', label: 'Segmentos', key: 'segments' },
   { href: '/#products', label: 'Produtos', key: 'products' },
   { href: '/blog', label: 'Pesquisas Públicas', key: 'blog' },
+  { href: '/contato', label: 'Contato', key: 'contato' },
 ];
 ---
 
 <nav id="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <img src="/d.lab.png" alt="D.Lab" class="nav-logo-img" />
+    <a href="/" class="nav-logo" aria-label="D.Lab, ir para a home">
+      <img src="/d.lab-mark.webp" alt="D.Lab" class="nav-logo-img" width="71" height="16" />
     </a>
     <ul class="nav-links">
       {links.map((link) => (
@@ -26,10 +27,9 @@ const links: Array<{ href: string; label: string; key: Props['active'] }> = [
       ))}
     </ul>
     <div class="nav-ctas">
-      <a href="mailto:contato@dlab.com.br" class="btn btn-ghost btn-sm">Falar com a equipe</a>
-      <a href="mailto:contato@dlab.com.br" class="btn btn-primary btn-sm">Iniciar análise D.Lab →</a>
+      <a href="/contato" class="btn btn-primary btn-sm">Propor um problema →</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -40,7 +40,6 @@ const links: Array<{ href: string; label: string; key: Props['active'] }> = [
     <a href={link.href} data-mm-link>{link.label}</a>
   ))}
   <div class="mobile-ctas">
-    <a href="mailto:contato@dlab.com.br" class="btn btn-ghost">Falar com a equipe</a>
-    <a href="mailto:contato@dlab.com.br" class="btn btn-primary">Iniciar análise D.Lab →</a>
+    <a href="/contato" class="btn btn-primary">Propor um problema →</a>
   </div>
 </div>

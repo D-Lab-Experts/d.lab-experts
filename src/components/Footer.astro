@@ -1,25 +1,35 @@
 ---
 const year = new Date().getFullYear();
+// Buttondown embed endpoint. Replace {USERNAME} once Buttondown account is live.
+// Fallback: form posts nowhere and analytics event fires — no crash.
+const BUTTONDOWN_USER = import.meta.env.PUBLIC_BUTTONDOWN_USER ?? 'REPLACE_ME';
+const newsletterAction = `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USER}`;
 ---
 
 <footer id="footer">
   <div class="container">
     <!-- Mini manifesto -->
     <div class="foot-manifesto fi">
-      <p class="foot-manifesto-text">"Em um mundo onde dados sobram e clareza falta, construímos a ponte entre informação bruta e decisão inteligente."</p>
+      <p class="foot-manifesto-text">"Não vendemos certeza. Entregamos leitura de contexto boa o suficiente para a decisão se sustentar de pé."</p>
     </div>
 
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="/d.lab.png" alt="D.Lab" class="foot-logo-img" />
-        <p>Inteligência de dados, cybersegurança e IA. Consultoria premium para empresas que querem decidir com precisão e operar com segurança.</p>
-        <div class="foot-newsletter">
-          <div class="foot-newsletter-label">Receba insights de inteligência estratégica</div>
+        <img src="/d.lab-mark.webp" alt="D.Lab" class="foot-logo-img" width="98" height="22" loading="lazy" />
+        <p>Laboratório brasileiro de pesquisa aplicada em inteligência de dados e cybersegurança. Trabalho sob NDA, com escopo negociado por projeto.</p>
+        <form
+          class="foot-newsletter"
+          action={newsletterAction}
+          method="POST"
+          target="popupwindow"
+          data-track="newsletter_subscribe"
+        >
+          <label class="foot-newsletter-label" for="nl-email">Nota semanal da mesa de pesquisa. O que os dados estão dizendo, direto.</label>
           <div class="foot-newsletter-row">
-            <input type="email" class="foot-newsletter-input" placeholder="seu@email.com" />
-            <button class="foot-newsletter-btn">Inscrever</button>
+            <input id="nl-email" type="email" name="email" required class="foot-newsletter-input" placeholder="voce@empresa.com.br" autocomplete="email" />
+            <button type="submit" class="foot-newsletter-btn">Inscrever</button>
           </div>
-        </div>
+        </form>
       </div>
       <div class="foot-col">
         <h4>Serviços</h4>
@@ -42,17 +52,18 @@ const year = new Date().getFullYear();
       <div class="foot-col">
         <h4>Contato</h4>
         <ul>
-          <li><a href="mailto:contato@dlab.com.br">E-mail</a></li>
-          <li><a href="https://www.linkedin.com/company/d-lab-intelligence" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="mailto:contato@dlab.com.br">Solicitar análise</a></li>
-          <li><a href="mailto:contato@dlab.com.br">Falar com a equipe</a></li>
+          <li><a href="/contato">Propor um problema</a></li>
+          <li><a href="/contato">Apresentar o contexto</a></li>
+          <li><a href="mailto:contato@dlabexperts.com">E-mail direto</a></li>
+          <li><a href="https://www.linkedin.com/company/d-lab-intelligence" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="/rss.xml">RSS das pesquisas</a></li>
         </ul>
       </div>
     </div>
 
     <div class="foot-seal">
       <div class="foot-seal-badge">
-        <img src="/d.lab-icon.png" alt="" class="foot-seal-icon" />
+        <img src="/d.lab-icon.webp" alt="" class="foot-seal-icon" width="16" height="16" loading="lazy" />
         Data Intelligence & Cybersecurity
       </div>
     </div>

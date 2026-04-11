@@ -11,6 +11,9 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     author: z.string().default('D.Lab Research'),
+    // Track determines which section the post appears under on /blog.
+    // 'intelligence' = pesquisa/inteligência (default); 'cybersec' = cybersegurança.
+    track: z.enum(['intelligence', 'cybersec']).default('intelligence'),
     category: z.string(),
     tags: z.array(z.string()).default([]),
     // Long-tail SEO keywords (in addition to tags)

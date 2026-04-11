@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://dlab.com.br',
+  site: 'https://dlabexperts.com',
   integrations: [mdx(), sitemap()],
   build: {
     inlineStylesheets: 'auto',

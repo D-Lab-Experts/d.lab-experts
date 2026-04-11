@@ -10,7 +10,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
 <Layout
   title="D.Lab | Inteligência de Dados & Cybersegurança"
-  description="Consultoria de inteligência de dados e cybersegurança. Análise de mercado, concorrência e público, pentest, segurança digital, implementação de IA e transformação digital."
+  description="Laboratório brasileiro de pesquisa aplicada em inteligência de dados e cybersegurança. Análise estratégica, inteligência competitiva, pentest, consultoria de segurança, IA e automação. Trabalho sob NDA."
   active="home"
 >
   <!-- ═══════════════ HERO ══════════════════════════════════════════ -->
@@ -46,27 +46,27 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
     <div class="hero-inner">
       <div class="fi d1">
-        <div class="hero-tag"><span class="tag-dot"></span>Inteligência de Dados & Cybersegurança</div>
+        <div class="hero-tag"><span class="tag-dot"></span>Pesquisa aplicada · Inteligência · Cybersegurança</div>
         <h1 class="hero-h1">
           Inteligência<br>para <span class="hero-accent">decisões<br><span class="hero-rotate-word" id="rotate-word"></span></span>
         </h1>
-        <p class="hero-sub">Inteligência de dados, cybersegurança e IA para empresas que precisam decidir com precisão e operar com segurança. Da análise estratégica ao pentest, da automação à proteção digital.</p>
+        <p class="hero-sub">Laboratório brasileiro de pesquisa aplicada para empresas que não podem errar a próxima decisão. Cruzamos fontes, testamos infraestruturas e entregamos raciocínio exposto. Não opinião embalada.</p>
         <div class="hero-ctas">
-          <a href="mailto:contato@dlab.com.br" class="btn btn-primary">Solicitar diagnóstico estratégico →</a>
-          <a href="#demo" class="btn btn-ghost">Ver exemplo de relatório</a>
+          <a href="/contato" class="btn btn-primary">Propor um problema →</a>
+          <a href="/blog" class="btn btn-ghost">Ler uma pesquisa aberta</a>
         </div>
         <div class="hero-stats">
           <div>
-            <div class="hero-stat-val">120+</div>
-            <div class="hero-stat-lbl">Análises entregues</div>
+            <div class="hero-stat-val">NDA</div>
+            <div class="hero-stat-lbl">Padrão de entrega</div>
           </div>
           <div>
-            <div class="hero-stat-val">6 segmentos</div>
-            <div class="hero-stat-lbl">De atuação</div>
+            <div class="hero-stat-val">Sênior</div>
+            <div class="hero-stat-lbl">Sem juniores entre você e o analista</div>
           </div>
           <div>
-            <div class="hero-stat-val">98%</div>
-            <div class="hero-stat-lbl">Taxa de recomendação</div>
+            <div class="hero-stat-val">Protocolo</div>
+            <div class="hero-stat-lbl">Mesma metodologia documentada em todo projeto</div>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
         <div class="hero-card">
           <div class="hc-header">
             <div style="display:flex;align-items:center">
-              <img src="/d.lab-icon.png" alt="" class="hc-icon" />
+              <img src="/d.lab-icon.webp" alt="" class="hc-icon" width="28" height="28" />
               <div>
                 <div class="hc-title">Cafeteria Premium</div>
                 <div class="hc-sub">Santo André, SP · Análise de viabilidade</div>
@@ -127,7 +127,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
           <div class="hc-verdict">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L10 6H15L11 9.5L12.5 15L8 11.5L3.5 15L5 9.5L1 6H6L8 1Z" fill="url(#g1)" opacity=".9"/></svg>
-            <div class="hc-verdict-text"><strong>Recomendação:</strong> Alto potencial. Demanda reprimida no raio de 800m. Recomendamos avançar.</div>
+            <div class="hc-verdict-text"><strong>Nota D.Lab:</strong> Demanda reprimida no raio de 800m. Janela curta. Avançar.</div>
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
         <h2 class="brand-title">
           Clareza. Estrutura. <span class="gradient-text">Vantagem.</span>
         </h2>
-        <p class="brand-desc">Transformamos dados dispersos em inteligência acionável para decisões críticas.</p>
+        <p class="brand-desc">Quando a decisão é cara demais pra palpite, o trabalho é de laboratório.</p>
       </div>
     </div>
   </section>
@@ -172,13 +172,31 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     </svg>
   </div>
 
-  <!-- ═══════════════ LOGOS ═════════════════════════════════════════ -->
+  <!-- ═══════════════ TRUST BAR ═════════════════════════════════════ -->
   <div id="logos">
     <div class="container">
-      <p class="logos-lbl label">Confiados por quem decide com estratégia.</p>
-      <div class="logos-row">
-        <div class="logo-ph"></div><div class="logo-ph"></div><div class="logo-ph"></div>
-        <div class="logo-ph"></div><div class="logo-ph"></div>
+      <p class="logos-lbl label">Padrões D.Lab</p>
+      <div class="trust-row">
+        <div class="trust-item">
+          <div class="trust-val">NDA</div>
+          <div class="trust-lbl">Confidencialidade como padrão</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">Sênior</div>
+          <div class="trust-lbl">Sem cadeia de juniores entre você e o analista</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">Dual</div>
+          <div class="trust-lbl">Inteligência e cyber na mesma operação</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">Método</div>
+          <div class="trust-lbl">Cada etapa rastreável, zero caixa-preta</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">Aplicada</div>
+          <div class="trust-lbl">Pesquisa pública como prova do método</div>
+        </div>
       </div>
     </div>
   </div>
@@ -192,8 +210,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <div class="container">
       <div class="seg-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">Onde atuamos</span></div>
-        <h2 class="section-title">Inteligência aplicada a<br><span class="gradient-text">qualquer decisão complexa.</span></h2>
-        <p class="section-sub" style="margin:0 auto">De startups a grandes operações, do posicionamento de marca à expansão de mercado. Onde há decisão complexa, dado disperso ou transformação necessária, há método D.Lab.</p>
+        <h2 class="section-title">Seis verticais.<br><span class="gradient-text">Um único protocolo.</span></h2>
+        <p class="section-sub" style="margin:0 auto">Do mercado à segurança, da concorrência à política. O mesmo rigor metodológico em qualquer decisão.</p>
       </div>
       <div class="seg-grid">
         <div class="seg-card fi d1">
@@ -202,7 +220,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           </div>
           <div class="seg-tag" style="color:var(--lilac)">Mercado & Público</div>
           <div class="seg-name">Análise de Mercado & Público</div>
-          <p class="seg-desc">Mapeamento de público-alvo, dimensionamento de mercado, análise de demanda e perfil de consumidor. Quem é o seu cliente, onde está e o que busca.</p>
+          <p class="seg-desc">Quem é o cliente real, onde ele está, o que ele busca, e quanto disso você pode capturar. Sem achismo, sem persona genérica.</p>
           <div class="seg-samples">
             <span class="seg-sample">Perfil de público</span>
             <span class="seg-sample">Dimensionamento de mercado</span>
@@ -216,7 +234,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           </div>
           <div class="seg-tag" style="color:var(--blue)">Estratégia</div>
           <div class="seg-name">Análise Estratégica de Mercado</div>
-          <p class="seg-desc">Análise de mercado estratégica, qualitativa e quantitativa. Consultoria para posicionar sua empresa, identificar oportunidades e tomar decisões competitivas fundamentadas em dados.</p>
+          <p class="seg-desc">Dimensionamento, posicionamento e janelas de oportunidade. Para quando a decisão é cara demais pra palpite de reunião.</p>
           <div class="seg-samples">
             <span class="seg-sample">Análise estratégica</span>
             <span class="seg-sample">Consultoria competitiva</span>
@@ -230,7 +248,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           </div>
           <div class="seg-tag" style="color:var(--yellow)">Política</div>
           <div class="seg-name">Análise Política e Eleitoral</div>
-          <p class="seg-desc">Pesquisa de opinião pública, mapeamento de eleitorado, análise de sentimento e modelagem de cenários eleitorais com rigor metodológico.</p>
+          <p class="seg-desc">Opinião pública, eleitorado, sentimento e modelagem de cenário. Campanha é disputa de leitura de contexto antes de ser disputa de narrativa.</p>
           <div class="seg-samples">
             <span class="seg-sample">Mapeamento eleitoral</span>
             <span class="seg-sample">Opinião pública</span>
@@ -244,7 +262,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           </div>
           <div class="seg-tag" style="color:var(--violet)">Tendências</div>
           <div class="seg-name">Estudos de Tendência</div>
-          <p class="seg-desc">Identificação de movimentos culturais, comportamentais e de consumo antes que se tornem mainstream. Antecipação como vantagem competitiva.</p>
+          <p class="seg-desc">Sinais fracos antes do consenso. Para quem precisa se mover antes do setor inteiro enxergar.</p>
           <div class="seg-samples">
             <span class="seg-sample">Tendências de consumo</span>
             <span class="seg-sample">Comportamento digital</span>
@@ -258,7 +276,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           </div>
           <div class="seg-tag" style="color:var(--green)">Concorrência</div>
           <div class="seg-name">Inteligência Competitiva</div>
-          <p class="seg-desc">Mapeamento profundo de concorrentes, benchmarking de mercado e análise de posicionamento. Entenda onde sua empresa está e onde deveria estar.</p>
+          <p class="seg-desc">Dossiê dos concorrentes reais, não os da sua cabeça. Força, posicionamento, pontos cegos, e o que eles ainda não viram.</p>
           <div class="seg-samples">
             <span class="seg-sample">Análise de concorrentes</span>
             <span class="seg-sample">Benchmarking de mercado</span>
@@ -272,7 +290,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           </div>
           <div class="seg-tag" style="color:var(--cyan)">Segurança</div>
           <div class="seg-name">Cybersegurança</div>
-          <p class="seg-desc">Pentest, análise de vulnerabilidades, consultoria de segurança digital e proteção de infraestrutura. Para empresas que precisam operar com confiança e conformidade.</p>
+          <p class="seg-desc">Pentest, análise de vulnerabilidades e consultoria ofensiva. Descobrimos o que um atacante descobriria, antes dele, e deixamos documentado.</p>
           <div class="seg-samples">
             <span class="seg-sample">Pentest</span>
             <span class="seg-sample">Análise de vulnerabilidades</span>
@@ -306,12 +324,12 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <h3>Sem D.Lab</h3>
           </div>
           <ul class="prob-list">
-            <li><span class="prob-bul r"></span>Decisões baseadas em feeling e experiência anedótica</li>
-            <li><span class="prob-bul r"></span>Análise de concorrência feita no olho, sem dados reais</li>
-            <li><span class="prob-bul r"></span>Processos manuais que consomem tempo e dinheiro</li>
-            <li><span class="prob-bul r"></span>Sem acesso à consultoria estratégica de alto padrão</li>
-            <li><span class="prob-bul r"></span>Decisões de investimento sem validação de mercado</li>
-            <li><span class="prob-bul r"></span>Concorrência adotando IA enquanto a operação fica para trás</li>
+            <li><span class="prob-bul r"></span>Decisão baseada em feeling e anedota</li>
+            <li><span class="prob-bul r"></span>Concorrência "analisada" no olho</li>
+            <li><span class="prob-bul r"></span>Processos manuais ocupando tempo de decisão</li>
+            <li><span class="prob-bul r"></span>Investimento sem leitura de demanda real</li>
+            <li><span class="prob-bul r"></span>Infraestrutura exposta que ninguém mapeou</li>
+            <li><span class="prob-bul r"></span>IA adiada enquanto o concorrente automatiza</li>
           </ul>
         </div>
 
@@ -351,7 +369,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
               </div>
               <div class="prob-face bottom"></div>
             </div>
-            <img src="/d.lab-icon2.png" alt="" class="prob-icon-mark" />
+            <img src="/d.lab-icon2.webp" alt="" class="prob-icon-mark" width="28" height="28" loading="lazy" />
           </div>
           <div class="prob-arrow">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -365,12 +383,12 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <h3>Com D.Lab</h3>
           </div>
           <ul class="prob-list">
-            <li><span class="prob-bul g"></span>Análise estratégica com dados reais e metodologia validada</li>
-            <li><span class="prob-bul g"></span>Mapeamento completo de mercado e oportunidades</li>
-            <li><span class="prob-bul g"></span>Agentes de IA e automação implementados na operação</li>
-            <li><span class="prob-bul g"></span>Consultoria de nível McKinsey acessível para PMEs</li>
-            <li><span class="prob-bul g"></span>Investimentos, lançamentos e posicionamento com inteligência validada</li>
-            <li><span class="prob-bul g"></span>Operação na fronteira da inovação</li>
+            <li><span class="prob-bul g"></span>Pesquisa aplicada antes da decisão, não depois</li>
+            <li><span class="prob-bul g"></span>Concorrentes mapeados com dado, não com print</li>
+            <li><span class="prob-bul g"></span>IA implementada onde há ROI, não onde há moda</li>
+            <li><span class="prob-bul g"></span>Investimento calibrado por leitura de mercado real</li>
+            <li><span class="prob-bul g"></span>Perímetro testado por quem atacaria primeiro</li>
+            <li><span class="prob-bul g"></span>Operação que sobrevive à próxima tentativa</li>
           </ul>
         </div>
       </div>
@@ -387,7 +405,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <div class="how-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">Metodologia</span></div>
         <h2 class="section-title">Como funciona</h2>
-        <p class="section-sub" style="margin:0 auto">Da pergunta de negócio à decisão acionável em 4 etapas.</p>
+        <p class="section-sub" style="margin:0 auto">Da pergunta à decisão acionável, em quatro etapas documentadas.</p>
       </div>
       <div class="steps-grid fi">
         <div class="step">
@@ -429,52 +447,52 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <div class="container">
       <div class="how-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">Produtos & Serviços</span></div>
-        <h2 class="section-title">Da inteligência à proteção.<br><span class="gradient-text">Tudo sob medida.</span></h2>
-        <p class="section-sub" style="margin:0 auto">Análises que fundamentam decisões e serviços de segurança que protegem operações. Cada entrega calibrada para o momento e o risco certo.</p>
+        <h2 class="section-title">Três formatos de trabalho.<br><span class="gradient-text">Cada um ajustado ao risco.</span></h2>
+        <p class="section-sub" style="margin:0 auto">Pesquisa aplicada e operações de segurança. Calibramos profundidade, escopo e prazo pela decisão em jogo. Nunca pelo pacote de prateleira.</p>
       </div>
 
       <div style="margin-bottom:12px" class="fi"><span class="label" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:16px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><rect x="8" y="1" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><rect x="1" y="8" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><path d="M10.5 8v5M8 10.5h5" stroke="url(#g1)" stroke-width="1" stroke-linecap="round"/></svg>Inteligência de Dados</span></div>
       <div class="prod-grid fi">
         <div class="prod-card fi-l d1">
           <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="url(#g1)" stroke-width="1.6"/><path d="M13 8v5l3.5 2" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-          <div class="prod-name">Relatório Essencial</div>
-          <p class="prod-desc">Análise estratégica focada em uma pergunta-chave de negócio. Ideal para validar uma hipótese antes de tomar a decisão.</p>
+          <div class="prod-name">Relatório de Base</div>
+          <p class="prod-desc">Pesquisa aplicada focada em uma pergunta-chave. Para quando a hipótese já existe e falta o rigor antes de mover.</p>
           <ul class="prod-feats">
-            <li>Análise de mercado, concorrência ou público-alvo</li>
+            <li>Pesquisa de mercado, concorrência ou público-alvo</li>
             <li>Mapeamento de competidores diretos e indiretos</li>
             <li>Dimensionamento de oportunidade com dados reais</li>
             <li>Score de viabilidade com metodologia D.Lab</li>
-            <li>Relatório em PDF estruturado com recomendação</li>
+            <li>Documento estruturado com recomendação exposta</li>
           </ul>
-          <a href="mailto:contato@dlab.com.br" class="prod-cta">Solicitar diagnóstico →</a>
+          <a href="/contato" class="prod-cta">Propor a pergunta →</a>
         </div>
         <div class="prod-card featured fi d2">
           <span class="badge badge-lilac prod-badge">★ Mais solicitado</span>
           <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><path d="M5 20L13 4l8 16H5z" stroke="url(#g1)" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.5 15h11" stroke="url(#g1)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-          <div class="prod-name">Relatório Premium</div>
-          <p class="prod-desc">Análise profunda e multidimensional com dados temporais, cruzamento de fontes e interpretação ao vivo. Para decisões de alto impacto.</p>
+          <div class="prod-name">Relatório Aprofundado</div>
+          <p class="prod-desc">Pesquisa multidimensional com dados temporais, cruzamento de múltiplas fontes e sessão de interpretação com o analista. Para decisões de alto impacto.</p>
           <ul class="prod-feats">
-            <li>Tudo do Essencial, mais:</li>
+            <li>Tudo do Base, mais:</li>
             <li>Análise temporal, sazonalidade e tendências</li>
             <li>Cruzamento de múltiplas fontes de dados</li>
             <li>Comparativo entre até 3 cenários ou competidores</li>
             <li>Perfil de público e estimativa de demanda latente</li>
-            <li>Call de interpretação com o analista (60min)</li>
+            <li>Sessão de interpretação com o analista (60min)</li>
           </ul>
-          <a href="mailto:contato@dlab.com.br" class="prod-cta">Agendar avaliação inteligente →</a>
+          <a href="/contato" class="prod-cta">Apresentar o contexto →</a>
         </div>
         <div class="prod-card fi-r d1">
           <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><rect x="4" y="7" width="18" height="13" rx="3" stroke="url(#g-green)" stroke-width="1.5"/><path d="M9 7V5.5a4 4 0 018 0V7" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="14" r="1.5" fill="url(#g-green)"/></svg></div>
           <div class="prod-name">Consultoria de Transformação</div>
-          <p class="prod-desc">Implementação end-to-end de processos, agentes de IA e automação. Para empresas que querem operar na fronteira da inovação.</p>
+          <p class="prod-desc">Implementação end-to-end de IA, automação e processos na operação. Para quando o que trava não é a decisão. É a execução.</p>
           <ul class="prod-feats">
-            <li>Diagnóstico estratégico da operação</li>
+            <li>Diagnóstico técnico da operação</li>
             <li>Implementação de agentes de IA</li>
             <li>Automação de processos críticos</li>
             <li>Fluxos inteligentes e integração de sistemas</li>
             <li>Acompanhamento e evolução contínua</li>
           </ul>
-          <a href="mailto:contato@dlab.com.br" class="prod-cta">Iniciar transformação →</a>
+          <a href="/contato" class="prod-cta">Iniciar conversa →</a>
         </div>
       </div>
 
@@ -491,7 +509,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <li>Relatório com classificação CVSS</li>
             <li>Plano de remediação priorizado</li>
           </ul>
-          <a href="mailto:contato@dlab.com.br" class="prod-cta">Solicitar pentest →</a>
+          <a href="/contato" class="prod-cta">Propor o escopo →</a>
         </div>
         <div class="prod-card fi-r d1">
           <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="url(#g-green)" stroke-width="1.5"/><path d="M13 9v5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="17.5" r="1" fill="url(#g-green)"/></svg></div>
@@ -504,7 +522,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <li>Monitoramento e resposta a incidentes</li>
             <li>Treinamento de equipe</li>
           </ul>
-          <a href="mailto:contato@dlab.com.br" class="prod-cta">Solicitar consultoria →</a>
+          <a href="/contato" class="prod-cta">Apresentar o cenário →</a>
         </div>
       </div>
     </div>
@@ -520,14 +538,14 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <div class="demo-inner">
         <div class="fi-l">
           <div class="section-label"><span class="label">Exemplo real</span></div>
-          <h2 class="section-title">Um relatório que você<br>realmente consegue usar.</h2>
-          <p class="section-sub">Dados transformados em linguagem de decisão. Cada métrica com contexto, cada recomendação com raciocínio.</p>
+          <h2 class="section-title">Uma pesquisa que você<br>realmente consegue usar.</h2>
+          <p class="section-sub">Dado bruto virou linguagem de decisão. Cada métrica com contexto, cada recomendação com o raciocínio exposto pra contestar.</p>
           <div class="demo-points">
             <div class="demo-pt">
               <div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><rect x="3" y="11" width="3" height="8" rx="1" fill="url(#g1)" opacity=".6"/><rect x="8" y="7" width="3" height="12" rx="1" fill="url(#g1)" opacity=".8"/><rect x="13" y="4" width="3" height="15" rx="1" fill="url(#g1)"/><rect x="18" y="2" width="3" height="17" rx="1" fill="url(#g2)"/></svg></div>
               <div>
                 <div class="demo-pt-title">Métricas que importam</div>
-                <div class="demo-pt-desc">Score de demanda, saturação de mercado e potencial calculados com metodologia rigorosa e dados de múltiplas fontes.</div>
+                <div class="demo-pt-desc">Score de demanda, saturação de mercado e potencial calculados a partir de múltiplas fontes cruzadas. Cada número com a fórmula documentada.</div>
               </div>
             </div>
             <div class="demo-pt">
@@ -541,7 +559,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
               <div class="icon-wrap green"><svg viewBox="0 0 22 22" fill="none"><path d="M4 13l5 5L18 6" stroke="url(#g-green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div>
                 <div class="demo-pt-title">Veredicto acionável</div>
-                <div class="demo-pt-desc">Não entregamos apenas dados. Entregamos uma recomendação clara com o raciocínio por trás dela e, quando necessário, implementamos a mudança junto com você.</div>
+                <div class="demo-pt-desc">Não entregamos só dados. Entregamos a posição do analista, com o raciocínio aberto pra ser contestado. E quando faz sentido, implementamos a mudança junto.</div>
               </div>
             </div>
           </div>
@@ -551,8 +569,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           <div class="report-card">
             <div class="rc-header">
               <div class="rc-header-left">
-                <img src="/d.lab-icon.png" alt="" class="rc-header-icon" />
-                <div><div class="rc-title">Cafeteria Premium · Santo André, SP</div><div class="rc-sub">Análise de viabilidade · Relatório D.Lab #0042</div></div>
+                <img src="/d.lab-icon.webp" alt="" class="rc-header-icon" width="24" height="24" loading="lazy" />
+                <div><div class="rc-title">Cafeteria Premium · Santo André, SP</div><div class="rc-sub">Pesquisa de viabilidade · D.Lab #0042</div></div>
               </div>
               <span class="badge badge-green badge-dot">Concluído</span>
             </div>
@@ -612,7 +630,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
               </div>
               <div class="rc-verdict">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M9 1.5L11.5 7H17L12.5 10.5L14.5 17L9 13.5L3.5 17L5.5 10.5L1 7H6.5L9 1.5Z" fill="url(#g1)" opacity=".95"/></svg>
-                <div class="rc-verdict-text"><strong>Recomendação D.Lab:</strong> Ponto com alto potencial. Concorrência no raio de 500m gerenciável. Demanda reprimida significativa no quadrante norte. <strong>Recomendamos avançar.</strong></div>
+                <div class="rc-verdict-text"><strong>Nota D.Lab:</strong> Ponto com alto potencial. Concorrência no raio de 500m gerenciável. Demanda reprimida significativa no quadrante norte. <strong>Avançar.</strong></div>
               </div>
             </div>
             <div class="rc-tab-panel" data-panel="demand">
@@ -663,8 +681,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <div class="container">
       <div class="ds-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">Fontes de dados</span></div>
-        <h2 class="section-title">Dados que revelam o que<br>ninguém está vendo.</h2>
-        <p class="section-sub" style="margin:0 auto">Cruzamos fontes públicas, APIs, scraping e ferramentas proprietárias para construir a visão mais completa de qualquer mercado.</p>
+        <h2 class="section-title">Fontes que ninguém<br><span class="gradient-text">cruza desse jeito.</span></h2>
+        <p class="section-sub" style="margin:0 auto">Combinamos fontes públicas, APIs, scraping e pesquisa primária. Cada camada documentada, cada cruzamento auditável. A visão completa vira decisão, não deck.</p>
       </div>
       <div class="ds-grid fi">
         <div class="ds-card"><div class="ds-top"><div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="url(#g1)" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="url(#g1)" stroke-width="1.5"/><path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="url(#g1)" stroke-width="1.3" stroke-linecap="round"/></svg></div><span class="badge badge-blue">API</span></div><div class="ds-name">Google Maps e Places</div><p class="ds-desc">Mapeamento de concorrentes, estabelecimentos, pontos de fluxo e avaliações em tempo real.</p></div>
@@ -686,8 +704,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <div class="container">
       <div class="research-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">Pesquisas Públicas</span></div>
-        <h2 class="section-title">Inteligência aberta.<br><span class="gradient-text">Pesquisa aplicada.</span></h2>
-        <p class="section-sub" style="margin:0 auto">Publicamos pesquisas, análises de tendência e estudos de mercado. Dados que iluminam decisões — acessíveis para todos.</p>
+        <h2 class="section-title">Pesquisa aberta.<br><span class="gradient-text">Enquanto o resto é fechado.</span></h2>
+        <p class="section-sub" style="margin:0 auto">Publicamos uma fração do que pesquisamos, como prova pública de método. O resto vive sob NDA, nas mãos de quem encomendou.</p>
       </div>
 
       <div class="research-grid fi">
@@ -695,7 +713,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           <a href={`/posts/${post.slug}`} class="research-card fi d1" style="position:relative">
             <div class="research-card-img" style="padding:0;background:#0B0B0F">
               {post.data.cover && (
-                <img src={post.data.cover} alt={post.data.coverAlt ?? ''} style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
+                <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
               )}
             </div>
             <div class="research-card-body">
@@ -782,13 +800,13 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <div class="cta-box fi">
         <div class="cta-box-grid"></div>
         <div style="position:relative;z-index:2">
-          <img src="/d.lab-icon2.png" alt="" class="cta-icon" />
-          <div class="hero-tag" style="display:inline-flex;margin-bottom:24px"><span class="tag-dot"></span>Pronto para sair na frente?</div>
-          <h2>A inteligência que grandes empresas<br><span class="gradient-text">têm. Agora para você.</span></h2>
-          <p>Fale com a equipe e descubra qual análise ou consultoria faz mais sentido para a decisão que você precisa tomar agora.</p>
+          <img src="/d.lab-icon2.webp" alt="" class="cta-icon" width="48" height="48" loading="lazy" />
+          <div class="hero-tag" style="display:inline-flex;margin-bottom:24px"><span class="tag-dot"></span>Há problemas que não esperam</div>
+          <h2>Apresente o que trava.<br><span class="gradient-text">Um analista sênior responde.</span></h2>
+          <p>A porta está aberta e o escopo é negociado. Respondemos em até um dia útil com leitura do problema, formato de trabalho e prazo. O primeiro movimento é entender.</p>
           <div class="cta-btns">
-            <a href="mailto:contato@dlab.com.br" class="btn btn-primary">Solicitar diagnóstico estratégico →</a>
-            <a href="mailto:contato@dlab.com.br" class="btn btn-ghost">Agendar avaliação inteligente</a>
+            <a href="/contato" class="btn btn-primary">Propor um problema →</a>
+            <a href="/blog" class="btn btn-ghost">Ler uma pesquisa aberta</a>
           </div>
         </div>
       </div>

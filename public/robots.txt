@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dlab.com.br/sitemap-index.xml
+Sitemap: https://dlabexperts.com/sitemap-index.xml

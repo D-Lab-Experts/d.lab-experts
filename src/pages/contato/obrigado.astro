@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Mensagem recebida | D.Lab"
+  description="Sua mensagem chegou ao D.Lab. Um analista sênior entra em contato em até 1 dia útil."
+>
+  <section class="ty-hero">
+    <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:500px;height:400px"></div>
+    <div class="section-glow green" style="bottom:0;right:-80px"></div>
+    <div class="container">
+      <div class="ty-inner fi">
+        <div class="ty-check">
+          <svg viewBox="0 0 64 64" fill="none" width="64" height="64" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" stroke="url(#g-green)" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="32" cy="32" r="30" stroke="url(#g-green)" stroke-width="2.5" stroke-dasharray="180 100" stroke-linecap="round"/>
+            <path d="M20 32 L28 40 L44 24" stroke="url(#g-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h1>Mensagem recebida.</h1>
+        <p class="ty-sub">
+          Obrigado pelo contato. Um analista sênior do D.Lab responde em até
+          <strong>1 dia útil</strong>. Fique de olho na caixa de entrada e também
+          na pasta de spam.
+        </p>
+
+        <div class="ty-next">
+          <div class="label" style="margin-bottom:14px">Enquanto isso, explore</div>
+          <div class="ty-ctas">
+            <a href="/blog" class="btn btn-primary">Ler pesquisas públicas →</a>
+            <a href="/" class="btn btn-ghost">Voltar para a home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .ty-hero {
+    padding: 160px 0 140px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    min-height: calc(100vh - var(--nav-h) - 200px);
+    display: flex;
+    align-items: center;
+  }
+  .ty-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .ty-check {
+    display: inline-flex;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: rgba(0, 229, 160, 0.06);
+    border: 1px solid rgba(0, 229, 160, 0.15);
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .ty-inner h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    margin-bottom: 16px;
+  }
+  .ty-sub {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 48px;
+  }
+  .ty-sub strong { color: var(--green); }
+  .ty-next { padding-top: 32px; border-top: 1px solid var(--border); }
+  .ty-ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 640px) {
+    .ty-ctas { flex-direction: column; align-items: stretch; }
+    .ty-ctas .btn { justify-content: center; }
+  }
+</style>

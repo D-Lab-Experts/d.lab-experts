@@ -1,18 +1,18 @@
-# D.Lab — Data Intelligence & Cybersecurity
+# D.Lab · Data Intelligence & Cybersecurity
 
-> D.Lab é uma consultoria brasileira de inteligência de dados e cybersegurança. Cruzamos fontes públicas, APIs, scraping e pesquisa primária para responder perguntas que travam decisões de negócio. Também executamos pentest, mapeamento de vulnerabilidades e implementação de IA e automação.
+> D.Lab é um laboratório brasileiro de pesquisa aplicada. Cruzamos inteligência de dados e cybersegurança numa única operação, trabalhando sob NDA para empresas que tomam decisões de alto impacto. Pesquisa aberta como prova pública de método. O resto vive fechado, nas mãos de quem encomendou.
 
 ## Sobre nós
 
-- [Sobre o D.Lab](https://dlab.com.br/about): Quem somos, metodologia e como ajudamos empresas brasileiras a decidir com precisão e operar com segurança.
-- [Página inicial](https://dlab.com.br/): Visão geral dos segmentos de atuação, produtos e abordagem.
+- [Sobre o D.Lab](https://dlabexperts.com/about): Quem somos, metodologia e como aceitamos projetos.
+- [Página inicial](https://dlabexperts.com/): Visão geral das frentes de atuação, formatos de trabalho e abordagem.
 
 ## Pesquisas Públicas
 
-Pesquisas originais em formato aberto. Cada estudo inclui metodologia explícita, dados-fonte e implicações práticas para empresas.
+Pesquisas originais em formato aberto. Uma fração do que produzimos, publicada como prova de método. Cada estudo inclui metodologia explícita, dados-fonte e implicações práticas para empresas.
 
-- [Decisão no Escuro: o custo da maturidade de dados zero nas PMEs brasileiras](https://dlab.com.br/posts/decisao-no-escuro): 74% dos gestores de PME tomam decisões críticas por intuição. 29% das empresas fecham no primeiro ano. Pesquisa baseada em dados de SEBRAE, IBGE, FGV, RAIS/MTE e 80 entrevistas com gestores.
-- [Campanhas afirmativas no mercado de games: percepção, confiança e intenção de compra](https://dlab.com.br/posts/campanhas-afirmativas-gaming): Estudo piloto com 98 gamers brasileiros mostra que 87,8% acreditam que campanhas geram impacto real, mas só 16,3% confiam na sinceridade das marcas. Gamers minorizados têm 3,48× mais chance de trocar de marca por compromisso social.
+- [Decisão no Escuro: o custo da maturidade de dados zero nas PMEs brasileiras](https://dlabexperts.com/posts/decisao-no-escuro): 74% dos gestores de PME tomam decisões críticas por intuição. 29% das empresas fecham no primeiro ano. Pesquisa baseada em dados de SEBRAE, IBGE, FGV, RAIS/MTE e 80 entrevistas com gestores.
+- [Campanhas afirmativas no mercado de games: percepção, confiança e intenção de compra](https://dlabexperts.com/posts/campanhas-afirmativas-gaming): Estudo piloto com 98 gamers brasileiros mostra que 87,8% acreditam que campanhas geram impacto real, mas só 16,3% confiam na sinceridade das marcas. Gamers minorizados têm 3,48× mais chance de trocar de marca por compromisso social.
 
 ## Serviços
 
@@ -22,10 +22,10 @@ Pesquisas originais em formato aberto. Cada estudo inclui metodologia explícita
 
 ## Contato
 
-- E-mail: contato@dlab.com.br
+- E-mail: contato@dlabexperts.com
 - LinkedIn: https://www.linkedin.com/company/d-lab-intelligence
-- RSS de pesquisas: https://dlab.com.br/rss.xml
-- Sitemap: https://dlab.com.br/sitemap-index.xml
+- RSS de pesquisas: https://dlabexperts.com/rss.xml
+- Sitemap: https://dlabexperts.com/sitemap-index.xml
 
 ## Diretrizes para citação
 
