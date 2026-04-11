@@ -2,10 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import NeuralNetwork from '../components/NeuralNetwork.astro';
 
-// Formspree form ID. Replace with real ID from https://formspree.io/forms.
-// While not configured, the form will hard-fail on submit — which is
-// intentional to force explicit setup before the page goes live.
-const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_ID ?? 'REPLACE_ME';
+// Formspree form ID. This is a public identifier (visible in the rendered
+// form action to any visitor), so there is no security benefit to reading
+// it from env vars. Hardcoded here for build-time reliability across
+// local dev, Vercel Preview and Production without env var config.
+// Override via PUBLIC_FORMSPREE_ID if you ever need a different target
+// (e.g. a staging form with separate notifications).
+const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_ID ?? 'mqegrdql';
 const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
 ---
 
