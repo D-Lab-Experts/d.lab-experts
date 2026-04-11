@@ -22,3 +22,6 @@ pnpm-debug.log*
 # editors
 .vscode/
 .idea/
+
+# AI coding assistants (Claude Code scratch: plans, memories, sessions)
+.claude/
