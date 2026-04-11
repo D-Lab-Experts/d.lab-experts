@@ -1,0 +1,135 @@
+---
+import Layout from './Layout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const {
+  title,
+  subtitle,
+  description,
+  excerpt,
+  pubDate,
+  updatedDate,
+  author,
+  category,
+  tags,
+  keywords,
+  cover,
+  faq,
+  readingTime,
+} = post.data;
+
+const isoPub = pubDate.toISOString();
+const isoMod = (updatedDate ?? pubDate).toISOString();
+const canonicalURL = new URL(`/posts/${post.slug}/`, Astro.site).toString();
+const imageURL = cover ? new URL(cover, Astro.site).toString() : new URL('/d.lab.png', Astro.site).toString();
+
+// Combine tags + keywords for SEO/GEO. Tags are visible UI; keywords are extra long-tail.
+const allKeywords = Array.from(new Set([...(keywords ?? []), ...(tags ?? [])]));
+
+// Rich Article schema with Speakable selectors and ImageObject
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': canonicalURL + '#article',
+  headline: title,
+  alternativeHeadline: subtitle ?? undefined,
+  description,
+  abstract: excerpt ?? description,
+  datePublished: isoPub,
+  dateModified: isoMod,
+  inLanguage: 'pt-BR',
+  isAccessibleForFree: true,
+  url: canonicalURL,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalURL,
+  },
+  image: {
+    '@type': 'ImageObject',
+    url: imageURL,
+    width: 1200,
+    height: 675,
+  },
+  author: {
+    '@type': 'Organization',
+    '@id': new URL('/', Astro.site).toString() + '#org',
+    name: author,
+    url: new URL('/', Astro.site).toString(),
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': new URL('/', Astro.site).toString() + '#org',
+    name: 'D.Lab',
+    url: new URL('/', Astro.site).toString(),
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/d.lab.png', Astro.site).toString(),
+    },
+  },
+  keywords: allKeywords.join(', '),
+  articleSection: category,
+  about: tags.map((t) => ({ '@type': 'Thing', name: t })),
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.article-title', '.post-title', '.tldr-card', '.article-subtitle', '.post-subtitle'],
+  },
+  ...(readingTime
+    ? {
+        timeRequired: 'PT' + (parseInt(readingTime, 10) || 10) + 'M',
+      }
+    : {}),
+};
+
+// Breadcrumb so AI engines and Google understand site hierarchy
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'D.Lab', item: new URL('/', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Pesquisas Públicas', item: new URL('/blog', Astro.site).toString() },
+    { '@type': 'ListItem', position: 3, name: title, item: canonicalURL },
+  ],
+};
+
+// FAQPage schema (only if frontmatter declares it)
+const faqLd =
+  faq && faq.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      }
+    : null;
+---
+
+<Layout
+  title={`${title} | D.Lab Research`}
+  description={description}
+  image={cover}
+  active="blog"
+  type="article"
+  publishedTime={isoPub}
+  modifiedTime={isoMod}
+  author={author}
+  tags={allKeywords}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+  {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
+
+  <article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="datePublished" content={isoPub} />
+    <meta itemprop="dateModified" content={isoMod} />
+    <meta itemprop="inLanguage" content="pt-BR" />
+    <slot />
+  </article>
+</Layout>

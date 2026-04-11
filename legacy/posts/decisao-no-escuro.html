@@ -15,7 +15,7 @@
       --white:#EAEAF0;--muted:rgba(234,234,240,0.55);--dimmed:rgba(234,234,240,0.28);
       --lilac:#B18CFF;--blue:#4DA3FF;--cyan:#00D4FF;--green:#00E5A0;
       --amber:#F5A623;--red:#FF5C5C;--violet:#A78BFA;
-      --grad:linear-gradient(135deg,#B18CFF 0%,#4DA3FF 100%);
+      --grad:linear-gradient(135deg,#7C3AED 0%,#06B6D4 100%);
       --nav-h:72px;--nav-h-shrink:56px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -35,8 +35,8 @@
     #nav.scrolled::after{opacity:1}
     .nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:32px}
     .nav-logo{display:flex;align-items:center;gap:12px}
-    .nav-logo-img{height:30px;width:auto;transition:height .4s cubic-bezier(.16,1,.3,1)}
-    #nav.scrolled .nav-logo-img{height:24px}
+    .nav-logo-img{height:38px;width:auto;object-fit:contain;transition:height .4s cubic-bezier(.16,1,.3,1)}
+    #nav.scrolled .nav-logo-img{height:30px}
     .nav-links{display:flex;align-items:center;gap:36px}
     .nav-links a{font-size:14px;color:var(--muted);transition:color .25s;font-weight:400}
     .nav-links a:hover{color:var(--white)}
@@ -206,24 +206,24 @@
     <a href="../index.html" class="nav-logo"><img src="../d.lab.png" alt="D.Lab" class="nav-logo-img" /></a>
     <ul class="nav-links">
       <li><a href="../index.html#hero">Home</a></li>
+      <li><a href="../about.html">Sobre</a></li>
       <li><a href="../index.html#segments">Segmentos</a></li>
       <li><a href="../index.html#products">Produtos</a></li>
-      <li><a href="../blog.html" class="active">Pesquisas</a></li>
-      <li><a href="../index.html#about">Sobre</a></li>
+      <li><a href="../blog.html" class="active">Pesquisas Públicas</a></li>
     </ul>
     <div class="nav-ctas">
-      <a href="../blog.html" class="btn btn-ghost btn-sm">Todas as pesquisas</a>
-      <a href="mailto:contato@dlab.com.br" class="btn btn-primary btn-sm">Iniciar análise D.Lab</a>
+      <a href="#" class="btn btn-ghost btn-sm">Falar com a equipe</a>
+      <a href="mailto:contato@dlab.com.br" class="btn btn-primary btn-sm">Iniciar análise D.Lab →</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="../blog.html" onclick="closeMM()">Pesquisas</a>
   <a href="../index.html#hero" onclick="closeMM()">Home</a>
+  <a href="../about.html" onclick="closeMM()">Sobre</a>
   <a href="../index.html#segments" onclick="closeMM()">Segmentos</a>
   <a href="../index.html#products" onclick="closeMM()">Produtos</a>
-  <a href="../index.html#about" onclick="closeMM()">Sobre</a>
+  <a href="../blog.html" onclick="closeMM()">Pesquisas Públicas</a>
   <div class="mobile-ctas"><a href="mailto:contato@dlab.com.br" class="btn btn-primary">Iniciar análise D.Lab</a></div>
 </div>
 
@@ -235,7 +235,7 @@
     <nav class="post-breadcrumb fi">
       <a href="../index.html">D.Lab</a>
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      <a href="../blog.html">Pesquisas</a>
+      <a href="../blog.html">Pesquisas Públicas</a>
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
       <span style="color:var(--muted)">Decision Intelligence</span>
     </nav>

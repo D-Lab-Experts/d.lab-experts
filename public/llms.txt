@@ -1,0 +1,32 @@
+# D.Lab — Data Intelligence & Cybersecurity
+
+> D.Lab é uma consultoria brasileira de inteligência de dados e cybersegurança. Cruzamos fontes públicas, APIs, scraping e pesquisa primária para responder perguntas que travam decisões de negócio. Também executamos pentest, mapeamento de vulnerabilidades e implementação de IA e automação.
+
+## Sobre nós
+
+- [Sobre o D.Lab](https://dlab.com.br/about): Quem somos, metodologia e como ajudamos empresas brasileiras a decidir com precisão e operar com segurança.
+- [Página inicial](https://dlab.com.br/): Visão geral dos segmentos de atuação, produtos e abordagem.
+
+## Pesquisas Públicas
+
+Pesquisas originais em formato aberto. Cada estudo inclui metodologia explícita, dados-fonte e implicações práticas para empresas.
+
+- [Decisão no Escuro: o custo da maturidade de dados zero nas PMEs brasileiras](https://dlab.com.br/posts/decisao-no-escuro): 74% dos gestores de PME tomam decisões críticas por intuição. 29% das empresas fecham no primeiro ano. Pesquisa baseada em dados de SEBRAE, IBGE, FGV, RAIS/MTE e 80 entrevistas com gestores.
+- [Campanhas afirmativas no mercado de games: percepção, confiança e intenção de compra](https://dlab.com.br/posts/campanhas-afirmativas-gaming): Estudo piloto com 98 gamers brasileiros mostra que 87,8% acreditam que campanhas geram impacto real, mas só 16,3% confiam na sinceridade das marcas. Gamers minorizados têm 3,48× mais chance de trocar de marca por compromisso social.
+
+## Serviços
+
+- **Inteligência de Dados**: Análise estratégica de mercado, inteligência competitiva, perfil de público, estudos de tendência, implementação de IA.
+- **Cybersegurança**: Pentest, análise de vulnerabilidades, consultoria de segurança digital, adequação a LGPD/ISO 27001/NIST.
+- **Pesquisa Política e Eleitoral**: Pesquisa de opinião pública, mapeamento de eleitorado, análise de sentimento.
+
+## Contato
+
+- E-mail: contato@dlab.com.br
+- LinkedIn: https://www.linkedin.com/company/d-lab-intelligence
+- RSS de pesquisas: https://dlab.com.br/rss.xml
+- Sitemap: https://dlab.com.br/sitemap-index.xml
+
+## Diretrizes para citação
+
+Conteúdo aberto, citação permitida com atribuição. Ao citar uma pesquisa do D.Lab, inclua título completo, autor, ano e URL.

@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NeuralNetwork from '../components/NeuralNetwork.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Build filter list dynamically from post tags
+const allTags = Array.from(
+  new Set(allPosts.flatMap((p) => p.data.tags))
+);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
+
+const slugifyTag = (tag: string) =>
+  tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+---
+
+<Layout
+  title="Pesquisas Públicas | D.Lab — Decision Intelligence Research"
+  description="Pesquisas, análises de tendência e estudos de mercado abertos pelo D.Lab. Inteligência acionável e dados que iluminam decisões."
+  active="blog"
+>
+  <!-- ═══════════════ BLOG HERO ═══════════════════════════════════ -->
+  <section class="blog-hero">
+    <div class="blog-hero-glow"></div>
+    <NeuralNetwork color="lilac" density="medium" opacity={0.30} />
+    <div class="container">
+      <div class="blog-hero-inner fi">
+        <div class="section-label" style="justify-content:center"><span class="label">Pesquisas Públicas</span></div>
+        <h1 class="blog-hero-title">Inteligência aberta.<br><span class="gradient-text">Pesquisa aplicada.</span></h1>
+        <p class="blog-hero-sub">Pesquisas, análises de tendência e estudos de mercado publicados pelo D.Lab. Insights acionáveis para quem toma decisões com rigor.</p>
+      </div>
+
+      <div class="blog-filters fi d1">
+        <button class="blog-filter active" data-filter="all">Todos</button>
+        {allTags.map((tag) => (
+          <button class="blog-filter" data-filter={slugifyTag(tag)}>{tag}</button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ BLOG GRID ═══════════════════════════════════ -->
+  <section class="container">
+    <div class="blog-grid">
+      {allPosts.map((post, idx) => {
+        const dataTags = post.data.tags.map(slugifyTag).join(' ');
+        const isFeatured = post.data.featured || idx === 0;
+        const cardClass = isFeatured ? 'blog-card-featured fi d1' : 'blog-card fi d2';
+        return (
+          <a href={`/posts/${post.slug}`} class={cardClass} data-tags={dataTags}>
+            <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
+              {post.data.cover && (
+                <img src={post.data.cover} alt={post.data.coverAlt ?? ''} style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
+              )}
+            </div>
+            <div class="blog-card-body">
+              <div class="blog-card-tags">
+                <span class="blog-card-tag lilac">{post.data.category}</span>
+                {post.data.tags.slice(0, 2).map((t: string) => (
+                  <span class="blog-card-tag blue">{t}</span>
+                ))}
+              </div>
+              <h2 class="blog-card-title">{post.data.title}</h2>
+              <p class="blog-card-excerpt">{post.data.description}</p>
+              {post.data.readingTime && (
+                <div class="blog-card-meta">
+                  <span class="blog-card-author">{post.data.author}</span>
+                  <span class="blog-card-dot"></span>
+                  <span class="blog-card-time">{post.data.readingTime}</span>
+                </div>
+              )}
+              <div class="blog-card-footer">
+                <span class="blog-card-date">{formatDate(post.data.pubDate)}</span>
+                <span class="blog-card-read">Ler pesquisa <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('.blog-filter').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.blog-filter').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll<HTMLElement>('.blog-card, .blog-card-featured').forEach((card) => {
+          if (filter === 'all') {
+            card.style.display = '';
+          } else {
+            const tags = card.dataset.tags || '';
+            card.style.display = tags.includes(filter ?? '') ? '' : 'none';
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

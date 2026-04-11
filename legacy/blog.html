@@ -29,7 +29,7 @@
       --red:      #FF5C7A;
       --violet:   #A78BFA;
       --magenta:  #E879A8;
-      --grad:     linear-gradient(135deg,#B18CFF 0%,#4DA3FF 100%);
+      --grad:     linear-gradient(135deg,#7C3AED 0%,#06B6D4 100%);
       --nav-h:    72px;
       --nav-h-shrink: 56px;
     }
@@ -99,8 +99,8 @@
     #nav.scrolled::after { opacity: 1; }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 28px; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
-    .nav-logo-img { height: 30px; width: auto; transition: height .4s cubic-bezier(.16,1,.3,1); }
-    #nav.scrolled .nav-logo-img { height: 24px; }
+    .nav-logo-img { height: 38px; width: auto; object-fit: contain; transition: height .4s cubic-bezier(.16,1,.3,1); }
+    #nav.scrolled .nav-logo-img { height: 30px; }
     .nav-links { display: flex; align-items: center; gap: 36px; }
     .nav-links a { font-size: 14px; color: var(--muted); transition: color .25s; font-weight: 400; }
     .nav-links a:hover { color: var(--white); }
@@ -293,14 +293,14 @@
       <img src="d.lab.png" alt="D.Lab" class="nav-logo-img" />
     </a>
     <ul class="nav-links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="about.html">Sobre</a></li>
       <li><a href="index.html#segments">Segmentos</a></li>
-      <li><a href="index.html#how">Metodologia</a></li>
       <li><a href="index.html#products">Produtos</a></li>
-      <li><a href="blog.html" class="active">Pesquisas</a></li>
-      <li><a href="index.html#about">Sobre</a></li>
+      <li><a href="blog.html" class="active">Pesquisas Públicas</a></li>
     </ul>
     <div class="nav-ctas">
-      <a href="index.html" class="btn btn-ghost btn-sm">Falar com a equipe</a>
+      <a href="#" class="btn btn-ghost btn-sm">Falar com a equipe</a>
       <a href="mailto:contato@dlab.com.br" class="btn btn-primary btn-sm">Iniciar análise D.Lab →</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -310,13 +310,13 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#hero" onclick="closeMM()">Home</a>
+  <a href="about.html" onclick="closeMM()">Sobre</a>
   <a href="index.html#segments" onclick="closeMM()">Segmentos</a>
-  <a href="index.html#how" onclick="closeMM()">Metodologia</a>
   <a href="index.html#products" onclick="closeMM()">Produtos</a>
-  <a href="blog.html" onclick="closeMM()">Pesquisas</a>
-  <a href="index.html#about" onclick="closeMM()">Sobre</a>
+  <a href="blog.html" onclick="closeMM()">Pesquisas Públicas</a>
   <div class="mobile-ctas">
-    <a href="index.html" class="btn btn-ghost">Falar com a equipe</a>
+    <a href="#" class="btn btn-ghost">Falar com a equipe</a>
     <a href="mailto:contato@dlab.com.br" class="btn btn-primary">Iniciar análise D.Lab →</a>
   </div>
 </div>
@@ -327,7 +327,7 @@
   <div class="container">
     <div class="blog-hero-inner fi">
       <div class="section-label" style="justify-content:center"><span class="label">Pesquisas Públicas</span></div>
-      <h1 class="blog-hero-title">Inteligência aberta.<br><span class="gradient-text">Dados que iluminam.</span></h1>
+      <h1 class="blog-hero-title">Inteligência aberta.<br><span class="gradient-text">Pesquisa aplicada.</span></h1>
       <p class="blog-hero-sub">Pesquisas, análises de tendência e estudos de mercado publicados pelo D.Lab. Insights acionáveis para quem toma decisões com rigor.</p>
     </div>
 
@@ -335,6 +335,7 @@
     <div class="blog-filters fi d1">
       <button class="blog-filter active" data-filter="all">Todos</button>
       <button class="blog-filter" data-filter="decision-intelligence">Decision Intelligence</button>
+      <button class="blog-filter" data-filter="consumer-behavior">Comportamento do Consumidor</button>
     </div>
   </div>
 </section>
@@ -343,23 +344,50 @@
 <section class="container">
   <div class="blog-grid">
 
-    <!-- FEATURED: Decisão no Escuro -->
-    <a href="posts/decisao-no-escuro.html" class="blog-card-featured fi d1" data-tags="decision-intelligence">
+    <!-- FEATURED: Campanhas Afirmativas Gaming -->
+    <a href="posts/campanhas-afirmativas-gaming.html" class="blog-card-featured fi d1" data-tags="consumer-behavior">
+      <div class="blog-card-img" style="padding:0;background:var(--surface);display:flex;align-items:center;justify-content:center">
+        <div style="text-align:center;padding:40px;position:relative;z-index:2">
+          <div style="font-size:72px;font-weight:900;letter-spacing:-.06em;line-height:1;margin-bottom:8px"><span style="background:linear-gradient(135deg,#B18CFF,#4DA3FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">3,48x</span></div>
+          <div style="font-size:14px;color:var(--muted);max-width:200px;margin:0 auto">mais chance de trocar de marca entre gamers minorizados</div>
+          <div style="display:flex;gap:16px;justify-content:center;margin-top:24px">
+            <div style="text-align:center"><div style="font-size:28px;font-weight:700;color:var(--green)">87,8%</div><div style="font-size:10px;color:var(--dimmed)">percebem impacto</div></div>
+            <div style="text-align:center"><div style="font-size:28px;font-weight:700;color:var(--lilac)">81,6%</div><div style="font-size:10px;color:var(--dimmed)">mais próximos</div></div>
+            <div style="text-align:center"><div style="font-size:28px;font-weight:700;color:var(--blue)">n=98</div><div style="font-size:10px;color:var(--dimmed)">gamers</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-card-tags">
+          <span class="blog-card-tag lilac">Pesquisa Original</span>
+          <span class="blog-card-tag green">Gaming & Diversidade</span>
+          <span class="blog-card-tag blue">Comportamento do Consumidor</span>
+        </div>
+        <h2 class="blog-card-title">Campanhas afirmativas no mercado de games: percepção, confiança e intenção de compra</h2>
+        <p class="blog-card-excerpt">Estudo piloto com 98 gamers brasileiros revela que 87,8% acreditam que campanhas geram impacto real — mas apenas 16,3% confiam na sinceridade das marcas. Gamers minorizados têm 3,48x mais chance de trocar de marca por compromisso social. Análise estatística completa com 3 hipóteses testadas.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-author">D.Lab Research</span>
+          <span class="blog-card-dot"></span>
+          <span class="blog-card-time">18 min de leitura</span>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Abril 2026</span>
+          <span class="blog-card-read">Ver relatório completo <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Decisão no Escuro -->
+    <a href="posts/decisao-no-escuro.html" class="blog-card fi d2" data-tags="decision-intelligence">
       <div class="blog-card-img" style="padding:0;background:none">
         <img src="posts/decisao-no-escuro-cover.svg" alt="Decisão no Escuro" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
       </div>
       <div class="blog-card-body">
         <div class="blog-card-tags">
-          <span class="blog-card-tag lilac">Destaque</span>
           <span class="blog-card-tag blue">Decision Intelligence</span>
         </div>
         <h2 class="blog-card-title">Decisão no Escuro: o custo da maturidade de dados zero nas PMEs brasileiras</h2>
-        <p class="blog-card-excerpt">74% dos gestores de PME tomam decisões críticas por intuição. 29% das empresas fecham no primeiro ano. Essa pesquisa cruza dados de SEBRAE, IBGE, FGV e 80 entrevistas para mostrar quanto custa decidir sem dado, e por que a solução já existe.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-author">D.Lab Research</span>
-          <span class="blog-card-dot"></span>
-          <span class="blog-card-time">12 min de leitura</span>
-        </div>
+        <p class="blog-card-excerpt">74% dos gestores de PME tomam decisões críticas por intuição. 29% das empresas fecham no primeiro ano. Pesquisa com dados de SEBRAE, IBGE, FGV e 80 entrevistas.</p>
         <div class="blog-card-footer">
           <span class="blog-card-date">Abril 2026</span>
           <span class="blog-card-read">Ler pesquisa <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -393,7 +421,7 @@
           <li><a href="index.html#about">Sobre</a></li>
           <li><a href="index.html#how">Metodologia</a></li>
           <li><a href="index.html#products">Produtos</a></li>
-          <li><a href="blog.html">Pesquisas</a></li>
+          <li><a href="blog.html">Pesquisas Públicas</a></li>
         </ul>
       </div>
       <div class="foot-col">

@@ -1,0 +1,46 @@
+---
+export interface Props {
+  active?: 'home' | 'about' | 'segments' | 'products' | 'blog';
+}
+const { active } = Astro.props;
+
+const links: Array<{ href: string; label: string; key: Props['active'] }> = [
+  { href: '/#hero', label: 'Home', key: 'home' },
+  { href: '/about', label: 'Sobre', key: 'about' },
+  { href: '/#segments', label: 'Segmentos', key: 'segments' },
+  { href: '/#products', label: 'Produtos', key: 'products' },
+  { href: '/blog', label: 'Pesquisas Públicas', key: 'blog' },
+];
+---
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/d.lab.png" alt="D.Lab" class="nav-logo-img" />
+    </a>
+    <ul class="nav-links">
+      {links.map((link) => (
+        <li>
+          <a href={link.href} class={active === link.key ? 'active' : ''}>{link.label}</a>
+        </li>
+      ))}
+    </ul>
+    <div class="nav-ctas">
+      <a href="mailto:contato@dlab.com.br" class="btn btn-ghost btn-sm">Falar com a equipe</a>
+      <a href="mailto:contato@dlab.com.br" class="btn btn-primary btn-sm">Iniciar análise D.Lab →</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  {links.map((link) => (
+    <a href={link.href} data-mm-link>{link.label}</a>
+  ))}
+  <div class="mobile-ctas">
+    <a href="mailto:contato@dlab.com.br" class="btn btn-ghost">Falar com a equipe</a>
+    <a href="mailto:contato@dlab.com.br" class="btn btn-primary">Iniciar análise D.Lab →</a>
+  </div>
+</div>

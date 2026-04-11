@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campanhas Afirmativas no Mercado de Games | D.Lab Research</title>
+  <meta name="description" content="Estudo piloto: percepção de impacto social e mudanças na intenção de compra do público-alvo de campanhas afirmativas no mercado de jogos eletrônicos. N=98 gamers brasileiros." />
+  <link rel="icon" type="image/png" href="../d.lab-favicon.png" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,900&display=swap" rel="stylesheet" />
+  <style>
+    :root{--black:#0B0B0F;--graphite:#1A1A22;--surface:#22222E;--card:#1E1E2A;--border:rgba(255,255,255,0.05);--border-h:rgba(177,140,255,0.22);--white:#EAEAF0;--muted:rgba(234,234,240,0.55);--dimmed:rgba(234,234,240,0.28);--lilac:#B18CFF;--blue:#4DA3FF;--cyan:#00D4FF;--green:#00E5A0;--yellow:#FFD166;--red:#FF5C7A;--violet:#A78BFA;--grad:linear-gradient(135deg,#7C3AED 0%,#06B6D4 100%);--nav-h:72px;--nav-h-shrink:56px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Satoshi',system-ui,sans-serif;background:var(--black);color:var(--white);font-size:16px;line-height:1.7;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+    a{text-decoration:none;color:inherit}ul{list-style:none}
+    #geo-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.2}
+    .gradient-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .container{max-width:1200px;margin:0 auto;padding:0 28px}
+    .label{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmed)}
+
+    /* Nav */
+    #nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;background:rgba(11,11,15,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.04);transition:height .4s,background .4s}
+    #nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(177,140,255,.2) 30%,rgba(77,163,255,.15) 70%,transparent);opacity:0;transition:opacity .4s}
+    #nav.scrolled{height:var(--nav-h-shrink);background:rgba(11,11,15,.82);backdrop-filter:blur(28px)}
+    #nav.scrolled::after{opacity:1}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:32px}
+    .nav-logo-img{height:38px;width:auto;transition:height .4s}
+    #nav.scrolled .nav-logo-img{height:30px}
+    .nav-links{display:flex;align-items:center;gap:36px}
+    .nav-links a{font-size:14px;color:var(--muted);transition:color .25s}
+    .nav-links a:hover{color:var(--white)}
+    .nav-links a.active{color:var(--lilac)}
+    .nav-ctas{display:flex;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;border:none;transition:all .25s;position:relative;overflow:hidden}
+    .btn-primary{background:var(--grad);color:#fff;box-shadow:0 0 20px rgba(155,110,255,.2)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(155,110,255,.35)}
+    .btn-ghost{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.08)}
+    .btn-ghost:hover{border-color:var(--border-h);background:rgba(177,140,255,.05);transform:translateY(-2px)}
+    .btn-sm{padding:10px 20px;font-size:13px}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(11,11,15,.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:24px;z-index:999;flex-direction:column;gap:16px}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{font-size:16px;color:var(--muted);padding:10px 0;border-bottom:1px solid var(--border)}
+    .mobile-menu .mobile-ctas{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+    .mobile-menu .btn{justify-content:center}
+
+    /* Article layout */
+    .article-hero{padding:160px 0 60px;position:relative;z-index:1;overflow:hidden}
+    .article-hero-glow{position:absolute;width:700px;height:500px;top:10%;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(177,140,255,.07) 0%,transparent 70%);filter:blur(60px);pointer-events:none}
+    .article-hero-inner{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}
+    .article-meta{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+    .article-tag{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:6px}
+    .article-tag.lilac{background:rgba(177,140,255,.08);color:var(--lilac);border:1px solid rgba(177,140,255,.12)}
+    .article-tag.blue{background:rgba(77,163,255,.08);color:var(--blue);border:1px solid rgba(77,163,255,.12)}
+    .article-tag.green{background:rgba(0,229,160,.08);color:var(--green);border:1px solid rgba(0,229,160,.12)}
+    .article-date{font-size:12px;color:var(--dimmed)}
+    .article-title{font-size:clamp(32px,4.5vw,50px);font-weight:700;letter-spacing:-.04em;line-height:1.1;margin-bottom:20px}
+    .article-subtitle{font-size:17px;color:var(--muted);line-height:1.75;max-width:640px;margin:0 auto 30px}
+    .article-authors{display:flex;align-items:center;justify-content:center;gap:12px;font-size:13px;color:var(--dimmed)}
+    .article-read-time{font-size:13px;color:var(--dimmed)}
+
+    /* Key findings bar */
+    .key-findings{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:60px auto;max-width:1000px;position:relative;z-index:1}
+    .key-finding{background:var(--card);padding:28px 20px;text-align:center;transition:background .25s}
+    .key-finding:hover{background:var(--surface)}
+    .key-finding-val{font-size:28px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+    .key-finding-lbl{font-size:12px;color:var(--dimmed);line-height:1.4}
+
+    /* Article body */
+    .article-body{max-width:760px;margin:0 auto;padding:40px 28px 100px;position:relative;z-index:1}
+    .article-body h2{font-size:clamp(22px,3vw,30px);font-weight:700;letter-spacing:-.03em;margin:56px 0 20px;line-height:1.15;padding-top:20px;border-top:1px solid var(--border)}
+    .article-body h2:first-of-type{border-top:none;margin-top:0}
+    .article-body h3{font-size:18px;font-weight:700;margin:32px 0 12px}
+    .article-body p{font-size:16.5px;color:var(--muted);line-height:1.85;margin-bottom:20px}
+    .article-body p strong{color:var(--white);font-weight:600}
+    .article-body blockquote{border-left:3px solid var(--lilac);padding:16px 24px;margin:28px 0;background:rgba(177,140,255,.03);border-radius:0 12px 12px 0}
+    .article-body blockquote p{font-size:15px;font-style:italic;color:var(--white);margin:0}
+
+    /* Data cards */
+    .data-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin:28px 0;overflow:hidden}
+    .data-card-title{font-size:14px;font-weight:600;letter-spacing:.02em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .data-card-title::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--lilac)}
+    .data-card.blue .data-card-title::before{background:var(--blue)}
+    .data-card.green .data-card-title::before{background:var(--green)}
+
+    /* Chart bars */
+    .chart-bars{display:flex;flex-direction:column;gap:14px}
+    .chart-bar{display:grid;grid-template-columns:180px 1fr 60px;gap:12px;align-items:center}
+    .chart-bar-label{font-size:13px;color:var(--muted);text-align:right}
+    .chart-bar-track{height:28px;background:rgba(255,255,255,.03);border-radius:8px;overflow:hidden;position:relative}
+    .chart-bar-fill{height:100%;border-radius:8px;transition:width 1.5s cubic-bezier(.16,1,.3,1);position:relative;display:flex;align-items:center;justify-content:flex-end;padding-right:8px}
+    .chart-bar-fill.lilac{background:linear-gradient(90deg,rgba(177,140,255,.15),rgba(177,140,255,.4))}
+    .chart-bar-fill.blue{background:linear-gradient(90deg,rgba(77,163,255,.15),rgba(77,163,255,.4))}
+    .chart-bar-fill.green{background:linear-gradient(90deg,rgba(0,229,160,.15),rgba(0,229,160,.4))}
+    .chart-bar-fill.red{background:linear-gradient(90deg,rgba(255,92,122,.15),rgba(255,92,122,.4))}
+    .chart-bar-fill.cyan{background:linear-gradient(90deg,rgba(0,212,255,.15),rgba(0,212,255,.4))}
+    .chart-bar-val{font-size:13px;font-weight:600}
+
+    /* Comparison grid */
+    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+    .comparison-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center}
+    .comparison-card-label{font-size:11px;color:var(--dimmed);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+    .comparison-card-val{font-size:32px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
+    .comparison-card-sub{font-size:12px;color:var(--dimmed)}
+
+    /* Stat table */
+    .stat-table{width:100%;border-collapse:collapse;margin:20px 0}
+    .stat-table th{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dimmed);text-align:left;padding:12px 14px;border-bottom:1px solid var(--border)}
+    .stat-table td{font-size:14px;padding:12px 14px;border-bottom:1px solid var(--border);color:var(--muted)}
+    .stat-table td strong{color:var(--white)}
+    .stat-table tr:hover td{background:rgba(177,140,255,.02)}
+    .stat-table .sig{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.05em}
+    .sig.yes{background:rgba(0,229,160,.1);color:var(--green)}
+    .sig.no{background:rgba(255,92,122,.08);color:var(--red)}
+
+    /* Callout */
+    .callout{display:flex;gap:16px;padding:20px 24px;border-radius:14px;margin:28px 0;align-items:flex-start}
+    .callout.insight{background:rgba(177,140,255,.04);border:1px solid rgba(177,140,255,.1)}
+    .callout.warning{background:rgba(255,209,102,.03);border:1px solid rgba(255,209,102,.1)}
+    .callout.success{background:rgba(0,229,160,.04);border:1px solid rgba(0,229,160,.1)}
+    .callout-icon{font-size:18px;flex-shrink:0;margin-top:2px}
+    .callout-body{font-size:14px;color:var(--muted);line-height:1.65}
+    .callout-body strong{color:var(--white)}
+
+    /* Hypothesis result */
+    .hyp-result{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin:24px 0;position:relative;overflow:hidden}
+    .hyp-result::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+    .hyp-result.supported::before{background:var(--green)}
+    .hyp-result.partial::before{background:var(--yellow)}
+    .hyp-result.rejected::before{background:var(--red)}
+    .hyp-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+    .hyp-badge.supported{background:rgba(0,229,160,.08);color:var(--green);border:1px solid rgba(0,229,160,.12)}
+    .hyp-badge.partial{background:rgba(255,209,102,.08);color:var(--yellow);border:1px solid rgba(255,209,102,.12)}
+    .hyp-badge.rejected{background:rgba(255,92,122,.08);color:var(--red);border:1px solid rgba(255,92,122,.12)}
+    .hyp-title{font-size:16px;font-weight:700;margin-bottom:8px}
+    .hyp-desc{font-size:14px;color:var(--muted);line-height:1.6}
+
+    /* Brand cloud */
+    .brand-cloud{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+    .brand-pill{padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--muted);transition:all .2s}
+    .brand-pill:hover{border-color:var(--border-h);color:var(--white)}
+    .brand-pill.xl{font-size:16px;font-weight:700;color:var(--lilac);border-color:rgba(177,140,255,.2);background:rgba(177,140,255,.05)}
+    .brand-pill.lg{font-size:14px;font-weight:600;color:var(--blue)}
+    .brand-pill.md{font-size:13px;font-weight:500}
+
+    /* Method badge */
+    .method-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:.05em;background:rgba(77,163,255,.06);color:var(--blue);border:1px solid rgba(77,163,255,.1);margin:2px 0}
+
+    /* TOC */
+    .toc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin:0 0 40px}
+    .toc-title{font-size:14px;font-weight:700;margin-bottom:16px}
+    .toc ol{counter-reset:toc;padding-left:0}
+    .toc li{counter-increment:toc;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
+    .toc li:last-child{border-bottom:none}
+    .toc li a{color:var(--muted);transition:color .2s;display:flex;gap:8px}
+    .toc li a:hover{color:var(--lilac)}
+    .toc li a::before{content:counter(toc) '.';color:var(--lilac);font-weight:600;min-width:20px}
+
+    /* Footer */
+    #footer{background:var(--black);border-top:1px solid var(--border);padding:40px 0;position:relative;z-index:1}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--dimmed)}
+    .foot-logo-img{height:28px;width:auto}
+
+    /* Animations */
+    .fi{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+    .fi.visible{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    /* Section separator */
+    .section-sep{height:1px;background:linear-gradient(90deg,transparent,rgba(177,140,255,.08) 20%,rgba(77,163,255,.06) 80%,transparent);margin:0 auto;max-width:760px}
+
+    /* References */
+    .references{margin-top:40px}
+    .references p{font-size:13px;color:var(--dimmed);line-height:1.6;margin-bottom:8px;padding-left:24px;text-indent:-24px}
+
+    @media(max-width:1023px){.nav-links,.nav-ctas{display:none}.hamburger{display:flex}.key-findings{grid-template-columns:1fr 1fr}.chart-bar{grid-template-columns:120px 1fr 50px}}
+    @media(max-width:767px){.article-hero{padding:130px 0 50px}.key-findings{grid-template-columns:1fr}.comparison-grid{grid-template-columns:1fr}.chart-bar{grid-template-columns:100px 1fr 45px}.chart-bar-label{font-size:11px}}
+  </style>
+</head>
+<body>
+
+<canvas id="geo-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><img src="../d.lab.png" alt="D.Lab" class="nav-logo-img" /></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#hero">Home</a></li>
+      <li><a href="../about.html">Sobre</a></li>
+      <li><a href="../index.html#segments">Segmentos</a></li>
+      <li><a href="../index.html#products">Produtos</a></li>
+      <li><a href="../blog.html" class="active">Pesquisas Públicas</a></li>
+    </ul>
+    <div class="nav-ctas">
+      <a href="mailto:contato@dlab.com.br" class="btn btn-primary btn-sm">Falar com a equipe</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html" onclick="closeMM()">Home</a>
+  <a href="../about.html" onclick="closeMM()">Sobre</a>
+  <a href="../index.html#segments" onclick="closeMM()">Segmentos</a>
+  <a href="../blog.html" onclick="closeMM()">Pesquisas Públicas</a>
+  <div class="mobile-ctas"><a href="mailto:contato@dlab.com.br" class="btn btn-primary">Falar com a equipe</a></div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════════════════════════════════ -->
+<section class="article-hero">
+  <div class="article-hero-glow"></div>
+  <div class="container">
+    <div class="article-hero-inner fi">
+      <div class="article-meta">
+        <span class="article-tag lilac">Pesquisa Original</span>
+        <span class="article-tag blue">Comportamento do Consumidor</span>
+        <span class="article-tag green">Gaming & Diversidade</span>
+        <span class="article-date">Abril 2026</span>
+      </div>
+      <h1 class="article-title">Campanhas afirmativas no mercado de games:<br><span class="gradient-text">percepção, confiança e intenção de compra</span></h1>
+      <p class="article-subtitle">Estudo piloto com 98 gamers brasileiros investiga se campanhas de diversidade e inclusão geram impacto real na percepção de marca e na disposição de trocar de marca.</p>
+      <div class="article-authors">
+        <span>D.Lab Research</span>
+        <span style="opacity:.3">|</span>
+        <span>Investigador principal: Gabriel Olegario</span>
+        <span style="opacity:.3">|</span>
+        <span class="article-read-time">18 min de leitura</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key Findings -->
+<div class="container fi d1">
+  <div class="key-findings">
+    <div class="key-finding">
+      <div class="key-finding-val" style="color:var(--lilac)">81,6%</div>
+      <div class="key-finding-lbl">se sentem mais próximos de marcas com causas sociais</div>
+    </div>
+    <div class="key-finding">
+      <div class="key-finding-val" style="color:var(--blue)">3,48x</div>
+      <div class="key-finding-lbl">mais chance de trocar de marca entre gamers minorizados</div>
+    </div>
+    <div class="key-finding">
+      <div class="key-finding-val" style="color:var(--green)">87,8%</div>
+      <div class="key-finding-lbl">acreditam que campanhas geram oportunidades reais</div>
+    </div>
+    <div class="key-finding">
+      <div class="key-finding-val" style="color:var(--cyan)">r = 0,39</div>
+      <div class="key-finding-lbl">correlação percepção positiva vs. troca de marca (p < 0,001)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ ARTICLE BODY ═══════════════════════════════════ -->
+<div class="article-body">
+
+  <!-- TOC -->
+  <div class="toc fi">
+    <div class="toc-title">Sumário</div>
+    <ol>
+      <li><a href="#abstract">Resumo Executivo</a></li>
+      <li><a href="#context">Contexto e Racional</a></li>
+      <li><a href="#method">Metodologia</a></li>
+      <li><a href="#sample">Perfil da Amostra</a></li>
+      <li><a href="#results">Resultados</a></li>
+      <li><a href="#hypotheses">Teste de Hipóteses</a></li>
+      <li><a href="#exploratory">Análises Exploratórias</a></li>
+      <li><a href="#brands">Marcas Citadas</a></li>
+      <li><a href="#discussion">Discussão</a></li>
+      <li><a href="#limitations">Limitações</a></li>
+      <li><a href="#implications">Implicações Práticas</a></li>
+      <li><a href="#references">Referências</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. ABSTRACT -->
+  <h2 id="abstract">1. Resumo Executivo</h2>
+
+  <p><strong>Contexto:</strong> A responsabilidade social tornou-se um fator central na decisão de compra. No entanto, seu impacto no mercado de jogos eletrônicos — especialmente através de campanhas afirmativas — permanece pouco estudado. Com o mercado global de games projetado para ultrapassar US$ 212 bilhões até 2026 (Newzoo, 2023) e mais de 70% da população brasileira jogando (PGB, 2023), compreender como essas campanhas influenciam percepções e intenção de compra é tanto oportuno quanto comercialmente relevante.</p>
+
+  <p><strong>Objetivo:</strong> Este estudo piloto transversal investigou se gamers brasileiros percebem campanhas afirmativas no mercado de games de forma positiva, se essa percepção se correlaciona com disposição de troca de marca, e se existem diferenças significativas entre grupos minorizados e não-minorizados.</p>
+
+  <p><strong>Método:</strong> Questionário online distribuído a 98 gamers brasileiros via redes sociais e comunidades gaming. Itens demográficos (10) e de percepção/comportamento (6) codificados como binários (Sim/Não). Testes: binomial, Wilcoxon, correlação de Spearman, Mann-Whitney U, Fisher's exact e regressão logística.</p>
+
+  <p><strong>Resultado principal:</strong> 4 de 5 itens de percepção apresentaram proporções significativamente acima de 50% (p < 0,001). A correlação entre percepção e intenção de troca de marca foi moderada e significativa (r = 0,39; p < 0,001). Gamers minorizados demonstraram <strong>3,48 vezes mais chance</strong> de trocar de marca por compromisso social (OR = 3,48; p = 0,006), com 72,9% dispostos vs. 43,6% do grupo não-minorizado.</p>
+
+  <!-- 2. CONTEXT -->
+  <h2 id="context">2. Contexto e Racional</h2>
+
+  <p>Na última década, preocupações sociais deixaram de ser periféricas para se tornarem centrais no comportamento do consumidor. Pesquisa da Edelman (2007) indicou que <strong>85% dos consumidores preferem marcas socialmente responsáveis</strong>, com 70% dispostos a pagar preços premium.</p>
+
+  <p>O mercado de games é particularmente relevante: com crescimento contínuo e projeção de receita acima de US$ 212 bilhões até 2026 (Newzoo, 2023). No Brasil, 70,1% da população jogou games em 2023 (PGB). Mas a indústria enfrenta desafios de diversidade: entre jogadores engajados, cerca de 85% são do gênero masculino (Souza et al., 2021).</p>
+
+  <p>Pesquisa da Newzoo & Intel (2021) mostrou que <strong>54% dos gamers consideram diversidade de personagens importante</strong> e <strong>47% evitam jogos excludentes</strong>. Esses efeitos são mais pronunciados entre jogadores LGBTQIA+ e com deficiência.</p>
+
+  <div class="callout insight">
+    <div class="callout-icon">&#9670;</div>
+    <div class="callout-body"><strong>Lacuna identificada:</strong> Apesar da escala do mercado, há escassez de estudos que examinem (1) como campanhas afirmativas são percebidas no contexto gaming, (2) diferenças entre grupos minorizados e não-minorizados, e (3) a conexão entre percepção de impacto social e mudança real na intenção de compra.</div>
+  </div>
+
+  <!-- 3. METHOD -->
+  <h2 id="method">3. Metodologia</h2>
+
+  <p>Estudo transversal, observacional, com questionário anônimo online. O protocolo segue as diretrizes STROBE para estudos transversais (Von Elm et al., 2007).</p>
+
+  <h3>Design e Coleta</h3>
+  <p>Questionário hospedado em Google Forms, distribuído em comunidades gaming brasileiras (Facebook, Reddit r/gamesEcultura, Discord) via amostragem por conveniência e snowball. Período de coleta: Janeiro-Março 2023.</p>
+
+  <h3>Instrumento</h3>
+  <p>20 itens: 10 demográficos + 6 de percepção/comportamento (binários: Sim/Não) + 1 resposta aberta + 3 itens estruturais. Os itens de percepção medem:</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Variáveis de percepção e comportamento</div>
+    <table class="stat-table">
+      <thead><tr><th>ID</th><th>Domínio</th><th>Constructo</th></tr></thead>
+      <tbody>
+        <tr><td>P1</td><td>Proximidade de marca</td><td>Marcas que resolvem problemas da comunidade</td></tr>
+        <tr><td>P2</td><td>Sinceridade</td><td>Crença em preocupação genuína da marca</td></tr>
+        <tr><td>P3</td><td>Confiança</td><td>Confiança em empresas com ações para grupos minorizados</td></tr>
+        <tr><td>P4</td><td>Impacto percebido</td><td>Crença que campanhas geram oportunidades reais</td></tr>
+        <tr><td>P5</td><td>Branding empático</td><td>Preferência por marcas que entendem suas vivências</td></tr>
+        <tr><td><strong>P6</strong></td><td><strong>Troca de marca</strong></td><td><strong>Disposição de trocar por concorrente mais comprometido</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Classificação de minoria</h3>
+  <p>Participante classificado como "minorizado" se atender ao menos um critério: (a) gênero diferente de homem cis, (b) raça/cor diferente de branca, (c) orientação sexual diferente de heterossexual, ou (d) presença de deficiência. Baseado em Siqueira & Castro (2017).</p>
+
+  <h3>Análises estatísticas</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 20px">
+    <span class="method-badge">Teste binomial</span>
+    <span class="method-badge">Wilcoxon signed-rank</span>
+    <span class="method-badge">Correlação point-biserial</span>
+    <span class="method-badge">Spearman rho</span>
+    <span class="method-badge">Mann-Whitney U</span>
+    <span class="method-badge">Fisher's exact</span>
+    <span class="method-badge">Regressão logística</span>
+  </div>
+  <p>Nível de significância: &alpha; = 0,05. Tamanhos de efeito reportados independente da significância. Software: Python 3.12+ (pandas, scipy, statsmodels).</p>
+
+  <!-- 4. SAMPLE -->
+  <h2 id="sample">4. Perfil da Amostra</h2>
+
+  <p>A amostra final compreende <strong>98 gamers brasileiros</strong> que consentiram com a pesquisa. A maioria reside em centros urbanos (94,9%), tem entre 18-34 anos (91,9%) e é do gênero masculino cisgênero (75,5%).</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Perfil do jogador</div>
+    <div class="chart-bars">
+      <div class="chart-bar"><span class="chart-bar-label">Casual</span><div class="chart-bar-track"><div class="chart-bar-fill lilac" style="width:61.2%"></div></div><span class="chart-bar-val">61,2%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">Hardcore</span><div class="chart-bar-track"><div class="chart-bar-fill blue" style="width:37.8%"></div></div><span class="chart-bar-val">37,8%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">Profissional</span><div class="chart-bar-track"><div class="chart-bar-fill cyan" style="width:1%"></div></div><span class="chart-bar-val">1,0%</span></div>
+    </div>
+  </div>
+
+  <div class="data-card blue">
+    <div class="data-card-title">Distribuição demográfica</div>
+    <div class="chart-bars">
+      <div class="chart-bar"><span class="chart-bar-label">18-24 anos</span><div class="chart-bar-track"><div class="chart-bar-fill blue" style="width:38.8%"></div></div><span class="chart-bar-val">38,8%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">25-34 anos</span><div class="chart-bar-track"><div class="chart-bar-fill blue" style="width:53.1%"></div></div><span class="chart-bar-val">53,1%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">35-44 anos</span><div class="chart-bar-track"><div class="chart-bar-fill blue" style="width:7.1%"></div></div><span class="chart-bar-val">7,1%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">45-49 anos</span><div class="chart-bar-track"><div class="chart-bar-fill blue" style="width:1%"></div></div><span class="chart-bar-val">1,0%</span></div>
+    </div>
+  </div>
+
+  <div class="data-card green">
+    <div class="data-card-title">Raça/cor autodeclarada</div>
+    <div class="chart-bars">
+      <div class="chart-bar"><span class="chart-bar-label">Branca</span><div class="chart-bar-track"><div class="chart-bar-fill green" style="width:71.4%"></div></div><span class="chart-bar-val">71,4%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">Parda</span><div class="chart-bar-track"><div class="chart-bar-fill green" style="width:21.4%"></div></div><span class="chart-bar-val">21,4%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">Preta</span><div class="chart-bar-track"><div class="chart-bar-fill green" style="width:5.1%"></div></div><span class="chart-bar-val">5,1%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">Indígena</span><div class="chart-bar-track"><div class="chart-bar-fill green" style="width:1%"></div></div><span class="chart-bar-val">1,0%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">Amarela</span><div class="chart-bar-track"><div class="chart-bar-fill green" style="width:1%"></div></div><span class="chart-bar-val">1,0%</span></div>
+    </div>
+  </div>
+
+  <div class="comparison-grid">
+    <div class="comparison-card">
+      <div class="comparison-card-label">Grupo Minorizado</div>
+      <div class="comparison-card-val" style="color:var(--lilac)">59</div>
+      <div class="comparison-card-sub">60,2% da amostra</div>
+    </div>
+    <div class="comparison-card">
+      <div class="comparison-card-label">Grupo Não-minorizado</div>
+      <div class="comparison-card-val" style="color:var(--blue)">39</div>
+      <div class="comparison-card-sub">39,8% da amostra</div>
+    </div>
+  </div>
+
+  <!-- 5. RESULTS -->
+  <h2 id="results">5. Resultados Descritivos</h2>
+
+  <p>A percepção geral das campanhas afirmativas é marcadamente positiva. Quatro dos cinco itens de percepção ultrapassaram 67% de aprovação, com destaque para o <strong>impacto percebido (87,8%)</strong> e o <strong>branding empático (84,7%)</strong>.</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Proporção de respostas positivas por item (com IC 95%)</div>
+    <div class="chart-bars">
+      <div class="chart-bar"><span class="chart-bar-label">P4 Impacto percebido</span><div class="chart-bar-track"><div class="chart-bar-fill green" style="width:87.8%"></div></div><span class="chart-bar-val" style="color:var(--green)">87,8%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">P5 Branding empático</span><div class="chart-bar-track"><div class="chart-bar-fill lilac" style="width:84.7%"></div></div><span class="chart-bar-val" style="color:var(--lilac)">84,7%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">P1 Proximidade</span><div class="chart-bar-track"><div class="chart-bar-fill lilac" style="width:81.6%"></div></div><span class="chart-bar-val" style="color:var(--lilac)">81,6%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">P3 Confiança</span><div class="chart-bar-track"><div class="chart-bar-fill blue" style="width:67.3%"></div></div><span class="chart-bar-val" style="color:var(--blue)">67,3%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">P6 Troca de marca</span><div class="chart-bar-track"><div class="chart-bar-fill cyan" style="width:61.2%"></div></div><span class="chart-bar-val" style="color:var(--cyan)">61,2%</span></div>
+      <div class="chart-bar"><span class="chart-bar-label">P2 Sinceridade</span><div class="chart-bar-track"><div class="chart-bar-fill red" style="width:16.3%"></div></div><span class="chart-bar-val" style="color:var(--red)">16,3%</span></div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-icon">&#9888;</div>
+    <div class="callout-body"><strong>Dado notável:</strong> Apenas 16,3% acreditam que marcas de games conduzem campanhas sociais por preocupação genuína (P2). A maioria percebe impacto e se sente mais próxima — mas não confia na motivação. Isso sugere que consumidores são <strong>céticos quanto à intenção, mas receptivos ao efeito</strong>.</div>
+  </div>
+
+  <h3>Escore de percepção composto (0-5)</h3>
+  <p>O escore de percepção (soma de P1 a P5) apresentou <strong>média de 3,38</strong> (DP = 1,20), mediana de <strong>4,0</strong> e IQR de 3,0-4,0. A distribuição é negativamente assimétrica: 57,1% da amostra pontuou 4 ou 5.</p>
+
+  <!-- 6. HYPOTHESES -->
+  <h2 id="hypotheses">6. Teste de Hipóteses</h2>
+
+  <div class="hyp-result supported">
+    <span class="hyp-badge supported">Suportada</span>
+    <div class="hyp-title">H1: Percepção positiva das campanhas afirmativas</div>
+    <div class="hyp-desc">
+      <p style="margin-bottom:12px">O público-alvo percebe campanhas afirmativas de forma positiva, com 4 de 5 itens significativamente acima do ponto neutro (50%).</p>
+    </div>
+    <table class="stat-table" style="margin-top:12px">
+      <thead><tr><th>Item</th><th>%&nbsp;Sim</th><th>p-valor</th><th>Cohen's h</th><th>Sig.</th></tr></thead>
+      <tbody>
+        <tr><td>P1 Proximidade</td><td><strong>81,6%</strong></td><td>< 0,0001</td><td>0,685</td><td><span class="sig yes">SIM</span></td></tr>
+        <tr><td>P2 Sinceridade</td><td>16,3%</td><td>1,000</td><td>-0,739</td><td><span class="sig no">NÃO</span></td></tr>
+        <tr><td>P3 Confiança</td><td><strong>67,3%</strong></td><td>0,0004</td><td>0,354</td><td><span class="sig yes">SIM</span></td></tr>
+        <tr><td>P4 Impacto</td><td><strong>87,8%</strong></td><td>< 0,0001</td><td>0,856</td><td><span class="sig yes">SIM</span></td></tr>
+        <tr><td>P5 Branding empático</td><td><strong>84,7%</strong></td><td>< 0,0001</td><td>0,767</td><td><span class="sig yes">SIM</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:var(--dimmed);margin-top:12px">Wilcoxon signed-rank (escore > 3): W = 1972, p = 0,0012, r = 0,692 (efeito grande)</p>
+  </div>
+
+  <div class="hyp-result supported">
+    <span class="hyp-badge supported">Suportada</span>
+    <div class="hyp-title">H2: Correlação entre percepção e intenção de troca de marca</div>
+    <div class="hyp-desc">
+      <p style="margin-bottom:12px">Existe correlação positiva moderada e significativa entre percepção de impacto social e disposição de trocar de marca.</p>
+      <table class="stat-table">
+        <thead><tr><th>Teste</th><th>Coeficiente</th><th>p-valor</th></tr></thead>
+        <tbody>
+          <tr><td>Point-biserial</td><td><strong>r = 0,393</strong></td><td>< 0,001</td></tr>
+          <tr><td>Spearman</td><td><strong>&rho; = 0,392</strong></td><td>< 0,001</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="comparison-grid" style="margin-top:16px">
+      <div class="comparison-card">
+        <div class="comparison-card-label">P6 = Sim (troca marca)</div>
+        <div class="comparison-card-val" style="color:var(--green)">3,75</div>
+        <div class="comparison-card-sub">Escore médio de percepção</div>
+      </div>
+      <div class="comparison-card">
+        <div class="comparison-card-label">P6 = Não</div>
+        <div class="comparison-card-val" style="color:var(--red)">2,79</div>
+        <div class="comparison-card-sub">Escore médio de percepção</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hyp-result supported">
+    <span class="hyp-badge supported">Suportada</span>
+    <div class="hyp-title">H3: Diferenças entre grupos minorizados e não-minorizados</div>
+    <div class="hyp-desc">
+      <p style="margin-bottom:12px">Participantes do grupo minorizado apresentam percepção significativamente mais positiva e maior disposição de troca de marca.</p>
+    </div>
+    <table class="stat-table" style="margin-top:12px">
+      <thead><tr><th>Análise</th><th>Minoria</th><th>Não-minoria</th><th>Teste</th><th>p-valor</th></tr></thead>
+      <tbody>
+        <tr><td>Escore de percepção</td><td><strong>3,54</strong> (md=4,0)</td><td>3,13 (md=3,0)</td><td>Mann-Whitney U = 1417</td><td>0,021</td></tr>
+        <tr><td>P6 Troca de marca</td><td><strong>72,9%</strong></td><td>43,6%</td><td>Fisher exact (OR = 3,48)</td><td>0,006</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout success" style="margin-top:16px">
+      <div class="callout-icon">&#10004;</div>
+      <div class="callout-body">A diferença na intenção de troca de marca é a mais expressiva: <strong>+29,3 pontos percentuais</strong> entre gamers minorizados e não-minorizados. Um gamer minorizado tem <strong>3,48x mais chance</strong> de trocar de marca por compromisso social.</div>
+    </div>
+  </div>
+
+  <h3>Comparação item a item: minoria vs. não-minoria</h3>
+  <div class="data-card">
+    <div class="data-card-title">Percentual de respostas positivas por grupo</div>
+    <table class="stat-table">
+      <thead><tr><th>Item</th><th>Minoria</th><th>Não-minoria</th><th>Diferença</th></tr></thead>
+      <tbody>
+        <tr><td>P1 Proximidade</td><td><strong>86,4%</strong></td><td>74,4%</td><td style="color:var(--green)">+12,1 pp</td></tr>
+        <tr><td>P2 Sinceridade</td><td>18,6%</td><td>12,8%</td><td style="color:var(--green)">+5,8 pp</td></tr>
+        <tr><td>P3 Confiança</td><td><strong>74,6%</strong></td><td>56,4%</td><td style="color:var(--green)">+18,2 pp</td></tr>
+        <tr><td>P4 Impacto</td><td>86,4%</td><td>89,7%</td><td style="color:var(--red)">-3,3 pp</td></tr>
+        <tr><td>P5 Branding empático</td><td><strong>88,1%</strong></td><td>79,5%</td><td style="color:var(--green)">+8,6 pp</td></tr>
+        <tr><td><strong>P6 Troca de marca</strong></td><td><strong>72,9%</strong></td><td>43,6%</td><td style="color:var(--green)"><strong>+29,3 pp</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 7. EXPLORATORY -->
+  <h2 id="exploratory">7. Análises Exploratórias</h2>
+
+  <h3>Regressão logística: preditores da troca de marca (P6)</h3>
+  <p>Um modelo de regressão logística foi ajustado para identificar preditores da intenção de troca de marca, controlando por idade e tipo de jogador.</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Odds ratios — Regressão logística (P6 ~ preditores)</div>
+    <table class="stat-table">
+      <thead><tr><th>Preditor</th><th>OR</th><th>IC 95%</th><th>p-valor</th><th>Sig.</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Status de minoria</strong></td><td><strong>3,36</strong></td><td>1,41 — 8,01</td><td>0,006</td><td><span class="sig yes">SIM</span></td></tr>
+        <tr><td>Idade</td><td>1,05</td><td>0,97 — 1,14</td><td>0,216</td><td><span class="sig no">NÃO</span></td></tr>
+        <tr><td>Gamer hardcore</td><td>0,65</td><td>0,27 — 1,57</td><td>0,334</td><td><span class="sig no">NÃO</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout insight">
+    <div class="callout-icon">&#9670;</div>
+    <div class="callout-body"><strong>Insight:</strong> Mesmo controlando por idade e perfil de jogador, o status de minoria permanece o único preditor significativo da intenção de troca de marca (OR = 3,36; IC 95%: 1,41-8,01; p = 0,006). Idade e perfil hardcore/casual não influenciam significativamente essa decisão.</div>
+  </div>
+
+  <!-- 8. BRANDS -->
+  <h2 id="brands">8. Marcas Citadas pelos Participantes</h2>
+
+  <p>36,7% dos participantes (36/98) citaram espontaneamente marcas que consideram ter gerado impacto social real no mercado de games. As menções revelam um espectro que vai de publishers globais a organizações de esports brasileiras.</p>
+
+  <div class="brand-cloud">
+    <span class="brand-pill xl">Itaú (6)</span>
+    <span class="brand-pill lg">Xbox/Microsoft (4)</span>
+    <span class="brand-pill lg">Riot Games (3)</span>
+    <span class="brand-pill lg">Garena/Free Fire (3)</span>
+    <span class="brand-pill md">PlayStation/Sony (2)</span>
+    <span class="brand-pill md">Submarino (2)</span>
+    <span class="brand-pill md">O Boticário (2)</span>
+    <span class="brand-pill md">Annapurna (2)</span>
+    <span class="brand-pill md">Razer (2)</span>
+    <span class="brand-pill">Santander</span>
+    <span class="brand-pill">FURIA</span>
+    <span class="brand-pill">FlyQuest</span>
+    <span class="brand-pill">Rensga</span>
+    <span class="brand-pill">Epic Games</span>
+    <span class="brand-pill">Burger King</span>
+    <span class="brand-pill">Naughty Dog</span>
+    <span class="brand-pill">Don't Nod</span>
+    <span class="brand-pill">Celeste/Maddy</span>
+    <span class="brand-pill">Valorant Game Changers</span>
+    <span class="brand-pill">Gamers Club</span>
+    <span class="brand-pill">Minecraft/Mojang</span>
+  </div>
+
+  <div class="callout insight" style="margin-top:20px">
+    <div class="callout-icon">&#9670;</div>
+    <div class="callout-body"><strong>Padrão emergente:</strong> O <strong>Itaú</strong> lidera as citações (6x), principalmente pela Taça das Favelas de Free Fire. <strong>Xbox/Microsoft</strong> foi citado pelo controle adaptável para pessoas com deficiência. <strong>Riot Games</strong> apareceu por campanhas de arrecadação e pelo Valorant Game Changers. Nota-se que <strong>marcas não-endêmicas</strong> (Itaú, Santander, Boticário) são lembradas tanto quanto publishers tradicionais.</div>
+  </div>
+
+  <!-- 9. DISCUSSION -->
+  <h2 id="discussion">9. Discussão</h2>
+
+  <p>Os resultados deste estudo piloto oferecem evidências empíricas relevantes sobre a interseção entre responsabilidade social corporativa e comportamento do consumidor no mercado de games brasileiro.</p>
+
+  <h3>O paradoxo da sinceridade</h3>
+  <p>O achado mais intrigante é a dissociação entre <strong>ceticismo sobre motivação</strong> (apenas 16,3% acreditam em sinceridade) e <strong>receptividade ao efeito</strong> (87,8% percebem impacto real). Os gamers brasileiros parecem operar com uma lógica pragmática: não importa se a motivação da marca é genuína — o que importa é se a ação gera resultados tangíveis. Isso alinha-se com Porter & Kramer (2006): a responsabilidade social corporativa gera valor mesmo quando motivada estrategicamente.</p>
+
+  <h3>O efeito minoria amplificado</h3>
+  <p>A diferença de <strong>29,3 pontos percentuais</strong> na disposição de troca de marca entre grupos minorizados e não-minorizados é expressiva. O OR de 3,48 (p = 0,006) indica que, para cada gamer não-minorizado disposto a trocar de marca por compromisso social, há quase 3,5 gamers minorizados na mesma posição. Isso confirma achados de Newzoo & Intel (2021) sobre efeitos diferenciais entre grupos e tem implicação direta para estratégias de marketing: <strong>campanhas afirmativas não são apenas socialmente desejáveis — são comercialmente estratégicas</strong>, especialmente para audiências diversas.</p>
+
+  <h3>A correlação percepção-comportamento</h3>
+  <p>A correlação moderada (r = 0,39) entre percepção e intenção de troca confirma H2 e sugere que a percepção positiva de campanhas afirmativas se traduz, ao menos em intenção declarada, em mudança comportamental. Quem pontua 4 ou 5 no escore de percepção tem escore médio de intenção de troca significativamente maior.</p>
+
+  <!-- 10. LIMITATIONS -->
+  <h2 id="limitations">10. Limitações</h2>
+
+  <p>Este estudo possui limitações que devem contextualizar a interpretação dos resultados:</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Limitações metodológicas</div>
+    <table class="stat-table">
+      <thead><tr><th>#</th><th>Limitação</th><th>Impacto</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Design transversal</strong></td><td>Não permite inferência causal — associações, não causalidade</td></tr>
+        <tr><td>2</td><td><strong>N = 98</strong> (abaixo do alvo de 200)</td><td>Poder estatístico reduzido para subgrupos; estudo piloto</td></tr>
+        <tr><td>3</td><td><strong>Itens binários</strong> (Sim/Não)</td><td>O protocolo v2.0 usa Likert 5 pontos — granularidade limitada</td></tr>
+        <tr><td>4</td><td><strong>Amostragem por conveniência</strong></td><td>Pode super-representar gamers digitalmente ativos e jovens</td></tr>
+        <tr><td>5</td><td><strong>Intenção declarada</strong></td><td>Intenção &#8800; comportamento real de compra</td></tr>
+        <tr><td>6</td><td><strong>Classificação binária de minoria</strong></td><td>Simplifica identidades interseccionais complexas</td></tr>
+        <tr><td>7</td><td><strong>Sem validação psicométrica</strong></td><td>Limita claims sobre validade de construto</td></tr>
+        <tr><td>8</td><td><strong>Contexto brasileiro</strong></td><td>Resultados podem não generalizar para outros contextos</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 11. IMPLICATIONS -->
+  <h2 id="implications">11. Implicações Práticas</h2>
+
+  <blockquote><p>Campanhas afirmativas no mercado de games não são gesto simbólico — são vantagem competitiva mensurável.</p></blockquote>
+
+  <h3>Para marcas de games e anunciantes</h3>
+  <p><strong>1. Foco no impacto, não na narrativa:</strong> Gamers são céticos quanto à motivação (16,3% acreditam em sinceridade), mas receptivos ao resultado (87,8% percebem impacto). Invista em ações com resultado mensurável, não em comunicação genérica de valores.</p>
+  <p><strong>2. Priorize audiências minorizadas:</strong> Com 72,9% dispostos a trocar de marca vs. 43,6% do grupo não-minorizado, a conversão potencial é significativamente maior. Programas como o Xbox Adaptive Controller ou a Taça das Favelas do Itaú são referências citadas espontaneamente.</p>
+  <p><strong>3. Invista em consistência:</strong> A baixa percepção de sinceridade indica que ações pontuais são vistas como oportunismo. Marcas que mantêm programas continuados (como FURIA + Casa 1, ou Riot com arrecadações regulares) acumulam capital de marca.</p>
+
+  <h3>Para pesquisadores</h3>
+  <p><strong>4. Use escala Likert no estudo completo:</strong> Os itens binários limitaram a granularidade analítica. O protocolo v2.0 já prevê escala de 5 pontos.</p>
+  <p><strong>5. Explore interseccionalidade:</strong> A classificação binária simplifica demais. Análises por dimensão (gênero, raça, orientação, deficiência) podem revelar efeitos diferenciais.</p>
+  <p><strong>6. Meça comportamento real:</strong> Complementar self-report com dados transacionais ou experimentação (A/B tests com estímulos de campanha) fortaleceria causalidade.</p>
+
+  <!-- 12. REFERENCES -->
+  <h2 id="references">12. Referências</h2>
+
+  <div class="references">
+    <p>Champlin, S., Sterbenk, Y., Windels, K., & Poteet, M. (2019). How brand-cause fit shapes real world advertising messages. <em>International Journal of Advertising</em>, 38(8), 1240-1263.</p>
+    <p>Gray, K. L. (2012). Intersecting oppressions and online communities. <em>Information, Communication & Society</em>, 15(3), 411-428.</p>
+    <p>Kotler, P., Kartajaya, H., & Setiawan, I. (2010). <em>Marketing 3.0</em>. Wiley.</p>
+    <p>McConnell, R. (2007). Edelman: Consumers will pay up to support socially conscious marketers. <em>Advertising Age</em>.</p>
+    <p>Newzoo. (2023). <em>Global Games Market Report</em>.</p>
+    <p>Newzoo & Intel. (2021). <em>Diversity and Inclusion in Gaming</em>.</p>
+    <p>Pesquisa Game Brasil. (2023). <em>PGB 2023: 10th Edition</em>.</p>
+    <p>Porter, M. E., & Kramer, M. R. (2006). Strategy and society. <em>Harvard Business Review</em>, 84(12), 78-92.</p>
+    <p>Siqueira, D. P., & Castro, L. R. B. (2017). Minorias e grupos vulneráveis. <em>Revista Direitos Sociais e Políticas Públicas</em>, 5(1), 105-122.</p>
+    <p>Souza, L., Freitas, A. A., Heineck, L. F., & Wattes, J. L. (2021). Os Grupos de Gamers. <em>Brazilian Business Review</em>, 18(2), 177-195.</p>
+    <p>Von Elm, E. et al. (2007). The STROBE Statement. <em>The Lancet</em>, 370(9596), 1453-1457.</p>
+  </div>
+
+  <div style="margin-top:60px;padding:32px;border-radius:16px;background:rgba(177,140,255,.03);border:1px solid rgba(177,140,255,.1);text-align:center">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:16px">Este relatório foi produzido pelo <strong style="color:var(--white)">D.Lab Research</strong> como parte de nossa iniciativa de pesquisas abertas. Precisa de uma análise com esse nível de profundidade para o seu negócio?</p>
+    <a href="mailto:contato@dlab.com.br" class="btn btn-primary">Falar com o D.Lab &rarr;</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <img src="../d.lab.png" alt="D.Lab" class="foot-logo-img" />
+    <span>&copy; 2025 D.Lab | Decision Intelligence Research &middot; São Paulo, BR</span>
+    <a href="../blog.html" style="color:var(--lilac)">Voltar para Pesquisas</a>
+  </div>
+</footer>
+
+<script>
+// Canvas
+(function(){const c=document.getElementById('geo-canvas'),x=c.getContext('2d');let W,H,n=[],t=0;function r(){W=c.width=innerWidth;H=c.height=innerHeight;n=[];const s=200;for(let i=0;i<Math.ceil(W/s)+1;i++)for(let j=0;j<Math.ceil(H/s)+1;j++)if(Math.random()>.5)n.push({x:i*s+(j%2?s*.5:0),y:j*s,bx:i*s+(j%2?s*.5:0),by:j*s,r:Math.random()*1+.3,p:Math.random()*Math.PI*2,a:6+Math.random()*8,l:Math.random()>.5})}function d(){x.clearRect(0,0,W,H);t+=.005;n.forEach(p=>{p.x=p.bx+Math.sin(t+p.p)*p.a*.3;p.y=p.by+Math.cos(t*.5+p.p)*p.a*.2});for(let i=0;i<n.length;i++)for(let j=i+1;j<n.length;j++){const dx=n[i].x-n[j].x,dy=n[i].y-n[j].y,dd=Math.sqrt(dx*dx+dy*dy);if(dd<200){const a=.04*(1-dd/200);x.beginPath();x.moveTo(n[i].x,n[i].y);x.lineTo(n[j].x,n[j].y);x.strokeStyle=`rgba(177,140,255,${a})`;x.lineWidth=.3;x.stroke()}}n.forEach(p=>{const a=.08+.06*Math.sin(t*2+p.p);x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle=p.l?`rgba(177,140,255,${a})`:`rgba(77,163,255,${a})`;x.fill()});requestAnimationFrame(d)}r();addEventListener('resize',r);d()})();
+// Nav
+const nav=document.getElementById('nav');addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open')});function closeMM(){hb.classList.remove('open');mm.classList.remove('open')}
+// Animations
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1});document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

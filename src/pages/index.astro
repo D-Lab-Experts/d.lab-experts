@@ -1,0 +1,797 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NeuralNetwork from '../components/NeuralNetwork.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<Layout
+  title="D.Lab | Inteligência de Dados & Cybersegurança"
+  description="Consultoria de inteligência de dados e cybersegurança. Análise de mercado, concorrência e público, pentest, segurança digital, implementação de IA e transformação digital."
+  active="home"
+>
+  <!-- ═══════════════ HERO ══════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-light-a"></div>
+    <div class="hero-light-b"></div>
+    <NeuralNetwork color="lilac" density="medium" opacity={0.32} />
+
+    <svg class="hero-orbital" viewBox="0 0 800 800" fill="none">
+      <circle cx="400" cy="400" r="300" stroke="rgba(177,140,255,0.15)" stroke-width="0.5" fill="none" stroke-dasharray="6 8"/>
+      <circle cx="400" cy="400" r="200" stroke="rgba(77,163,255,0.12)" stroke-width="0.5" fill="none" stroke-dasharray="4 10"/>
+      <circle cx="400" cy="400" r="100" stroke="rgba(177,140,255,0.1)" stroke-width="0.5" fill="none"/>
+      <circle r="3" fill="#B18CFF" opacity=".6">
+        <animateMotion dur="20s" repeatCount="indefinite" path="M400,100 A300,300 0 1,1 399.99,100"/>
+      </circle>
+      <circle r="2.5" fill="#4DA3FF" opacity=".5">
+        <animateMotion dur="15s" repeatCount="indefinite" path="M400,200 A200,200 0 1,1 399.99,200"/>
+      </circle>
+      <circle r="2" fill="#00E5A0" opacity=".4">
+        <animateMotion dur="10s" repeatCount="indefinite" path="M400,300 A100,100 0 1,1 399.99,300"/>
+      </circle>
+      <circle cx="400" cy="400" r="2" fill="rgba(177,140,255,0.3)"/>
+      <circle cx="250" cy="350" r="1.5" fill="rgba(77,163,255,0.25)"/>
+      <circle cx="550" cy="350" r="1.5" fill="rgba(77,163,255,0.25)"/>
+      <circle cx="400" cy="250" r="1.5" fill="rgba(177,140,255,0.2)"/>
+      <circle cx="400" cy="550" r="1.5" fill="rgba(177,140,255,0.2)"/>
+      <line x1="400" y1="400" x2="250" y2="350" stroke="rgba(177,140,255,0.08)" stroke-width="0.5"/>
+      <line x1="400" y1="400" x2="550" y2="350" stroke="rgba(77,163,255,0.08)" stroke-width="0.5"/>
+      <line x1="400" y1="400" x2="400" y2="250" stroke="rgba(177,140,255,0.06)" stroke-width="0.5"/>
+      <line x1="400" y1="400" x2="400" y2="550" stroke="rgba(177,140,255,0.06)" stroke-width="0.5"/>
+    </svg>
+
+    <div class="hero-inner">
+      <div class="fi d1">
+        <div class="hero-tag"><span class="tag-dot"></span>Inteligência de Dados & Cybersegurança</div>
+        <h1 class="hero-h1">
+          Inteligência<br>para <span class="hero-accent">decisões<br><span class="hero-rotate-word" id="rotate-word"></span></span>
+        </h1>
+        <p class="hero-sub">Inteligência de dados, cybersegurança e IA para empresas que precisam decidir com precisão e operar com segurança. Da análise estratégica ao pentest, da automação à proteção digital.</p>
+        <div class="hero-ctas">
+          <a href="mailto:contato@dlab.com.br" class="btn btn-primary">Solicitar diagnóstico estratégico →</a>
+          <a href="#demo" class="btn btn-ghost">Ver exemplo de relatório</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-val">120+</div>
+            <div class="hero-stat-lbl">Análises entregues</div>
+          </div>
+          <div>
+            <div class="hero-stat-val">6 segmentos</div>
+            <div class="hero-stat-lbl">De atuação</div>
+          </div>
+          <div>
+            <div class="hero-stat-val">98%</div>
+            <div class="hero-stat-lbl">Taxa de recomendação</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card-wrap fi d2">
+        <div class="hero-card">
+          <div class="hc-header">
+            <div style="display:flex;align-items:center">
+              <img src="/d.lab-icon.png" alt="" class="hc-icon" />
+              <div>
+                <div class="hc-title">Cafeteria Premium</div>
+                <div class="hc-sub">Santo André, SP · Análise de viabilidade</div>
+              </div>
+            </div>
+            <span class="badge badge-green badge-dot">Concluído</span>
+          </div>
+
+          <div class="hc-metrics">
+            <div class="hc-m"><div class="hc-m-val" style="color:var(--green)">Alta</div><div class="hc-m-lbl">Demanda</div></div>
+            <div class="hc-m"><div class="hc-m-val" style="color:var(--yellow)">Média</div><div class="hc-m-lbl">Saturação</div></div>
+            <div class="hc-m"><div class="hc-m-val" style="color:var(--lilac)">7.8</div><div class="hc-m-lbl">Score</div></div>
+          </div>
+
+          <div class="hc-chart">
+            <div class="hc-chart-label">Tendência de demanda · 12 meses</div>
+            <svg class="sparkline-svg" viewBox="0 0 320 56" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="spark-area" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#B18CFF" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#B18CFF" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4 L320,56 L0,56 Z" fill="url(#spark-area)"/>
+              <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4" fill="none" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" filter="url(#glow-f)"/>
+              <circle cx="320" cy="4" r="3" fill="#B18CFF" filter="url(#glow-f)">
+                <animate attributeName="opacity" values="1;0.4;1" dur="1.4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="320" cy="4" r="3" fill="none" stroke="#B18CFF" stroke-opacity=".6">
+                <animate attributeName="r" values="3;8;3" dur="1.4s" repeatCount="indefinite"/>
+                <animate attributeName="stroke-opacity" values=".6;0;.6" dur="1.4s" repeatCount="indefinite"/>
+              </circle>
+              <text x="0" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jan</text>
+              <text x="145" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jun</text>
+              <text x="300" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Dez</text>
+            </svg>
+          </div>
+
+          <div class="hc-bars">
+            <div class="hc-bar-row">
+              <div class="hc-bar-meta"><span class="hc-bar-name">Potencial de demanda</span><span class="hc-bar-pct" style="color:var(--lilac)">82%</span></div>
+              <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="82"></div></div>
+            </div>
+            <div class="hc-bar-row">
+              <div class="hc-bar-meta"><span class="hc-bar-name">Concentração de público</span><span class="hc-bar-pct" style="color:var(--blue)">68%</span></div>
+              <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="68"></div></div>
+            </div>
+          </div>
+
+          <div class="hc-verdict">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L10 6H15L11 9.5L12.5 15L8 11.5L3.5 15L5 9.5L1 6H6L8 1Z" fill="url(#g1)" opacity=".9"/></svg>
+            <div class="hc-verdict-text"><strong>Recomendação:</strong> Alto potencial. Demanda reprimida no raio de 800m. Recomendamos avançar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-ind">
+      <span class="label" style="font-size:9px">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ BRAND STATEMENT ═══════════════════════════════ -->
+  <section id="brand-statement">
+    <div class="brand-wave-bg">
+      <svg viewBox="0 0 1200 400" preserveAspectRatio="none">
+        <path class="brand-wave-line" d="M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200" stroke="rgba(177,140,255,0.25)" stroke-width="1">
+          <animate attributeName="d" dur="8s" repeatCount="indefinite" values="M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200;M0,200 Q150,260 300,200 T600,200 T900,200 T1200,200;M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200"/>
+        </path>
+        <path class="brand-wave-line" d="M0,200 Q200,160 400,200 T800,200 T1200,200" stroke="rgba(77,163,255,0.18)" stroke-width="0.8">
+          <animate attributeName="d" dur="10s" repeatCount="indefinite" values="M0,200 Q200,160 400,200 T800,200 T1200,200;M0,200 Q200,240 400,200 T800,200 T1200,200;M0,200 Q200,160 400,200 T800,200 T1200,200"/>
+        </path>
+        <path class="brand-wave-line" d="M0,200 Q300,180 600,200 T1200,200" stroke="rgba(0,229,160,0.1)" stroke-width="0.6">
+          <animate attributeName="d" dur="12s" repeatCount="indefinite" values="M0,200 Q300,180 600,200 T1200,200;M0,200 Q300,220 600,200 T1200,200;M0,200 Q300,180 600,200 T1200,200"/>
+        </path>
+      </svg>
+    </div>
+    <NeuralNetwork color="lilac" density="low" opacity={0.22} />
+    <div class="container">
+      <div class="brand-inner fi">
+        <h2 class="brand-title">
+          Clareza. Estrutura. <span class="gradient-text">Vantagem.</span>
+        </h2>
+        <p class="brand-desc">Transformamos dados dispersos em inteligência acionável para decisões críticas.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" fill="none">
+      <path d="M0,30 Q150,15 300,30 T600,30 T900,30 T1200,30" stroke="rgba(177,140,255,0.06)" stroke-width="1"/>
+      <path d="M0,35 Q200,22 400,35 T800,35 T1200,35" stroke="rgba(77,163,255,0.04)" stroke-width="0.8"/>
+    </svg>
+  </div>
+
+  <!-- ═══════════════ LOGOS ═════════════════════════════════════════ -->
+  <div id="logos">
+    <div class="container">
+      <p class="logos-lbl label">Confiados por quem decide com estratégia.</p>
+      <div class="logos-row">
+        <div class="logo-ph"></div><div class="logo-ph"></div><div class="logo-ph"></div>
+        <div class="logo-ph"></div><div class="logo-ph"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SEGMENTOS ════════════════════════════════════ -->
+  <div class="section-sep"></div>
+  <section id="segments" class="section">
+    <div class="section-glow lilac" style="top:-100px;right:-150px"></div>
+    <div class="section-glow blue" style="bottom:-80px;left:-100px"></div>
+    <canvas class="section-particles" data-color="lilac"></canvas>
+    <div class="container">
+      <div class="seg-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">Onde atuamos</span></div>
+        <h2 class="section-title">Inteligência aplicada a<br><span class="gradient-text">qualquer decisão complexa.</span></h2>
+        <p class="section-sub" style="margin:0 auto">De startups a grandes operações, do posicionamento de marca à expansão de mercado. Onde há decisão complexa, dado disperso ou transformação necessária, há método D.Lab.</p>
+      </div>
+      <div class="seg-grid">
+        <div class="seg-card fi d1">
+          <div class="icon-wrap" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="url(#g1)" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="url(#g1)" stroke-width="1.5"/><path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="url(#g1)" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--lilac)">Mercado & Público</div>
+          <div class="seg-name">Análise de Mercado & Público</div>
+          <p class="seg-desc">Mapeamento de público-alvo, dimensionamento de mercado, análise de demanda e perfil de consumidor. Quem é o seu cliente, onde está e o que busca.</p>
+          <div class="seg-samples">
+            <span class="seg-sample">Perfil de público</span>
+            <span class="seg-sample">Dimensionamento de mercado</span>
+            <span class="seg-sample">Análise de demanda</span>
+          </div>
+        </div>
+
+        <div class="seg-card blue fi d2">
+          <div class="icon-wrap blue" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><path d="M15.5 12v7M12 15.5h7" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--blue)">Estratégia</div>
+          <div class="seg-name">Análise Estratégica de Mercado</div>
+          <p class="seg-desc">Análise de mercado estratégica, qualitativa e quantitativa. Consultoria para posicionar sua empresa, identificar oportunidades e tomar decisões competitivas fundamentadas em dados.</p>
+          <div class="seg-samples">
+            <span class="seg-sample">Análise estratégica</span>
+            <span class="seg-sample">Consultoria competitiva</span>
+            <span class="seg-sample">Benchmarking setorial</span>
+          </div>
+        </div>
+
+        <div class="seg-card yellow fi d3">
+          <div class="icon-wrap yellow" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><path d="M11 3l8 8-8 8-8-8 8-8z" stroke="url(#g-yellow)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="11" cy="11" r="3.8" stroke="url(#g-yellow)" stroke-width="1.5"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--yellow)">Política</div>
+          <div class="seg-name">Análise Política e Eleitoral</div>
+          <p class="seg-desc">Pesquisa de opinião pública, mapeamento de eleitorado, análise de sentimento e modelagem de cenários eleitorais com rigor metodológico.</p>
+          <div class="seg-samples">
+            <span class="seg-sample">Mapeamento eleitoral</span>
+            <span class="seg-sample">Opinião pública</span>
+            <span class="seg-sample">Modelagem de cenários</span>
+          </div>
+        </div>
+
+        <div class="seg-card violet fi d2">
+          <div class="icon-wrap violet" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><polyline points="3,15 7,9 11,12 15,6 19,8" stroke="url(#g-violet)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="19" cy="8" r="2" fill="url(#g-violet)" opacity=".7"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--violet)">Tendências</div>
+          <div class="seg-name">Estudos de Tendência</div>
+          <p class="seg-desc">Identificação de movimentos culturais, comportamentais e de consumo antes que se tornem mainstream. Antecipação como vantagem competitiva.</p>
+          <div class="seg-samples">
+            <span class="seg-sample">Tendências de consumo</span>
+            <span class="seg-sample">Comportamento digital</span>
+            <span class="seg-sample">Análise cultural</span>
+          </div>
+        </div>
+
+        <div class="seg-card green fi d3">
+          <div class="icon-wrap green" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><path d="M3 18l4-4 4 3 4-6 4-4" stroke="url(#g-green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="18" r="1.5" fill="url(#g-green)"/><circle cx="19" cy="7" r="1.5" fill="url(#g-green)"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--green)">Concorrência</div>
+          <div class="seg-name">Inteligência Competitiva</div>
+          <p class="seg-desc">Mapeamento profundo de concorrentes, benchmarking de mercado e análise de posicionamento. Entenda onde sua empresa está e onde deveria estar.</p>
+          <div class="seg-samples">
+            <span class="seg-sample">Análise de concorrentes</span>
+            <span class="seg-sample">Benchmarking de mercado</span>
+            <span class="seg-sample">Posicionamento estratégico</span>
+          </div>
+        </div>
+
+        <div class="seg-card cyan fi d4">
+          <div class="icon-wrap cyan" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><path d="M11 2L4 5.5v5c0 4.7 3 8.5 7 10 4-1.5 7-5.3 7-10v-5L11 2z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11l2.5 2.5L14.5 9" stroke="url(#g-green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--cyan)">Segurança</div>
+          <div class="seg-name">Cybersegurança</div>
+          <p class="seg-desc">Pentest, análise de vulnerabilidades, consultoria de segurança digital e proteção de infraestrutura. Para empresas que precisam operar com confiança e conformidade.</p>
+          <div class="seg-samples">
+            <span class="seg-sample">Pentest</span>
+            <span class="seg-sample">Análise de vulnerabilidades</span>
+            <span class="seg-sample">Consultoria de segurança</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" fill="none">
+      <path d="M0,30 Q300,10 600,30 T1200,30" stroke="rgba(177,140,255,0.05)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- ═══════════════ PROBLEMA / SOLUÇÃO ═══════════════════════════ -->
+  <section id="problem">
+    <div class="prob-ambient"></div>
+    <div class="container">
+      <div class="prob-header fi">
+        <div class="section-label" style="justify-content:center"><span class="label">O Problema</span></div>
+        <h2 class="section-title">De decisões no escuro a<br><span class="gradient-text">inteligência acionável.</span></h2>
+        <p class="section-sub" style="margin:0 auto">A distância entre intuição e estratégia é medida em dados.</p>
+      </div>
+
+      <div class="prob-layout fi">
+        <div class="prob-panel red-side">
+          <div class="prob-head">
+            <div class="icon-wrap red sm"><svg viewBox="0 0 17 17" fill="none"><path d="M4 4l9 9M13 4l-9 9" stroke="#FF5C7A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <h3>Sem D.Lab</h3>
+          </div>
+          <ul class="prob-list">
+            <li><span class="prob-bul r"></span>Decisões baseadas em feeling e experiência anedótica</li>
+            <li><span class="prob-bul r"></span>Análise de concorrência feita no olho, sem dados reais</li>
+            <li><span class="prob-bul r"></span>Processos manuais que consomem tempo e dinheiro</li>
+            <li><span class="prob-bul r"></span>Sem acesso à consultoria estratégica de alto padrão</li>
+            <li><span class="prob-bul r"></span>Decisões de investimento sem validação de mercado</li>
+            <li><span class="prob-bul r"></span>Concorrência adotando IA enquanto a operação fica para trás</li>
+          </ul>
+        </div>
+
+        <div class="prob-center">
+          <div class="prob-3d-wrap">
+            <div class="prob-orbit-ring"><div class="prob-orbit-dot"></div></div>
+            <div class="prob-orbit-ring"><div class="prob-orbit-dot"></div></div>
+            <div class="prob-prism">
+              <div class="prob-face front">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" opacity=".6">
+                  <path d="M24 8L38 18V34L24 44L10 34V18L24 8Z" stroke="url(#g1)" stroke-width="1" fill="none"/>
+                  <path d="M24 8V44M10 18L38 34M38 18L10 34" stroke="url(#g1)" stroke-width=".5" opacity=".4"/>
+                  <circle cx="24" cy="24" r="3" fill="url(#g1)" opacity=".5"/>
+                </svg>
+              </div>
+              <div class="prob-face back">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" opacity=".4">
+                  <rect x="4" y="4" width="32" height="32" rx="4" stroke="url(#g2)" stroke-width=".8"/>
+                  <line x1="4" y1="20" x2="36" y2="20" stroke="url(#g2)" stroke-width=".5" opacity=".5"/>
+                  <line x1="20" y1="4" x2="20" y2="36" stroke="url(#g2)" stroke-width=".5" opacity=".5"/>
+                </svg>
+              </div>
+              <div class="prob-face left">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" opacity=".3">
+                  <circle cx="18" cy="18" r="12" stroke="url(#g-green)" stroke-width=".8"/>
+                  <circle cx="18" cy="18" r="6" stroke="url(#g-green)" stroke-width=".6"/>
+                  <circle cx="18" cy="18" r="2" fill="url(#g-green)" opacity=".6"/>
+                </svg>
+              </div>
+              <div class="prob-face right">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" opacity=".3">
+                  <polyline points="4,28 12,16 18,22 26,10 32,14" stroke="url(#g1)" stroke-width=".8" fill="none"/>
+                </svg>
+              </div>
+              <div class="prob-face top">
+                <div class="prob-face-inner">D.Lab</div>
+              </div>
+              <div class="prob-face bottom"></div>
+            </div>
+            <img src="/d.lab-icon2.png" alt="" class="prob-icon-mark" />
+          </div>
+          <div class="prob-arrow">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Transformação
+          </div>
+        </div>
+
+        <div class="prob-panel green-side">
+          <div class="prob-head">
+            <div class="icon-wrap green sm"><svg viewBox="0 0 17 17" fill="none"><path d="M3 8.5l4 4 7-8" stroke="#00E5A0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Com D.Lab</h3>
+          </div>
+          <ul class="prob-list">
+            <li><span class="prob-bul g"></span>Análise estratégica com dados reais e metodologia validada</li>
+            <li><span class="prob-bul g"></span>Mapeamento completo de mercado e oportunidades</li>
+            <li><span class="prob-bul g"></span>Agentes de IA e automação implementados na operação</li>
+            <li><span class="prob-bul g"></span>Consultoria de nível McKinsey acessível para PMEs</li>
+            <li><span class="prob-bul g"></span>Investimentos, lançamentos e posicionamento com inteligência validada</li>
+            <li><span class="prob-bul g"></span>Operação na fronteira da inovação</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+  <!-- ═══════════════ COMO FUNCIONA ════════════════════════════════ -->
+  <section id="how" class="section">
+    <div class="dot-bg"></div>
+    <div class="section-glow blue" style="top:50%;left:-120px;transform:translateY(-50%)"></div>
+    <canvas class="section-particles" data-color="blue"></canvas>
+    <div class="container">
+      <div class="how-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">Metodologia</span></div>
+        <h2 class="section-title">Como funciona</h2>
+        <p class="section-sub" style="margin:0 auto">Da pergunta de negócio à decisão acionável em 4 etapas.</p>
+      </div>
+      <div class="steps-grid fi">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><path d="M11 3L13.5 8.5H19L14.5 12L16.5 18L11 14.5L5.5 18L7.5 12L3 8.5H8.5L11 3Z" stroke="url(#g1)" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <div class="step-title">Briefing</div>
+          <p class="step-desc">Entendemos o contexto, a hipótese e os critérios de decisão mais relevantes para o cliente.</p>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(177,140,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="icon-wrap blue"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke="url(#g2)" stroke-width="1.5"/><path d="M11 7v4l3 2" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="step-title">Coleta e Modelagem</div>
+          <p class="step-desc">Cruzamos dados de APIs públicas, fontes abertas e ferramentas proprietárias para construir o modelo analítico.</p>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(77,163,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="icon-wrap cyan"><svg viewBox="0 0 22 22" fill="none"><rect x="3" y="13" width="3" height="6" rx="1" fill="url(#g-green)" opacity=".7"/><rect x="8" y="9" width="3" height="10" rx="1" fill="url(#g-green)"/><rect x="13" y="5" width="3" height="14" rx="1" fill="url(#g-green)"/><rect x="18" y="3" width="3" height="16" rx="1" fill="url(#g1)"/></svg></div>
+          <div class="step-title">Síntese</div>
+          <p class="step-desc">Dados brutos transformados em insights estruturados, com scores, rankings e visualizações interpretáveis.</p>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(0,212,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="icon-wrap green"><svg viewBox="0 0 22 22" fill="none"><path d="M4 12l5 5L18 6" stroke="url(#g-green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="step-title">Entrega e Implementação</div>
+          <p class="step-desc">Relatório completo com recomendação clara ou início da jornada de consultoria para implementar processos, IA e automação na sua operação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+  <!-- ═══════════════ PRODUTOS ══════════════════════════════════════ -->
+  <section id="products" class="section">
+    <div class="section-glow lilac" style="top:-50px;left:50%;transform:translateX(-50%)"></div>
+    <canvas class="section-particles" data-color="lilac"></canvas>
+    <div class="container">
+      <div class="how-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">Produtos & Serviços</span></div>
+        <h2 class="section-title">Da inteligência à proteção.<br><span class="gradient-text">Tudo sob medida.</span></h2>
+        <p class="section-sub" style="margin:0 auto">Análises que fundamentam decisões e serviços de segurança que protegem operações. Cada entrega calibrada para o momento e o risco certo.</p>
+      </div>
+
+      <div style="margin-bottom:12px" class="fi"><span class="label" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:16px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><rect x="8" y="1" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><rect x="1" y="8" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><path d="M10.5 8v5M8 10.5h5" stroke="url(#g1)" stroke-width="1" stroke-linecap="round"/></svg>Inteligência de Dados</span></div>
+      <div class="prod-grid fi">
+        <div class="prod-card fi-l d1">
+          <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="url(#g1)" stroke-width="1.6"/><path d="M13 8v5l3.5 2" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="prod-name">Relatório Essencial</div>
+          <p class="prod-desc">Análise estratégica focada em uma pergunta-chave de negócio. Ideal para validar uma hipótese antes de tomar a decisão.</p>
+          <ul class="prod-feats">
+            <li>Análise de mercado, concorrência ou público-alvo</li>
+            <li>Mapeamento de competidores diretos e indiretos</li>
+            <li>Dimensionamento de oportunidade com dados reais</li>
+            <li>Score de viabilidade com metodologia D.Lab</li>
+            <li>Relatório em PDF estruturado com recomendação</li>
+          </ul>
+          <a href="mailto:contato@dlab.com.br" class="prod-cta">Solicitar diagnóstico →</a>
+        </div>
+        <div class="prod-card featured fi d2">
+          <span class="badge badge-lilac prod-badge">★ Mais solicitado</span>
+          <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><path d="M5 20L13 4l8 16H5z" stroke="url(#g1)" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.5 15h11" stroke="url(#g1)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="prod-name">Relatório Premium</div>
+          <p class="prod-desc">Análise profunda e multidimensional com dados temporais, cruzamento de fontes e interpretação ao vivo. Para decisões de alto impacto.</p>
+          <ul class="prod-feats">
+            <li>Tudo do Essencial, mais:</li>
+            <li>Análise temporal, sazonalidade e tendências</li>
+            <li>Cruzamento de múltiplas fontes de dados</li>
+            <li>Comparativo entre até 3 cenários ou competidores</li>
+            <li>Perfil de público e estimativa de demanda latente</li>
+            <li>Call de interpretação com o analista (60min)</li>
+          </ul>
+          <a href="mailto:contato@dlab.com.br" class="prod-cta">Agendar avaliação inteligente →</a>
+        </div>
+        <div class="prod-card fi-r d1">
+          <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><rect x="4" y="7" width="18" height="13" rx="3" stroke="url(#g-green)" stroke-width="1.5"/><path d="M9 7V5.5a4 4 0 018 0V7" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="14" r="1.5" fill="url(#g-green)"/></svg></div>
+          <div class="prod-name">Consultoria de Transformação</div>
+          <p class="prod-desc">Implementação end-to-end de processos, agentes de IA e automação. Para empresas que querem operar na fronteira da inovação.</p>
+          <ul class="prod-feats">
+            <li>Diagnóstico estratégico da operação</li>
+            <li>Implementação de agentes de IA</li>
+            <li>Automação de processos críticos</li>
+            <li>Fluxos inteligentes e integração de sistemas</li>
+            <li>Acompanhamento e evolução contínua</li>
+          </ul>
+          <a href="mailto:contato@dlab.com.br" class="prod-cta">Iniciar transformação →</a>
+        </div>
+      </div>
+
+      <div style="margin:56px 0 12px" class="fi"><span class="label" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:16px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L2.5 3.5v3.5c0 3.2 1.9 5.8 4.5 6.5 2.6-.7 4.5-3.3 4.5-6.5V3.5L7 1z" stroke="url(#g-green)" stroke-width="1" stroke-linejoin="round"/><path d="M5 7l1.5 1.5L9.5 6" stroke="url(#g-green)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>Cybersegurança</span></div>
+      <div class="prod-grid fi" style="grid-template-columns:repeat(2,1fr)">
+        <div class="prod-card fi-l d1">
+          <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><path d="M13 3L5 7v6c0 5.2 3.4 9.8 8 11.5 4.6-1.7 8-6.3 8-11.5V7L13 3z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 13l2 2 4.5-5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="prod-name">Pentest & Análise de Vulnerabilidades</div>
+          <p class="prod-desc">Teste de intrusão e mapeamento de vulnerabilidades em aplicações, infraestrutura e redes. Relatório técnico com classificação de risco e plano de correção.</p>
+          <ul class="prod-feats">
+            <li>Pentest em aplicações web e mobile</li>
+            <li>Análise de infraestrutura e rede</li>
+            <li>Teste de engenharia social</li>
+            <li>Relatório com classificação CVSS</li>
+            <li>Plano de remediação priorizado</li>
+          </ul>
+          <a href="mailto:contato@dlab.com.br" class="prod-cta">Solicitar pentest →</a>
+        </div>
+        <div class="prod-card fi-r d1">
+          <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="url(#g-green)" stroke-width="1.5"/><path d="M13 9v5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="17.5" r="1" fill="url(#g-green)"/></svg></div>
+          <div class="prod-name">Consultoria de Segurança Digital</div>
+          <p class="prod-desc">Diagnóstico completo da postura de segurança, definição de políticas, adequação a frameworks e acompanhamento contínuo.</p>
+          <ul class="prod-feats">
+            <li>Diagnóstico de postura de segurança</li>
+            <li>Políticas de segurança e compliance</li>
+            <li>Adequação a LGPD, ISO 27001, NIST</li>
+            <li>Monitoramento e resposta a incidentes</li>
+            <li>Treinamento de equipe</li>
+          </ul>
+          <a href="mailto:contato@dlab.com.br" class="prod-cta">Solicitar consultoria →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ DEMO ══════════════════ -->
+  <section id="demo" class="section">
+    <div class="section-glow green" style="top:20%;right:-100px"></div>
+    <div class="section-glow lilac" style="bottom:10%;left:-120px"></div>
+    <canvas class="section-particles" data-color="green"></canvas>
+    <NeuralNetwork color="lilac" density="low" opacity={0.25} />
+    <div class="container">
+      <div class="demo-inner">
+        <div class="fi-l">
+          <div class="section-label"><span class="label">Exemplo real</span></div>
+          <h2 class="section-title">Um relatório que você<br>realmente consegue usar.</h2>
+          <p class="section-sub">Dados transformados em linguagem de decisão. Cada métrica com contexto, cada recomendação com raciocínio.</p>
+          <div class="demo-points">
+            <div class="demo-pt">
+              <div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><rect x="3" y="11" width="3" height="8" rx="1" fill="url(#g1)" opacity=".6"/><rect x="8" y="7" width="3" height="12" rx="1" fill="url(#g1)" opacity=".8"/><rect x="13" y="4" width="3" height="15" rx="1" fill="url(#g1)"/><rect x="18" y="2" width="3" height="17" rx="1" fill="url(#g2)"/></svg></div>
+              <div>
+                <div class="demo-pt-title">Métricas que importam</div>
+                <div class="demo-pt-desc">Score de demanda, saturação de mercado e potencial calculados com metodologia rigorosa e dados de múltiplas fontes.</div>
+              </div>
+            </div>
+            <div class="demo-pt">
+              <div class="icon-wrap blue"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="url(#g2)" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="url(#g2)" stroke-width="1.5"/><path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="url(#g2)" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+              <div>
+                <div class="demo-pt-title">Dados cruzados de múltiplas fontes</div>
+                <div class="demo-pt-desc">APIs, bases públicas, scraping e pesquisa primária combinados para uma visão que nenhuma fonte isolada entrega.</div>
+              </div>
+            </div>
+            <div class="demo-pt">
+              <div class="icon-wrap green"><svg viewBox="0 0 22 22" fill="none"><path d="M4 13l5 5L18 6" stroke="url(#g-green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div>
+                <div class="demo-pt-title">Veredicto acionável</div>
+                <div class="demo-pt-desc">Não entregamos apenas dados. Entregamos uma recomendação clara com o raciocínio por trás dela e, quando necessário, implementamos a mudança junto com você.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fi-r d1">
+          <div class="report-card">
+            <div class="rc-header">
+              <div class="rc-header-left">
+                <img src="/d.lab-icon.png" alt="" class="rc-header-icon" />
+                <div><div class="rc-title">Cafeteria Premium · Santo André, SP</div><div class="rc-sub">Análise de viabilidade · Relatório D.Lab #0042</div></div>
+              </div>
+              <span class="badge badge-green badge-dot">Concluído</span>
+            </div>
+            <div class="rc-tabs">
+              <button class="rc-tab active" data-tab="overview">Visão Geral</button>
+              <button class="rc-tab" data-tab="demand">Demanda</button>
+              <button class="rc-tab" data-tab="score">Score</button>
+            </div>
+            <div class="rc-tab-panel active" data-panel="overview">
+              <div class="rc-metrics">
+                <div class="rc-m"><span class="badge badge-green">Alta</span><div class="rc-m-name">Demanda</div></div>
+                <div class="rc-m"><span class="badge badge-yellow">Média</span><div class="rc-m-name">Saturação</div></div>
+                <div class="rc-m"><span class="badge badge-lilac">7.8/10</span><div class="rc-m-name">Score</div></div>
+              </div>
+              <div class="rc-charts">
+                <div class="rc-chart-title">Distribuição de viabilidade</div>
+                <div class="donut-wrap">
+                  <svg class="donut-svg" width="90" height="90" viewBox="0 0 90 90">
+                    <circle cx="45" cy="45" r="38" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="8"/>
+                    <circle cx="45" cy="45" r="38" fill="none" stroke="url(#g-green)" stroke-width="8" stroke-linecap="round" stroke-dasharray="190 239" stroke-dashoffset="60"/>
+                    <circle cx="45" cy="45" r="28" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="7"/>
+                    <circle cx="45" cy="45" r="28" fill="none" stroke="url(#g2)" stroke-width="7" stroke-linecap="round" stroke-dasharray="150 176" stroke-dashoffset="44"/>
+                    <circle cx="45" cy="45" r="18" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="6"/>
+                    <circle cx="45" cy="45" r="18" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round" stroke-dasharray="95 113" stroke-dashoffset="28"/>
+                    <text x="45" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#EAEAF0" font-family="Satoshi">7.8</text>
+                    <text x="45" y="54" text-anchor="middle" font-size="8" fill="rgba(234,234,240,0.35)" font-family="Satoshi">SCORE</text>
+                  </svg>
+                  <div class="donut-legend">
+                    <div class="donut-leg-item"><div class="donut-leg-dot" style="background:var(--green)"></div>Demanda: 82%</div>
+                    <div class="donut-leg-item"><div class="donut-leg-dot" style="background:var(--blue)"></div>Acessibilidade: 74%</div>
+                    <div class="donut-leg-item"><div class="donut-leg-dot" style="background:var(--lilac)"></div>Competitividade: 61%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="line-chart-wrap">
+                <div class="rc-chart-title" style="padding-top:18px">Tendência de busca local · 12 meses</div>
+                <svg class="line-chart-svg" viewBox="0 0 320 80" preserveAspectRatio="none">
+                  <line x1="0" y1="20" x2="320" y2="20" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+                  <line x1="0" y1="40" x2="320" y2="40" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+                  <line x1="0" y1="60" x2="320" y2="60" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+                  <path d="M0,62 C26,58 53,54 80,46 C106,38 133,40 160,32 C186,24 213,26 240,18 C266,10 293,12 320,6 L320,80 L0,80 Z" fill="url(#g-area)"/>
+                  <path class="line-draw" d="M0,62 C26,58 53,54 80,46 C106,38 133,40 160,32 C186,24 213,26 240,18 C266,10 293,12 320,6" fill="none" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" filter="url(#glow-f)"/>
+                  <path d="M0,70 C26,68 53,66 80,62 C106,58 133,60 160,56 C186,52 213,50 240,46 C266,42 293,44 320,40 L320,80 L0,80 Z" fill="url(#g-area2)"/>
+                  <path class="line-draw" d="M0,70 C26,68 53,66 80,62 C106,58 133,60 160,56 C186,52 213,50 240,46 C266,42 293,44 320,40" fill="none" stroke="url(#g-line2)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="4 2"/>
+                  <circle cx="320" cy="6" r="3" fill="#B18CFF" filter="url(#glow-f)"/>
+                  <circle cx="320" cy="40" r="3" fill="#00E5A0" filter="url(#glow-f)"/>
+                  <text x="0" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Jan</text>
+                  <text x="148" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Jun</text>
+                  <text x="305" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Dez</text>
+                </svg>
+              </div>
+              <div class="rc-bars">
+                <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Potencial de demanda</span><span class="rc-bar-pct" style="color:var(--lilac)">82%</span></div><div class="rc-bar-track"><div class="rc-bar-fill demo-bar" data-v="82"></div></div></div>
+                <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Concentração de público-alvo</span><span class="rc-bar-pct" style="color:var(--blue)">68%</span></div><div class="rc-bar-track"><div class="rc-bar-fill demo-bar green" data-v="68"></div></div></div>
+                <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Acessibilidade e fluxo</span><span class="rc-bar-pct" style="color:var(--green)">74%</span></div><div class="rc-bar-track"><div class="rc-bar-fill demo-bar" data-v="74"></div></div></div>
+                <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Viabilidade competitiva</span><span class="rc-bar-pct" style="color:var(--yellow)">61%</span></div><div class="rc-bar-track"><div class="rc-bar-fill demo-bar yellow" data-v="61"></div></div></div>
+              </div>
+              <div class="rc-verdict">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M9 1.5L11.5 7H17L12.5 10.5L14.5 17L9 13.5L3.5 17L5.5 10.5L1 7H6.5L9 1.5Z" fill="url(#g1)" opacity=".95"/></svg>
+                <div class="rc-verdict-text"><strong>Recomendação D.Lab:</strong> Ponto com alto potencial. Concorrência no raio de 500m gerenciável. Demanda reprimida significativa no quadrante norte. <strong>Recomendamos avançar.</strong></div>
+              </div>
+            </div>
+            <div class="rc-tab-panel" data-panel="demand">
+              <div class="rc-demand-detail">
+                <div class="rc-demand-grid">
+                  <div class="rc-demand-card"><div class="rc-demand-val" style="color:var(--green)">2.847</div><div class="rc-demand-lbl">Buscas/mês</div></div>
+                  <div class="rc-demand-card"><div class="rc-demand-val" style="color:var(--blue)">+34%</div><div class="rc-demand-lbl">Crescimento 12m</div></div>
+                  <div class="rc-demand-card"><div class="rc-demand-val" style="color:var(--lilac)">82%</div><div class="rc-demand-lbl">Índice de demanda</div></div>
+                  <div class="rc-demand-card"><div class="rc-demand-val" style="color:var(--yellow)">Média</div><div class="rc-demand-lbl">Saturação local</div></div>
+                </div>
+                <div class="rc-demand-note">Demanda reprimida identificada no raio de 800m. Picos sazonais em Q2 e Q4. Categoria com crescimento acima da média da região.</div>
+              </div>
+            </div>
+            <div class="rc-tab-panel" data-panel="score">
+              <div class="rc-score-detail">
+                <div class="rc-score-big">7.8</div>
+                <div class="rc-score-label">Score D.Lab de Viabilidade</div>
+                <div class="rc-score-bars">
+                  <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Demanda</span><span class="rc-bar-pct" style="color:var(--green)">8.2</span></div><div class="rc-bar-track"><div class="rc-bar-fill score-bar green" data-v="82"></div></div></div>
+                  <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Localização</span><span class="rc-bar-pct" style="color:var(--blue)">7.4</span></div><div class="rc-bar-track"><div class="rc-bar-fill score-bar" data-v="74"></div></div></div>
+                  <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Competitividade</span><span class="rc-bar-pct" style="color:var(--lilac)">6.1</span></div><div class="rc-bar-track"><div class="rc-bar-fill score-bar" data-v="61"></div></div></div>
+                  <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Público-alvo</span><span class="rc-bar-pct" style="color:var(--cyan)">8.8</span></div><div class="rc-bar-track"><div class="rc-bar-fill score-bar green" data-v="88"></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+  <!-- ═══════════════ DATA STACK ════════════════════════════════════ -->
+  <section id="data-stack" class="section">
+    <div class="section-glow cyan" style="top:30%;right:-80px"></div>
+    <canvas class="section-particles" data-color="cyan"></canvas>
+    <NeuralNetwork color="cyan" density="medium" opacity={0.28} />
+    <svg class="ds-flow" height="120" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60" stroke="url(#g2)" stroke-width="1.5" fill="none">
+        <animate attributeName="stroke-dashoffset" from="1000" to="0" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="6s" repeatCount="indefinite"/>
+      </path>
+      <path d="M0,80 Q200,40 400,80 T800,80 T1200,80" stroke="url(#g-green)" stroke-width="1" fill="none">
+        <animate attributeName="stroke-dashoffset" from="800" to="0" dur="9s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-dasharray" from="0,800" to="800,0" dur="9s" repeatCount="indefinite"/>
+      </path>
+    </svg>
+    <div class="container">
+      <div class="ds-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">Fontes de dados</span></div>
+        <h2 class="section-title">Dados que revelam o que<br>ninguém está vendo.</h2>
+        <p class="section-sub" style="margin:0 auto">Cruzamos fontes públicas, APIs, scraping e ferramentas proprietárias para construir a visão mais completa de qualquer mercado.</p>
+      </div>
+      <div class="ds-grid fi">
+        <div class="ds-card"><div class="ds-top"><div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="url(#g1)" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="url(#g1)" stroke-width="1.5"/><path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="url(#g1)" stroke-width="1.3" stroke-linecap="round"/></svg></div><span class="badge badge-blue">API</span></div><div class="ds-name">Google Maps e Places</div><p class="ds-desc">Mapeamento de concorrentes, estabelecimentos, pontos de fluxo e avaliações em tempo real.</p></div>
+        <div class="ds-card"><div class="ds-top"><div class="icon-wrap green"><svg viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="3" stroke="url(#g-green)" stroke-width="1.5"/><path d="M7 11h8M11 7v8" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/></svg></div><span class="badge badge-green">Aberto</span></div><div class="ds-name">IBGE e DataSUS</div><p class="ds-desc">Dados censitários, perfil socioeconômico, densidade demográfica e indicadores por região.</p></div>
+        <div class="ds-card"><div class="ds-top"><div class="icon-wrap blue"><svg viewBox="0 0 22 22" fill="none"><polyline points="3,15 7,9 11,12 15,6 19,8" stroke="url(#g2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span class="badge badge-green">Tendências</span></div><div class="ds-name">Google Trends</div><p class="ds-desc">Análise temporal de interesse por categoria, sazonalidade e tendências emergentes de mercado.</p></div>
+        <div class="ds-card"><div class="ds-top"><div class="icon-wrap yellow"><svg viewBox="0 0 22 22" fill="none"><rect x="4" y="8" width="14" height="10" rx="2" stroke="#FFD166" stroke-width="1.5"/><path d="M8 8V6a3 3 0 016 0v2" stroke="#FFD166" stroke-width="1.5" stroke-linecap="round"/></svg></div><span class="badge badge-yellow">Scraping</span></div><div class="ds-name">Marketplaces e Plataformas</div><p class="ds-desc">Dados de preço, volume, avaliações e posicionamento de competidores em marketplaces, delivery e e-commerce.</p></div>
+        <div class="ds-card"><div class="ds-top"><div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="14" rx="3" stroke="url(#g1)" stroke-width="1.5"/><path d="M2 10h18" stroke="url(#g1)" stroke-width="1.5"/><circle cx="7" cy="15" r="1.5" fill="url(#g1)"/></svg></div><span class="badge badge-blue">Ads API</span></div><div class="ds-name">Meta Audience Insights</div><p class="ds-desc">Segmentação demográfica, comportamental e de interesse do público-alvo via Ads API.</p></div>
+        <div class="ds-card"><div class="ds-top"><div class="icon-wrap cyan"><svg viewBox="0 0 22 22" fill="none"><path d="M3 11C3 6.58 6.58 3 11 3s8 3.58 8 8-3.58 8-8 8-8-3.58-8-8z" stroke="url(#g-green)" stroke-width="1.5"/><path d="M3 11h18M11 3c-2.21 3.13-3 5.34-3 8s.79 4.87 3 8M11 3c2.21 3.13 3 5.34 3 8s-.79 4.87-3 8" stroke="url(#g-green)" stroke-width="1.3"/></svg></div><span class="badge badge-green">Web</span></div><div class="ds-name">SimilarWeb e SEMrush</div><p class="ds-desc">Tráfego digital de concorrentes, posicionamento em busca, share of voice e análise de presença online.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+  <!-- ═══════════════ PESQUISAS PÚBLICAS ═════════════════════════════ -->
+  <section id="research" class="section">
+    <div class="section-glow violet" style="top:-60px;right:-100px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(167,139,250,.05) 0%,transparent 70%);filter:blur(60px);position:absolute;pointer-events:none;border-radius:50%"></div>
+    <div class="section-glow blue" style="bottom:0;left:-80px"></div>
+    <canvas class="section-particles" data-color="lilac"></canvas>
+    <div class="container">
+      <div class="research-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">Pesquisas Públicas</span></div>
+        <h2 class="section-title">Inteligência aberta.<br><span class="gradient-text">Pesquisa aplicada.</span></h2>
+        <p class="section-sub" style="margin:0 auto">Publicamos pesquisas, análises de tendência e estudos de mercado. Dados que iluminam decisões — acessíveis para todos.</p>
+      </div>
+
+      <div class="research-grid fi">
+        {posts.map((post) => (
+          <a href={`/posts/${post.slug}`} class="research-card fi d1" style="position:relative">
+            <div class="research-card-img" style="padding:0;background:#0B0B0F">
+              {post.data.cover && (
+                <img src={post.data.cover} alt={post.data.coverAlt ?? ''} style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
+              )}
+            </div>
+            <div class="research-card-body">
+              <div class="research-card-tags">
+                <span class="research-card-tag">{post.data.category}</span>
+                {post.data.tags.slice(0, 1).map((t: string) => (
+                  <span class="research-card-tag blue">{t}</span>
+                ))}
+              </div>
+              <h3 class="research-card-title">{post.data.title}</h3>
+              <p class="research-card-excerpt">{post.data.description}</p>
+              <div class="research-card-footer">
+                <span class="research-card-date">{post.data.pubDate.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' })}{post.data.readingTime ? ` · ${post.data.readingTime}` : ''}</span>
+                <span class="research-card-read">Ler pesquisa <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="research-cta fi">
+        <a href="/blog" class="btn btn-ghost">Ver todas as pesquisas</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+  <!-- ═══════════════ SOBRE ══════════════════════════════════════════ -->
+  <section id="about" class="section">
+    <div class="section-glow lilac" style="top:20%;left:-100px"></div>
+    <div class="section-glow blue" style="bottom:10%;right:-80px"></div>
+    <canvas class="section-particles" data-color="lilac"></canvas>
+    <div class="container">
+      <div class="fi" style="text-align:center;margin-bottom:56px">
+        <div class="section-label" style="justify-content:center"><span class="label">Sobre o D.Lab</span></div>
+        <h2 class="section-title">Rigor de laboratório.<br><span class="gradient-text">Aplicação de negócio.</span></h2>
+        <p class="section-sub" style="margin:0 auto">Consultoria de inteligência de dados e cybersegurança para empresas que precisam decidir com precisão e operar com segurança.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+        <div class="fi-l">
+          <div style="font-size:16px;color:var(--muted);line-height:1.8">
+            <p style="margin-bottom:18px">O D.Lab nasceu de uma premissa: <strong style="color:var(--white)">empresas brasileiras tomam decisões críticas sem dados</strong> e operam com infraestrutura exposta a riscos que não conseguem ver.</p>
+            <p style="margin-bottom:18px">Do lado da inteligência, cruzamos fontes públicas, APIs e pesquisa primária para responder as perguntas que travam decisões de negócio: quem é o concorrente real, qual o tamanho do mercado, onde está a oportunidade.</p>
+            <p style="margin-bottom:18px">Do lado da segurança, mapeamos vulnerabilidades, executamos testes de intrusão e implementamos a proteção que a operação exige.</p>
+            <p>Cada projeto começa com a pergunta certa e termina com entrega acionável.</p>
+          </div>
+        </div>
+        <div class="fi-r d1">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="about-pillar" style="display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5L10 2Z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              <div class="about-pillar-title">Rigor metodológico</div>
+              <div class="about-pillar-desc">Cada análise com metodologia documentada e replicável</div>
+            </div>
+            <div class="about-pillar" style="display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="7" stroke="url(#g1)" stroke-width="1.2"/><circle cx="10" cy="10" r="3" stroke="url(#g1)" stroke-width="1.2"/><path d="M10 3v2M10 15v2M3 10h2M15 10h2" stroke="url(#g1)" stroke-width="1" stroke-linecap="round"/></svg>
+              <div class="about-pillar-title">Dados primários</div>
+              <div class="about-pillar-desc">Coleta própria quando fontes abertas não são suficientes</div>
+            </div>
+            <div class="about-pillar" style="display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><path d="M3 15l4-4 3 2.5 4-5.5 3-2" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="about-pillar-title">Raciocínio exposto</div>
+              <div class="about-pillar-desc">Você entende como chegamos à recomendação</div>
+            </div>
+            <div class="about-pillar" style="display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><path d="M10 2L4 5.5v5c0 4 2.5 7.2 6 8.5 3.5-1.3 6-4.5 6-8.5v-5L10 2z" stroke="url(#g-green)" stroke-width="1.2" stroke-linejoin="round"/><path d="M7.5 10l2 2 3.5-4" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="about-pillar-title">Independência</div>
+              <div class="about-pillar-desc">Análises sem viés. Reportamos o que os dados mostram</div>
+            </div>
+          </div>
+          <div style="margin-top:24px;text-align:center">
+            <a href="/about" class="btn btn-ghost">Conheça o D.Lab →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CTA FINAL ══════════════════════════════════════ -->
+  <section id="cta-final">
+    <div class="cta-glow"></div>
+    <div class="container">
+      <div class="cta-box fi">
+        <div class="cta-box-grid"></div>
+        <div style="position:relative;z-index:2">
+          <img src="/d.lab-icon2.png" alt="" class="cta-icon" />
+          <div class="hero-tag" style="display:inline-flex;margin-bottom:24px"><span class="tag-dot"></span>Pronto para sair na frente?</div>
+          <h2>A inteligência que grandes empresas<br><span class="gradient-text">têm. Agora para você.</span></h2>
+          <p>Fale com a equipe e descubra qual análise ou consultoria faz mais sentido para a decisão que você precisa tomar agora.</p>
+          <div class="cta-btns">
+            <a href="mailto:contato@dlab.com.br" class="btn btn-primary">Solicitar diagnóstico estratégico →</a>
+            <a href="mailto:contato@dlab.com.br" class="btn btn-ghost">Agendar avaliação inteligente</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

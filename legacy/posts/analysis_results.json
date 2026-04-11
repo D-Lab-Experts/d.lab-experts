@@ -1,0 +1,70 @@
+{
+  "n_total": 98,
+  "n_minority": 59,
+  "n_non_minority": 39,
+  "perception_items": {
+    "P1_brand_closeness": {
+      "pct": 81.6,
+      "ci_low": 72.8,
+      "ci_high": 88.1
+    },
+    "P2_campaign_sincerity": {
+      "pct": 16.3,
+      "ci_low": 10.3,
+      "ci_high": 24.9
+    },
+    "P3_trust_marginalized": {
+      "pct": 67.3,
+      "ci_low": 57.6,
+      "ci_high": 75.8
+    },
+    "P4_perceived_impact": {
+      "pct": 87.8,
+      "ci_low": 79.8,
+      "ci_high": 92.9
+    },
+    "P5_empathetic_branding": {
+      "pct": 84.7,
+      "ci_low": 76.3,
+      "ci_high": 90.5
+    },
+    "P6_brand_switching": {
+      "pct": 61.2,
+      "ci_low": 51.3,
+      "ci_high": 70.3
+    }
+  },
+  "perception_score": {
+    "mean": 3.38,
+    "median": 4.0,
+    "sd": 1.2
+  },
+  "h1": {
+    "wilcoxon_p": 0.001199,
+    "effect_r": 0.692
+  },
+  "h2": {
+    "rpb": 0.3929,
+    "rpb_p": 6.3e-05,
+    "rho": 0.3924,
+    "rho_p": 6.4e-05
+  },
+  "h3": {
+    "u_p": 0.020554,
+    "rbc": -0.2316,
+    "fisher_or": 3.478,
+    "fisher_p": 0.005623,
+    "p6_minority": 72.9,
+    "p6_non_minority": 43.6,
+    "ps_mean_min": 3.54,
+    "ps_mean_non": 3.13
+  },
+  "logistic": {
+    "minority_or": 3.36,
+    "minority_ci": [
+      1.409,
+      8.012
+    ],
+    "minority_p": 0.0063
+  }
+}
