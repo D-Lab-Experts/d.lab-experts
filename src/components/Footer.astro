@@ -1,9 +1,5 @@
 ---
 const year = new Date().getFullYear();
-// Buttondown embed endpoint. Replace {USERNAME} once Buttondown account is live.
-// Fallback: form posts nowhere and analytics event fires — no crash.
-const BUTTONDOWN_USER = import.meta.env.PUBLIC_BUTTONDOWN_USER ?? 'REPLACE_ME';
-const newsletterAction = `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USER}`;
 ---
 
 <footer id="footer">
@@ -17,19 +13,6 @@ const newsletterAction = `https://buttondown.com/api/emails/embed-subscribe/${BU
       <div class="foot-brand">
         <img src="/d.lab-mark.webp" alt="D.Lab" class="foot-logo-img" width="98" height="22" loading="lazy" />
         <p>Laboratório brasileiro de pesquisa aplicada em inteligência de dados e cybersegurança. Trabalho sob NDA, com escopo negociado por projeto.</p>
-        <form
-          class="foot-newsletter"
-          action={newsletterAction}
-          method="POST"
-          target="popupwindow"
-          data-track="newsletter_subscribe"
-        >
-          <label class="foot-newsletter-label" for="nl-email">Nota semanal da mesa de pesquisa. O que os dados estão dizendo, direto.</label>
-          <div class="foot-newsletter-row">
-            <input id="nl-email" type="email" name="email" required class="foot-newsletter-input" placeholder="voce@empresa.com.br" autocomplete="email" />
-            <button type="submit" class="foot-newsletter-btn">Inscrever</button>
-          </div>
-        </form>
       </div>
       <div class="foot-col">
         <h4>Serviços</h4>
@@ -46,7 +29,7 @@ const newsletterAction = `https://buttondown.com/api/emails/embed-subscribe/${BU
           <li><a href="/about">Sobre</a></li>
           <li><a href="/#how">Metodologia</a></li>
           <li><a href="/#products">Produtos</a></li>
-          <li><a href="/blog">Pesquisas Públicas</a></li>
+          <li><a href="/blog">Análises Públicas</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -56,7 +39,7 @@ const newsletterAction = `https://buttondown.com/api/emails/embed-subscribe/${BU
           <li><a href="/contato">Apresentar o contexto</a></li>
           <li><a href="mailto:contato@dlabexperts.com">E-mail direto</a></li>
           <li><a href="https://www.linkedin.com/company/d-lab-intelligence" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="/rss.xml">RSS das pesquisas</a></li>
+          <li><a href="/rss.xml">RSS das análises</a></li>
         </ul>
       </div>
     </div>

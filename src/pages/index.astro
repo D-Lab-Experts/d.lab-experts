@@ -195,7 +195,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
         </div>
         <div class="trust-item">
           <div class="trust-val">Aplicada</div>
-          <div class="trust-lbl">Pesquisa pública como prova do método</div>
+          <div class="trust-lbl">Análise pública como prova do método</div>
         </div>
       </div>
     </div>
@@ -497,7 +497,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       </div>
 
       <div style="margin:56px 0 12px" class="fi"><span class="label" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:16px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L2.5 3.5v3.5c0 3.2 1.9 5.8 4.5 6.5 2.6-.7 4.5-3.3 4.5-6.5V3.5L7 1z" stroke="url(#g-green)" stroke-width="1" stroke-linejoin="round"/><path d="M5 7l1.5 1.5L9.5 6" stroke="url(#g-green)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>Cybersegurança</span></div>
-      <div class="prod-grid fi" style="grid-template-columns:repeat(2,1fr)">
+      <div class="prod-grid prod-grid-2 fi">
         <div class="prod-card fi-l d1">
           <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><path d="M13 3L5 7v6c0 5.2 3.4 9.8 8 11.5 4.6-1.7 8-6.3 8-11.5V7L13 3z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 13l2 2 4.5-5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="prod-name">Pentest & Análise de Vulnerabilidades</div>
@@ -696,14 +696,14 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   </section>
 
   <div class="section-sep"></div>
-  <!-- ═══════════════ PESQUISAS PÚBLICAS ═════════════════════════════ -->
+  <!-- ═══════════════ ANÁLISES PÚBLICAS ══════════════════════════════ -->
   <section id="research" class="section">
     <div class="section-glow violet" style="top:-60px;right:-100px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(167,139,250,.05) 0%,transparent 70%);filter:blur(60px);position:absolute;pointer-events:none;border-radius:50%"></div>
     <div class="section-glow blue" style="bottom:0;left:-80px"></div>
     <canvas class="section-particles" data-color="lilac"></canvas>
     <div class="container">
       <div class="research-head fi">
-        <div class="section-label" style="justify-content:center"><span class="label">Pesquisas Públicas</span></div>
+        <div class="section-label" style="justify-content:center"><span class="label">Análises Públicas</span></div>
         <h2 class="section-title">Pesquisa aberta.<br><span class="gradient-text">Enquanto o resto é fechado.</span></h2>
         <p class="section-sub" style="margin:0 auto">Publicamos uma fração do que pesquisamos, como prova pública de método. O resto vive sob NDA, nas mãos de quem encomendou.</p>
       </div>
@@ -753,39 +753,37 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
         <p class="section-sub" style="margin:0 auto">Consultoria de inteligência de dados e cybersegurança para empresas que precisam decidir com precisão e operar com segurança.</p>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
-        <div class="fi-l">
-          <div style="font-size:16px;color:var(--muted);line-height:1.8">
-            <p style="margin-bottom:18px">O D.Lab nasceu de uma premissa: <strong style="color:var(--white)">empresas brasileiras tomam decisões críticas sem dados</strong> e operam com infraestrutura exposta a riscos que não conseguem ver.</p>
-            <p style="margin-bottom:18px">Do lado da inteligência, cruzamos fontes públicas, APIs e pesquisa primária para responder as perguntas que travam decisões de negócio: quem é o concorrente real, qual o tamanho do mercado, onde está a oportunidade.</p>
-            <p style="margin-bottom:18px">Do lado da segurança, mapeamos vulnerabilidades, executamos testes de intrusão e implementamos a proteção que a operação exige.</p>
-            <p>Cada projeto começa com a pergunta certa e termina com entrega acionável.</p>
-          </div>
+      <div class="home-about-layout">
+        <div class="home-about-text fi-l">
+          <p>O D.Lab nasceu de uma premissa: <strong>empresas brasileiras tomam decisões críticas sem dados</strong> e operam com infraestrutura exposta a riscos que não conseguem ver.</p>
+          <p>Do lado da inteligência, cruzamos fontes públicas, APIs e pesquisa primária para responder as perguntas que travam decisões de negócio: quem é o concorrente real, qual o tamanho do mercado, onde está a oportunidade.</p>
+          <p>Do lado da segurança, mapeamos vulnerabilidades, executamos testes de intrusão e implementamos a proteção que a operação exige.</p>
+          <p>Cada projeto começa com a pergunta certa e termina com entrega acionável.</p>
         </div>
-        <div class="fi-r d1">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div class="about-pillar" style="display:flex;flex-direction:column;gap:8px">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5L10 2Z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        <div class="home-about-side fi-r d1">
+          <div class="home-about-pillars">
+            <div class="about-pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5L10 2Z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round"/></svg>
               <div class="about-pillar-title">Rigor metodológico</div>
               <div class="about-pillar-desc">Cada análise com metodologia documentada e replicável</div>
             </div>
-            <div class="about-pillar" style="display:flex;flex-direction:column;gap:8px">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="7" stroke="url(#g1)" stroke-width="1.2"/><circle cx="10" cy="10" r="3" stroke="url(#g1)" stroke-width="1.2"/><path d="M10 3v2M10 15v2M3 10h2M15 10h2" stroke="url(#g1)" stroke-width="1" stroke-linecap="round"/></svg>
+            <div class="about-pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="url(#g1)" stroke-width="1.2"/><circle cx="10" cy="10" r="3" stroke="url(#g1)" stroke-width="1.2"/><path d="M10 3v2M10 15v2M3 10h2M15 10h2" stroke="url(#g1)" stroke-width="1" stroke-linecap="round"/></svg>
               <div class="about-pillar-title">Dados primários</div>
               <div class="about-pillar-desc">Coleta própria quando fontes abertas não são suficientes</div>
             </div>
-            <div class="about-pillar" style="display:flex;flex-direction:column;gap:8px">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><path d="M3 15l4-4 3 2.5 4-5.5 3-2" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="about-pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 15l4-4 3 2.5 4-5.5 3-2" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <div class="about-pillar-title">Raciocínio exposto</div>
               <div class="about-pillar-desc">Você entende como chegamos à recomendação</div>
             </div>
-            <div class="about-pillar" style="display:flex;flex-direction:column;gap:8px">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><path d="M10 2L4 5.5v5c0 4 2.5 7.2 6 8.5 3.5-1.3 6-4.5 6-8.5v-5L10 2z" stroke="url(#g-green)" stroke-width="1.2" stroke-linejoin="round"/><path d="M7.5 10l2 2 3.5-4" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="about-pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L4 5.5v5c0 4 2.5 7.2 6 8.5 3.5-1.3 6-4.5 6-8.5v-5L10 2z" stroke="url(#g-green)" stroke-width="1.2" stroke-linejoin="round"/><path d="M7.5 10l2 2 3.5-4" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <div class="about-pillar-title">Independência</div>
               <div class="about-pillar-desc">Análises sem viés. Reportamos o que os dados mostram</div>
             </div>
           </div>
-          <div style="margin-top:24px;text-align:center">
+          <div class="home-about-cta">
             <a href="/about" class="btn btn-ghost">Conheça o D.Lab →</a>
           </div>
         </div>

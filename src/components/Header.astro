@@ -4,12 +4,22 @@ export interface Props {
 }
 const { active } = Astro.props;
 
-const links: Array<{ href: string; label: string; key: Props['active'] }> = [
+// `highlight: true` marks a link that gets the pulsing bi-colored dot
+// (lilás + verde). Used to signal that /blog contains two distinct content
+// tracks: Inteligência and Cybersegurança.
+type Link = {
+  href: string;
+  label: string;
+  key: Props['active'];
+  highlight?: boolean;
+};
+
+const links: Array<Link> = [
   { href: '/#hero', label: 'Home', key: 'home' },
   { href: '/about', label: 'Sobre', key: 'about' },
   { href: '/#segments', label: 'Segmentos', key: 'segments' },
   { href: '/#products', label: 'Produtos', key: 'products' },
-  { href: '/blog', label: 'Pesquisas Públicas', key: 'blog' },
+  { href: '/blog', label: 'Análises Públicas', key: 'blog', highlight: true },
   { href: '/contato', label: 'Contato', key: 'contato' },
 ];
 ---
@@ -20,11 +30,20 @@ const links: Array<{ href: string; label: string; key: Props['active'] }> = [
       <img src="/d.lab-mark.webp" alt="D.Lab" class="nav-logo-img" width="71" height="16" />
     </a>
     <ul class="nav-links">
-      {links.map((link) => (
-        <li>
-          <a href={link.href} class={active === link.key ? 'active' : ''}>{link.label}</a>
-        </li>
-      ))}
+      {links.map((link) => {
+        const classes = [
+          active === link.key ? 'active' : '',
+          link.highlight ? 'nav-link-dual' : '',
+        ].filter(Boolean).join(' ');
+        return (
+          <li>
+            <a href={link.href} class={classes}>
+              {link.label}
+              {link.highlight && <span class="nav-dot-dual" aria-hidden="true"></span>}
+            </a>
+          </li>
+        );
+      })}
     </ul>
     <div class="nav-ctas">
       <a href="/contato" class="btn btn-primary btn-sm">Propor um problema →</a>
@@ -33,11 +52,21 @@ const links: Array<{ href: string; label: string; key: Props['active'] }> = [
       <span></span><span></span><span></span>
     </button>
   </div>
+  <!-- Scroll progress bar — glued to the bottom edge of the nav,
+       width grows from 0 → 100% as the user scrolls the page. -->
+  <div id="scroll-progress" aria-hidden="true"></div>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
   {links.map((link) => (
-    <a href={link.href} data-mm-link>{link.label}</a>
+    <a
+      href={link.href}
+      data-mm-link
+      class={link.highlight ? 'nav-link-dual' : ''}
+    >
+      {link.label}
+      {link.highlight && <span class="nav-dot-dual" aria-hidden="true"></span>}
+    </a>
   ))}
   <div class="mobile-ctas">
     <a href="/contato" class="btn btn-primary">Propor um problema →</a>
