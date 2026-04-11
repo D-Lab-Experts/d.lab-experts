@@ -3,6 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SvgDefs from '../components/SvgDefs.astro';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
 
 export interface Props {
@@ -440,12 +442,9 @@ const {
       })();
     </script>
 
-    <!-- Vercel Analytics + Speed Insights (only active when deployed on Vercel) -->
-    <script>
-      import { inject } from '@vercel/analytics';
-      import { injectSpeedInsights } from '@vercel/speed-insights';
-      inject();
-      injectSpeedInsights();
-    </script>
+    <!-- Vercel Analytics + Speed Insights (idiomatic Astro integration,
+         only collects data when deployed on Vercel) -->
+    <Analytics />
+    <SpeedInsights />
   </body>
 </html>
