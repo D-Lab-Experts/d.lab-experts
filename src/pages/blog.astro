@@ -263,4 +263,92 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
       </div>
     )}
   </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ COLABORAÇÃO CIENTÍFICA ═════════════════════════ -->
+  <section class="blog-colab-cta">
+    <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:520px;height:380px"></div>
+    <div class="section-glow blue" style="bottom:-60px;right:-100px"></div>
+    <div class="container">
+      <div class="blog-colab-inner fi">
+        <div class="section-label" style="justify-content:center;margin-bottom:20px">
+          <span class="label">Research Hub aberto</span>
+        </div>
+        <h2 class="blog-colab-title">
+          Pesquisa é trabalho<br /><span class="gradient-text">coletivo.</span>
+        </h2>
+        <p class="blog-colab-sub">
+          Pesquisadores, vanguardistas, cientistas independentes — se você tem um estudo
+          pronto, um dataset relevante, ou uma pergunta que cabe numa das linhas da agenda,
+          a gente quer saber. Publicamos com coautoria explícita e raciocínio exposto, como
+          a ciência funciona.
+        </p>
+        <div class="blog-colab-modes">
+          <span class="blog-colab-chip">Submeter pesquisa</span>
+          <span class="blog-colab-chip">Propor co-pesquisa</span>
+          <span class="blog-colab-chip">Compartilhar dados</span>
+          <span class="blog-colab-chip">Peer review</span>
+        </div>
+        <div class="blog-colab-ctas">
+          <a href="/colaborar" class="btn btn-primary">Proposta de colaboração →</a>
+          <a href="/colaborar" class="btn btn-ghost">Como funciona</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .blog-colab-cta {
+    padding: 100px 28px 120px;
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-colab-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .blog-colab-title {
+    font-size: clamp(32px, 4.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    margin-bottom: 20px;
+    text-wrap: balance;
+  }
+  .blog-colab-sub {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin: 0 auto 28px;
+    max-width: 580px;
+  }
+  .blog-colab-modes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .blog-colab-chip {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(177, 140, 255, 0.22);
+    background: rgba(177, 140, 255, 0.04);
+    color: var(--lilac);
+  }
+  .blog-colab-ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>
