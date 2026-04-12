@@ -10,7 +10,7 @@ import '../styles/global.css';
 export interface Props {
   title: string;
   description: string;
-  active?: 'home' | 'about' | 'segments' | 'products' | 'blog';
+  active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato';
   image?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
@@ -439,6 +439,50 @@ const {
           }
         }
         setTimeout(tick, 1200);
+      })();
+
+      // ══ NAV SCROLL SPY ═════════════════════════════════════════════════
+      // On the home page, the nav has in-page anchors (/#hero, /#segments,
+      // /#products). The server can only mark one of them active, so the
+      // others never light up. This observer tracks which section is in
+      // view and toggles the `active` class on the matching anchor link so
+      // Segmentos/Produtos get the same lilac treatment as Home.
+      (function () {
+        const nav = document.getElementById('nav');
+        if (!nav) return;
+        const anchorLinks = new Map<string, HTMLAnchorElement>();
+        nav.querySelectorAll<HTMLAnchorElement>('.nav-links a').forEach((a) => {
+          const href = a.getAttribute('href') || '';
+          const m = href.match(/^\/?#(.+)$/);
+          if (m) anchorLinks.set(m[1], a);
+        });
+        if (!anchorLinks.size) return;
+
+        const sections: HTMLElement[] = [];
+        anchorLinks.forEach((_, id) => {
+          const el = document.getElementById(id);
+          if (el) sections.push(el);
+        });
+        if (!sections.length) return;
+
+        const activate = (id: string) => {
+          anchorLinks.forEach((a, key) => {
+            a.classList.toggle('active', key === id);
+          });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          // Pick the entry that's most prominently in view.
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible) activate((visible.target as HTMLElement).id);
+        }, {
+          // Activate when a section crosses the middle of the viewport.
+          rootMargin: '-40% 0px -50% 0px',
+          threshold: [0, 0.25, 0.5, 0.75, 1],
+        });
+        sections.forEach((s) => observer.observe(s));
       })();
     </script>
 
