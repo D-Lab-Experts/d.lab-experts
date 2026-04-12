@@ -21,6 +21,13 @@ const blog = defineCollection({
     //               (SEBRAE/IBGE/FGV compilations, threat intel reports,
     //                open data, industry studies).
     researchType: z.enum(['original', 'secondary']).default('secondary'),
+    // Editorial format of the publication. Aligns with the Research Hub
+    // content taxonomy so readers can pick by time/depth/purpose:
+    // 'briefing'  = 3-5 min executive read (panorama + recommendation)
+    // 'report'    = 12-30 min deep dive (primary research or compilation)
+    // 'foresight' = short, sharp, future-looking piece (AI, cyber, frontier tech)
+    // 'sector'    = market/sector analysis for founders and investors
+    format: z.enum(['briefing', 'report', 'foresight', 'sector']).default('report'),
     category: z.string(),
     tags: z.array(z.string()).default([]),
     // Long-tail SEO keywords (in addition to tags)

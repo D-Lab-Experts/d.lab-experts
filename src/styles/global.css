@@ -1096,6 +1096,39 @@ ul, ol { list-style: none; }
 .blog-card-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--dimmed); }
 .blog-card-time { font-size: 12px; color: var(--dimmed); }
 
+/* Editorial format label — small uppercase meta-line element with a
+   colored LED dot to signal the publication type at a glance. Kept
+   subtle vs the .original marker: format is everyday sub-categorization,
+   not prestige. Four formats, each mapped to a palette accent. */
+.blog-card-format,
+.research-card-format {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.format-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.format-briefing  .format-dot { background: var(--blue);   box-shadow: 0 0 6px rgba(77,163,255,.6); }
+.format-report    .format-dot { background: var(--lilac);  box-shadow: 0 0 6px rgba(177,140,255,.6); }
+.format-foresight .format-dot { background: var(--violet); box-shadow: 0 0 6px rgba(167,139,250,.6); }
+.format-sector    .format-dot { background: var(--cyan);   box-shadow: 0 0 6px rgba(0,212,255,.6); }
+.format-briefing  { color: var(--blue); }
+.format-report    { color: var(--lilac); }
+.format-foresight { color: var(--violet); }
+.format-sector    { color: var(--cyan); }
+.research-card-format-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.research-card-time { font-size: 12px; color: var(--dimmed); }
+
 /* ── Blog · tracks (Inteligência | Cybersegurança) ──────────── */
 .gradient-text-green {
   background: linear-gradient(135deg, #00E5A0 0%, #00D4FF 100%);

@@ -6,6 +6,13 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string> = {
+  briefing: 'Briefing',
+  report: 'Report',
+  foresight: 'Foresight',
+  sector: 'Sector Report',
+};
 ---
 
 <Layout
@@ -209,9 +216,9 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <canvas class="section-particles" data-color="lilac"></canvas>
     <div class="container">
       <div class="seg-head fi">
-        <div class="section-label" style="justify-content:center"><span class="label">Onde atuamos</span></div>
-        <h2 class="section-title">Seis verticais.<br><span class="gradient-text">Um único protocolo.</span></h2>
-        <p class="section-sub" style="margin:0 auto">Do mercado à segurança, da concorrência à política. O mesmo rigor metodológico em qualquer decisão.</p>
+        <div class="section-label" style="justify-content:center"><span class="label">Agenda de Pesquisa</span></div>
+        <h2 class="section-title">Seis linhas de investigação.<br><span class="gradient-text">Um único protocolo.</span></h2>
+        <p class="section-sub" style="margin:0 auto">Frentes contínuas de pesquisa que orientam as publicações do Research Hub. Do comportamento de consumidor à arquitetura de ataque — passando por IA e política —, o mesmo rigor metodológico.</p>
       </div>
       <div class="seg-grid">
         <div class="seg-card fi d1">
@@ -219,8 +226,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="url(#g1)" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="url(#g1)" stroke-width="1.5"/><path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="url(#g1)" stroke-width="1.3" stroke-linecap="round"/></svg>
           </div>
           <div class="seg-tag" style="color:var(--lilac)">Mercado & Público</div>
-          <div class="seg-name">Análise de Mercado & Público</div>
-          <p class="seg-desc">Quem é o cliente real, onde ele está, o que ele busca, e quanto disso você pode capturar. Sem achismo, sem persona genérica.</p>
+          <div class="seg-name">Mercados & Comportamento</div>
+          <p class="seg-desc">Investigamos quem é o consumidor real, onde está e como a demanda se move. Publicamos o padrão que persona genérica não captura.</p>
           <div class="seg-samples">
             <span class="seg-sample">Perfil de público</span>
             <span class="seg-sample">Dimensionamento de mercado</span>
@@ -233,8 +240,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <svg viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><path d="M15.5 12v7M12 15.5h7" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
           <div class="seg-tag" style="color:var(--blue)">Estratégia</div>
-          <div class="seg-name">Análise Estratégica de Mercado</div>
-          <p class="seg-desc">Dimensionamento, posicionamento e janelas de oportunidade. Para quando a decisão é cara demais pra palpite de reunião.</p>
+          <div class="seg-name">Estratégia & Decisão</div>
+          <p class="seg-desc">Pesquisa sobre dimensionamento, posicionamento e janelas de oportunidade. Para apostas de peso — board, founder, fundo — que não aguentam palpite de reunião.</p>
           <div class="seg-samples">
             <span class="seg-sample">Análise estratégica</span>
             <span class="seg-sample">Consultoria competitiva</span>
@@ -247,8 +254,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             <svg viewBox="0 0 22 22" fill="none"><path d="M11 3l8 8-8 8-8-8 8-8z" stroke="url(#g-yellow)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="11" cy="11" r="3.8" stroke="url(#g-yellow)" stroke-width="1.5"/></svg>
           </div>
           <div class="seg-tag" style="color:var(--yellow)">Política</div>
-          <div class="seg-name">Análise Política e Eleitoral</div>
-          <p class="seg-desc">Opinião pública, eleitorado, sentimento e modelagem de cenário. Campanha é disputa de leitura de contexto antes de ser disputa de narrativa.</p>
+          <div class="seg-name">Política, Opinião & Regulação</div>
+          <p class="seg-desc">Investigação de opinião pública, eleitorado e movimento regulatório. Campanha é disputa de leitura de contexto antes de ser disputa de narrativa — e regulação decide o próximo mercado antes dele existir.</p>
           <div class="seg-samples">
             <span class="seg-sample">Mapeamento eleitoral</span>
             <span class="seg-sample">Opinião pública</span>
@@ -260,13 +267,13 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           <div class="icon-wrap violet" style="margin-bottom:20px">
             <svg viewBox="0 0 22 22" fill="none"><polyline points="3,15 7,9 11,12 15,6 19,8" stroke="url(#g-violet)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="19" cy="8" r="2" fill="url(#g-violet)" opacity=".7"/></svg>
           </div>
-          <div class="seg-tag" style="color:var(--violet)">Tendências</div>
-          <div class="seg-name">Estudos de Tendência</div>
-          <p class="seg-desc">Sinais fracos antes do consenso. Para quem precisa se mover antes do setor inteiro enxergar.</p>
+          <div class="seg-tag" style="color:var(--violet)">Foresight</div>
+          <div class="seg-name">Foresight Tech & IA</div>
+          <p class="seg-desc">Onde IA, LLMs e agentes estão reconfigurando decisão, trabalho e risco. Linha vanguard do Hub — para quem precisa se mover antes do setor inteiro enxergar o sinal.</p>
           <div class="seg-samples">
-            <span class="seg-sample">Tendências de consumo</span>
-            <span class="seg-sample">Comportamento digital</span>
-            <span class="seg-sample">Análise cultural</span>
+            <span class="seg-sample">IA & Agentes</span>
+            <span class="seg-sample">Foresight setorial</span>
+            <span class="seg-sample">Sinais fracos</span>
           </div>
         </div>
 
@@ -276,7 +283,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           </div>
           <div class="seg-tag" style="color:var(--green)">Concorrência</div>
           <div class="seg-name">Inteligência Competitiva</div>
-          <p class="seg-desc">Dossiê dos concorrentes reais, não os da sua cabeça. Força, posicionamento, pontos cegos, e o que eles ainda não viram.</p>
+          <p class="seg-desc">Pesquisa sobre os concorrentes reais — não os da sua cabeça. Força, posicionamento, pontos cegos e o que eles ainda não viram. Publicamos metodologia, detalhe setorial vira projeto sob NDA.</p>
           <div class="seg-samples">
             <span class="seg-sample">Análise de concorrentes</span>
             <span class="seg-sample">Benchmarking de mercado</span>
@@ -288,13 +295,13 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
           <div class="icon-wrap cyan" style="margin-bottom:20px">
             <svg viewBox="0 0 22 22" fill="none"><path d="M11 2L4 5.5v5c0 4.7 3 8.5 7 10 4-1.5 7-5.3 7-10v-5L11 2z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11l2.5 2.5L14.5 9" stroke="url(#g-green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <div class="seg-tag" style="color:var(--cyan)">Segurança</div>
-          <div class="seg-name">Cybersegurança</div>
-          <p class="seg-desc">Pentest, análise de vulnerabilidades e consultoria ofensiva. Descobrimos o que um atacante descobriria, antes dele, e deixamos documentado.</p>
+          <div class="seg-tag" style="color:var(--cyan)">Cyber</div>
+          <div class="seg-name">Cyber & Superfícies Modernas</div>
+          <p class="seg-desc">Pentest, análise de vulnerabilidades e leitura das novas superfícies que IA, agentes e automação inauguraram. Descobrimos o que um atacante descobriria — incluindo o atacante que ainda não nasceu.</p>
           <div class="seg-samples">
             <span class="seg-sample">Pentest</span>
-            <span class="seg-sample">Análise de vulnerabilidades</span>
-            <span class="seg-sample">Consultoria de segurança</span>
+            <span class="seg-sample">LLM security</span>
+            <span class="seg-sample">Consultoria ofensiva</span>
           </div>
         </div>
       </div>
@@ -730,8 +737,19 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
               </div>
               <h3 class="research-card-title">{post.data.title}</h3>
               <p class="research-card-excerpt">{post.data.description}</p>
+              <div class="research-card-format-row">
+                <span class={`research-card-format format-${post.data.format}`}>
+                  <span class="format-dot"></span>{formatLabel[post.data.format]}
+                </span>
+                {post.data.readingTime && (
+                  <>
+                    <span class="blog-card-dot"></span>
+                    <span class="research-card-time">{post.data.readingTime}</span>
+                  </>
+                )}
+              </div>
               <div class="research-card-footer">
-                <span class="research-card-date">{post.data.pubDate.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' })}{post.data.readingTime ? ` · ${post.data.readingTime}` : ''}</span>
+                <span class="research-card-date">{post.data.pubDate.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' })}</span>
                 <span class="research-card-read">Ler pesquisa <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
             </div>
