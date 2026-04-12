@@ -14,6 +14,13 @@ const blog = defineCollection({
     // Track determines which section the post appears under on /blog.
     // 'intelligence' = pesquisa/inteligência (default); 'cybersec' = cybersegurança.
     track: z.enum(['intelligence', 'cybersec']).default('intelligence'),
+    // Research type splits each track into two sub-sections on /blog:
+    // 'original'  = primary data collected by the lab (our own surveys,
+    //               interviews, instrumentation, pentests, etc.)
+    // 'secondary' = desk research / analysis of third-party sources
+    //               (SEBRAE/IBGE/FGV compilations, threat intel reports,
+    //                open data, industry studies).
+    researchType: z.enum(['original', 'secondary']).default('secondary'),
     category: z.string(),
     tags: z.array(z.string()).default([]),
     // Long-tail SEO keywords (in addition to tags)

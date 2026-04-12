@@ -179,6 +179,9 @@ const faqLd =
               )}
               <div class="related-card-body">
                 <div class="related-card-tags">
+                  {rp.data.researchType === 'original' && (
+                    <span class="related-card-tag original">Pesquisa Original</span>
+                  )}
                   <span class="related-card-tag">{rp.data.category}</span>
                 </div>
                 <h3 class="related-card-title">{rp.data.title}</h3>
@@ -281,6 +284,14 @@ const faqLd =
     background: rgba(177, 140, 255, .08);
     color: var(--lilac);
     border: 1px solid rgba(177, 140, 255, .12);
+  }
+  /* The .original variant lives in global.css but the scoped base rule
+     above sets background/color/border at equal specificity, so we
+     escape scoping here to let the shared neon rule land unchanged. */
+  :global(.related-card-tag.original) {
+    background: linear-gradient(135deg, rgba(124,58,237,.22) 0%, rgba(6,182,212,.18) 100%);
+    color: #fff;
+    border-color: rgba(177,140,255,.5);
   }
   .related-card-title {
     font-size: 17px;

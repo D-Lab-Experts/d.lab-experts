@@ -26,6 +26,11 @@
   --violet:   #A78BFA;
   --magenta:  #E879A8;
   --grad:     linear-gradient(135deg,#7C3AED 0%,#06B6D4 100%);
+  /* Button-only gradient — deeper violet → deep teal. Kept separate
+     from --grad so that gradient text, decorative lines and progress
+     bars keep the vibrant "candy" tone, while the solid CTA surfaces
+     read as darker/more sober. */
+  --grad-btn: linear-gradient(135deg,#6D28D9 0%,#0891B2 100%);
   --nav-h:    72px;
   --nav-h-shrink: 58px;
 }
@@ -108,8 +113,8 @@ ul, ol { list-style: none; }
   opacity: 0; transition: opacity .3s;
 }
 .btn:hover::before { opacity: 1; }
-.btn-primary { background: var(--grad); color: #fff; box-shadow: 0 0 24px rgba(124,58,237,.25), 0 0 48px rgba(6,182,212,.12); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(124,58,237,.4), 0 0 64px rgba(6,182,212,.2); }
+.btn-primary { background: var(--grad-btn); color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.3), 0 0 28px rgba(109,40,217,.32); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.4), 0 0 36px rgba(109,40,217,.48); }
 .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.08); }
 .btn-ghost:hover { border-color: var(--border-h); background: rgba(177,140,255,.05); transform: translateY(-2px); }
 .btn-sm { padding: 11px 22px; font-size: 14px; }
@@ -358,8 +363,8 @@ ul, ol { list-style: none; }
 .section-sep { height: 1px; position: relative; z-index: 1; background: linear-gradient(90deg, transparent 0%, rgba(177,140,255,.08) 20%, rgba(77,163,255,.06) 80%, transparent 100%); }
 
 /* ═══════════ LOGOS ══════════════════════════════════════════════ */
-#logos { padding: 56px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(11,11,15,.6); position: relative; z-index: 1; }
-.logos-lbl { text-align: center; margin-bottom: 28px; color: var(--dimmed); }
+#logos { padding: 16px 0 72px; position: relative; z-index: 1; }
+.logos-lbl { text-align: center; margin-bottom: 24px; color: var(--dimmed); }
 .trust-row {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1006,6 +1011,87 @@ ul, ol { list-style: none; }
 .blog-card-tag.green  { background: rgba(0,229,160,.08); color: var(--green); border: 1px solid rgba(0,229,160,.12); }
 .blog-card-tag.violet { background: rgba(167,139,250,.08); color: var(--violet); border: 1px solid rgba(167,139,250,.12); }
 .blog-card-tag.cyan   { background: rgba(0,212,255,.08); color: var(--cyan); border: 1px solid rgba(0,212,255,.12); }
+
+/* ── Research type marker — "Pesquisa Original" pill ─────────────────
+   Applied wherever a post has researchType: original. Gradient fill
+   plus a pulsing neon halo visually separates primary-data studies
+   from desk research at a glance. Shared across every tag surface:
+   .blog-card-tag (grid /blog), .research-card-tag (home research
+   grid), .article-tag (post hero) and .related-card-tag ("Continue
+   lendo" grid in PostLayout). Keeping them in one rule guarantees
+   the marker looks identical everywhere it's rendered. */
+.blog-card-tag.original,
+.research-card-tag.original,
+.article-tag.original,
+.related-card-tag.original {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(124,58,237,.22) 0%, rgba(6,182,212,.18) 100%);
+  border: 1px solid rgba(177,140,255,.5);
+  box-shadow:
+    inset 0 0 10px rgba(177,140,255,.12),
+    0 0 14px rgba(177,140,255,.35),
+    0 0 28px rgba(77,163,255,.12);
+  animation: originalPulse 3.2s ease-in-out infinite;
+}
+.blog-card-tag.original::before,
+.research-card-tag.original::before,
+.article-tag.original::before,
+.related-card-tag.original::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lilac), var(--blue));
+  box-shadow: 0 0 8px rgba(177,140,255,.85);
+  flex-shrink: 0;
+}
+/* Cybersec variant: same pulsing neon, but flipped to the green/cyan
+   palette so it stays coherent with the cyber track. */
+.blog-card-tag.original.green {
+  background: linear-gradient(135deg, rgba(0,229,160,.22) 0%, rgba(0,212,255,.18) 100%);
+  border-color: rgba(0,229,160,.5);
+  box-shadow:
+    inset 0 0 10px rgba(0,229,160,.12),
+    0 0 14px rgba(0,229,160,.35),
+    0 0 28px rgba(0,212,255,.14);
+  animation-name: originalPulseGreen;
+}
+.blog-card-tag.original.green::before {
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  box-shadow: 0 0 8px rgba(0,229,160,.85);
+}
+@keyframes originalPulse {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 10px rgba(177,140,255,.12),
+      0 0 14px rgba(177,140,255,.35),
+      0 0 28px rgba(77,163,255,.12);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 14px rgba(177,140,255,.18),
+      0 0 22px rgba(177,140,255,.5),
+      0 0 40px rgba(77,163,255,.2);
+  }
+}
+@keyframes originalPulseGreen {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 10px rgba(0,229,160,.12),
+      0 0 14px rgba(0,229,160,.35),
+      0 0 28px rgba(0,212,255,.14);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 14px rgba(0,229,160,.2),
+      0 0 22px rgba(0,229,160,.5),
+      0 0 40px rgba(0,212,255,.22);
+  }
+}
+
 .blog-card-title { font-size: 18px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; margin-bottom: 10px; }
 .blog-card-excerpt { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; flex: 1; }
 .blog-card-footer { display: flex; justify-content: space-between; align-items: center; }
@@ -1186,6 +1272,88 @@ ul, ol { list-style: none; }
 .blog-card-read.green {
   color: var(--green);
 }
+
+/* ── Blog sub-tracks: each track (Inteligência / Cybersegurança) is
+   further split into "Pesquisas Originais" (primary data collected by
+   the lab) and "Pesquisas com Dados Secundários" (desk research over
+   third-party sources). Sub-headers mirror the pill aesthetic of
+   .blog-track-eyebrow but one step down in visual weight. ────────── */
+.blog-subtrack { position: relative; }
+.blog-subtrack-header {
+  max-width: 640px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+.blog-subtrack-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: rgba(22, 22, 32, 0.5);
+  margin-bottom: 14px;
+  color: var(--muted);
+}
+.blog-subtrack-tag.lilac {
+  color: var(--lilac);
+  border-color: rgba(177, 140, 255, 0.22);
+  background: rgba(177, 140, 255, 0.05);
+}
+.blog-subtrack-tag.green {
+  color: var(--green);
+  border-color: rgba(0, 229, 160, 0.22);
+  background: rgba(0, 229, 160, 0.04);
+}
+.blog-subtrack-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.blog-subtrack-tag.lilac .blog-subtrack-dot {
+  background: var(--lilac);
+  box-shadow: 0 0 10px rgba(177, 140, 255, 0.6);
+}
+.blog-subtrack-tag.green .blog-subtrack-dot {
+  background: var(--green);
+  box-shadow: 0 0 10px rgba(0, 229, 160, 0.55);
+}
+.blog-subtrack-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: inherit;
+}
+.blog-subtrack-tag.lilac .blog-subtrack-count {
+  background: rgba(177, 140, 255, 0.14);
+}
+.blog-subtrack-tag.green .blog-subtrack-count {
+  background: rgba(0, 229, 160, 0.14);
+}
+.blog-subtrack-sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 520px;
+  margin: 0 auto;
+}
+/* When sub-tracks stack, tighten the gap between the first grid and
+   the next sub-header so they read as one section instead of two
+   islands; keep the original 80px tail on the last grid. */
+.blog-subtrack .blog-grid { padding-bottom: 48px; }
+.blog-subtrack:last-child .blog-grid { padding-bottom: 80px; }
 
 /* Empty state inside a track section */
 .blog-empty {
@@ -1418,8 +1586,8 @@ ul, ol { list-style: none; }
 .post-cta { padding: 80px 0; border-top: 1px solid var(--border); text-align: center; position: relative; z-index: 1; }
 .post-cta h2 { font-size: clamp(28px,4vw,44px); font-weight: 700; letter-spacing: -.03em; margin-bottom: 16px; }
 .post-cta p { font-size: 17px; color: var(--muted); max-width: 480px; margin: 0 auto 36px; }
-.cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--grad); color: #fff; font-weight: 600; font-size: 15px; padding: 16px 32px; border-radius: 10px; font-family: inherit; border: none; cursor: pointer; transition: all .25s; box-shadow: 0 0 24px rgba(177,140,255,.2); }
-.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(177,140,255,.35); }
+.cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--grad-btn); color: #fff; font-weight: 600; font-size: 15px; padding: 16px 32px; border-radius: 10px; font-family: inherit; border: none; cursor: pointer; transition: all .25s; box-shadow: 0 8px 28px rgba(0,0,0,.35), 0 0 28px rgba(109,40,217,.28); }
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,.45), 0 0 36px rgba(109,40,217,.42); }
 .post-footer-area { max-width: 1100px; margin: 0 auto; padding: 0 28px 80px; position: relative; z-index: 1; }
 .post-share { display: flex; align-items: center; gap: 12px; padding: 24px 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
 .post-share-label { font-size: 12px; color: var(--dimmed); font-weight: 500; }

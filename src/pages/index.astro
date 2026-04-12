@@ -183,7 +183,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
         </div>
         <div class="trust-item">
           <div class="trust-val">Sênior</div>
-          <div class="trust-lbl">Sem cadeia de juniores entre você e o analista</div>
+          <div class="trust-lbl">Do briefing à entrega, sempre o analista sênior</div>
         </div>
         <div class="trust-item">
           <div class="trust-val">Dual</div>
@@ -705,11 +705,15 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <div class="research-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">Análises Públicas</span></div>
         <h2 class="section-title">Pesquisa aberta.<br><span class="gradient-text">Enquanto o resto é fechado.</span></h2>
-        <p class="section-sub" style="margin:0 auto">Publicamos uma fração do que pesquisamos, como prova pública de método. O resto vive sob NDA, nas mãos de quem encomendou.</p>
+        <p class="section-sub" style="margin:0 auto">As pesquisas abertas nascem no nosso próprio laboratório — estudos independentes, publicados como prova de método. Trabalho de cliente nunca é divulgado: sempre sob NDA.</p>
       </div>
 
       <div class="research-grid fi">
-        {posts.map((post) => (
+        {posts.map((post) => {
+          const isOriginal = post.data.researchType === 'original';
+          const cat = post.data.category.toLowerCase();
+          const extraTag = post.data.tags.find((t: string) => t.toLowerCase() !== cat);
+          return (
           <a href={`/posts/${post.slug}`} class="research-card fi d1" style="position:relative">
             <div class="research-card-img" style="padding:0;background:#0B0B0F">
               {post.data.cover && (
@@ -718,10 +722,11 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
             </div>
             <div class="research-card-body">
               <div class="research-card-tags">
+                {isOriginal && <span class="research-card-tag original">Pesquisa Original</span>}
                 <span class="research-card-tag">{post.data.category}</span>
-                {post.data.tags.slice(0, 1).map((t: string) => (
-                  <span class="research-card-tag blue">{t}</span>
-                ))}
+                {!isOriginal && extraTag && (
+                  <span class="research-card-tag blue">{extraTag}</span>
+                )}
               </div>
               <h3 class="research-card-title">{post.data.title}</h3>
               <p class="research-card-excerpt">{post.data.description}</p>
@@ -731,7 +736,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
               </div>
             </div>
           </a>
-        ))}
+          );
+        })}
       </div>
 
       <div class="research-cta fi">
