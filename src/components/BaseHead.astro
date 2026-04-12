@@ -19,7 +19,7 @@ const {
   type = 'website',
   publishedTime,
   modifiedTime,
-  author = 'D.Lab',
+  author = 'D.Lab Experts',
   tags = [],
 } = Astro.props;
 
@@ -42,7 +42,7 @@ const imageURL = new URL(image, Astro.site);
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-<link rel="alternate" type="application/rss+xml" title="D.Lab Research · Análises Públicas" href="/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="D.Lab Experts · Research Hub" href="/rss.xml" />
 
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
 <link
@@ -57,7 +57,7 @@ const imageURL = new URL(image, Astro.site);
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
 <meta property="og:locale" content="pt_BR" />
-<meta property="og:site_name" content="D.Lab" />
+<meta property="og:site_name" content="D.Lab Experts" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -83,9 +83,9 @@ const imageURL = new URL(image, Astro.site);
 <script type="application/ld+json" set:html={JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'D.Lab',
+  name: 'D.Lab Experts',
   url: Astro.site?.toString(),
   logo: new URL('/d.lab.png', Astro.site).toString(),
-  description: 'Consultoria de inteligência de dados e cybersegurança.',
+  description: 'Research Hub em inteligência aplicada e cybersegurança. Publicações abertas, consultoria sob NDA.',
   sameAs: ['https://www.linkedin.com/company/d-lab-intelligence'],
 })} />

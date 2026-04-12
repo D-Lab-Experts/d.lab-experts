@@ -400,47 +400,6 @@ const {
         });
       })();
 
-      // ══ TYPEWRITER ROTATING WORD ══════════════════════════════════════
-      (function () {
-        const el = document.getElementById('rotate-word');
-        if (!el) return;
-        const words = ['críticas.', 'importantes.', 'lucrativas.'];
-        const typeSpeed = 90;
-        const deleteSpeed = 60;
-        const pauseAfterType = 2000;
-        const pauseAfterDelete = 400;
-        let wordIdx = 0;
-        let charIdx = 0;
-        let isDeleting = false;
-        function tick() {
-          const current = words[wordIdx];
-          if (!isDeleting) {
-            el!.classList.add('typing');
-            charIdx++;
-            el!.textContent = current.substring(0, charIdx);
-            if (charIdx === current.length) {
-              el!.classList.remove('typing');
-              setTimeout(() => { isDeleting = true; tick(); }, pauseAfterType);
-              return;
-            }
-            setTimeout(tick, typeSpeed);
-          } else {
-            el!.classList.add('typing');
-            charIdx--;
-            el!.textContent = current.substring(0, charIdx);
-            if (charIdx === 0) {
-              isDeleting = false;
-              wordIdx = (wordIdx + 1) % words.length;
-              el!.classList.remove('typing');
-              setTimeout(tick, pauseAfterDelete);
-              return;
-            }
-            setTimeout(tick, deleteSpeed);
-          }
-        }
-        setTimeout(tick, 1200);
-      })();
-
       // ══ NAV SCROLL SPY ═════════════════════════════════════════════════
       // On the home page, the nav has in-page anchors (/#hero, /#segments,
       // /#products). The server can only mark one of them active, so the

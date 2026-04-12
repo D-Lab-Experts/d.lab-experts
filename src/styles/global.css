@@ -298,13 +298,6 @@ ul, ol { list-style: none; }
   background: linear-gradient(135deg, #B18CFF 0%, #7B9EFF 50%, #4DA3FF 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.hero-rotate-word {
-  display: inline;
-  border-right: 2px solid var(--lilac);
-  animation: cursorBlink 1s step-end infinite;
-}
-.hero-rotate-word.typing { animation: none; border-right-color: var(--lilac); }
-@keyframes cursorBlink { 0%,100%{border-color:var(--lilac)} 50%{border-color:transparent} }
 .hero-sub { font-size: 17px; color: var(--muted); max-width: 460px; margin-bottom: 40px; line-height: 1.7; }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 .scroll-ind { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2; }
