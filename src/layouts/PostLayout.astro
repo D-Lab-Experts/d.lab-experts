@@ -33,6 +33,27 @@ const {
 
 // Related posts: same category first, then tag overlap, excluding self. Top 2.
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+// Sibling translations: find other-language versions of THIS study via
+// the `translationOf` link. A translation points to the original slug;
+// the original itself has no translationOf. Resolve bidirectionally so
+// readers see "Also available in: EN/PT" regardless of which version
+// they're on.
+const translationOf = post.data.translationOf;
+const siblingTranslations = allPosts.filter((p) => {
+  if (p.slug === post.slug) return false;
+  // Current is a translation → find original + other translations
+  if (translationOf) {
+    return p.slug === translationOf || p.data.translationOf === translationOf;
+  }
+  // Current is an original → find translations of it
+  return p.data.translationOf === post.slug;
+});
+const otherLangLabel: Record<string, string> = {
+  en: 'English',
+  pt: 'Português',
+  es: 'Español',
+};
 const relatedPosts = allPosts
   .filter((p) => p.slug !== post.slug)
   .map((p) => {
@@ -161,10 +182,28 @@ const faqLd =
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
   {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
 
+  {siblingTranslations.length > 0 && (
+    <div class="post-translations" role="note">
+      <div class="post-container">
+        <span class="post-translations-label">Also available in:</span>
+        {siblingTranslations.map((s) => {
+          const href = s.data.lang === 'en'
+            ? `/posts/${s.slug}`
+            : `/${s.data.lang}/posts/${s.slug}`;
+          return (
+            <a href={href} class="post-translations-link" hreflang={s.data.lang}>
+              {otherLangLabel[s.data.lang] ?? s.data.lang.toUpperCase()}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  )}
+
   <article itemscope itemtype="https://schema.org/Article">
     <meta itemprop="datePublished" content={isoPub} />
     <meta itemprop="dateModified" content={isoMod} />
-    <meta itemprop="inLanguage" content="pt-BR" />
+    <meta itemprop="inLanguage" content={post.data.lang === 'pt' ? 'pt-BR' : post.data.lang} />
     <slot />
   </article>
 
@@ -214,6 +253,44 @@ const faqLd =
 </Layout>
 
 <style>
+  /* Cross-language links: renders when this post has siblings in
+     other locales via frontmatter `translationOf`. Thin strip above
+     the article so readers can jump to the language they prefer
+     without leaving the page. */
+  .post-translations {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    background: rgba(22, 22, 32, 0.35);
+  }
+  .post-translations .post-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .post-translations-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dimmed);
+  }
+  .post-translations-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--lilac);
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(177, 140, 255, 0.22);
+    background: rgba(177, 140, 255, 0.05);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .post-translations-link:hover {
+    border-color: rgba(177, 140, 255, 0.45);
+    background: rgba(177, 140, 255, 0.12);
+  }
+
   .related-posts {
     padding: 72px 0 40px;
     border-top: 1px solid var(--border);
