@@ -23,7 +23,7 @@ const blog = defineCollection({
     track: z.enum(['intelligence', 'cybersec']).default('intelligence'),
     // Research type splits each track into two sub-sections on /blog:
     // 'original'  = primary data collected by the lab (our own surveys,
-    //               interviews, instrumentation, pentests, etc.)
+    //               interviews, instrumentation, SOC telemetry, etc.)
     // 'secondary' = desk research / analysis of third-party sources
     //               (SEBRAE/IBGE/FGV compilations, threat intel reports,
     //                open data, industry studies).

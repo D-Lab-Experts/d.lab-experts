@@ -157,12 +157,12 @@ const pt: Translation = {
     compSample3: 'Posicionamento estratégico',
 
     cyberTag: 'Cyber',
-    cyberName: 'Cyber & Superfícies Modernas',
+    cyberName: 'Security Operations Center',
     cyberDesc:
-      'Pentest, análise de vulnerabilidades e leitura das novas superfícies que IA, agentes e automação inauguraram. Descobrimos o que um atacante descobriria, incluindo o atacante que ainda não nasceu.',
-    cyberSample1: 'Pentest',
-    cyberSample2: 'LLM security',
-    cyberSample3: 'Consultoria ofensiva',
+      'Monitoramento contínuo nas horas em que o atacante realmente age. Olhamos logs, correlacionamos alertas e triagem de incidentes para que o primeiro sinal de comprometimento chegue a alguém acordado — e não a um dashboard esperando o sol nascer.',
+    cyberSample1: 'Monitoramento SOC',
+    cyberSample2: 'Triagem de incidentes',
+    cyberSample3: 'Detecção de ameaças',
   },
 
   products: {
@@ -187,12 +187,12 @@ const pt: Translation = {
       'Implementação de IA, automação e processos na operação. Para quando o que trava não é a decisão. É a execução.',
 
     cyberHeader: 'Cybersegurança',
-    cyberPentestName: 'Pentest & Análise de Vulnerabilidades',
+    cyberPentestName: 'SOC · Security Operations Center',
     cyberPentestDesc:
-      'Teste de intrusão e mapeamento de vulnerabilidades em aplicações, infraestrutura e redes. Relatório técnico com classificação de risco e plano de correção.',
+      'Monitoramento fora do expediente com resposta a incidentes. Ficamos atentos a logs e alertas enquanto o time do cliente dorme, triagem em tempo real das anomalias e entregamos pela manhã um briefing limpo com cada evento, decisão e ação tomada na madrugada.',
     cyberConsultName: 'Consultoria de Segurança Digital',
     cyberConsultDesc:
-      'Diagnóstico completo da postura de segurança, definição de políticas, adequação a frameworks e acompanhamento contínuo.',
+      'Diagnóstico completo da postura de segurança, definição de políticas, adequação a frameworks e acompanhamento contínuo junto à operação do SOC.',
   },
 
   research: {
@@ -276,9 +276,9 @@ const pt: Translation = {
 
     cyberEyebrow: 'Cybersegurança',
     cyberTitle: 'Cybersegurança &',
-    cyberTitleAccent: 'Operação Ofensiva',
+    cyberTitleAccent: 'Defesa Contínua',
     cyberSub:
-      'Pentest, análise de vulnerabilidades, incidentes e posturas de segurança. Cases e análises técnicas publicadas quando o NDA permite.',
+      'Monitoramento SOC, triagem de incidentes, detecção de ameaças e postura de segurança. Cases e análises técnicas publicadas quando o NDA permite.',
 
     groupOriginalLabel: 'Pesquisas Originais',
     groupOriginalSub:
@@ -289,7 +289,7 @@ const pt: Translation = {
 
     cyberGroupOriginalLabel: 'Cases Originais',
     cyberGroupOriginalSub:
-      'Análises técnicas com dados coletados em engajamentos próprios, pentests, forense e instrumentação.',
+      'Análises técnicas com dados coletados em engajamentos próprios de SOC — logs, linhas do tempo de incidentes, correlação de alertas.',
     cyberGroupSecondaryLabel: 'Análises com Dados Secundários',
     cyberGroupSecondarySub:
       'Leituras construídas sobre feeds de threat intel, relatórios de fornecedores e inteligência aberta.',
@@ -299,7 +299,7 @@ const pt: Translation = {
       'As próximas pesquisas serão publicadas após liberação pós-NDA.',
     emptyCyberTitle: 'Em preparação.',
     emptyCyberText:
-      'Os primeiros cases públicos de cybersegurança serão publicados quando o NDA permitir. Enquanto isso, a frente segue ativa em pentest, análise de vulnerabilidades e consultoria ofensiva.',
+      'Os primeiros cases públicos de cybersegurança serão publicados quando o NDA permitir. Enquanto isso, a operação do SOC segue ativa em monitoramento fora do expediente, triagem de incidentes e detecção de ameaças.',
     emptyCyberCta: 'Propor um escopo de segurança →',
 
     originalMarker: 'Pesquisa Original',
@@ -441,7 +441,7 @@ const pt: Translation = {
     verticalAudience: 'Análise de público e demanda',
     verticalTrends: 'Estudos de tendência',
     verticalAI: 'Implementação de IA e automação',
-    verticalPentest: 'Pentest e análise de vulnerabilidades',
+    verticalPentest: 'SOC · monitoramento fora do expediente',
     verticalSecurity: 'Consultoria em segurança digital',
     verticalPolitics: 'Pesquisa política e eleitoral',
     verticalUnsure: 'Ainda não sei / quero conversar',
@@ -622,12 +622,12 @@ const pt: Translation = {
     intelItem6: 'Política, opinião pública e movimentos regulatórios',
 
     cyberName: 'Cybersegurança',
-    cyberDesc: 'Projeta-se que o cibercrime custe <strong>US$ 10,5 trilhões por ano globalmente até 2025</strong> (Cybersecurity Ventures). Investigamos as superfícies modernas de ataque, incluindo as que IA e agentes autônomos acabaram de abrir, e traduzimos os achados em postura defensiva antes do custo virar manchete.',
-    cyberItem1: 'Pentest em web, mobile e infraestrutura',
-    cyberItem2: 'Análise de vulnerabilidades e classificação de risco',
-    cyberItem3: 'Segurança de LLMs e avaliação de agentes em operação',
-    cyberItem4: 'Compliance com GDPR, ISO 27001, NIST e LGPD',
-    cyberItem5: 'Monitoramento e resposta a incidentes',
+    cyberDesc: 'Projeta-se que o cibercrime custe <strong>US$ 10,5 trilhões por ano globalmente até 2025</strong> (Cybersecurity Ventures). Operamos um Security Operations Center focado em cobertura fora do expediente — a janela em que a atividade do atacante de fato acontece — para que o primeiro sinal de comprometimento chegue a alguém acordado e em plantão.',
+    cyberItem1: 'SOC · monitoramento fora do expediente e madrugada',
+    cyberItem2: 'Correlação de logs e triagem de alertas',
+    cyberItem3: 'Resposta a incidentes e escalonamento em tempo real',
+    cyberItem4: 'Observabilidade de LLMs e agentes em operação',
+    cyberItem5: 'Compliance com GDPR, ISO 27001, NIST e LGPD',
     cyberItem6: 'Treinamento de times e security awareness',
 
     methodEyebrow: 'Metodologia',
@@ -636,7 +636,7 @@ const pt: Translation = {
     methodStep1Title: 'Briefing',
     methodStep1Desc: 'Enquadramos o contexto, a hipótese e os critérios de decisão, ou o perímetro de risco a mapear.',
     methodStep2Title: 'Coleta & Modelagem',
-    methodStep2Desc: 'Cruzamos múltiplas fontes de dados, ou rodamos os testes de segurança com escopo definido.',
+    methodStep2Desc: 'Cruzamos múltiplas fontes de dados, ou instrumentamos a telemetria e o escopo de monitoramento do SOC.',
     methodStep3Title: 'Síntese',
     methodStep3Desc: 'Dado bruto convertido em insight estruturado com scores, classificações e visualizações.',
     methodStep4Title: 'Entrega',
@@ -649,7 +649,7 @@ const pt: Translation = {
     pillar3Title: 'Raciocínio exposto',
     pillar3Desc: 'Você vê exatamente como chegamos à recomendação ou ao diagnóstico.',
     pillar4Title: 'Independência',
-    pillar4Desc: 'Sem viés. Reportamos o que os dados mostram e o que os testes revelam.',
+    pillar4Desc: 'Sem viés. Reportamos o que os dados mostram e o que a telemetria revela.',
 
     whyEyebrow: 'O cenário',
     whyTitleLead: 'Por que isso importa',
@@ -667,10 +667,10 @@ const pt: Translation = {
     whyInsight: 'Empresas que adotam cultura data-driven observam <strong>5 a 8% mais produtividade e 6% mais lucratividade</strong> que os pares.',
     whyInsightSrc: 'Harvard Business Review',
     whyP3: 'Do lado positivo, os números mostram oportunidade. O mercado de Business Intelligence deve atingir <strong>US$ 33 bilhões até 2027</strong> (Mordor Intelligence). Quem se move com uma leitura sólida de contexto captura vantagem composta sobre quem espera o concorrente ir primeiro.',
-    whyP4: 'O D.Lab Experts existe para fechar essa lacuna. Pesquisa aberta que embasa o movimento. Operação ofensiva de segurança que sobrevive à próxima tentativa. <strong>Método documentado em vez de prosa.</strong>',
+    whyP4: 'O D.Lab Experts existe para fechar essa lacuna. Pesquisa aberta que embasa o movimento. Operação de segurança contínua que captura o próximo incidente antes de ele virar vazamento. <strong>Método documentado em vez de prosa.</strong>',
 
     ctaTitleLead: 'Pesquisa que embasa o movimento.',
-    ctaTitleAccent: 'Operação que sobrevive à próxima tentativa.',
+    ctaTitleAccent: 'Operação que captura o próximo incidente.',
     ctaLead: 'Research Hub primeiro. Consultoria quando o contexto pede. Comece pelas análises abertas, ou fale com a gente direto.',
     ctaPrimary: 'Ler análises abertas →',
     ctaSecondary: 'Conversar sobre um projeto',

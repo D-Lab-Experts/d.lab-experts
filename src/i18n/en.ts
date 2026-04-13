@@ -156,12 +156,12 @@ const en = {
     compSample3: 'Strategic positioning',
 
     cyberTag: 'Cyber',
-    cyberName: 'Cyber & Modern Surfaces',
+    cyberName: 'Security Operations Center',
     cyberDesc:
-      'Pentest, vulnerability analysis and a read of the new surfaces AI, agents and automation have opened. We discover what an attacker would, including the attacker that has not emerged yet.',
-    cyberSample1: 'Pentest',
-    cyberSample2: 'LLM security',
-    cyberSample3: 'Offensive consulting',
+      "Continuous monitoring during the hours attackers actually move. We watch logs, correlate alerts and triage incidents so the first sign of compromise reaches someone awake — not a dashboard waiting for morning.",
+    cyberSample1: 'SOC monitoring',
+    cyberSample2: 'Incident triage',
+    cyberSample3: 'Threat detection',
   },
 
   products: {
@@ -186,12 +186,12 @@ const en = {
       'Implementation of AI, automation and process in the operation. For when what stalls is not the decision, it is the execution.',
 
     cyberHeader: 'Cybersecurity',
-    cyberPentestName: 'Pentest & Vulnerability Analysis',
+    cyberPentestName: 'SOC · Security Operations Center',
     cyberPentestDesc:
-      'Intrusion testing and vulnerability mapping across applications, infrastructure and networks. Technical report with risk classification and remediation plan.',
+      'Off-hours monitoring and incident response. We watch logs and alerts when the client team sleeps, triage anomalies in real time and hand over a clean morning briefing with every event, decision and action taken overnight.',
     cyberConsultName: 'Digital Security Consulting',
     cyberConsultDesc:
-      'Full diagnosis of the security posture, policy definition, framework compliance and ongoing follow-through.',
+      'Full diagnosis of the security posture, policy definition, framework compliance and ongoing follow-through alongside the SOC practice.',
   },
 
   research: {
@@ -275,9 +275,9 @@ const en = {
 
     cyberEyebrow: 'Cybersecurity',
     cyberTitle: 'Cybersecurity &',
-    cyberTitleAccent: 'Offensive Operations',
+    cyberTitleAccent: 'Continuous Defense',
     cyberSub:
-      'Pentest, vulnerability analysis, incidents and security postures. Cases and technical analysis published when NDA permits.',
+      'SOC monitoring, incident triage, threat detection and security posture. Cases and technical analysis published when NDA permits.',
 
     groupOriginalLabel: 'Original Research',
     groupOriginalSub:
@@ -288,7 +288,7 @@ const en = {
 
     cyberGroupOriginalLabel: 'Original Cases',
     cyberGroupOriginalSub:
-      'Technical analyses with data collected in our own engagements, pentest, forensics, instrumentation.',
+      'Technical analyses with data collected from our own SOC engagements — logs, incident timelines, alert correlation.',
     cyberGroupSecondaryLabel: 'Secondary Data Analysis',
     cyberGroupSecondarySub:
       'Readings built on threat intel feeds, vendor reports and open intelligence.',
@@ -298,7 +298,7 @@ const en = {
       'The next publications ship once cleared post-NDA.',
     emptyCyberTitle: 'In preparation.',
     emptyCyberText:
-      'The first public cybersecurity cases ship when NDA permits. Meanwhile, the practice remains active in pentest, vulnerability analysis and offensive consulting.',
+      'The first public cybersecurity cases ship when NDA permits. Meanwhile, the SOC practice is active in off-hours monitoring, incident triage and threat detection.',
     emptyCyberCta: 'Propose a security scope →',
 
     originalMarker: 'Original Research',
@@ -450,7 +450,7 @@ const en = {
     verticalAudience: 'Audience and demand analysis',
     verticalTrends: 'Trend studies',
     verticalAI: 'AI and automation deployment',
-    verticalPentest: 'Pentest and vulnerability analysis',
+    verticalPentest: 'SOC · off-hours monitoring',
     verticalSecurity: 'Digital security consulting',
     verticalPolitics: 'Politics and electoral research',
     verticalUnsure: 'Not sure yet / want to talk',
@@ -636,12 +636,12 @@ const en = {
     intelItem6: 'Politics, public opinion and regulatory movement',
 
     cyberName: 'Cybersecurity',
-    cyberDesc: 'Cybercrime is projected to cost <strong>$10.5 trillion per year globally by 2025</strong> (Cybersecurity Ventures). We investigate modern attack surfaces, including those AI and autonomous agents have just opened, and translate the findings into defensive posture before the cost becomes a headline.',
-    cyberItem1: 'Pentest across web, mobile and infrastructure',
-    cyberItem2: 'Vulnerability analysis and risk classification',
-    cyberItem3: 'LLM security and assessment of agents in operation',
-    cyberItem4: 'Compliance with GDPR, ISO 27001, NIST and LGPD',
-    cyberItem5: 'Monitoring and incident response',
+    cyberDesc: 'Cybercrime is projected to cost <strong>$10.5 trillion per year globally by 2025</strong> (Cybersecurity Ventures). We run a Security Operations Center focused on off-hours coverage — the window when most attacker activity actually happens — so the first sign of compromise reaches someone awake and on rotation.',
+    cyberItem1: 'SOC · off-hours and weekend monitoring',
+    cyberItem2: 'Log correlation and alert triage',
+    cyberItem3: 'Incident response and real-time escalation',
+    cyberItem4: 'LLM and agent observability in operation',
+    cyberItem5: 'Compliance with GDPR, ISO 27001, NIST and LGPD',
     cyberItem6: 'Team training and security awareness',
 
     methodEyebrow: 'Methodology',
@@ -650,7 +650,7 @@ const en = {
     methodStep1Title: 'Briefing',
     methodStep1Desc: 'We frame the context, the hypothesis and the decision criteria, or the risk perimeter to map.',
     methodStep2Title: 'Collection & Modeling',
-    methodStep2Desc: 'We cross-reference multiple data sources, or run the security tests with a defined scope.',
+    methodStep2Desc: 'We cross-reference multiple data sources, or wire the SOC telemetry and monitoring scope.',
     methodStep3Title: 'Synthesis',
     methodStep3Desc: 'Raw data turned into structured insights with scores, classifications and visualizations.',
     methodStep4Title: 'Delivery',
@@ -663,7 +663,7 @@ const en = {
     pillar3Title: 'Reasoning exposed',
     pillar3Desc: 'You see exactly how we arrived at the recommendation or the diagnosis.',
     pillar4Title: 'Independence',
-    pillar4Desc: 'No bias. We report what the data shows and what the tests reveal.',
+    pillar4Desc: 'No bias. We report what the data shows and what the telemetry reveals.',
 
     whyEyebrow: 'The landscape',
     whyTitleLead: 'Why this matters',
@@ -681,10 +681,10 @@ const en = {
     whyInsight: 'Companies that adopt a data-driven culture see <strong>5 to 8% more productivity and 6% more profitability</strong> than their peers.',
     whyInsightSrc: 'Harvard Business Review',
     whyP3: 'On the upside, the numbers show opportunity. The Business Intelligence market should reach <strong>$33 billion by 2027</strong> (Mordor Intelligence). Whoever moves with a solid context read captures compound advantage over those who wait for the competitor to go first.',
-    whyP4: 'D.Lab Experts exists to close that gap. Open research that grounds the move. Offensive security operation that survives the next attempt. <strong>Documented method instead of prose.</strong>',
+    whyP4: 'D.Lab Experts exists to close that gap. Open research that grounds the move. Continuous security operation that catches the next incident before it becomes a breach. <strong>Documented method instead of prose.</strong>',
 
     ctaTitleLead: 'Research that grounds the move.',
-    ctaTitleAccent: 'Operation that survives the next attempt.',
+    ctaTitleAccent: 'Operation that catches the next incident.',
     ctaLead: 'Research Hub first. Consulting when the context calls for it. Start with the open publications, or talk to us directly.',
     ctaPrimary: 'Read open publications →',
     ctaSecondary: 'Talk about a project',

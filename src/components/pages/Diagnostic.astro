@@ -164,9 +164,12 @@ const alternateUrls = {
 
         <!-- RESULT (right, sticky) -->
         <aside class="diag-result fi d1" id="diag-result">
-          <div class="diag-result-inner">
+          <div class="diag-result-inner" id="diag-result-inner">
+            <!-- Accent strip — color shifts with badge state -->
+            <div class="diag-result-accent" aria-hidden="true"></div>
+
             <header class="diag-result-head">
-              <div class="label" style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div class="diag-result-eyebrow">
                 <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
                 {t('diagnostic.resultTitle')}
               </div>
@@ -181,35 +184,41 @@ const alternateUrls = {
               </div>
               <p class="diag-badge-sub" id="diag-badge-sub"></p>
 
-              <!-- Quality probability -->
-              <div class="diag-metric">
+              <!-- Quality probability card -->
+              <div class="diag-metric diag-metric-quality">
                 <div class="diag-metric-head">
-                  <span class="diag-metric-label">{t('diagnostic.resultQualityLabel')}</span>
+                  <span class="diag-metric-tag">{t('diagnostic.resultQualityLabel')}</span>
                 </div>
                 <div class="diag-metric-big" id="diag-quality-value">—</div>
-                <div class="diag-metric-meta">{t('diagnostic.resultQualityVsBase')}</div>
                 <div class="diag-quality-bar">
-                  <div class="diag-quality-bar-baseline" title="37% baseline (McKinsey)"></div>
+                  <div class="diag-quality-bar-baseline" title="37% baseline (McKinsey)" aria-hidden="true"></div>
                   <div class="diag-quality-bar-fill" id="diag-quality-fill"></div>
                 </div>
+                <div class="diag-metric-meta">{t('diagnostic.resultQualityVsBase')}</div>
               </div>
 
-              <!-- Exposure range -->
-              <div class="diag-metric">
+              <!-- Exposure range card -->
+              <div class="diag-metric diag-metric-exposure">
                 <div class="diag-metric-head">
-                  <span class="diag-metric-label">{t('diagnostic.resultExposureLabel')}</span>
+                  <span class="diag-metric-tag">{t('diagnostic.resultExposureLabel')}</span>
                 </div>
-                <div class="diag-metric-range">
-                  <span class="diag-metric-range-low" id="diag-exposure-low">—</span>
-                  <span class="diag-metric-range-sep">–</span>
-                  <span class="diag-metric-range-high" id="diag-exposure-high">—</span>
+                <div class="diag-range">
+                  <div class="diag-range-item diag-range-low">
+                    <span class="diag-range-lbl">LOW</span>
+                    <span class="diag-range-val" id="diag-exposure-low">—</span>
+                  </div>
+                  <div class="diag-range-bar" aria-hidden="true"></div>
+                  <div class="diag-range-item diag-range-high">
+                    <span class="diag-range-lbl">HIGH</span>
+                    <span class="diag-range-val" id="diag-exposure-high">—</span>
+                  </div>
                 </div>
                 <div class="diag-metric-meta">{t('diagnostic.resultExposureHint')}</div>
               </div>
 
               <!-- Actions -->
               <div class="diag-actions">
-                <div class="label" style="margin-bottom:10px">{t('diagnostic.actionsTitle')}</div>
+                <div class="diag-actions-label">{t('diagnostic.actionsTitle')}</div>
                 <div id="diag-actions-list"></div>
               </div>
             </div>
@@ -317,6 +326,7 @@ const alternateUrls = {
   };
 
   const form = document.getElementById('diag-form');
+  const resultInner = document.getElementById('diag-result-inner');
   const staleHint = document.getElementById('diag-stale');
   const body = document.getElementById('diag-body');
   const badge = document.getElementById('diag-badge');
@@ -434,13 +444,17 @@ const alternateUrls = {
     if (exposureLow) exposureLow.textContent = formatCurrency(exposure.low);
     if (exposureHigh) exposureHigh.textContent = formatCurrency(exposure.high);
 
-    // Badge
+    // Badge + accent strip state (propagates color tint to the whole card)
     let badgeKey = 'green';
     if (quality < 0.35) badgeKey = 'red';
     else if (quality < 0.55) badgeKey = 'yellow';
     if (badge) {
       badge.classList.remove('diag-badge-red', 'diag-badge-yellow', 'diag-badge-green');
       badge.classList.add(`diag-badge-${badgeKey}`);
+    }
+    if (resultInner) {
+      resultInner.classList.remove('state-red', 'state-yellow', 'state-green');
+      resultInner.classList.add(`state-${badgeKey}`);
     }
     if (badgeLabel) {
       badgeLabel.textContent =
@@ -644,97 +658,179 @@ const alternateUrls = {
     box-shadow: 0 0 0 3px rgba(177, 140, 255, 0.18);
   }
 
-  /* RESULT */
+  /* ═══════════ RESULT PANEL ════════════════════════════════════
+     Nested metric cards + accent bar that shifts color per badge
+     state, so red/yellow/green read at a glance instead of forcing
+     the reader to parse numbers first. */
   .diag-result {
     position: sticky;
     top: 100px;
   }
   .diag-result-inner {
-    background: linear-gradient(145deg, rgba(177, 140, 255, 0.06), rgba(22, 22, 32, 0.7));
-    border: 1px solid rgba(177, 140, 255, 0.22);
-    border-radius: 20px;
-    padding: 30px 30px 28px;
+    position: relative;
+    background: linear-gradient(165deg, rgba(26, 26, 40, 0.85), rgba(22, 22, 32, 0.7));
+    border: 1px solid rgba(177, 140, 255, 0.2);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.35s, box-shadow 0.35s;
+  }
+  .diag-result-accent {
+    height: 4px;
+    width: 100%;
+    background: var(--grad);
+    transition: background 0.4s;
+  }
+  .diag-result-inner.state-red .diag-result-accent {
+    background: linear-gradient(90deg, var(--red), var(--amber));
+  }
+  .diag-result-inner.state-red {
+    border-color: rgba(255, 92, 122, 0.32);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 92, 122, 0.06);
+  }
+  .diag-result-inner.state-yellow .diag-result-accent {
+    background: linear-gradient(90deg, var(--amber), var(--yellow));
+  }
+  .diag-result-inner.state-yellow {
+    border-color: rgba(255, 209, 102, 0.3);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 209, 102, 0.05);
+  }
+  .diag-result-inner.state-green .diag-result-accent {
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+  }
+  .diag-result-inner.state-green {
+    border-color: rgba(0, 229, 160, 0.3);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(0, 229, 160, 0.06);
+  }
+
+  .diag-result-head {
+    padding: 26px 28px 0;
+  }
+  .diag-result-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dimmed);
+    margin-bottom: 14px;
   }
   .diag-stale-hint {
     font-size: 13px;
     color: var(--muted);
-    line-height: 1.55;
-    padding: 14px 0;
+    line-height: 1.6;
+    padding: 14px 0 28px;
   }
+  .diag-result-body {
+    padding: 8px 28px 28px;
+  }
+
+  /* Badge */
   .diag-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 12px;
+    padding: 6px 14px;
     border-radius: 100px;
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .diag-badge-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
   }
   .diag-badge.diag-badge-red {
     background: rgba(255, 92, 122, 0.12);
-    border: 1px solid rgba(255, 92, 122, 0.3);
+    border: 1px solid rgba(255, 92, 122, 0.36);
     color: var(--red);
   }
   .diag-badge.diag-badge-red .diag-badge-dot {
     background: var(--red);
-    box-shadow: 0 0 8px rgba(255, 92, 122, 0.7);
+    box-shadow: 0 0 10px rgba(255, 92, 122, 0.8);
+    animation: diagBadgePulse 2s ease-in-out infinite;
   }
   .diag-badge.diag-badge-yellow {
     background: rgba(255, 209, 102, 0.12);
-    border: 1px solid rgba(255, 209, 102, 0.3);
+    border: 1px solid rgba(255, 209, 102, 0.36);
     color: var(--yellow);
   }
   .diag-badge.diag-badge-yellow .diag-badge-dot {
     background: var(--yellow);
-    box-shadow: 0 0 8px rgba(255, 209, 102, 0.7);
+    box-shadow: 0 0 10px rgba(255, 209, 102, 0.8);
+    animation: diagBadgePulse 2.4s ease-in-out infinite;
   }
   .diag-badge.diag-badge-green {
     background: rgba(0, 229, 160, 0.12);
-    border: 1px solid rgba(0, 229, 160, 0.3);
+    border: 1px solid rgba(0, 229, 160, 0.36);
     color: var(--green);
   }
   .diag-badge.diag-badge-green .diag-badge-dot {
     background: var(--green);
-    box-shadow: 0 0 8px rgba(0, 229, 160, 0.7);
+    box-shadow: 0 0 10px rgba(0, 229, 160, 0.8);
+    animation: diagBadgePulse 2.8s ease-in-out infinite;
+  }
+  @keyframes diagBadgePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.55; transform: scale(1.25); }
   }
   .diag-badge-sub {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--muted);
-    line-height: 1.55;
-    margin-bottom: 20px;
+    line-height: 1.6;
+    margin-bottom: 22px;
   }
+
+  /* Metric cards */
   .diag-metric {
-    padding: 18px 0;
-    border-top: 1px solid var(--border);
+    padding: 20px 22px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(14, 14, 22, 0.55);
+    margin-bottom: 14px;
   }
-  .diag-metric:first-of-type {
-    border-top: 0;
-    padding-top: 6px;
-  }
-  .diag-metric-head {
-    margin-bottom: 8px;
-  }
-  .diag-metric-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--dimmed);
-  }
-  .diag-metric-big {
-    font-size: 34px;
+  .diag-metric-head { margin-bottom: 14px; }
+  .diag-metric-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .diag-metric-tag::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 8px currentColor;
+  }
+  .diag-metric-quality {
+    border-color: rgba(177, 140, 255, 0.22);
+    background: linear-gradient(165deg, rgba(177, 140, 255, 0.08), rgba(14, 14, 22, 0.55) 70%);
+  }
+  .diag-metric-quality .diag-metric-tag { color: var(--lilac); }
+  .diag-metric-exposure {
+    border-color: rgba(255, 209, 102, 0.22);
+    background: linear-gradient(165deg, rgba(255, 209, 102, 0.06), rgba(255, 92, 122, 0.04) 60%, rgba(14, 14, 22, 0.55));
+  }
+  .diag-metric-exposure .diag-metric-tag { color: var(--yellow); }
+
+  .diag-metric-big {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.035em;
     line-height: 1;
-    background: var(--grad);
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, #B18CFF 0%, #7B9EFF 60%, #4DA3FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -742,94 +838,177 @@ const alternateUrls = {
   .diag-metric-meta {
     font-size: 11px;
     color: var(--dimmed);
-    margin-top: 6px;
+    margin-top: 10px;
     letter-spacing: 0.04em;
   }
-  .diag-metric-range {
+
+  /* Exposure range — LOW/HIGH with colored rail between */
+  .diag-range {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .diag-range-item {
     display: flex;
-    align-items: baseline;
-    gap: 8px;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .diag-range-item.diag-range-high {
+    align-items: flex-end;
+    text-align: right;
+  }
+  .diag-range-lbl {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .diag-range-low .diag-range-lbl { color: var(--yellow); }
+  .diag-range-high .diag-range-lbl { color: var(--red); }
+  .diag-range-val {
     font-size: 22px;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    line-height: 1;
   }
-  .diag-metric-range-sep { color: var(--dimmed); font-weight: 500; }
-  .diag-metric-range-low { color: var(--yellow); }
-  .diag-metric-range-high { color: var(--red); }
+  .diag-range-low .diag-range-val { color: var(--yellow); }
+  .diag-range-high .diag-range-val { color: var(--red); }
+  .diag-range-bar {
+    position: relative;
+    height: 4px;
+    min-width: 48px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--yellow), var(--amber), var(--red));
+    align-self: center;
+    margin-top: 6px;
+  }
+  .diag-range-bar::before,
+  .diag-range-bar::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .diag-range-bar::before {
+    left: -4px;
+    background: var(--yellow);
+    box-shadow: 0 0 10px rgba(255, 209, 102, 0.7);
+  }
+  .diag-range-bar::after {
+    right: -4px;
+    background: var(--red);
+    box-shadow: 0 0 10px rgba(255, 92, 122, 0.7);
+  }
+
+  /* Quality bar */
   .diag-quality-bar {
     position: relative;
-    height: 6px;
-    background: rgba(34, 34, 46, 0.8);
-    border-radius: 4px;
+    height: 8px;
+    background: rgba(14, 14, 22, 0.9);
+    border: 1px solid rgba(177, 140, 255, 0.12);
+    border-radius: 6px;
     overflow: hidden;
-    margin-top: 10px;
   }
   .diag-quality-bar-fill {
     position: absolute;
     inset: 0 auto 0 0;
     width: 0%;
-    background: var(--grad);
+    background: linear-gradient(90deg, #B18CFF, #7B9EFF, #4DA3FF);
     border-radius: 4px;
-    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px rgba(177, 140, 255, 0.55);
+    transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  /* 37% baseline marker */
   .diag-quality-bar-baseline {
     position: absolute;
-    top: -3px;
-    bottom: -3px;
+    top: -4px;
+    bottom: -4px;
     left: 37%;
     width: 1.5px;
-    background: var(--white);
-    opacity: 0.6;
+    background: #fff;
+    opacity: 0.55;
     z-index: 1;
     pointer-events: none;
   }
+  .diag-quality-bar-baseline::after {
+    content: '37%';
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
+  }
 
+  /* Actions */
   .diag-actions {
     margin-top: 22px;
     padding-top: 22px;
     border-top: 1px solid var(--border);
+  }
+  .diag-actions-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dimmed);
+    margin-bottom: 12px;
   }
   .diag-action {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
-    padding: 14px 16px;
-    background: rgba(22, 22, 32, 0.55);
+    padding: 14px 16px 14px 18px;
+    background: rgba(14, 14, 22, 0.6);
     border: 1px solid var(--border);
+    border-left: 3px solid var(--lilac);
     border-radius: 12px;
     margin-bottom: 10px;
     color: inherit;
     text-decoration: none;
     transition: border-color 0.2s, background 0.2s, transform 0.2s;
   }
+  .diag-action:nth-child(2) { border-left-color: var(--green); }
   .diag-action:last-child { margin-bottom: 0; }
   .diag-action:hover {
     border-color: rgba(177, 140, 255, 0.4);
-    background: rgba(177, 140, 255, 0.05);
-    transform: translateX(2px);
+    background: rgba(177, 140, 255, 0.06);
+    transform: translateX(3px);
+  }
+  .diag-action:nth-child(2):hover {
+    border-color: rgba(0, 229, 160, 0.4);
+    background: rgba(0, 229, 160, 0.05);
   }
   .diag-action-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--white);
-    margin-bottom: 4px;
+    margin-bottom: 5px;
+    letter-spacing: -0.005em;
   }
   .diag-action-desc {
     font-size: 12px;
     color: var(--muted);
-    line-height: 1.5;
+    line-height: 1.55;
   }
   .diag-action-cta {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--lilac);
     white-space: nowrap;
     flex-shrink: 0;
+    align-self: center;
   }
+  .diag-action:nth-child(2) .diag-action-cta { color: var(--green); }
 
   /* ═══════════ METHODOLOGY ════════════════════════════════════ */
   .diag-methodology {
@@ -948,7 +1127,12 @@ const alternateUrls = {
   @media (max-width: 640px) {
     .diag-hero { padding: 130px 0 60px; }
     .diag-opts-grid2 { grid-template-columns: 1fr; }
-    .diag-result-inner { padding: 24px 22px 22px; }
+    .diag-result-head { padding: 22px 20px 0; }
+    .diag-result-body { padding: 8px 20px 22px; }
+    .diag-metric { padding: 16px 18px; }
+    .diag-metric-big { font-size: 36px; }
+    .diag-range-val { font-size: 18px; }
+    .diag-range { gap: 10px; }
     .diag-formula { padding: 18px 20px; }
     .diag-sources li { padding-left: 28px; }
   }
