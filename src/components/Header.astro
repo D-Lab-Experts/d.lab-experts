@@ -4,7 +4,7 @@ import { defaultLocale, type Locale } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
 
 export interface Props {
-  active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar';
+  active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar' | 'diagnostic';
   locale: Locale;
   alternateUrls?: Partial<Record<Locale, string>>;
 }
@@ -16,11 +16,16 @@ const t = useTranslations(locale);
 const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
 const href = (path: string) => `${localePrefix}${path}`;
 
+// Diagnostic uses a locale-specific slug (EN 'diagnostic' / PT
+// 'diagnostico'), so it doesn't follow the shared prefix helper.
+const diagnosticHref = locale === 'pt' ? '/pt/diagnostico' : '/diagnostic';
+
 type Link = {
   href: string;
   label: string;
   key: Props['active'];
   highlight?: boolean;
+  badge?: string;
 };
 
 const links: Array<Link> = [
@@ -29,6 +34,7 @@ const links: Array<Link> = [
   { href: href('/#segments'), label: t('nav.segments'), key: 'segments' },
   { href: href('/#products'), label: t('nav.products'), key: 'products' },
   { href: href('/blog'), label: t('nav.blog'), key: 'blog', highlight: true },
+  { href: diagnosticHref, label: t('nav.diagnostic'), key: 'diagnostic', badge: 'NEW' },
   { href: href('/contato'), label: t('nav.contato'), key: 'contato' },
 ];
 ---
@@ -43,12 +49,14 @@ const links: Array<Link> = [
         const classes = [
           active === link.key ? 'active' : '',
           link.highlight ? 'nav-link-dual' : '',
+          link.badge ? 'nav-link-badge' : '',
         ].filter(Boolean).join(' ');
         return (
           <li>
             <a href={link.href} class={classes}>
               {link.label}
               {link.highlight && <span class="nav-dot-dual" aria-hidden="true"></span>}
+              {link.badge && <span class="nav-badge">{link.badge}</span>}
             </a>
           </li>
         );
@@ -72,10 +80,11 @@ const links: Array<Link> = [
     <a
       href={link.href}
       data-mm-link
-      class={link.highlight ? 'nav-link-dual' : ''}
+      class:list={[link.highlight && 'nav-link-dual', link.badge && 'nav-link-badge']}
     >
       {link.label}
       {link.highlight && <span class="nav-dot-dual" aria-hidden="true"></span>}
+      {link.badge && <span class="nav-badge">{link.badge}</span>}
     </a>
   ))}
   <div class="mobile-lang-switcher">
@@ -94,5 +103,26 @@ const links: Array<Link> = [
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid var(--border);
+  }
+  /* NEW-badge on a nav link. Sits to the right of the label, small,
+     gradient pill so it reads as a deliberate signal — not an ad. */
+  .nav-link-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--grad);
+    color: #fff;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+  @media (max-width: 1023px) {
+    .nav-badge { transform: translateY(0); }
   }
 </style>

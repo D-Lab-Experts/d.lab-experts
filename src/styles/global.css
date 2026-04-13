@@ -601,6 +601,247 @@ ul, ol { list-style: none; }
   border-color: rgba(177, 140, 255, 0.45);
   background: rgba(177, 140, 255, 0.10);
 }
+
+/* ── DIAGNOSTIC PROMO CARD ────────────────────────────────────────
+   Full-width gradient card on the home announcing the /diagnostic
+   tool. Mirrors featured-study's visual weight so the research → tool
+   rhythm reads as one sequence. */
+.diag-promo-section {
+  padding: 40px 0 60px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.diag-promo-card {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 40px 44px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(177, 140, 255, 0.08), rgba(77, 163, 255, 0.06) 60%, rgba(0, 212, 255, 0.04));
+  border: 1px solid rgba(177, 140, 255, 0.24);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(.16, 1, .3, 1), border-color 0.3s, box-shadow 0.3s;
+}
+.diag-promo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(177, 140, 255, 0.14), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.diag-promo-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(177, 140, 255, 0.5);
+  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4), 0 0 60px rgba(177, 140, 255, 0.08);
+}
+.diag-promo-card:hover::before { opacity: 1; }
+.diag-promo-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  margin-bottom: 16px;
+}
+.diag-promo-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lilac);
+  box-shadow: 0 0 0 0 rgba(177, 140, 255, 0.6);
+  animation: diagPromoPulse 2s ease-out infinite;
+}
+@keyframes diagPromoPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(177, 140, 255, 0.5); }
+  80%  { box-shadow: 0 0 0 10px rgba(177, 140, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(177, 140, 255, 0); }
+}
+.diag-promo-title {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+.diag-promo-sub {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 540px;
+  margin-bottom: 22px;
+}
+.diag-promo-stats {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(177, 140, 255, 0.14);
+}
+.diag-promo-stat-val {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.diag-promo-stat-lbl {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-top: 3px;
+}
+.diag-promo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  padding: 12px 22px;
+  border-radius: 100px;
+  border: 1px solid rgba(177, 140, 255, 0.36);
+  background: rgba(177, 140, 255, 0.08);
+  transition: gap 0.25s, border-color 0.25s, background 0.25s;
+}
+.diag-promo-card:hover .diag-promo-cta {
+  gap: 14px;
+  border-color: rgba(177, 140, 255, 0.6);
+  background: rgba(177, 140, 255, 0.15);
+}
+
+/* Decorative visual on the right — mini result-card preview */
+.diag-promo-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+.diag-promo-cube {
+  position: relative;
+  width: 260px;
+  padding: 26px 28px;
+  background: rgba(22, 22, 32, 0.7);
+  border: 1px solid rgba(177, 140, 255, 0.24);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  animation: diagPromoFloat 6s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes diagPromoFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.diag-promo-cube-face { position: relative; }
+.diag-promo-cube-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-bottom: 10px;
+}
+.diag-promo-cube-num {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 14px;
+}
+.diag-promo-cube-bar {
+  position: relative;
+  height: 6px;
+  background: rgba(34, 34, 46, 0.9);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.diag-promo-cube-bar-baseline {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: 37%;
+  width: 1.5px;
+  background: var(--white);
+  opacity: 0.6;
+  z-index: 1;
+}
+.diag-promo-cube-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: var(--grad);
+  border-radius: 4px;
+  animation: diagPromoBar 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards infinite;
+}
+@keyframes diagPromoBar {
+  0%   { width: 0%; }
+  40%  { width: 47%; }
+  70%  { width: 47%; }
+  100% { width: 47%; }
+}
+.diag-promo-cube-lbl {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+}
+
+.diag-promo-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.diag-promo-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--lilac);
+  box-shadow: 0 0 10px rgba(177, 140, 255, 0.7);
+  animation: diagPromoSparkle 4s ease-in-out infinite;
+}
+.diag-promo-sparkle.s1 { top: 12%;  left: 6%;  animation-delay: 0s; }
+.diag-promo-sparkle.s2 { bottom: 18%; right: 4%; background: var(--blue); box-shadow: 0 0 10px rgba(77, 163, 255, 0.7); animation-delay: -1.5s; }
+.diag-promo-sparkle.s3 { top: 60%; left: 10%; background: var(--green); box-shadow: 0 0 10px rgba(0, 229, 160, 0.7); animation-delay: -2.8s; }
+@keyframes diagPromoSparkle {
+  0%, 100% { opacity: 0.6; transform: translate(0, 0) scale(1); }
+  50%      { opacity: 1;   transform: translate(4px, -8px) scale(1.3); }
+}
+
+@media (max-width: 900px) {
+  .diag-promo-card {
+    grid-template-columns: 1fr;
+    padding: 28px 22px;
+    gap: 24px;
+  }
+  .diag-promo-visual { min-height: 180px; }
+  .diag-promo-cube { width: 100%; max-width: 320px; }
+  .diag-promo-stats { gap: 20px; }
+}
+
 .hero-card {
   background: rgba(22,22,31,.6);
   border: 1px solid rgba(177,140,255,.14);

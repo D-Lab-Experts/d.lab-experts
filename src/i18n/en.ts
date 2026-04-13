@@ -17,6 +17,7 @@ const en = {
     segments: 'Research',
     products: 'Consulting',
     blog: 'Publications',
+    diagnostic: 'Diagnostic',
     contato: 'Contact',
     collaborate: 'Collaborate',
     ariaLogo: 'D.Lab Experts, go to home',
@@ -785,6 +786,20 @@ const en = {
     ctaFinalSub: 'The diagnostic is public because the method is the point. When you need the same rigor applied to your specific context, we have a scoped engagement for that.',
     ctaFinalPrimary: 'Book a scoped diagnostic →',
     ctaFinalSecondary: 'See open research',
+
+    // Home promo card — lives on the homepage between featured study
+    // and brand statement. Surfaces the tool without cluttering the nav.
+    homeEyebrow: 'Interactive research tool',
+    homePromoTitle: 'How much is this decision',
+    homePromoAccent: 'costing you?',
+    homePromoSub: 'Five inputs, two outputs. An illustrative reference grounded in McKinsey, MIT, Bain and PMI research — not a forecast. 60 seconds, fully open method.',
+    homePromoCta: 'Open the diagnostic →',
+    homePromoStat1Label: 'inputs',
+    homePromoStat1Val: '5',
+    homePromoStat2Label: 'sourced studies',
+    homePromoStat2Val: '7',
+    homePromoStat3Label: 'seconds',
+    homePromoStat3Val: '~60',
   },
 } as const;
 

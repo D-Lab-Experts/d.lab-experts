@@ -286,6 +286,67 @@ const dateLocaleMap: Record<Locale, string> = {
     </div>
   </section>
 
+  <!-- ═══════════════ DIAGNOSTIC PROMO ══════════════════════════════ -->
+  <!-- Prominent promo for the /diagnostic interactive tool. Sits
+       between the featured study and the brand statement so readers
+       land on the tool right after seeing what we publish. -->
+  <section id="diagnostic-promo" class="diag-promo-section">
+    <div class="section-glow lilac" style="top:20%;left:-100px;width:460px;height:340px"></div>
+    <div class="section-glow blue" style="bottom:-40px;right:-60px;width:520px;height:360px"></div>
+    <div class="container">
+      <a class="diag-promo-card fi" href={locale === 'pt' ? '/pt/diagnostico' : '/diagnostic'} aria-label={t('diagnostic.homePromoCta')}>
+        <div class="diag-promo-copy">
+          <div class="diag-promo-eyebrow">
+            <span class="diag-promo-pulse"></span>
+            {t('diagnostic.homeEyebrow')}
+          </div>
+          <h2 class="diag-promo-title">
+            {t('diagnostic.homePromoTitle')}<br /><span class="gradient-text">{t('diagnostic.homePromoAccent')}</span>
+          </h2>
+          <p class="diag-promo-sub">{t('diagnostic.homePromoSub')}</p>
+          <div class="diag-promo-stats">
+            <div class="diag-promo-stat">
+              <div class="diag-promo-stat-val">{t('diagnostic.homePromoStat1Val')}</div>
+              <div class="diag-promo-stat-lbl">{t('diagnostic.homePromoStat1Label')}</div>
+            </div>
+            <div class="diag-promo-stat">
+              <div class="diag-promo-stat-val">{t('diagnostic.homePromoStat2Val')}</div>
+              <div class="diag-promo-stat-lbl">{t('diagnostic.homePromoStat2Label')}</div>
+            </div>
+            <div class="diag-promo-stat">
+              <div class="diag-promo-stat-val">{t('diagnostic.homePromoStat3Val')}</div>
+              <div class="diag-promo-stat-lbl">{t('diagnostic.homePromoStat3Label')}</div>
+            </div>
+          </div>
+          <span class="diag-promo-cta">
+            {t('diagnostic.homePromoCta')}
+          </span>
+        </div>
+
+        <!-- Tiny decorative cube preview on the right — echoes the
+             hero cube so visitors recognize the tool as D.Lab-built. -->
+        <div class="diag-promo-visual" aria-hidden="true">
+          <div class="diag-promo-cube">
+            <div class="diag-promo-cube-face diag-promo-cube-front">
+              <div class="diag-promo-cube-eyebrow">Quality</div>
+              <div class="diag-promo-cube-num">47%</div>
+              <div class="diag-promo-cube-bar">
+                <div class="diag-promo-cube-bar-baseline"></div>
+                <div class="diag-promo-cube-bar-fill"></div>
+              </div>
+              <div class="diag-promo-cube-lbl">vs. 37% baseline</div>
+            </div>
+          </div>
+          <div class="diag-promo-sparkles">
+            <span class="diag-promo-sparkle s1"></span>
+            <span class="diag-promo-sparkle s2"></span>
+            <span class="diag-promo-sparkle s3"></span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <!-- ═══════════════ BRAND STATEMENT ═══════════════════════════════ -->
   <section id="brand-statement">
     <div class="brand-wave-bg">

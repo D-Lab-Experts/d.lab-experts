@@ -18,6 +18,7 @@ const pt: Translation = {
     segments: 'Pesquisa',
     products: 'Consultoria',
     blog: 'Análises Públicas',
+    diagnostic: 'Diagnóstico',
     contato: 'Contato',
     collaborate: 'Colaborar',
     ariaLogo: 'D.Lab Experts, ir para a home',
@@ -766,6 +767,18 @@ const pt: Translation = {
     ctaFinalSub: 'O diagnóstico é público porque o método é o que importa. Quando você precisar do mesmo rigor aplicado ao seu contexto específico, a gente tem um engajamento com escopo fechado pra isso.',
     ctaFinalPrimary: 'Agendar um diagnóstico →',
     ctaFinalSecondary: 'Ver pesquisas abertas',
+
+    homeEyebrow: 'Ferramenta interativa de pesquisa',
+    homePromoTitle: 'Quanto essa decisão',
+    homePromoAccent: 'está te custando?',
+    homePromoSub: 'Cinco entradas, duas saídas. Uma referência ilustrativa ancorada em pesquisa McKinsey, MIT, Bain e PMI — não é previsão. 60 segundos, método totalmente aberto.',
+    homePromoCta: 'Abrir o diagnóstico →',
+    homePromoStat1Label: 'entradas',
+    homePromoStat1Val: '5',
+    homePromoStat2Label: 'fontes citadas',
+    homePromoStat2Val: '7',
+    homePromoStat3Label: 'segundos',
+    homePromoStat3Val: '~60',
   },
 };
 
