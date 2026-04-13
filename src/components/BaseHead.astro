@@ -1,11 +1,9 @@
 ---
-import { locales, type Locale } from '../i18n/ui';
-import { getLocalizedPath, useTranslations } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
 
 export interface Props {
   title: string;
   description: string;
-  locale: Locale;
   image?: string;
   canonical?: string;
   type?: 'website' | 'article';
@@ -18,7 +16,6 @@ export interface Props {
 const {
   title,
   description,
-  locale,
   image = '/d.lab.png',
   canonical,
   type = 'website',
@@ -28,33 +25,20 @@ const {
   tags = [],
 } = Astro.props;
 
-const t = useTranslations(locale);
+const t = useTranslations();
 
 const canonicalURL = canonical
   ? new URL(canonical, Astro.site)
   : new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
-
-// Per-locale og:locale tag — BCP 47 with region for PT (Facebook/OG
-// convention uses underscore not hyphen).
-const ogLocale: Record<Locale, string> = {
-  en: 'en_US',
-  pt: 'pt_BR',
-  es: 'es_ES',
-};
-
-// Build hreflang alternates for the current page URL. Helps search
-// engines serve the right variant per audience and signals that the
-// site is genuinely multilingual rather than naive dup-content.
-const alternates = locales.map((loc) => ({
-  locale: loc,
-  href: new URL(getLocalizedPath(Astro.url.pathname, loc), Astro.site).toString(),
-}));
 ---
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#0B0B0F" />
+<meta name="color-scheme" content="dark" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 
 <title>{title}</title>
 <meta name="description" content={description} />
@@ -66,11 +50,6 @@ const alternates = locales.map((loc) => ({
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
 <link rel="alternate" type="application/rss+xml" title="D.Lab Experts · Research Hub" href="/rss.xml" />
-
-{alternates.map((alt) => (
-  <link rel="alternate" hreflang={alt.locale} href={alt.href} />
-))}
-<link rel="alternate" hreflang="x-default" href={new URL(getLocalizedPath(Astro.url.pathname, 'en'), Astro.site).toString()} />
 
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
 <link
@@ -84,7 +63,7 @@ const alternates = locales.map((loc) => ({
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:locale" content={ogLocale[locale]} />
+<meta property="og:locale" content="en_US" />
 <meta property="og:site_name" content={t('meta.ogSiteName')} />
 
 <!-- Twitter -->

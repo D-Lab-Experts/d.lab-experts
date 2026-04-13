@@ -328,14 +328,6 @@ const en = {
   contributors: {
     label: 'Contributors to the Hub',
   },
-
-  // Soft notice rendered above /pt/* and /es/* pages whose body has
-  // not been translated yet. EN visitors never see it (the component
-  // self-hides when locale === defaultLocale).
-  translationNotice: {
-    heading: 'Translation in progress',
-    message: 'This page is shown in English while the localized version is being prepared.',
-  },
 } as const;
 
 export default en;

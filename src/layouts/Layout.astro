@@ -6,14 +6,12 @@ import SvgDefs from '../components/SvgDefs.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
-import { htmlLang, type Locale } from '../i18n/ui';
-import { getLocaleFromUrl } from '../i18n/utils';
+import { htmlLang } from '../i18n/ui';
 
 export interface Props {
   title: string;
   description: string;
   active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar';
-  locale?: Locale;
   image?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
@@ -26,7 +24,6 @@ const {
   title,
   description,
   active,
-  locale: explicitLocale,
   image,
   type,
   publishedTime,
@@ -34,19 +31,14 @@ const {
   author,
   tags,
 } = Astro.props;
-
-// Pages can pass `locale` explicitly (cleanest), otherwise we derive
-// it from the URL prefix (/pt/..., /es/..., or root = en).
-const locale: Locale = explicitLocale ?? getLocaleFromUrl(Astro.url);
 ---
 
 <!DOCTYPE html>
-<html lang={htmlLang[locale]}>
+<html lang={htmlLang}>
   <head>
     <BaseHead
       title={title}
       description={description}
-      locale={locale}
       image={image}
       type={type}
       publishedTime={publishedTime}
@@ -58,9 +50,9 @@ const locale: Locale = explicitLocale ?? getLocaleFromUrl(Astro.url);
   <body>
     <canvas id="geo-canvas"></canvas>
     <SvgDefs />
-    <Header active={active} locale={locale} />
+    <Header active={active} />
     <slot />
-    <Footer locale={locale} />
+    <Footer />
 
     <script>
       // ══ REDUCED MOTION: skip all decorative animations ══════════════════
@@ -206,6 +198,21 @@ const locale: Locale = explicitLocale ?? getLocaleFromUrl(Astro.url);
         window.addEventListener('resize', resize);
         draw();
       })();
+
+      // ══ HERO CUBE: pause when offscreen ═══════════════════════════════
+      // The cube has 3 layered animations (outer spin, inner spin,
+      // particle drift). Letting them tick while the user is reading
+      // sections far below burns frame-budget and slows scroll. Pause
+      // via animation-play-state when the hero leaves the viewport.
+      const cubeStage = document.querySelector('.hero-cube-stage');
+      if (cubeStage) {
+        const cubeObs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            cubeStage.classList.toggle('cube-paused', !e.isIntersecting);
+          });
+        }, { threshold: 0 });
+        cubeObs.observe(cubeStage);
+      }
 
       // ══ NAV SCROLL + PROGRESS BAR ═════════════════════════════════════
       // Single scroll listener drives both the nav shrink state and the

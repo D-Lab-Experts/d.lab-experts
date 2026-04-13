@@ -1,41 +1,14 @@
-import { locales, defaultLocale, type Locale } from './ui';
 import en from './en';
-import pt from './pt';
-import es from './es';
 
-const dictionaries = { en, pt, es } as const;
-
-// Single source of truth for the shape of translations.
-// EN is authoritative — PT and ES must keep the same keys.
+// Single English dictionary. `useTranslations()` keeps the same call
+// shape components were already using, so the transition to EN-only is
+// invisible at the call site.
 export type Translation = typeof en;
 
-/**
- * Extract the active locale from a URL. Returns the default locale
- * when the first path segment isn't a recognized locale.
- */
-export function getLocaleFromUrl(url: URL): Locale {
-  const [, first] = url.pathname.split('/');
-  return (locales as readonly string[]).includes(first)
-    ? (first as Locale)
-    : defaultLocale;
-}
-
-/**
- * Bind a locale and return a strongly-typed `t(key)` lookup that walks
- * the dictionary via dot-notation keys (e.g. `t('hero.title')`). Falls
- * back to the EN value if a key is missing in the requested locale —
- * safer than throwing while translations are still rolling out.
- */
-export function useTranslations(locale: Locale) {
-  const dict = dictionaries[locale];
-  const fallback = dictionaries[defaultLocale];
-
+export function useTranslations() {
   return function t(key: TranslationKey): string {
-    const fromLocale = resolve(dict, key);
-    if (fromLocale !== undefined) return fromLocale;
-    const fromFallback = resolve(fallback, key);
-    if (fromFallback !== undefined) return fromFallback;
-    // Missing keys are loud in dev so they're easy to catch in review.
+    const value = resolve(en, key);
+    if (value !== undefined) return value;
     if (import.meta.env.DEV) {
       console.warn(`[i18n] Missing translation for key "${key}"`);
     }
@@ -56,28 +29,6 @@ function resolve(obj: unknown, key: string): string | undefined {
   return typeof cursor === 'string' ? cursor : undefined;
 }
 
-/**
- * Build the URL for the same page in a different locale. Used by the
- * LanguageSwitcher and hreflang link tags. Strips the current locale
- * prefix (if any) then re-prefixes for non-default locales.
- */
-export function getLocalizedPath(pathname: string, locale: Locale): string {
-  // Strip the leading locale segment if present.
-  const segments = pathname.split('/').filter(Boolean);
-  if (segments.length && (locales as readonly string[]).includes(segments[0])) {
-    segments.shift();
-  }
-  const rest = segments.join('/');
-  if (locale === defaultLocale) {
-    return rest ? `/${rest}` : '/';
-  }
-  return rest ? `/${locale}/${rest}` : `/${locale}/`;
-}
-
-/**
- * Recursive dot-path key-union derived from the EN dictionary. Gives
- * autocomplete + compile-time errors in pages when a key is wrong.
- */
 type Join<K, P> = K extends string
   ? P extends string
     ? `${K}.${P}`

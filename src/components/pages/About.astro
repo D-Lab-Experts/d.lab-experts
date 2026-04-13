@@ -1,24 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import TranslationNotice from '../TranslationNotice.astro';
-import type { Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
+const t = useTranslations();
 ---
 
 <Layout
   title={t('pageTitles.about')}
   description={t('pageTitles.aboutDescription')}
   active="about"
-  locale={locale}
 >
-  <TranslationNotice locale={locale} />
   <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
   <section class="about-hero">
     <div class="section-glow lilac" style="top:-50px;left:50%;transform:translateX(-50%)"></div>
@@ -104,14 +96,14 @@ const t = useTranslations(locale);
           </div>
         </aside>
         <div class="about-split-content">
-          <p>D.Lab Experts was born from a documented premise. According to SEBRAE (2023), <strong>73% of SMB managers make critical decisions by intuition</strong>. In parallel, LLMs and agents accelerate execution while multiplying attack surfaces, and the global average cost of a data breach is <strong>$4.88 million</strong> (IBM, 2024). Blind decisions and exposed operations are two sides of the same problem.</p>
-          <p>On the intelligence side, we cross-reference public sources, APIs, scraping and primary research to answer what stalls decisions for boards, founders and operators. The global data analytics market grows 13.5% per year (Statista, 2024), and data-driven companies are <strong>23 times more likely to acquire customers</strong> (McKinsey Global Institute).</p>
+          <p>D.Lab Experts was born from a documented premise. According to SEBRAE (2023), <strong><span class="hl-lilac">73% of SMB managers</span> make critical decisions by intuition</strong>. In parallel, LLMs and agents accelerate execution while multiplying attack surfaces, and the global average cost of a data breach is <strong><span class="hl-cyan">$4.88 million</span></strong> (IBM, 2024). <em>Blind decisions and exposed operations</em> are two sides of the same problem.</p>
+          <p>On the <span class="hl-lilac">intelligence</span> side, we cross-reference public sources, APIs, scraping and primary research to answer what stalls decisions for boards, founders and operators. The global data analytics market grows <span class="hl-blue">13.5% per year</span> (Statista, 2024), and data-driven companies are <strong><span class="hl-blue">23× more likely to acquire customers</span></strong> (McKinsey Global Institute).</p>
           <div class="split-insight">
             Accumulated data is noise. What turns scattered data into an actionable decision is the <strong>interpretation architecture</strong> behind it.
             <span class="src">D.Lab Experts · Research Hub, 2026</span>
           </div>
-          <p>On the cyber side, we run intrusion tests, map vulnerabilities and investigate the new surfaces AI and automation have opened. Ransomware attacks grew 73% globally year over year (Statista, 2024), and over 80% of organizations experienced at least one breach in the last 12 months. With autonomous agents in operation, the window only gets shorter.</p>
-          <p>We publish the method. Open analysis as proof of how we think. Work under NDA becomes a consulting engagement when someone needs the same rigor applied to their own context. The rest is noise.</p>
+          <p>On the <span class="hl-green">cyber</span> side, we run intrusion tests, map vulnerabilities and investigate the new surfaces AI and automation have opened. Ransomware attacks grew <strong><span class="hl-yellow">73% globally year over year</span></strong> (Statista, 2024), and over <span class="hl-yellow">80% of organizations</span> experienced at least one breach in the last 12 months. With autonomous agents in operation, <em>the window only gets shorter</em>.</p>
+          <p>We publish the method. <strong>Open analysis as proof of how we think.</strong> Work under NDA becomes a consulting engagement when someone needs the same rigor applied to their own context. The rest is noise.</p>
         </div>
       </div>
     </div>

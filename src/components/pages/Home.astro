@@ -2,28 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
 import { getCollection } from 'astro:content';
-import type { Locale } from '../../i18n/ui';
-import { defaultLocale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
+const t = useTranslations();
 
-// Localized URL prefix for internal links (hash anchors + /blog etc.).
-const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-const href = (path: string) => `${localePrefix}${path}`;
-
-// Research Hub surfaces publications in the visitor's own language when
-// available, falling back to the global pool if this locale has no
-// publications yet. Keeps the section useful during the translation
-// rollout instead of showing an empty state at /pt or /es.
-const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const localized = allPosts.filter((p) => p.data.lang === locale);
-const posts = (localized.length ? localized : allPosts).slice(0, 3);
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
 const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', string> = {
   briefing: t('formats.briefing'),
@@ -31,28 +16,18 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   foresight: t('formats.foresight'),
   sector: t('formats.sector'),
 };
-
-// BCP 47 map for Intl.DateTimeFormat. Hoisted out of the card map so
-// TypeScript type annotations stay out of the JSX expression.
-const dateLocaleMap: Record<Locale, string> = {
-  en: 'en-US',
-  pt: 'pt-BR',
-  es: 'es-419',
-};
 ---
 
 <Layout
   title={t('pageTitles.home')}
   description={t('pageTitles.homeDescription')}
   active="home"
-  locale={locale}
 >
   <!-- ═══════════════ HERO ══════════════════════════════════════════ -->
   <section id="hero">
     <div class="hero-grid"></div>
     <div class="hero-light-a"></div>
     <div class="hero-light-b"></div>
-    <NeuralNetwork color="lilac" density="medium" opacity={0.32} />
 
     <svg class="hero-orbital" viewBox="0 0 800 800" fill="none">
       <circle cx="400" cy="400" r="300" stroke="rgba(177,140,255,0.15)" stroke-width="0.5" fill="none" stroke-dasharray="6 8"/>
@@ -79,15 +54,15 @@ const dateLocaleMap: Record<Locale, string> = {
     </svg>
 
     <div class="hero-inner">
-      <div class="fi d1">
+      <div class="hero-text fi">
         <div class="hero-tag"><span class="tag-dot"></span>{t('hero.tag')}</div>
         <h1 class="hero-h1">
           {t('hero.h1Line1')}<br><span class="hero-accent">{t('hero.h1Accent')}</span>
         </h1>
         <p class="hero-sub">{t('hero.sub')}</p>
         <div class="hero-ctas">
-          <a href={href('/blog')} class="btn btn-primary">{t('hero.ctaPrimary')}</a>
-          <a href={href('/#products')} class="btn btn-ghost">{t('hero.ctaSecondary')}</a>
+          <a href="/blog" class="btn btn-primary">{t('hero.ctaPrimary')}</a>
+          <a href="/#products" class="btn btn-ghost">{t('hero.ctaSecondary')}</a>
         </div>
         <div class="hero-stats">
           <div>
@@ -105,7 +80,123 @@ const dateLocaleMap: Record<Locale, string> = {
         </div>
       </div>
 
-      <div class="hero-card-wrap fi d2">
+      <!-- ── 3D Research Cube ─────────────────────────────────────────
+           Six-face data cube with grid overlays, corner brackets and
+           one headline metric per face. The outer cube spins on Y;
+           inside, a smaller wireframe cube counter-rotates on X+Y for
+           parallax depth. Pure CSS 3D, no JS. -->
+      <div class="hero-cube-stage fi d2" aria-hidden="true">
+        <div class="hero-cube-glow"></div>
+        <div class="hero-cube-shadow"></div>
+        <div class="hero-cube">
+          <!-- Inner counter-rotating wireframe -->
+          <div class="hero-cube-inner">
+            <div class="cube-inner-face inner-front"></div>
+            <div class="cube-inner-face inner-back"></div>
+            <div class="cube-inner-face inner-right"></div>
+            <div class="cube-inner-face inner-left"></div>
+            <div class="cube-inner-face inner-top"></div>
+            <div class="cube-inner-face inner-bottom"></div>
+          </div>
+
+          <!-- Outer faces with research data -->
+          <div class="cube-face cube-front">
+            <div class="cube-grid"></div>
+            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
+            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
+            <div class="cube-content">
+              <div class="cube-eyebrow">Sample · Brazil</div>
+              <div class="cube-num">N=98</div>
+              <div class="cube-lbl">Original gaming study</div>
+            </div>
+          </div>
+
+          <div class="cube-face cube-back">
+            <div class="cube-grid"></div>
+            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
+            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
+            <div class="cube-content">
+              <div class="cube-eyebrow">Cyber · 2024</div>
+              <div class="cube-num" style="background:linear-gradient(135deg,#00E5A0 0%,#00D4FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">$4.88M</div>
+              <div class="cube-lbl">Avg breach cost</div>
+            </div>
+          </div>
+
+          <div class="cube-face cube-right">
+            <div class="cube-grid"></div>
+            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
+            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
+            <div class="cube-content">
+              <div class="cube-eyebrow">SMB · SEBRAE</div>
+              <div class="cube-num">73%</div>
+              <div class="cube-lbl">Decide by intuition</div>
+            </div>
+          </div>
+
+          <div class="cube-face cube-left">
+            <div class="cube-grid"></div>
+            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
+            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
+            <div class="cube-content">
+              <div class="cube-eyebrow">Gaming · 2026</div>
+              <div class="cube-num" style="background:linear-gradient(135deg,#B18CFF 0%,#4DA3FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">3.48×</div>
+              <div class="cube-lbl">Switch intent</div>
+            </div>
+          </div>
+
+          <div class="cube-face cube-top">
+            <div class="cube-grid"></div>
+            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
+            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
+            <div class="cube-content">
+              <div class="cube-mark">D.LAB</div>
+              <div class="cube-mark-sub">Research Hub</div>
+            </div>
+          </div>
+
+          <div class="cube-face cube-bottom">
+            <div class="cube-grid"></div>
+            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
+            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
+            <div class="cube-content">
+              <div class="cube-eyebrow">Method</div>
+              <div class="cube-num" style="background:linear-gradient(135deg,#FFD166 0%,#F5A623 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">23×</div>
+              <div class="cube-lbl">Customer growth</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating particles around the cube (decorative) -->
+        <span class="cube-particle p1"></span>
+        <span class="cube-particle p2"></span>
+        <span class="cube-particle p3"></span>
+        <span class="cube-particle p4"></span>
+      </div>
+    </div>
+
+    <div class="scroll-ind">
+      <span class="label" style="font-size:9px">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FEATURED STUDY ════════════════════════════════ -->
+  <!-- Pulled out of the hero so the headline owns the viewport.
+       This card is the most recent original study — readers land, see
+       the claim, then immediately encounter the proof. -->
+  <section id="featured-study">
+    <div class="section-glow lilac" style="top:-40px;left:20%;width:480px;height:360px"></div>
+    <div class="section-glow blue" style="bottom:-60px;right:-40px;width:520px;height:380px"></div>
+    <div class="container">
+      <div class="featured-study-header fi">
+        <span class="label" style="display:inline-flex;align-items:center;gap:10px">
+          <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
+          Featured research
+        </span>
+        <h2 class="featured-study-title">Latest D.Lab <span class="gradient-text">original study.</span></h2>
+      </div>
+
+      <div class="hero-card-wrap fi d1">
         <div class="hero-card">
           <div class="hc-header">
             <div style="display:flex;align-items:center">
@@ -118,58 +209,63 @@ const dateLocaleMap: Record<Locale, string> = {
             <span class="badge badge-green badge-dot">Published</span>
           </div>
 
-          <div class="hc-metrics">
-            <div class="hc-m"><div class="hc-m-val" style="color:var(--green)">87.8%</div><div class="hc-m-lbl">Perceived impact</div></div>
-            <div class="hc-m"><div class="hc-m-val" style="color:var(--yellow)">16.3%</div><div class="hc-m-lbl">Brand trust</div></div>
-            <div class="hc-m"><div class="hc-m-val" style="color:var(--lilac)">3.48×</div><div class="hc-m-lbl">Switch intent</div></div>
-          </div>
+          <div class="hc-body">
+            <div class="hc-body-left">
+              <div class="hc-metrics">
+                <div class="hc-m"><div class="hc-m-val" style="color:var(--green)">87.8%</div><div class="hc-m-lbl">Perceived impact</div></div>
+                <div class="hc-m"><div class="hc-m-val" style="color:var(--yellow)">16.3%</div><div class="hc-m-lbl">Brand trust</div></div>
+                <div class="hc-m"><div class="hc-m-val" style="color:var(--lilac)">3.48×</div><div class="hc-m-lbl">Switch intent</div></div>
+              </div>
 
-          <div class="hc-chart">
-            <div class="hc-chart-label">Minority switch multiplier · 2023–2024</div>
-            <svg class="sparkline-svg" viewBox="0 0 320 56" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="spark-area" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#B18CFF" stop-opacity="0.2"/>
-                  <stop offset="100%" stop-color="#B18CFF" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4 L320,56 L0,56 Z" fill="url(#spark-area)"/>
-              <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4" fill="none" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" filter="url(#glow-f)"/>
-              <circle cx="320" cy="4" r="3" fill="#B18CFF" filter="url(#glow-f)">
-                <animate attributeName="opacity" values="1;0.4;1" dur="1.4s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="320" cy="4" r="3" fill="none" stroke="#B18CFF" stroke-opacity=".6">
-                <animate attributeName="r" values="3;8;3" dur="1.4s" repeatCount="indefinite"/>
-                <animate attributeName="stroke-opacity" values=".6;0;.6" dur="1.4s" repeatCount="indefinite"/>
-              </circle>
-              <text x="0" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jan</text>
-              <text x="145" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jun</text>
-              <text x="300" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Dec</text>
-            </svg>
-          </div>
-
-          <div class="hc-bars">
-            <div class="hc-bar-row">
-              <div class="hc-bar-meta"><span class="hc-bar-name">Minority switch intent</span><span class="hc-bar-pct" style="color:var(--lilac)">73%</span></div>
-              <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="73"></div></div>
+              <div class="hc-verdict">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L10 6H15L11 9.5L12.5 15L8 11.5L3.5 15L5 9.5L1 6H6L8 1Z" fill="url(#g1)" opacity=".9"/></svg>
+                <div class="hc-verdict-text"><strong>D.Lab finding:</strong> Minority gamers are 3.48× more likely to switch brands for social commitment. Impact is real; brand trust is the challenge.</div>
+              </div>
             </div>
-            <div class="hc-bar-row">
-              <div class="hc-bar-meta"><span class="hc-bar-name">Non-minority switch intent</span><span class="hc-bar-pct" style="color:var(--blue)">44%</span></div>
-              <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="44"></div></div>
-            </div>
-          </div>
 
-          <div class="hc-verdict">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L10 6H15L11 9.5L12.5 15L8 11.5L3.5 15L5 9.5L1 6H6L8 1Z" fill="url(#g1)" opacity=".9"/></svg>
-            <div class="hc-verdict-text"><strong>D.Lab finding:</strong> Minority gamers are 3.48× more likely to switch brands for social commitment. Impact is real; brand trust is the challenge.</div>
+            <div class="hc-body-right">
+              <div class="hc-chart">
+                <div class="hc-chart-label">Minority switch multiplier · 2023–2024</div>
+                <svg class="sparkline-svg" viewBox="0 0 320 56" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="spark-area" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#B18CFF" stop-opacity="0.2"/>
+                      <stop offset="100%" stop-color="#B18CFF" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4 L320,56 L0,56 Z" fill="url(#spark-area)"/>
+                  <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4" fill="none" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" filter="url(#glow-f)"/>
+                  <circle cx="320" cy="4" r="3" fill="#B18CFF" filter="url(#glow-f)">
+                    <animate attributeName="opacity" values="1;0.4;1" dur="1.4s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="320" cy="4" r="3" fill="none" stroke="#B18CFF" stroke-opacity=".6">
+                    <animate attributeName="r" values="3;8;3" dur="1.4s" repeatCount="indefinite"/>
+                    <animate attributeName="stroke-opacity" values=".6;0;.6" dur="1.4s" repeatCount="indefinite"/>
+                  </circle>
+                  <text x="0" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jan</text>
+                  <text x="145" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jun</text>
+                  <text x="300" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Dec</text>
+                </svg>
+              </div>
+
+              <div class="hc-bars">
+                <div class="hc-bar-row">
+                  <div class="hc-bar-meta"><span class="hc-bar-name">Minority switch intent</span><span class="hc-bar-pct" style="color:var(--lilac)">73%</span></div>
+                  <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="73"></div></div>
+                </div>
+                <div class="hc-bar-row">
+                  <div class="hc-bar-meta"><span class="hc-bar-name">Non-minority switch intent</span><span class="hc-bar-pct" style="color:var(--blue)">44%</span></div>
+                  <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="44"></div></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <a href="/posts/affirmative-campaigns-gaming" class="featured-study-link">
+          Read the full study
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
-    </div>
-
-    <div class="scroll-ind">
-      <span class="label" style="font-size:9px">Scroll</span>
-      <div class="scroll-line"></div>
     </div>
   </section>
 
@@ -232,48 +328,6 @@ const dateLocaleMap: Record<Locale, string> = {
               <animate attributeName="opacity" values=".8;0;.8" dur="5s" repeatCount="indefinite"/>
             </circle>
 
-            <!-- Impact connections: signal pulses traveling between
-                 points on the globe, each with a fading trace line so
-                 the viewer sees WHERE the connection runs. Staggered
-                 timing + different hues read as three independent
-                 channels of cross-reference happening inside the Hub. -->
-            <g class="globe-connections">
-              <!-- Connection 1: top → right (upper-right arc) -->
-              <path id="conn-path-1" d="M 140,50 Q 210,70 230,140" fill="none" stroke="none"/>
-              <path d="M 140,50 Q 210,70 230,140" fill="none" stroke="#B18CFF" stroke-width="1" stroke-opacity="0" stroke-linecap="round">
-                <animate attributeName="stroke-opacity" values="0;0.55;0" dur="4s" keyTimes="0;0.5;1" repeatCount="indefinite" begin="0s"/>
-              </path>
-              <circle r="3" fill="#B18CFF" opacity="0" filter="url(#glow-f)">
-                <animate attributeName="opacity" values="0;1;1;0" dur="4s" keyTimes="0;0.12;0.85;1" repeatCount="indefinite" begin="0s"/>
-                <animateMotion dur="4s" repeatCount="indefinite" begin="0s">
-                  <mpath href="#conn-path-1"/>
-                </animateMotion>
-              </circle>
-
-              <!-- Connection 2: left → bottom-right (diagonal chord) -->
-              <path id="conn-path-2" d="M 50,140 L 204,204" fill="none" stroke="none"/>
-              <path d="M 50,140 L 204,204" fill="none" stroke="#4DA3FF" stroke-width="1" stroke-opacity="0" stroke-linecap="round">
-                <animate attributeName="stroke-opacity" values="0;0.5;0" dur="4s" keyTimes="0;0.5;1" repeatCount="indefinite" begin="-2s"/>
-              </path>
-              <circle r="3" fill="#4DA3FF" opacity="0" filter="url(#glow-f)">
-                <animate attributeName="opacity" values="0;1;1;0" dur="4s" keyTimes="0;0.12;0.85;1" repeatCount="indefinite" begin="-2s"/>
-                <animateMotion dur="4s" repeatCount="indefinite" begin="-2s">
-                  <mpath href="#conn-path-2"/>
-                </animateMotion>
-              </circle>
-
-              <!-- Connection 3: top-right → bottom-left (curved through center) -->
-              <path id="conn-path-3" d="M 204,76 Q 140,140 76,204" fill="none" stroke="none"/>
-              <path d="M 204,76 Q 140,140 76,204" fill="none" stroke="#00E5A0" stroke-width="1" stroke-opacity="0" stroke-linecap="round">
-                <animate attributeName="stroke-opacity" values="0;0.45;0" dur="5s" keyTimes="0;0.5;1" repeatCount="indefinite" begin="-1.5s"/>
-              </path>
-              <circle r="3" fill="#00E5A0" opacity="0" filter="url(#glow-f)">
-                <animate attributeName="opacity" values="0;1;1;0" dur="5s" keyTimes="0;0.12;0.85;1" repeatCount="indefinite" begin="-1.5s"/>
-                <animateMotion dur="5s" repeatCount="indefinite" begin="-1.5s">
-                  <mpath href="#conn-path-3"/>
-                </animateMotion>
-              </circle>
-            </g>
           </svg>
 
           <!-- 6 orbiting labels. Each uses `transform: rotate(a)
@@ -284,23 +338,23 @@ const dateLocaleMap: Record<Locale, string> = {
             <span class="brand-point-dot"></span>
             <span class="brand-point-label">Communication studies</span>
           </div>
-          <div class="brand-point" style="--delay: -5s">
+          <div class="brand-point" style="--delay: -10s">
             <span class="brand-point-dot"></span>
             <span class="brand-point-label">ESG strategy</span>
           </div>
-          <div class="brand-point" style="--delay: -10s">
+          <div class="brand-point" style="--delay: -20s">
             <span class="brand-point-dot"></span>
             <span class="brand-point-label">Venture capital</span>
           </div>
-          <div class="brand-point" style="--delay: -15s">
+          <div class="brand-point" style="--delay: -30s">
             <span class="brand-point-dot"></span>
             <span class="brand-point-label">Policy analysis</span>
           </div>
-          <div class="brand-point" style="--delay: -20s">
+          <div class="brand-point" style="--delay: -40s">
             <span class="brand-point-dot"></span>
             <span class="brand-point-label">Market foresight</span>
           </div>
-          <div class="brand-point" style="--delay: -25s">
+          <div class="brand-point" style="--delay: -50s">
             <span class="brand-point-dot"></span>
             <span class="brand-point-label">Security posture</span>
           </div>
@@ -356,11 +410,8 @@ const dateLocaleMap: Record<Locale, string> = {
           const isOriginal = post.data.researchType === 'original';
           const cat = post.data.category.toLowerCase();
           const extraTag = post.data.tags.find((tag: string) => tag.toLowerCase() !== cat);
-          const postHref = post.data.lang === defaultLocale
-            ? `/posts/${post.slug}`
-            : `/${post.data.lang}/posts/${post.slug}`;
           return (
-          <a href={postHref} class="research-card fi d1" style="position:relative">
+          <a href={`/posts/${post.slug}`} class="research-card fi d1" style="position:relative">
             <div class="research-card-img" style="padding:0;background:#0B0B0F">
               {post.data.cover && (
                 <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
@@ -388,7 +439,7 @@ const dateLocaleMap: Record<Locale, string> = {
                 )}
               </div>
               <div class="research-card-footer">
-                <span class="research-card-date">{post.data.pubDate.toLocaleDateString(dateLocaleMap[locale], { year: 'numeric', month: 'long' })}</span>
+                <span class="research-card-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
                 <span class="research-card-read">{t('research.readCta')} <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
             </div>
@@ -398,7 +449,7 @@ const dateLocaleMap: Record<Locale, string> = {
       </div>
 
       <div class="research-cta fi">
-        <a href={href('/blog')} class="btn btn-ghost">{t('research.cta')}</a>
+        <a href="/blog" class="btn btn-ghost">{t('research.cta')}</a>
       </div>
     </div>
   </section>
@@ -714,8 +765,8 @@ const dateLocaleMap: Record<Locale, string> = {
           <span class="home-colab-chip">{t('blog.colabChipReview')}</span>
         </div>
         <div class="home-colab-ctas">
-          <a href={href('/colaborar')} class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
-          <a href={href('/colaborar')} class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
+          <a href="/colaborar" class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
+          <a href="/colaborar" class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
         </div>
       </div>
     </div>
@@ -789,7 +840,7 @@ const dateLocaleMap: Record<Locale, string> = {
             </div>
           </div>
           <div class="home-about-cta">
-            <a href={href('/about')} class="btn btn-ghost">{t('about.ctaAbout')}</a>
+            <a href="/about" class="btn btn-ghost">{t('about.ctaAbout')}</a>
           </div>
         </div>
       </div>
@@ -813,19 +864,19 @@ const dateLocaleMap: Record<Locale, string> = {
           <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="url(#g1)" stroke-width="1.6"/><path d="M13 8v5l3.5 2" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
           <div class="prod-name">{t('products.intBaseName')}</div>
           <p class="prod-desc">{t('products.intBaseDesc')}</p>
-          <a href={href('/contato')} class="prod-cta">{t('products.ctaPropose')}</a>
+          <a href="/contato" class="prod-cta">{t('products.ctaPropose')}</a>
         </div>
         <div class="prod-card fi d2">
           <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><path d="M5 20L13 4l8 16H5z" stroke="url(#g1)" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.5 15h11" stroke="url(#g1)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
           <div class="prod-name">{t('products.intDeepName')}</div>
           <p class="prod-desc">{t('products.intDeepDesc')}</p>
-          <a href={href('/contato')} class="prod-cta">{t('products.ctaPropose')}</a>
+          <a href="/contato" class="prod-cta">{t('products.ctaPropose')}</a>
         </div>
         <div class="prod-card fi-r d1">
           <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><rect x="4" y="7" width="18" height="13" rx="3" stroke="url(#g-green)" stroke-width="1.5"/><path d="M9 7V5.5a4 4 0 018 0V7" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="14" r="1.5" fill="url(#g-green)"/></svg></div>
           <div class="prod-name">{t('products.intAIName')}</div>
           <p class="prod-desc">{t('products.intAIDesc')}</p>
-          <a href={href('/contato')} class="prod-cta">{t('products.ctaStart')}</a>
+          <a href="/contato" class="prod-cta">{t('products.ctaStart')}</a>
         </div>
       </div>
 
@@ -835,13 +886,13 @@ const dateLocaleMap: Record<Locale, string> = {
           <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><path d="M13 3L5 7v6c0 5.2 3.4 9.8 8 11.5 4.6-1.7 8-6.3 8-11.5V7L13 3z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 13l2 2 4.5-5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="prod-name">{t('products.cyberPentestName')}</div>
           <p class="prod-desc">{t('products.cyberPentestDesc')}</p>
-          <a href={href('/contato')} class="prod-cta">{t('products.ctaPropose')}</a>
+          <a href="/contato" class="prod-cta">{t('products.ctaPropose')}</a>
         </div>
         <div class="prod-card fi-r d1">
           <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="url(#g-green)" stroke-width="1.5"/><path d="M13 9v5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="17.5" r="1" fill="url(#g-green)"/></svg></div>
           <div class="prod-name">{t('products.cyberConsultName')}</div>
           <p class="prod-desc">{t('products.cyberConsultDesc')}</p>
-          <a href={href('/contato')} class="prod-cta">{t('products.ctaPresent')}</a>
+          <a href="/contato" class="prod-cta">{t('products.ctaPresent')}</a>
         </div>
       </div>
     </div>
@@ -859,8 +910,8 @@ const dateLocaleMap: Record<Locale, string> = {
           <h2>{t('ctaFinal.title')}<br><span class="gradient-text">{t('ctaFinal.titleAccent')}</span></h2>
           <p>{t('ctaFinal.sub')}</p>
           <div class="cta-btns">
-            <a href={href('/blog')} class="btn btn-primary">{t('ctaFinal.ctaPrimary')}</a>
-            <a href={href('/contato')} class="btn btn-ghost">{t('ctaFinal.ctaSecondary')}</a>
+            <a href="/blog" class="btn btn-primary">{t('ctaFinal.ctaPrimary')}</a>
+            <a href="/contato" class="btn btn-ghost">{t('ctaFinal.ctaSecondary')}</a>
           </div>
         </div>
       </div>

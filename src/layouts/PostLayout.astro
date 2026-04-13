@@ -1,20 +1,12 @@
 ---
 import Layout from './Layout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import type { Locale } from '../i18n/ui';
-import { defaultLocale } from '../i18n/ui';
 
 export interface Props {
   post: CollectionEntry<'blog'>;
-  locale?: Locale;
 }
 
-const { post, locale: explicitLocale } = Astro.props;
-// Posts can be reached via /posts/, /pt/posts/ or /es/posts/. Honor
-// the explicit locale prop when the route file passes one (so a PT
-// post served at /pt/posts/foo gets PT chrome) and fall back to the
-// post's frontmatter `lang` otherwise (legacy direct imports).
-const locale: Locale = explicitLocale ?? (post.data.lang as Locale ?? defaultLocale);
+const { post } = Astro.props;
 const {
   title,
   subtitle,
@@ -34,26 +26,6 @@ const {
 // Related posts: same category first, then tag overlap, excluding self. Top 2.
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 
-// Sibling translations: find other-language versions of THIS study via
-// the `translationOf` link. A translation points to the original slug;
-// the original itself has no translationOf. Resolve bidirectionally so
-// readers see "Also available in: EN/PT" regardless of which version
-// they're on.
-const translationOf = post.data.translationOf;
-const siblingTranslations = allPosts.filter((p) => {
-  if (p.slug === post.slug) return false;
-  // Current is a translation → find original + other translations
-  if (translationOf) {
-    return p.slug === translationOf || p.data.translationOf === translationOf;
-  }
-  // Current is an original → find translations of it
-  return p.data.translationOf === post.slug;
-});
-const otherLangLabel: Record<string, string> = {
-  en: 'English',
-  pt: 'Português',
-  es: 'Español',
-};
 const relatedPosts = allPosts
   .filter((p) => p.slug !== post.slug)
   .map((p) => {
@@ -76,17 +48,15 @@ if (relatedPosts.length === 0) {
 }
 
 const formatRelDate = (d: Date) =>
-  d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
 
 const isoPub = pubDate.toISOString();
 const isoMod = (updatedDate ?? pubDate).toISOString();
 const canonicalURL = new URL(`/posts/${post.slug}/`, Astro.site).toString();
 const imageURL = cover ? new URL(cover, Astro.site).toString() : new URL('/d.lab.png', Astro.site).toString();
 
-// Combine tags + keywords for SEO/GEO. Tags are visible UI; keywords are extra long-tail.
 const allKeywords = Array.from(new Set([...(keywords ?? []), ...(tags ?? [])]));
 
-// Rich Article schema with Speakable selectors and ImageObject
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -97,7 +67,7 @@ const articleLd = {
   abstract: excerpt ?? description,
   datePublished: isoPub,
   dateModified: isoMod,
-  inLanguage: 'pt-BR',
+  inLanguage: 'en',
   isAccessibleForFree: true,
   url: canonicalURL,
   mainEntityOfPage: {
@@ -140,18 +110,16 @@ const articleLd = {
     : {}),
 };
 
-// Breadcrumb so AI engines and Google understand site hierarchy
 const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'D.Lab', item: new URL('/', Astro.site).toString() },
-    { '@type': 'ListItem', position: 2, name: 'Análises Públicas', item: new URL('/blog', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Open Publications', item: new URL('/blog', Astro.site).toString() },
     { '@type': 'ListItem', position: 3, name: title, item: canonicalURL },
   ],
 };
 
-// FAQPage schema (only if frontmatter declares it)
 const faqLd =
   faq && faq.length
     ? {
@@ -171,7 +139,6 @@ const faqLd =
   description={description}
   image={cover}
   active="blog"
-  locale={locale}
   type="article"
   publishedTime={isoPub}
   modifiedTime={isoMod}
@@ -182,28 +149,10 @@ const faqLd =
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
   {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
 
-  {siblingTranslations.length > 0 && (
-    <div class="post-translations" role="note">
-      <div class="post-container">
-        <span class="post-translations-label">Also available in:</span>
-        {siblingTranslations.map((s) => {
-          const href = s.data.lang === 'en'
-            ? `/posts/${s.slug}`
-            : `/${s.data.lang}/posts/${s.slug}`;
-          return (
-            <a href={href} class="post-translations-link" hreflang={s.data.lang}>
-              {otherLangLabel[s.data.lang] ?? s.data.lang.toUpperCase()}
-            </a>
-          );
-        })}
-      </div>
-    </div>
-  )}
-
   <article itemscope itemtype="https://schema.org/Article">
     <meta itemprop="datePublished" content={isoPub} />
     <meta itemprop="dateModified" content={isoMod} />
-    <meta itemprop="inLanguage" content={post.data.lang === 'pt' ? 'pt-BR' : post.data.lang} />
+    <meta itemprop="inLanguage" content="en" />
     <slot />
   </article>
 
@@ -213,9 +162,9 @@ const faqLd =
         <div class="related-header">
           <div class="label" style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
             <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
-            Continue lendo
+            Keep reading
           </div>
-          <h2>Outras pesquisas do D.Lab</h2>
+          <h2>More research from D.Lab</h2>
         </div>
         <div class="related-grid">
           {relatedPosts.map((rp) => (
@@ -228,7 +177,7 @@ const faqLd =
               <div class="related-card-body">
                 <div class="related-card-tags">
                   {rp.data.researchType === 'original' && (
-                    <span class="related-card-tag original">Pesquisa Original</span>
+                    <span class="related-card-tag original">Original Research</span>
                   )}
                   <span class="related-card-tag">{rp.data.category}</span>
                 </div>
@@ -237,7 +186,7 @@ const faqLd =
                 <div class="related-card-footer">
                   <span class="related-card-date">{formatRelDate(rp.data.pubDate)}{rp.data.readingTime ? ` · ${rp.data.readingTime}` : ''}</span>
                   <span class="related-card-read">
-                    Ler
+                    Read
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -253,44 +202,6 @@ const faqLd =
 </Layout>
 
 <style>
-  /* Cross-language links: renders when this post has siblings in
-     other locales via frontmatter `translationOf`. Thin strip above
-     the article so readers can jump to the language they prefer
-     without leaving the page. */
-  .post-translations {
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-    background: rgba(22, 22, 32, 0.35);
-  }
-  .post-translations .post-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-  .post-translations-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--dimmed);
-  }
-  .post-translations-link {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--lilac);
-    padding: 4px 12px;
-    border-radius: 100px;
-    border: 1px solid rgba(177, 140, 255, 0.22);
-    background: rgba(177, 140, 255, 0.05);
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .post-translations-link:hover {
-    border-color: rgba(177, 140, 255, 0.45);
-    background: rgba(177, 140, 255, 0.12);
-  }
-
   .related-posts {
     padding: 72px 0 40px;
     border-top: 1px solid var(--border);
@@ -371,9 +282,6 @@ const faqLd =
     color: var(--lilac);
     border: 1px solid rgba(177, 140, 255, .12);
   }
-  /* The .original variant lives in global.css but the scoped base rule
-     above sets background/color/border at equal specificity, so we
-     escape scoping here to let the shared neon rule land unchanged. */
   :global(.related-card-tag.original) {
     background: linear-gradient(135deg, rgba(124,58,237,.22) 0%, rgba(6,182,212,.18) 100%);
     color: #fff;

@@ -8,7 +8,7 @@ export async function GET(context) {
   return rss({
     title: 'D.Lab Research',
     description:
-      'Pesquisas, análises de tendência e estudos de mercado abertos pelo D.Lab.',
+      'Open research, trend analyses, and market studies published by D.Lab Experts.',
     site: context.site,
     items: posts.map((post) => ({
       title: post.data.title,
@@ -18,6 +18,6 @@ export async function GET(context) {
       categories: [post.data.category, ...post.data.tags],
       link: `/posts/${post.slug}/`,
     })),
-    customData: '<language>pt-BR</language>',
+    customData: '<language>en</language>',
   });
 }

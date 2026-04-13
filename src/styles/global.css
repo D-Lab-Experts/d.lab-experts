@@ -36,12 +36,26 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; color-scheme: dark; }
 body {
   font-family: 'Satoshi', system-ui, -apple-system, sans-serif;
   background: var(--black); color: var(--white);
   font-size: 16px; line-height: 1.65; overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Brand-tinted text selection. Visible signal that the hub is a
+   designed environment, not a default template. */
+::selection {
+  background: rgba(177, 140, 255, 0.28);
+  color: var(--white);
+}
+
+/* Hash-anchor targets (ToC jumps, deep links, keep-reading) land
+   below the fixed nav instead of sliding under it. */
+:is(h1, h2, h3, h4, section, article)[id] {
+  scroll-margin-top: 96px;
 }
 body::after {
   content: ''; position: fixed; inset: 0;
@@ -279,63 +293,358 @@ ul, ol { list-style: none; }
   position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
   width: 800px; height: 800px; pointer-events: none; opacity: .08;
 }
+/* Side-by-side hero. Text on the left, 3D research cube on the
+   right. The H1 is intentionally restrained (max ~76px) so it breaks
+   on natural rhythm rather than fighting the cube for attention. */
 .hero-inner {
-  position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto;
-  padding: 80px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+  position: relative; z-index: 2; width: 100%; max-width: 1240px; margin: 0 auto;
+  padding: 100px 28px 80px;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center;
 }
+.hero-text { text-align: left; }
 .hero-tag {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 14px; border: 1px solid rgba(177,140,255,.18);
+  padding: 6px 14px; border: 1px solid rgba(177,140,255,.22);
   border-radius: 100px; font-size: 12px; font-weight: 500; color: var(--lilac);
-  background: rgba(177,140,255,.04); margin-bottom: 28px;
+  background: rgba(177,140,255,.05); margin-bottom: 28px;
   animation: tagPulse 3.5s ease-in-out infinite;
 }
 @keyframes tagPulse { 0%,100%{box-shadow:0 0 0 0 rgba(177,140,255,0)} 50%{box-shadow:0 0 0 6px rgba(177,140,255,.04)} }
 .tag-dot { width: 6px; height: 6px; background: var(--lilac); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-.hero-h1 { font-size: clamp(48px,6.5vw,88px); font-weight: 700; letter-spacing: -.04em; line-height: 1.15; margin-bottom: 24px; }
+.hero-h1 {
+  font-size: clamp(40px, 5.2vw, 76px);
+  font-weight: 700; letter-spacing: -.035em; line-height: 1.05;
+  margin-bottom: 24px;
+  text-wrap: balance;
+}
 .hero-h1 .hero-accent {
   background: linear-gradient(135deg, #B18CFF 0%, #7B9EFF 50%, #4DA3FF 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.hero-sub { font-size: 17px; color: var(--muted); max-width: 460px; margin-bottom: 40px; line-height: 1.7; }
+.hero-sub {
+  font-size: 17px; color: var(--muted); max-width: 520px; margin-bottom: 36px; line-height: 1.65;
+  text-wrap: pretty;
+}
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 .scroll-ind { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2; }
 .scroll-line { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--lilac), transparent); animation: spl 2s ease-in-out infinite; }
 @keyframes spl { 0%,100%{opacity:.3;transform:scaleY(.7)} 50%{opacity:1;transform:scaleY(1)} }
-.hero-stats { display: flex; gap: 32px; margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--border); }
-.hero-stat-val { font-size: 26px; font-weight: 700; letter-spacing: -.03em; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.hero-stat-lbl { font-size: 12px; color: var(--dimmed); margin-top: 2px; }
-.hero-card-wrap { display: flex; justify-content: center; align-items: center; }
+.hero-stats {
+  display: flex; gap: 36px; margin-top: 40px; padding-top: 28px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.hero-stat-val { font-size: 24px; font-weight: 700; letter-spacing: -.03em; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-stat-lbl { font-size: 12px; color: var(--dimmed); margin-top: 4px; max-width: 180px; line-height: 1.4; }
+
+/* ── 3D RESEARCH CUBE ─────────────────────────────────────────────
+   Six-face data cube on the right side of the hero. Outer cube
+   slowly rotates on Y; inner wireframe counter-rotates for depth. */
+.hero-cube-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 480px;
+  margin: 0 auto;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  /* Isolate the cube's animations so the surrounding page does not
+     repaint when the cube spins. Big scroll-perf win. */
+  contain: layout paint style;
+  will-change: transform;
+}
+.hero-cube-glow {
+  position: absolute;
+  inset: 18%;
+  /* Pre-blurred radial via background only — no `filter: blur()` on a
+     constantly animated element (filter blur recomputes every frame). */
+  background: radial-gradient(circle, rgba(177,140,255,0.22) 0%, rgba(77,163,255,0.08) 50%, transparent 75%);
+  z-index: 0;
+  animation: cubeGlowPulse 6s ease-in-out infinite;
+  will-change: opacity;
+}
+@keyframes cubeGlowPulse {
+  0%, 100% { opacity: .85; }
+  50%      { opacity: 1; }
+}
+.hero-cube-shadow {
+  position: absolute;
+  bottom: 8%;
+  left: 18%;
+  right: 18%;
+  height: 16px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, transparent 70%);
+  filter: blur(12px);
+  z-index: 0;
+}
+.hero-cube {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 280px;
+  height: 280px;
+  transform: translate(-50%, -50%) rotateX(-18deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  animation: cubeSpin 36s linear infinite;
+  z-index: 1;
+  will-change: transform;
+}
+@keyframes cubeSpin {
+  from { transform: translate(-50%, -50%) rotateX(-18deg) rotateY(0deg); }
+  to   { transform: translate(-50%, -50%) rotateX(-18deg) rotateY(360deg); }
+}
+.cube-face {
+  position: absolute;
+  inset: 0;
+  /* Slightly more opaque to compensate for dropping backdrop-filter.
+     backdrop-filter on rotating elements forces the browser to re-blur
+     the area underneath every frame — the dominant scroll-jank source. */
+  background: linear-gradient(135deg, rgba(28, 28, 40, 0.82), rgba(22, 22, 32, 0.92));
+  border: 1px solid rgba(177, 140, 255, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 40px rgba(177, 140, 255, 0.06);
+  overflow: hidden;
+}
+.cube-front  { transform: translateZ(140px); }
+.cube-back   { transform: rotateY(180deg) translateZ(140px); }
+.cube-right  { transform: rotateY(90deg)  translateZ(140px); }
+.cube-left   { transform: rotateY(-90deg) translateZ(140px); }
+.cube-top    { transform: rotateX(90deg)  translateZ(140px); }
+.cube-bottom { transform: rotateX(-90deg) translateZ(140px); }
+
+.cube-grid {
+  position: absolute;
+  inset: 14px;
+  background-image:
+    linear-gradient(rgba(177,140,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(177,140,255,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.cube-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid var(--lilac);
+  opacity: 0.7;
+}
+.cube-corner.tl { top: 10px; left: 10px;     border-top-width: 1.5px; border-left-width: 1.5px; }
+.cube-corner.tr { top: 10px; right: 10px;    border-top-width: 1.5px; border-right-width: 1.5px; }
+.cube-corner.bl { bottom: 10px; left: 10px;  border-bottom-width: 1.5px; border-left-width: 1.5px; }
+.cube-corner.br { bottom: 10px; right: 10px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+.cube-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 16px;
+}
+.cube-eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-bottom: 10px;
+}
+.cube-num {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cube-lbl {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-top: 10px;
+  opacity: 0.85;
+}
+.cube-mark {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cube-mark-sub {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dimmed);
+  margin-top: 8px;
+}
+
+/* Inner counter-rotating wireframe cube — visible through the
+   translucent outer faces, adds depth without competing for focus. */
+.hero-cube-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  animation: cubeInnerSpin 24s linear infinite;
+  will-change: transform;
+}
+@keyframes cubeInnerSpin {
+  from { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg); }
+  to   { transform: translate(-50%, -50%) rotateX(-360deg) rotateY(-360deg); }
+}
+.cube-inner-face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(77, 163, 255, 0.45);
+  background: rgba(77, 163, 255, 0.04);
+  box-shadow: 0 0 16px rgba(77, 163, 255, 0.18);
+}
+.inner-front  { transform: translateZ(70px); }
+.inner-back   { transform: rotateY(180deg) translateZ(70px); }
+.inner-right  { transform: rotateY(90deg)  translateZ(70px); }
+.inner-left   { transform: rotateY(-90deg) translateZ(70px); }
+.inner-top    { transform: rotateX(90deg)  translateZ(70px); }
+.inner-bottom { transform: rotateX(-90deg) translateZ(70px); }
+
+/* Decorative particles drifting around the cube */
+.cube-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--lilac);
+  box-shadow: 0 0 12px rgba(177, 140, 255, 0.8);
+  z-index: 2;
+  animation: cubeParticle 8s ease-in-out infinite;
+}
+.cube-particle.p1 { top: 12%; left: 8%;  background: var(--lilac); animation-delay: 0s; }
+.cube-particle.p2 { top: 22%; right: 6%; background: var(--blue);  box-shadow: 0 0 12px rgba(77, 163, 255, 0.8); animation-delay: -1.2s; }
+.cube-particle.p3 { bottom: 18%; left: 12%; background: var(--green); box-shadow: 0 0 12px rgba(0, 229, 160, 0.8); animation-delay: -2.6s; }
+.cube-particle.p4 { bottom: 8%;  right: 14%; background: var(--cyan);  box-shadow: 0 0 12px rgba(0, 212, 255, 0.8); animation-delay: -3.8s; }
+.cube-particle.p5 { top: 50%;    left: 2%;   background: var(--lilac); animation-delay: -5s; }
+.cube-particle.p6 { top: 60%;    right: 4%;  background: var(--blue); box-shadow: 0 0 12px rgba(77, 163, 255, 0.8); animation-delay: -6.4s; }
+@keyframes cubeParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+  50%      { transform: translateY(-14px) translateX(6px); opacity: 1; }
+}
+/* Toggled by IntersectionObserver in Layout.astro when the hero
+   leaves the viewport. Stops every animation under the stage so the
+   cube doesn't burn frame-budget while the user is reading below. */
+.hero-cube-stage.cube-paused .hero-cube,
+.hero-cube-stage.cube-paused .hero-cube-inner,
+.hero-cube-stage.cube-paused .hero-cube-glow,
+.hero-cube-stage.cube-paused .cube-particle {
+  animation-play-state: paused;
+}
+
+/* Featured study section — the study card moved out of the hero so
+   the headline can breathe. Sits between hero and brand-statement. */
+#featured-study {
+  position: relative;
+  padding: 80px 0 60px;
+  z-index: 1;
+  overflow: hidden;
+}
+.featured-study-header {
+  text-align: center;
+  margin: 0 auto 40px;
+  max-width: 720px;
+}
+.featured-study-header .label {
+  margin-bottom: 14px;
+}
+.featured-study-title {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.12;
+  margin-top: 14px;
+  text-wrap: balance;
+}
+.hero-card-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+.featured-study-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--lilac);
+  padding: 10px 18px;
+  border-radius: 100px;
+  border: 1px solid rgba(177, 140, 255, 0.22);
+  background: rgba(177, 140, 255, 0.05);
+  transition: gap 0.2s, border-color 0.2s, background 0.2s;
+}
+.featured-study-link:hover {
+  gap: 12px;
+  border-color: rgba(177, 140, 255, 0.45);
+  background: rgba(177, 140, 255, 0.10);
+}
 .hero-card {
   background: rgba(22,22,31,.6);
-  border: 1px solid rgba(177,140,255,.1);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border-radius: 22px; padding: 26px; width: 100%; max-width: 390px;
+  border: 1px solid rgba(177,140,255,.14);
+  border-radius: 24px;
+  padding: 36px 40px;
+  width: 100%;
   animation: float 7s ease-in-out infinite;
   box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 0 60px rgba(177,140,255,.03);
 }
 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-.hc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-.hc-icon { width: 28px; height: 28px; border-radius: 6px; object-fit: contain; margin-right: 10px; }
-.hc-title { font-size: 13px; font-weight: 600; }
-.hc-sub { font-size: 11px; color: var(--dimmed); margin-top: 2px; }
-.hc-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 18px; }
-.hc-m { background: rgba(34,34,46,.6); border: 1px solid var(--border); border-radius: 10px; padding: 11px 8px; text-align: center; }
-.hc-m-val { font-size: 15px; font-weight: 700; letter-spacing: -.02em; }
-.hc-m-lbl { font-size: 10px; color: var(--dimmed); text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
-.hc-chart { margin-bottom: 16px; }
-.hc-chart-label { font-size: 10px; color: var(--dimmed); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
-.sparkline-svg { width: 100%; height: 56px; overflow: visible; }
-.hc-bars { display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
-.hc-bar-meta { display: flex; justify-content: space-between; margin-bottom: 4px; }
-.hc-bar-name { font-size: 11px; color: var(--muted); }
-.hc-bar-pct  { font-size: 11px; font-weight: 600; }
-.hc-bar-track { height: 4px; background: rgba(34,34,46,.8); border-radius: 4px; overflow: hidden; }
+.hc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+.hc-icon { width: 32px; height: 32px; border-radius: 6px; object-fit: contain; margin-right: 12px; }
+.hc-title { font-size: 16px; font-weight: 600; }
+.hc-sub { font-size: 12px; color: var(--dimmed); margin-top: 4px; }
+/* Two-column body — left: headline metrics + verdict; right: chart
+   + bars. Below 900px the card stacks back to a single column. */
+.hc-body {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 36px;
+  align-items: start;
+}
+.hc-body-left, .hc-body-right { display: flex; flex-direction: column; gap: 22px; }
+.hc-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.hc-m { background: rgba(34,34,46,.55); border: 1px solid var(--border); border-radius: 12px; padding: 18px 10px; text-align: center; }
+.hc-m-val { font-size: 22px; font-weight: 700; letter-spacing: -.025em; }
+.hc-m-lbl { font-size: 10px; color: var(--dimmed); text-transform: uppercase; letter-spacing: .08em; margin-top: 6px; }
+.hc-chart-label { font-size: 11px; color: var(--dimmed); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
+.sparkline-svg { width: 100%; height: 96px; overflow: visible; }
+.hc-bars { display: flex; flex-direction: column; gap: 14px; }
+.hc-bar-meta { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.hc-bar-name { font-size: 12px; color: var(--muted); }
+.hc-bar-pct  { font-size: 12px; font-weight: 600; }
+.hc-bar-track { height: 6px; background: rgba(34,34,46,.8); border-radius: 4px; overflow: hidden; }
 .hc-bar-fill { height: 100%; border-radius: 4px; background: var(--grad); width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
-.hc-verdict { background: rgba(177,140,255,.05); border: 1px solid rgba(177,140,255,.12); border-radius: 10px; padding: 11px 13px; display: flex; gap: 10px; align-items: flex-start; }
-.hc-verdict-text { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.hc-verdict { background: rgba(177,140,255,.05); border: 1px solid rgba(177,140,255,.12); border-radius: 12px; padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start; }
+.hc-verdict-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
 .hc-verdict-text strong { color: var(--lilac); }
+@media (max-width: 900px) {
+  .hero-card { padding: 28px 24px; }
+  .hc-body { grid-template-columns: 1fr; gap: 28px; }
+  .hc-m-val { font-size: 19px; }
+  .sparkline-svg { height: 72px; }
+}
 
 /* ═══════════ BRAND STATEMENT ════════════════════════════════════ */
 /* Tight bottom padding because the trust-bar cards sit directly below
@@ -406,7 +715,7 @@ ul, ol { list-style: none; }
   border: 1px solid rgba(177, 140, 255, 0.2);
   white-space: nowrap;
   transform-origin: 0 0;
-  animation: brandPointOrbit 50s linear infinite;
+  animation: brandPointOrbit 60s linear infinite;
   animation-delay: var(--delay);
 }
 .brand-point-dot {
@@ -426,10 +735,10 @@ ul, ol { list-style: none; }
 }
 @keyframes brandPointOrbit {
   from {
-    transform: rotate(0deg) translateX(46%) rotate(0deg);
+    transform: rotate(0deg) translateX(58%) rotate(0deg);
   }
   to {
-    transform: rotate(360deg) translateX(46%) rotate(-360deg);
+    transform: rotate(360deg) translateX(58%) rotate(-360deg);
   }
 }
 
@@ -1070,6 +1379,12 @@ ul, ol { list-style: none; }
 }
 .about-split-content > p:last-child { margin-bottom: 0; }
 .about-split-content > p strong { color: var(--white); font-weight: 600; }
+.about-split-content > p em {
+  font-style: normal;
+  color: var(--white);
+  border-bottom: 1px dashed rgba(177,140,255,0.4);
+  padding-bottom: 1px;
+}
 
 /* Standalone left-aligned section header (used above grids) */
 .about-section-header { margin-bottom: 48px; max-width: 760px; }
@@ -1922,10 +2237,34 @@ ul, ol { list-style: none; }
 @media (max-width: 1023px) {
   .nav-links, .nav-ctas { display: none; }
   .hamburger { display: flex; }
-  .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 60px 28px 80px; }
-  /* Natural DOM order on mobile: headline first, demo card second */
-  .hero-card-wrap { order: unset; }
-  .hero-stats { gap: 20px; }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 80px 24px 60px;
+    text-align: center;
+  }
+  .hero-text { text-align: center; }
+  .hero-h1, .hero-sub { margin-left: auto; margin-right: auto; }
+  .hero-ctas { justify-content: center; }
+  .hero-stats { justify-content: center; gap: 28px; margin-top: 36px; padding-top: 24px; }
+  .hero-cube-stage { max-width: 360px; }
+  .hero-cube { width: 220px; height: 220px; }
+  .cube-front  { transform: translateZ(110px); }
+  .cube-back   { transform: rotateY(180deg) translateZ(110px); }
+  .cube-right  { transform: rotateY(90deg)  translateZ(110px); }
+  .cube-left   { transform: rotateY(-90deg) translateZ(110px); }
+  .cube-top    { transform: rotateX(90deg)  translateZ(110px); }
+  .cube-bottom { transform: rotateX(-90deg) translateZ(110px); }
+  .cube-num { font-size: 36px; }
+  .hero-cube-inner { width: 110px; height: 110px; }
+  .inner-front  { transform: translateZ(55px); }
+  .inner-back   { transform: rotateY(180deg) translateZ(55px); }
+  .inner-right  { transform: rotateY(90deg)  translateZ(55px); }
+  .inner-left   { transform: rotateY(-90deg) translateZ(55px); }
+  .inner-top    { transform: rotateX(90deg)  translateZ(55px); }
+  .inner-bottom { transform: rotateX(-90deg) translateZ(55px); }
+  #featured-study { padding: 60px 0 40px; }
+  .hero-card { padding: 24px; }
   .steps-grid { grid-template-columns: repeat(2,1fr); }
   .step:first-child  { border-radius: 18px 0 0 0; }
   .step:nth-child(2) { border-radius: 0 18px 0 0; }
@@ -2063,3 +2402,32 @@ button:focus-visible {
 }
 /* Hide default outline for mouse users who click, keep for keyboard */
 :focus:not(:focus-visible) { outline: none; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PRINT — research articles often get printed or saved as PDF.
+   Strip decorative chrome, widen the column, force readable colors.
+   ═══════════════════════════════════════════════════════════════ */
+@media print {
+  body { background: #fff; color: #111; }
+  #geo-canvas,
+  #nav,
+  #footer,
+  .related-posts,
+  .post-share,
+  .post-translations,
+  .section-glow,
+  .hero-grid,
+  .hero-light-a,
+  .hero-light-b,
+  .hero-orbital,
+  .neural-net,
+  canvas { display: none !important; }
+  a { color: #111; text-decoration: underline; }
+  article { max-width: 100%; }
+  .gradient-text, .gradient-text-green {
+    -webkit-text-fill-color: #111;
+    color: #111;
+  }
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+  figure, img, table { break-inside: avoid; page-break-inside: avoid; }
+}

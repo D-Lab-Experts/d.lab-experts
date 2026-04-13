@@ -2,32 +2,16 @@
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
 import { getCollection } from 'astro:content';
-import type { Locale } from '../../i18n/ui';
-import { defaultLocale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
+const t = useTranslations();
 
-const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-const href = (path: string) => `${localePrefix}${path}`;
-
-// Blog filters posts by locale so readers on /pt/blog see PT posts,
-// /es/blog sees ES, and / sees EN. When a locale has no posts yet we
-// still render the empty-state copy rather than show foreign-language
-// posts.
-const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === locale))
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const intelligencePosts = allPosts.filter((p) => p.data.track === 'intelligence');
 const cybersecPosts = allPosts.filter((p) => p.data.track === 'cybersec');
 
-// Within each track, posts split by research type so the grid can be
-// grouped visually: primary-data studies (our own surveys/interviews/
-// pentests) vs. desk research over third-party sources.
 type Post = (typeof allPosts)[number];
 const byType = (posts: Post[], type: 'original' | 'secondary') =>
   posts.filter((p) => p.data.researchType === type);
@@ -37,19 +21,17 @@ const intelSecondary = byType(intelligencePosts, 'secondary');
 const cyberOriginal = byType(cybersecPosts, 'original');
 const cyberSecondary = byType(cybersecPosts, 'secondary');
 
-// Sub-section copy. Kept per-track so each can explain the distinction in
-// its own vocabulary (research vs. offensive security).
 const intelGroups = [
   {
     key: 'original',
-    label: 'Pesquisas Originais',
-    sub: 'Estudos com dados coletados pelo próprio laboratório — questionários, entrevistas e análise primária.',
+    label: 'Original Research',
+    sub: 'Studies built on data the Hub collected directly — surveys, interviews, and primary analysis.',
     posts: intelOriginal,
   },
   {
     key: 'secondary',
-    label: 'Pesquisas com Dados Secundários',
-    sub: 'Análises construídas sobre bases públicas, relatórios setoriais e fontes terceiras auditáveis.',
+    label: 'Secondary-Data Research',
+    sub: 'Analyses grounded in public datasets, sector reports, and auditable third-party sources.',
     posts: intelSecondary,
   },
 ] as const;
@@ -57,23 +39,21 @@ const intelGroups = [
 const cyberGroups = [
   {
     key: 'original',
-    label: 'Cases Originais',
-    sub: 'Análises técnicas com dados coletados em engajamentos próprios — pentests, forense e instrumentação.',
+    label: 'Original Cases',
+    sub: 'Technical analyses with data collected from our own engagements — pentests, forensics, instrumentation.',
     posts: cyberOriginal,
   },
   {
     key: 'secondary',
-    label: 'Análises com Dados Secundários',
-    sub: 'Leituras construídas sobre feeds de threat intel, relatórios de fornecedores e inteligência aberta.',
+    label: 'Secondary-Data Analyses',
+    sub: 'Reads built on threat-intel feeds, vendor reports, and open-source intelligence.',
     posts: cyberSecondary,
   },
 ] as const;
 
 const formatDate = (d: Date) =>
-  d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
 
-// Editorial format labels surfaced on each card meta row. Kept in EN
-// on purpose — reinforces the Research Hub's vanguard tone.
 const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string> = {
   briefing: 'Briefing',
   report: 'Report',
@@ -86,7 +66,6 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
   title={t('pageTitles.blog')}
   description={t('pageTitles.blogDescription')}
   active="blog"
-  locale={locale}
 >
   <!-- ═══════════════ BLOG HERO ═══════════════════════════════════ -->
   <section class="blog-hero">
@@ -94,35 +73,35 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
     <NeuralNetwork color="lilac" density="medium" opacity={0.30} />
     <div class="container">
       <div class="blog-hero-inner fi">
-        <div class="section-label" style="justify-content:center"><span class="label">Pesquisas e Análises Públicas</span></div>
-        <h1 class="blog-hero-title">Pesquisas e análises <span class="gradient-text">públicas.</span></h1>
-        <p class="blog-hero-sub">Publicamos uma fração do que produzimos como prova pública do método. Inteligência aplicada e cybersegurança, sob o mesmo protocolo de rigor.</p>
+        <div class="section-label" style="justify-content:center"><span class="label">Open Research &amp; Analyses</span></div>
+        <h1 class="blog-hero-title">Open research and <span class="gradient-text">public analyses.</span></h1>
+        <p class="blog-hero-sub">We publish a fraction of what we produce as public proof of method. Applied intelligence and cybersecurity, under the same protocol of rigor.</p>
       </div>
 
       <div class="blog-track-nav fi d1">
         <a href="#inteligencia" class="blog-track-btn lilac">
           <span class="blog-track-btn-dot"></span>
-          Inteligência &amp; Pesquisa
+          Intelligence &amp; Research
           <span class="blog-track-btn-count">{intelligencePosts.length}</span>
         </a>
         <a href="#cybersec" class="blog-track-btn green">
           <span class="blog-track-btn-dot"></span>
-          Cybersegurança
+          Cybersecurity
           <span class="blog-track-btn-count">{cybersecPosts.length}</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ 01 · INTELIGÊNCIA ══════════════════════════ -->
+  <!-- ═══════════════ 01 · INTELLIGENCE ══════════════════════════ -->
   <section class="container blog-track-section" id="inteligencia">
     <div class="blog-track-header fi">
       <div class="blog-track-eyebrow lilac">
         <span class="blog-track-eyebrow-num">01</span>
-        Inteligência
+        Intelligence
       </div>
-      <h2 class="blog-track-title">Inteligência &amp; <span class="gradient-text">Pesquisa Aplicada</span></h2>
-      <p class="blog-track-sub">Decisão estratégica, mercado, concorrência, tendências, público e política. Pesquisa que fundamenta o movimento antes dele acontecer.</p>
+      <h2 class="blog-track-title">Intelligence &amp; <span class="gradient-text">Applied Research</span></h2>
+      <p class="blog-track-sub">Strategic decisions, markets, competition, trends, audiences, and policy. Research that anchors the move before it happens.</p>
     </div>
 
     {intelligencePosts.length > 0 ? (
@@ -140,8 +119,6 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
             {group.posts.map((post) => {
               const cardClass = post.data.featured ? 'blog-card-featured fi d1' : 'blog-card fi d2';
               const isOriginal = post.data.researchType === 'original';
-              // Drop any tag that duplicates the category label (case-
-              // insensitive) so the card never shows the same pill twice.
               const cat = post.data.category.toLowerCase();
               const extraTags = post.data.tags
                 .filter((t: string) => t.toLowerCase() !== cat)
@@ -155,7 +132,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
                   </div>
                   <div class="blog-card-body">
                     <div class="blog-card-tags">
-                      {isOriginal && <span class="blog-card-tag original">Pesquisa Original</span>}
+                      {isOriginal && <span class="blog-card-tag original">Original Research</span>}
                       <span class="blog-card-tag lilac">{post.data.category}</span>
                       {extraTags.map((t: string) => (
                         <span class="blog-card-tag blue">{t}</span>
@@ -176,7 +153,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
                     </div>
                     <div class="blog-card-footer">
                       <span class="blog-card-date">{formatDate(post.data.pubDate)}</span>
-                      <span class="blog-card-read">Ler pesquisa <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      <span class="blog-card-read">Read study <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     </div>
                   </div>
                 </a>
@@ -187,23 +164,23 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
       ))
     ) : (
       <div class="blog-empty fi">
-        <div class="blog-empty-title">Em preparação.</div>
-        <div class="blog-empty-text">As próximas pesquisas serão publicadas após liberação pós-NDA.</div>
+        <div class="blog-empty-title">In preparation.</div>
+        <div class="blog-empty-text">The next studies will publish once post-NDA release clears.</div>
       </div>
     )}
   </section>
 
   <div class="section-sep"></div>
 
-  <!-- ═══════════════ 02 · CYBERSEGURANÇA ════════════════════════ -->
+  <!-- ═══════════════ 02 · CYBERSECURITY ════════════════════════ -->
   <section class="container blog-track-section blog-track-cyber" id="cybersec">
     <div class="blog-track-header fi">
       <div class="blog-track-eyebrow green">
         <span class="blog-track-eyebrow-num">02</span>
-        Cybersegurança
+        Cybersecurity
       </div>
-      <h2 class="blog-track-title">Cybersegurança &amp; <span class="gradient-text-green">Operação Ofensiva</span></h2>
-      <p class="blog-track-sub">Pentest, análise de vulnerabilidades, incidentes e posturas de segurança. Cases e análises técnicas publicadas quando o NDA permite.</p>
+      <h2 class="blog-track-title">Cybersecurity &amp; <span class="gradient-text-green">Offensive Operation</span></h2>
+      <p class="blog-track-sub">Pentest, vulnerability analysis, incidents, and security posture. Technical cases and analyses published when NDA allows.</p>
     </div>
 
     {cybersecPosts.length > 0 ? (
@@ -234,7 +211,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
                   </div>
                   <div class="blog-card-body">
                     <div class="blog-card-tags">
-                      {isOriginal && <span class="blog-card-tag original green">Case Original</span>}
+                      {isOriginal && <span class="blog-card-tag original green">Original Case</span>}
                       <span class="blog-card-tag green">{post.data.category}</span>
                       {extraTags.map((t: string) => (
                         <span class="blog-card-tag cyan">{t}</span>
@@ -255,7 +232,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
                     </div>
                     <div class="blog-card-footer">
                       <span class="blog-card-date">{formatDate(post.data.pubDate)}</span>
-                      <span class="blog-card-read green">Ler análise <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      <span class="blog-card-read green">Read analysis <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     </div>
                   </div>
                 </a>
@@ -272,10 +249,10 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
             <path d="M13 18l3.5 3.5L23 14" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="blog-empty-title">Em preparação.</div>
-        <div class="blog-empty-text">Os primeiros cases públicos de cybersegurança serão publicados quando o NDA permitir. Enquanto isso, a frente segue ativa em pentest, análise de vulnerabilidades e consultoria ofensiva.</div>
+        <div class="blog-empty-title">In preparation.</div>
+        <div class="blog-empty-text">The first public cybersecurity cases will publish when NDA allows. Meanwhile, the practice remains active in pentest, vulnerability analysis, and offensive consulting.</div>
         <div class="blog-empty-cta">
-          <a href={href("/contato")} class="btn btn-ghost">Propor um escopo de segurança →</a>
+          <a href="/contato" class="btn btn-ghost">Propose a security scope →</a>
         </div>
       </div>
     )}
@@ -283,33 +260,33 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
 
   <div class="section-sep"></div>
 
-  <!-- ═══════════════ COLABORAÇÃO CIENTÍFICA ═════════════════════════ -->
+  <!-- ═══════════════ SCIENTIFIC COLLABORATION ═════════════════════════ -->
   <section class="blog-colab-cta">
     <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:520px;height:380px"></div>
     <div class="section-glow blue" style="bottom:-60px;right:-100px"></div>
     <div class="container">
       <div class="blog-colab-inner fi">
         <div class="section-label" style="justify-content:center;margin-bottom:20px">
-          <span class="label">Research Hub aberto</span>
+          <span class="label">Open Research Hub</span>
         </div>
         <h2 class="blog-colab-title">
-          Pesquisa é trabalho<br /><span class="gradient-text">coletivo.</span>
+          Research is<br /><span class="gradient-text">collective work.</span>
         </h2>
         <p class="blog-colab-sub">
-          Pesquisadores, vanguardistas, cientistas independentes — se você tem um estudo
-          pronto, um dataset relevante, ou uma pergunta que cabe numa das linhas da agenda,
-          a gente quer saber. Publicamos com coautoria explícita e raciocínio exposto, como
-          a ciência funciona.
+          Researchers, frontier thinkers, independent scientists — if you have a study ready,
+          a relevant dataset, or a question that fits one of the lines on our agenda, we want
+          to hear. We publish with explicit co-authorship and exposed reasoning, the way
+          science works.
         </p>
         <div class="blog-colab-modes">
-          <span class="blog-colab-chip">Submeter pesquisa</span>
-          <span class="blog-colab-chip">Propor co-pesquisa</span>
-          <span class="blog-colab-chip">Compartilhar dados</span>
+          <span class="blog-colab-chip">Submit research</span>
+          <span class="blog-colab-chip">Propose co-research</span>
+          <span class="blog-colab-chip">Share data</span>
           <span class="blog-colab-chip">Peer review</span>
         </div>
         <div class="blog-colab-ctas">
-          <a href={href("/colaborar")} class="btn btn-primary">Proposta de colaboração →</a>
-          <a href={href("/colaborar")} class="btn btn-ghost">Como funciona</a>
+          <a href="/colaborar" class="btn btn-primary">Collaboration proposal →</a>
+          <a href="/colaborar" class="btn btn-ghost">How it works</a>
         </div>
       </div>
     </div>

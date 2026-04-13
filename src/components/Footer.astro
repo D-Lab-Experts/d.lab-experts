@@ -1,16 +1,8 @@
 ---
-import { defaultLocale, type Locale } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
+const t = useTranslations();
 const year = new Date().getFullYear();
-
-const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-const href = (path: string) => `${localePrefix}${path}`;
 ---
 
 <footer id="footer">
@@ -28,25 +20,25 @@ const href = (path: string) => `${localePrefix}${path}`;
       <div class="foot-col">
         <h4>{t('footer.colHub')}</h4>
         <ul>
-          <li><a href={href('/blog')}>{t('footer.linkPublications')}</a></li>
-          <li><a href={href('/#segments')}>{t('footer.linkAgenda')}</a></li>
-          <li><a href={href('/colaborar')}>{t('footer.linkCollaborate')}</a></li>
+          <li><a href="/blog">{t('footer.linkPublications')}</a></li>
+          <li><a href="/#segments">{t('footer.linkAgenda')}</a></li>
+          <li><a href="/colaborar">{t('footer.linkCollaborate')}</a></li>
           <li><a href="/rss.xml">{t('footer.linkRss')}</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h4>{t('footer.colConsulting')}</h4>
         <ul>
-          <li><a href={href('/#products')}>{t('footer.linkPractices')}</a></li>
-          <li><a href={href('/#how')}>{t('footer.linkMethod')}</a></li>
-          <li><a href={href('/contato')}>{t('footer.linkTalk')}</a></li>
-          <li><a href={href('/about')}>{t('footer.linkAbout')}</a></li>
+          <li><a href="/#products">{t('footer.linkPractices')}</a></li>
+          <li><a href="/#how">{t('footer.linkMethod')}</a></li>
+          <li><a href="/contato">{t('footer.linkTalk')}</a></li>
+          <li><a href="/about">{t('footer.linkAbout')}</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h4>{t('footer.colContact')}</h4>
         <ul>
-          <li><a href={href('/contato')}>{t('footer.linkForm')}</a></li>
+          <li><a href="/contato">{t('footer.linkForm')}</a></li>
           <li><a href="mailto:contato@dlabexperts.com">{t('footer.linkEmail')}</a></li>
           <li><a href="https://www.linkedin.com/company/d-lab-intelligence" target="_blank" rel="noopener noreferrer">{t('footer.linkLinkedin')}</a></li>
         </ul>
