@@ -408,16 +408,25 @@ const alternateUrls = {
   function renderActions(actions) {
     if (!actionsList) return;
     actionsList.innerHTML = '';
-    actions.forEach((action) => {
+    actions.forEach((action, idx) => {
       const card = document.createElement('a');
       card.href = action.url;
       card.className = 'diag-action';
+      const step = String(idx + 1).padStart(2, '0');
       card.innerHTML = `
-        <div class="diag-action-body">
-          <div class="diag-action-title">${action.title}</div>
-          <div class="diag-action-desc">${action.desc}</div>
+        <div class="diag-action-head">
+          <span class="diag-action-step">${step}</span>
+          <div class="diag-action-head-text">
+            <h4 class="diag-action-title">${action.title}</h4>
+          </div>
         </div>
-        <div class="diag-action-cta">${action.cta}</div>
+        <p class="diag-action-desc">${action.desc}</p>
+        <div class="diag-action-foot">
+          <span class="diag-action-cta">${action.cta}</span>
+          <span class="diag-action-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
       `;
       actionsList.appendChild(card);
     });
@@ -946,10 +955,13 @@ const alternateUrls = {
     color: rgba(255, 255, 255, 0.6);
   }
 
-  /* Actions */
+  /* Actions — stacked cards with numbered step, description, and a
+     divider-separated CTA footer. Color-coded per action position
+     (lilac for first, green for second) so the reader sees them as a
+     sequence, not a list. */
   .diag-actions {
-    margin-top: 22px;
-    padding-top: 22px;
+    margin-top: 24px;
+    padding-top: 24px;
     border-top: 1px solid var(--border);
   }
   .diag-actions-label {
@@ -958,24 +970,31 @@ const alternateUrls = {
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--dimmed);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .diag-action {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 14px 16px 14px 18px;
-    background: rgba(14, 14, 22, 0.6);
+    display: block;
+    padding: 18px 20px 0;
+    background: rgba(14, 14, 22, 0.65);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--lilac);
-    border-radius: 12px;
-    margin-bottom: 10px;
+    border-radius: 14px;
+    margin-bottom: 12px;
     color: inherit;
     text-decoration: none;
-    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
   }
-  .diag-action:nth-child(2) { border-left-color: var(--green); }
+  /* Colored rail on the left — grows slightly on hover */
+  .diag-action::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--lilac);
+    transition: width 0.25s;
+  }
+  .diag-action:nth-child(2)::before { background: var(--green); }
   .diag-action:last-child { margin-bottom: 0; }
   .diag-action:hover {
     border-color: rgba(177, 140, 255, 0.4);
@@ -986,29 +1005,92 @@ const alternateUrls = {
     border-color: rgba(0, 229, 160, 0.4);
     background: rgba(0, 229, 160, 0.05);
   }
-  .diag-action-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 5px;
-    letter-spacing: -0.005em;
+  .diag-action:hover::before { width: 4px; }
+
+  /* Head row — numbered step + title */
+  .diag-action-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
   }
-  .diag-action-desc {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.55;
-  }
-  .diag-action-cta {
+  .diag-action-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(177, 140, 255, 0.14);
+    color: var(--lilac);
+    border: 1px solid rgba(177, 140, 255, 0.3);
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+  .diag-action:nth-child(2) .diag-action-step {
+    background: rgba(0, 229, 160, 0.14);
+    color: var(--green);
+    border-color: rgba(0, 229, 160, 0.3);
+  }
+  .diag-action-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+  }
+  .diag-action-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  /* Foot — divider + CTA pill + arrow */
+  .diag-action-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .diag-action-cta {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--lilac);
-    white-space: nowrap;
-    flex-shrink: 0;
-    align-self: center;
   }
   .diag-action:nth-child(2) .diag-action-cta { color: var(--green); }
+  .diag-action-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(177, 140, 255, 0.3);
+    background: rgba(177, 140, 255, 0.08);
+    color: var(--lilac);
+    transition: transform 0.25s, background 0.25s, border-color 0.25s;
+  }
+  .diag-action:nth-child(2) .diag-action-arrow {
+    border-color: rgba(0, 229, 160, 0.3);
+    background: rgba(0, 229, 160, 0.08);
+    color: var(--green);
+  }
+  .diag-action:hover .diag-action-arrow {
+    transform: translateX(3px);
+    background: rgba(177, 140, 255, 0.2);
+    border-color: rgba(177, 140, 255, 0.55);
+  }
+  .diag-action:nth-child(2):hover .diag-action-arrow {
+    background: rgba(0, 229, 160, 0.18);
+    border-color: rgba(0, 229, 160, 0.55);
+  }
 
   /* ═══════════ METHODOLOGY ════════════════════════════════════ */
   .diag-methodology {
