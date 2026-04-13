@@ -108,35 +108,6 @@ const es: Translation = {
     sourcePrimary: 'Investigación primaria: encuestas, entrevistas',
   },
 
-  productBullets: {
-    intBase1: 'Investigación de mercado, competencia o público objetivo',
-    intBase2: 'Mapeo de competidores directos e indirectos',
-    intBase3: 'Dimensionamiento de oportunidad con datos reales',
-    intBase4: 'Score de viabilidad con metodología D.Lab',
-    intBase5: 'Documento estructurado con razonamiento expuesto',
-    intDeep1: 'Todo lo del Base, más:',
-    intDeep2: 'Análisis temporal, estacionalidad y tendencias',
-    intDeep3: 'Cruce de múltiples fuentes de datos',
-    intDeep4: 'Comparativo entre hasta 3 escenarios o competidores',
-    intDeep5: 'Perfil de público y estimación de demanda latente',
-    intDeep6: 'Sesión de interpretación con el analista (60min)',
-    intAI1: 'Diagnóstico técnico de la operación',
-    intAI2: 'Implementación de agentes de IA',
-    intAI3: 'Automatización de procesos críticos',
-    intAI4: 'Flujos inteligentes e integración de sistemas',
-    intAI5: 'Seguimiento y evolución continua',
-    cyberPentest1: 'Pentest en aplicaciones web y móviles',
-    cyberPentest2: 'Análisis de infraestructura y red',
-    cyberPentest3: 'Prueba de ingeniería social',
-    cyberPentest4: 'Reporte con clasificación CVSS',
-    cyberPentest5: 'Plan de remediación priorizado',
-    cyberConsult1: 'Diagnóstico de postura de seguridad',
-    cyberConsult2: 'Políticas de seguridad y compliance',
-    cyberConsult3: 'Alineación con LGPD, ISO 27001, NIST',
-    cyberConsult4: 'Monitoreo y respuesta a incidentes',
-    cyberConsult5: 'Capacitación del equipo',
-  },
-
   segments: {
     eyebrow: 'Agenda de Investigación',
     title: 'Seis líneas de investigación.',
@@ -359,7 +330,11 @@ const es: Translation = {
 
   contributors: {
     label: 'Contribuidores del Hub',
-    sub: 'Investigadores y profesionales que dan forma a nuestras publicaciones abiertas y alianzas de consultoría.',
+  },
+
+  translationNotice: {
+    heading: 'Traducción en proceso',
+    message: 'Esta página se muestra en inglés mientras se prepara la versión localizada.',
   },
 };
 

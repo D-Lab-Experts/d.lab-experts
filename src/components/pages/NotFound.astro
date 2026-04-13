@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import TranslationNotice from '../TranslationNotice.astro';
 import type { Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
@@ -15,6 +16,7 @@ const t = useTranslations(locale);
   description={t('pageTitles.notFoundDescription')}
   locale={locale}
 >
+  <TranslationNotice locale={locale} />
   <section class="nf-hero">
     <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:500px;height:400px"></div>
     <div class="section-glow blue" style="bottom:0;right:-80px"></div>

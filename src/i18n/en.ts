@@ -105,35 +105,6 @@ const en = {
     sourcePrimary: 'Primary research: surveys, interviews',
   },
 
-  productBullets: {
-    intBase1: 'Market, competitive or audience research',
-    intBase2: 'Direct and indirect competitor mapping',
-    intBase3: 'Opportunity sizing with real data',
-    intBase4: 'Feasibility score with D.Lab methodology',
-    intBase5: 'Structured document with exposed reasoning',
-    intDeep1: 'Everything in Base, plus:',
-    intDeep2: 'Time-series analysis, seasonality and trends',
-    intDeep3: 'Cross-referencing across multiple data sources',
-    intDeep4: 'Comparison of up to 3 scenarios or competitors',
-    intDeep5: 'Audience profile and latent-demand estimate',
-    intDeep6: 'Interpretation session with the analyst (60min)',
-    intAI1: 'Operational technical diagnostic',
-    intAI2: 'AI agent deployment',
-    intAI3: 'Automation of critical processes',
-    intAI4: 'Intelligent flows and system integration',
-    intAI5: 'Ongoing follow-through and evolution',
-    cyberPentest1: 'Web and mobile application pentest',
-    cyberPentest2: 'Infrastructure and network analysis',
-    cyberPentest3: 'Social engineering testing',
-    cyberPentest4: 'Report with CVSS classification',
-    cyberPentest5: 'Prioritized remediation plan',
-    cyberConsult1: 'Security posture diagnostic',
-    cyberConsult2: 'Security policies and compliance',
-    cyberConsult3: 'LGPD, ISO 27001, NIST alignment',
-    cyberConsult4: 'Monitoring and incident response',
-    cyberConsult5: 'Team training',
-  },
-
   segments: {
     eyebrow: 'Research Agenda',
     title: 'Six lines of investigation.',
@@ -356,7 +327,14 @@ const en = {
 
   contributors: {
     label: 'Contributors to the Hub',
-    sub: 'Researchers and practitioners who shape our open work and consulting partnerships.',
+  },
+
+  // Soft notice rendered above /pt/* and /es/* pages whose body has
+  // not been translated yet. EN visitors never see it (the component
+  // self-hides when locale === defaultLocale).
+  translationNotice: {
+    heading: 'Translation in progress',
+    message: 'This page is shown in English while the localized version is being prepared.',
   },
 } as const;
 

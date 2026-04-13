@@ -106,35 +106,6 @@ const pt: Translation = {
     sourcePrimary: 'Pesquisa primária: surveys, entrevistas',
   },
 
-  productBullets: {
-    intBase1: 'Pesquisa de mercado, concorrência ou público-alvo',
-    intBase2: 'Mapeamento de competidores diretos e indiretos',
-    intBase3: 'Dimensionamento de oportunidade com dados reais',
-    intBase4: 'Score de viabilidade com metodologia D.Lab',
-    intBase5: 'Documento estruturado com recomendação exposta',
-    intDeep1: 'Tudo do Base, mais:',
-    intDeep2: 'Análise temporal, sazonalidade e tendências',
-    intDeep3: 'Cruzamento de múltiplas fontes de dados',
-    intDeep4: 'Comparativo entre até 3 cenários ou competidores',
-    intDeep5: 'Perfil de público e estimativa de demanda latente',
-    intDeep6: 'Sessão de interpretação com o analista (60min)',
-    intAI1: 'Diagnóstico técnico da operação',
-    intAI2: 'Implementação de agentes de IA',
-    intAI3: 'Automação de processos críticos',
-    intAI4: 'Fluxos inteligentes e integração de sistemas',
-    intAI5: 'Acompanhamento e evolução contínua',
-    cyberPentest1: 'Pentest em aplicações web e mobile',
-    cyberPentest2: 'Análise de infraestrutura e rede',
-    cyberPentest3: 'Teste de engenharia social',
-    cyberPentest4: 'Relatório com classificação CVSS',
-    cyberPentest5: 'Plano de remediação priorizado',
-    cyberConsult1: 'Diagnóstico de postura de segurança',
-    cyberConsult2: 'Políticas de segurança e compliance',
-    cyberConsult3: 'Adequação a LGPD, ISO 27001, NIST',
-    cyberConsult4: 'Monitoramento e resposta a incidentes',
-    cyberConsult5: 'Treinamento de equipe',
-  },
-
   segments: {
     eyebrow: 'Agenda de Pesquisa',
     title: 'Seis linhas de investigação.',
@@ -357,7 +328,11 @@ const pt: Translation = {
 
   contributors: {
     label: 'Contribuidores do Hub',
-    sub: 'Pesquisadores e profissionais que moldam as nossas publicações abertas e parcerias de consultoria.',
+  },
+
+  translationNotice: {
+    heading: 'Tradução em andamento',
+    message: 'Esta página está exibida em inglês enquanto a versão em português é preparada.',
   },
 };
 
