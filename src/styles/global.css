@@ -2355,28 +2355,6 @@ ul, ol { list-style: none; }
    ACCESSIBILITY
    ═══════════════════════════════════════════════════════════════ */
 
-/* Respect user motion preference. Kills all decorative animations. */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .001ms !important;
-    scroll-behavior: auto !important;
-  }
-  #geo-canvas,
-  .neural-net,
-  .atom-orbit-wrap,
-  .atom-glow,
-  .atom-nucleus,
-  .hero-grid,
-  .brand-wave-bg,
-  .hero-orbital {
-    display: none !important;
-  }
-  /* Force entrance animations into final state */
-  .fi, .fi-l, .fi-r, .fi-s { opacity: 1 !important; transform: none !important; }
-}
-
 /* Keyboard-visible focus ring on interactive elements */
 .btn:focus-visible,
 .prod-cta:focus-visible,

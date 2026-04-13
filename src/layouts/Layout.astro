@@ -55,12 +55,8 @@ const {
     <Footer />
 
     <script>
-      // ══ REDUCED MOTION: skip all decorative animations ══════════════════
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
       // ══ GEOMETRIC INTELLIGENCE CANVAS ══════════════════════════════════
       (function () {
-        if (reducedMotion) return;
         const canvas = document.getElementById('geo-canvas') as HTMLCanvasElement | null;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
@@ -327,7 +323,6 @@ const {
 
       // ══ SECTION FLOATING PARTICLES ════════════════════════════════════
       (function () {
-        if (reducedMotion) return;
         const colors: Record<string, { r: number; g: number; b: number }> = {
           lilac: { r: 177, g: 140, b: 255 },
           blue:  { r: 77,  g: 163, b: 255 },
