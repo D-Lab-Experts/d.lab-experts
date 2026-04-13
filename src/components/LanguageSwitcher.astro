@@ -4,24 +4,34 @@ import { getLocalizedPath, useTranslations } from '../i18n/utils';
 
 interface Props {
   locale: Locale;
+  /**
+   * Optional explicit cross-locale URL map. Pages where the target URL
+   * cannot be derived by simple prefix swap (e.g., posts whose slug
+   * differs per language) can pass this from PostLayout so the switch
+   * lands on the real sibling instead of a 404.
+   */
+  alternateUrls?: Partial<Record<Locale, string>>;
 }
-const { locale } = Astro.props;
+const { locale, alternateUrls } = Astro.props;
 const t = useTranslations(locale);
 const currentPath = Astro.url.pathname;
 ---
 
 <div class="lang-switcher" role="group" aria-label={t('langSwitcher.label')}>
-  {locales.map((loc) => (
-    <a
-      href={getLocalizedPath(currentPath, loc)}
-      class:list={['lang-switcher-item', { active: loc === locale }]}
-      aria-current={loc === locale ? 'true' : undefined}
-      title={localeNames[loc]}
-      hreflang={loc}
-    >
-      {localeShort[loc]}
-    </a>
-  ))}
+  {locales.map((loc) => {
+    const href = alternateUrls?.[loc] ?? getLocalizedPath(currentPath, loc);
+    return (
+      <a
+        href={href}
+        class:list={['lang-switcher-item', { active: loc === locale }]}
+        aria-current={loc === locale ? 'true' : undefined}
+        title={localeNames[loc]}
+        hreflang={loc}
+      >
+        {localeShort[loc]}
+      </a>
+    );
+  })}
 </div>
 
 <style>

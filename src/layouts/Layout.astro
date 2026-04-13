@@ -20,6 +20,13 @@ export interface Props {
   modifiedTime?: string;
   author?: string;
   tags?: string[];
+  /**
+   * Optional explicit per-locale URLs for this page. Passed by post
+   * pages where the PT and EN slugs differ (e.g., /posts/deciding-in-
+   * the-dark ↔ /pt/posts/decisao-no-escuro). Flows into hreflang
+   * alternates and the LanguageSwitcher.
+   */
+  alternateUrls?: Partial<Record<Locale, string>>;
 }
 
 const {
@@ -33,6 +40,7 @@ const {
   modifiedTime,
   author,
   tags,
+  alternateUrls,
 } = Astro.props;
 
 // Pages pass `locale` explicitly; fall back to URL-based detection
@@ -53,12 +61,13 @@ const locale: Locale = explicitLocale ?? getLocaleFromUrl(Astro.url);
       modifiedTime={modifiedTime}
       author={author}
       tags={tags}
+      alternateUrls={alternateUrls}
     />
   </head>
   <body>
     <canvas id="geo-canvas"></canvas>
     <SvgDefs />
-    <Header active={active} locale={locale} />
+    <Header active={active} locale={locale} alternateUrls={alternateUrls} />
     <slot />
     <Footer locale={locale} />
 

@@ -46,6 +46,29 @@ const otherLangLabel: Record<string, string> = {
   pt: 'Português',
 };
 
+// Build alternate-locale URLs for the header switcher + hreflang tags.
+// Posts have different slugs per language, so a naive /pt/ ↔ / prefix
+// swap produces 404s. Look up the sibling post via translationOf; fall
+// back to the locale's blog index if no sibling exists yet.
+const alternateUrls: Partial<Record<Locale, string>> = {};
+for (const loc of ['en', 'pt'] as const) {
+  if (loc === post.data.lang) {
+    const selfPrefix = loc === 'en' ? '' : `/${loc}`;
+    alternateUrls[loc] = `${selfPrefix}/posts/${post.slug}`;
+    continue;
+  }
+  const sibling = allPosts.find((p) => {
+    if (p.data.lang !== loc) return false;
+    // same canonical study — p is an sibling of this post in loc
+    if (post.data.translationOf && p.slug === post.data.translationOf) return true;
+    if (post.data.translationOf && p.data.translationOf === post.data.translationOf) return true;
+    if (p.data.translationOf === post.slug) return true;
+    return false;
+  });
+  const prefix = loc === 'en' ? '' : `/${loc}`;
+  alternateUrls[loc] = sibling ? `${prefix}/posts/${sibling.slug}` : `${prefix}/blog`;
+}
+
 const relatedPosts = allPosts
   .filter((p) => p.slug !== post.slug)
   .map((p) => {
@@ -176,6 +199,7 @@ const originalResearchLabel = locale === 'pt' ? 'Pesquisa Original' : 'Original 
   modifiedTime={isoMod}
   author={author}
   tags={allKeywords}
+  alternateUrls={alternateUrls}
 >
   <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
