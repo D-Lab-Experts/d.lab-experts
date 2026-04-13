@@ -33,61 +33,52 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
       <div class="colab-hero-inner fi">
         <div class="colab-eyebrow">
           <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
-          Open collaboration
+          {t('colab.pageEyebrow')}
         </div>
         <h1 class="colab-title">
-          Research is a<br /><span class="gradient-text">collective effort.</span>
+          {t('colab.pageTitleLead')}<br /><span class="gradient-text">{t('colab.pageTitleAccent')}</span>
         </h1>
-        <p class="colab-lead">
-          The D.Lab Experts Research Hub runs in open mode. We publish our own research and we
-          open space for researchers, independent scientists and frontier thinkers to bring
-          studies, data, methodology, or to propose joint investigation along the lines of our
-          agenda. Co-authorship, explicit credit, exposed methodology.
-        </p>
-        <p class="colab-lead" style="margin-top:18px">
-          The same posture extends to consulting. When a client engagement needs expertise we
-          don't own, we bring in partners with explicit credit, never anonymously. Private
-          company, collaborative culture.
-        </p>
+        <p class="colab-lead">{t('colab.pageLead1')}</p>
+        <p class="colab-lead" style="margin-top:18px">{t('colab.pageLead2')}</p>
       </div>
     </div>
   </section>
 
   <div class="section-sep"></div>
 
-  <!-- ═══════════════ MODOS DE COLABORAÇÃO ═══════════════════════════ -->
+  <!-- ═══════════════ COLLABORATION MODES ═══════════════════════════ -->
   <section class="colab-section">
     <div class="section-glow lilac" style="top:20%;right:-120px"></div>
     <div class="container">
       <div class="colab-modes-head fi">
-        <div class="section-label" style="justify-content:center"><span class="label">How to collaborate</span></div>
-        <h2 class="section-title">Four modes.<br /><span class="gradient-text">One standard of rigor.</span></h2>
-        <p class="section-sub" style="margin:0 auto">Pick the one that fits your research moment. Every mode goes through the same methodological review before becoming a public publication.</p>
+        <div class="section-label" style="justify-content:center"><span class="label">{t('colab.modesLabel')}</span></div>
+        <h2 class="section-title">{t('colab.modesTitleLead')}<br /><span class="gradient-text">{t('colab.modesTitleAccent')}</span></h2>
+        <p class="section-sub" style="margin:0 auto">{t('colab.modesSub')}</p>
       </div>
 
       <div class="colab-modes-grid">
         <div class="colab-mode fi d1">
           <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><path d="M6 4h12a2 2 0 0 1 2 2v16l-5-3-3 2-3-2-5 3V6a2 2 0 0 1 2-2z" stroke="url(#g1)" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 9h8M9 13h8M9 17h5" stroke="url(#g1)" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <div class="colab-mode-name">Submit existing research</div>
-          <p class="colab-mode-desc">You've already run the study and want stable audience and attribution. We run methodological review and, if accepted, publish with explicit co-authorship and exposed reasoning.</p>
+          <div class="colab-mode-name">{t('colab.modeSubmitTitle')}</div>
+          <p class="colab-mode-desc">{t('colab.modeSubmitDesc')}</p>
         </div>
 
         <div class="colab-mode fi d2">
           <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><circle cx="9" cy="10" r="3.5" stroke="url(#g-green)" stroke-width="1.5"/><circle cx="17" cy="10" r="3.5" stroke="url(#g-green)" stroke-width="1.5"/><path d="M4 21c.8-3.2 2.9-5 5-5s4.2 1.8 5 5M13 21c.8-3.2 2.9-5 5-5s4.2 1.8 5 5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="colab-mode-name">Propose co-research</div>
-          <p class="colab-mode-desc">One of our agenda lines (markets, tech foresight, cyber, politics, competition or decision) interests you and you want to build the study together. Scope, timeline and work split negotiated up front.</p>
+          <div class="colab-mode-name">{t('colab.modeCoTitle')}</div>
+          <p class="colab-mode-desc">{t('colab.modeCoDesc')}</p>
         </div>
 
         <div class="colab-mode fi d3">
           <div class="icon-wrap lg blue"><svg viewBox="0 0 26 26" fill="none"><rect x="4" y="5" width="18" height="16" rx="2" stroke="url(#g2)" stroke-width="1.5"/><path d="M4 10h18M9 14h8M9 17h5" stroke="url(#g2)" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <div class="colab-mode-name">Share data or methodology</div>
-          <p class="colab-mode-desc">Novel datasets, instrumented techniques, analysis frameworks. We use them with credit, document provenance and, when it fits, return value through joint publication.</p>
+          <div class="colab-mode-name">{t('colab.modeDataTitle')}</div>
+          <p class="colab-mode-desc">{t('colab.modeDataDesc')}</p>
         </div>
 
         <div class="colab-mode fi d4">
           <div class="icon-wrap lg violet"><svg viewBox="0 0 26 26" fill="none"><path d="M13 3L5 7v6c0 5 3.3 9.3 8 10.5 4.7-1.2 8-5.5 8-10.5V7L13 3z" stroke="url(#g-violet)" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 13l2 2 4.5-5" stroke="url(#g-violet)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="colab-mode-name">Serve as a peer reviewer</div>
-          <p class="colab-mode-desc">You have depth in one of the agenda lines and want to contribute technical review of research before publication. Nominal attribution optional, methodology always traceable.</p>
+          <div class="colab-mode-name">{t('colab.modePeerTitle')}</div>
+          <p class="colab-mode-desc">{t('colab.modePeerDesc')}</p>
         </div>
       </div>
     </div>
@@ -95,35 +86,35 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
 
   <div class="section-sep"></div>
 
-  <!-- ═══════════════ COMO FUNCIONA ═══════════════════════════════════ -->
+  <!-- ═══════════════ PROCESS ═══════════════════════════════════ -->
   <section class="colab-section">
     <div class="section-glow blue" style="top:40%;left:-100px"></div>
     <div class="container">
       <div class="colab-modes-head fi">
-        <div class="section-label" style="justify-content:center"><span class="label">Process</span></div>
-        <h2 class="section-title">From proposal<br /><span class="gradient-text">to publication.</span></h2>
+        <div class="section-label" style="justify-content:center"><span class="label">{t('colab.processLabel')}</span></div>
+        <h2 class="section-title">{t('colab.processTitleLead')}<br /><span class="gradient-text">{t('colab.processTitleAccent')}</span></h2>
       </div>
 
       <div class="colab-steps fi d1">
         <div class="colab-step">
           <div class="colab-step-num">01</div>
-          <div class="colab-step-title">Proposal</div>
-          <p class="colab-step-desc">You describe the context, the collaboration mode and, if it already exists, the current material.</p>
+          <div class="colab-step-title">{t('colab.step1Name')}</div>
+          <p class="colab-step-desc">{t('colab.step1DescFull')}</p>
         </div>
         <div class="colab-step">
           <div class="colab-step-num">02</div>
-          <div class="colab-step-title">Triage</div>
-          <p class="colab-step-desc">We respond within 3 business days: agenda fit, methodology questions, next steps.</p>
+          <div class="colab-step-title">{t('colab.step2Name')}</div>
+          <p class="colab-step-desc">{t('colab.step2DescFull')}</p>
         </div>
         <div class="colab-step">
           <div class="colab-step-num">03</div>
-          <div class="colab-step-title">Alignment</div>
-          <p class="colab-step-desc">A 45-minute call to align scope, authorship, attribution, timeline and what is public versus reserved.</p>
+          <div class="colab-step-title">{t('colab.step3Name')}</div>
+          <p class="colab-step-desc">{t('colab.step3DescFull')}</p>
         </div>
         <div class="colab-step">
           <div class="colab-step-num">04</div>
-          <div class="colab-step-title">Publication</div>
-          <p class="colab-step-desc">Methodological review, joint editing, and public release on the Research Hub with explicit credit and DOI-ready.</p>
+          <div class="colab-step-title">{t('colab.step4Name')}</div>
+          <p class="colab-step-desc">{t('colab.step4DescFull')}</p>
         </div>
       </div>
     </div>
@@ -136,9 +127,9 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
     <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%)"></div>
     <div class="container">
       <div class="colab-form-head fi">
-        <div class="section-label" style="justify-content:center"><span class="label">Proposal</span></div>
-        <h2 class="section-title">Propose a collaboration</h2>
-        <p class="section-sub" style="margin:0 auto">The more context you bring, the faster we respond. But even a raw idea gets triaged.</p>
+        <div class="section-label" style="justify-content:center"><span class="label">{t('colab.formLabel')}</span></div>
+        <h2 class="section-title">{t('colab.formTitle')}</h2>
+        <p class="section-sub" style="margin:0 auto">{t('colab.formSub')}</p>
       </div>
 
       <div class="colab-form-wrap fi d1">
@@ -148,98 +139,96 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
           method="POST"
           data-track="collaboration_form_submit"
         >
-          <input type="hidden" name="_subject" value="[D.Lab Experts] New collaboration proposal" />
+          <input type="hidden" name="_subject" value={t('colab.formSubject')} />
           <!-- Honeypot anti-spam (Formspree ignores submissions that fill it) -->
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
           <div class="cf-row">
             <label class="cf-field">
-              <span class="cf-label">Full name</span>
-              <input type="text" name="name" required placeholder="Your name" autocomplete="name" />
+              <span class="cf-label">{t('colab.fieldName')}</span>
+              <input type="text" name="name" required placeholder={t('colab.fieldNamePh')} autocomplete="name" />
             </label>
             <label class="cf-field">
-              <span class="cf-label">Email</span>
-              <input type="email" name="email" required placeholder="you@example.com" autocomplete="email" />
-            </label>
-          </div>
-
-          <div class="cf-row">
-            <label class="cf-field">
-              <span class="cf-label">Affiliation or institution</span>
-              <input type="text" name="affiliation" placeholder="University, company or 'independent'" autocomplete="organization" />
-            </label>
-            <label class="cf-field">
-              <span class="cf-label">Field of work</span>
-              <input type="text" name="field" placeholder="e.g., economist, researcher, founder" />
+              <span class="cf-label">{t('colab.fieldEmail')}</span>
+              <input type="email" name="email" required placeholder={t('colab.fieldEmailPh')} autocomplete="email" />
             </label>
           </div>
 
           <div class="cf-row">
             <label class="cf-field">
-              <span class="cf-label">Collaboration mode</span>
+              <span class="cf-label">{t('colab.fieldAffiliation')}</span>
+              <input type="text" name="affiliation" placeholder={t('colab.fieldAffiliationPh')} autocomplete="organization" />
+            </label>
+            <label class="cf-field">
+              <span class="cf-label">{t('colab.fieldFieldWork')}</span>
+              <input type="text" name="field" placeholder={t('colab.fieldFieldWorkPh')} />
+            </label>
+          </div>
+
+          <div class="cf-row">
+            <label class="cf-field">
+              <span class="cf-label">{t('colab.fieldMode')}</span>
               <select name="mode" required>
-                <option value="">Select…</option>
-                <option>Submit existing research</option>
-                <option>Propose co-research</option>
-                <option>Share data or methodology</option>
-                <option>Serve as a peer reviewer</option>
-                <option>Discuss an idea</option>
+                <option value="">{t('contato.fieldSelectPlaceholder')}</option>
+                <option>{t('colab.modeOptSubmit')}</option>
+                <option>{t('colab.modeOptCo')}</option>
+                <option>{t('colab.modeOptData')}</option>
+                <option>{t('colab.modeOptPeer')}</option>
+                <option>{t('colab.modeOptIdea')}</option>
               </select>
             </label>
             <label class="cf-field">
-              <span class="cf-label">Research agenda line</span>
+              <span class="cf-label">{t('colab.fieldLine')}</span>
               <select name="line" required>
-                <option value="">Select…</option>
-                <option>Markets &amp; Behavior</option>
-                <option>Strategy &amp; Decision</option>
-                <option>Politics, Opinion &amp; Regulation</option>
-                <option>Tech Foresight &amp; AI</option>
-                <option>Competitive Intelligence</option>
-                <option>Cyber &amp; Modern Surfaces</option>
-                <option>Other (describe in the proposal)</option>
+                <option value="">{t('contato.fieldSelectPlaceholder')}</option>
+                <option>{t('colab.lineMarkets')}</option>
+                <option>{t('colab.lineStrategy')}</option>
+                <option>{t('colab.linePolitics')}</option>
+                <option>{t('colab.lineTech')}</option>
+                <option>{t('colab.lineCompetitive')}</option>
+                <option>{t('colab.lineCyber')}</option>
+                <option>{t('colab.lineOther')}</option>
               </select>
             </label>
           </div>
 
           <label class="cf-field">
-            <span class="cf-label">Proposal</span>
+            <span class="cf-label">{t('colab.fieldProposal')}</span>
             <textarea
               name="proposal"
               rows="6"
               required
-              placeholder="Describe what you're proposing: research question, hypothesis, current state of the work, data or methodology involved, what you expect from the collaboration."
+              placeholder={t('colab.fieldProposalPh')}
             ></textarea>
           </label>
 
           <label class="cf-field">
-            <span class="cf-label">Links (optional)</span>
-            <input type="text" name="links" placeholder="Portfolio, prior articles, CV, ORCID, repository — anything that adds context" />
+            <span class="cf-label">{t('colab.fieldLinks')}</span>
+            <input type="text" name="links" placeholder={t('colab.fieldLinksPh')} />
           </label>
 
           <div class="cf-consent">
             <label>
               <input type="checkbox" name="consent" required />
-              <span>I authorize D.Lab Experts to respond to this proposal and, if there's a fit, start a conversation about collaboration.</span>
+              <span>{t('colab.consentFull')}</span>
             </label>
           </div>
 
-          <button type="submit" class="btn btn-primary cf-submit">
-            Send proposal →
+          <button type="submit" class="btn btn-primary cf-submit" data-sending={t('colab.submitSending')}>
+            {t('colab.submit')}
           </button>
 
           <div class="cf-error" role="alert" hidden>
-            We couldn't send right now. Please try again, or email us directly at
+            {t('colab.errorLead')}
             <a href="mailto:contato@dlabexperts.com">contato@dlabexperts.com</a>.
           </div>
 
-          <p class="cf-footnote">
-            Your data is used exclusively to process this proposal. No mailing list, no
-            third-party sharing.
-          </p>
+          <p class="cf-footnote">{t('colab.footnote')}</p>
         </form>
       </div>
     </div>
   </section>
+
 </Layout>
 
 <script>
@@ -253,12 +242,13 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
 
   if (form && submitBtn && errorBox) {
     const originalBtnText = submitBtn.textContent?.trim() ?? 'Send proposal →';
+    const sendingText = submitBtn.dataset.sending ?? 'Sending…';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       errorBox.hidden = true;
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
+      submitBtn.textContent = sendingText;
 
       // Fire Vercel Analytics custom event (non-blocking, guarded).
       const modo = (form.querySelector('select[name="modo"]') as HTMLSelectElement | null)?.value;

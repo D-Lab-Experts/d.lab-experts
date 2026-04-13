@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import type { Locale } from '../../i18n/ui';
+import { defaultLocale, type Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
 export interface Props {
@@ -8,6 +8,9 @@ export interface Props {
 }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+
+const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
+const href = (path: string) => `${localePrefix}${path}`;
 ---
 
 <Layout
@@ -23,24 +26,21 @@ const t = useTranslations(locale);
         <div class="nf-code">
           <span class="gradient-text">404</span>
         </div>
-        <h1 class="nf-title">This page doesn't exist.</h1>
-        <p class="nf-sub">
-          The URL you reached may have moved, been renamed, or never existed at all. But we
-          have plenty of content for you to explore.
-        </p>
+        <h1 class="nf-title">{t('notFoundPage.title')}</h1>
+        <p class="nf-sub">{t('notFoundPage.sub')}</p>
         <div class="nf-ctas">
-          <a href="/" class="btn btn-primary">Back to the home →</a>
-          <a href="/blog" class="btn btn-ghost">See open publications</a>
+          <a href={href('/')} class="btn btn-primary">{t('notFoundPage.ctaHome')}</a>
+          <a href={href('/blog')} class="btn btn-ghost">{t('notFoundPage.ctaPublications')}</a>
         </div>
 
         <div class="nf-search-hint">
-          <div class="label" style="margin-bottom:12px">Shortcuts</div>
+          <div class="label" style="margin-bottom:12px">{t('notFoundPage.shortcutsLabel')}</div>
           <ul class="nf-links">
-            <li><a href="/#segments">Research agenda</a></li>
-            <li><a href="/#products">Consulting practices</a></li>
-            <li><a href="/about">About D.Lab Experts</a></li>
-            <li><a href="/blog">Open publications</a></li>
-            <li><a href="/rss.xml">Publications RSS</a></li>
+            <li><a href={href('/#segments')}>{t('notFoundPage.shortcutAgenda')}</a></li>
+            <li><a href={href('/#products')}>{t('notFoundPage.shortcutProducts')}</a></li>
+            <li><a href={href('/about')}>{t('notFoundPage.shortcutAbout')}</a></li>
+            <li><a href={href('/blog')}>{t('notFoundPage.shortcutPublications')}</a></li>
+            <li><a href="/rss.xml">{t('notFoundPage.shortcutRss')}</a></li>
           </ul>
         </div>
       </div>

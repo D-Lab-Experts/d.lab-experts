@@ -36,41 +36,37 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
         <aside class="contact-aside">
           <div class="contact-eyebrow">
             <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
-            Bring a problem
+            {t('contato.heroEyebrow')}
           </div>
-          <h1>Have a decision to make<br /><span class="gradient-text">or an operation to protect?</span></h1>
-          <p class="contact-lead">
-            Describe the context. A senior analyst replies within one business day with the
-            right questions to understand the problem in depth and propose format, scope and
-            timeline.
-          </p>
+          <h1>{t('contato.heroLead')}<br /><span class="gradient-text">{t('contato.heroAccent')}</span></h1>
+          <p class="contact-lead">{t('contato.lead')}</p>
 
           <ul class="contact-points">
             <li>
               <span class="cp-num">01</span>
               <div>
-                <div class="cp-title">You describe the context</div>
-                <div class="cp-desc">What's stalling the decision, or the risk to mitigate, and on what timeline.</div>
+                <div class="cp-title">{t('contato.step1Title')}</div>
+                <div class="cp-desc">{t('contato.step1Desc')}</div>
               </div>
             </li>
             <li>
               <span class="cp-num">02</span>
               <div>
-                <div class="cp-title">We respond within one business day</div>
-                <div class="cp-desc">We book a 30-minute call to understand the problem in depth, with the right questions to calibrate the format.</div>
+                <div class="cp-title">{t('contato.step2Title')}</div>
+                <div class="cp-desc">{t('contato.step2Desc')}</div>
               </div>
             </li>
             <li>
               <span class="cp-num">03</span>
               <div>
-                <div class="cp-title">You receive a concrete scope</div>
-                <div class="cp-desc">Plan, timeline, investment range and D.Lab's position on the problem.</div>
+                <div class="cp-title">{t('contato.step3Title')}</div>
+                <div class="cp-desc">{t('contato.step3Desc')}</div>
               </div>
             </li>
           </ul>
 
           <div class="contact-alt">
-            <div class="label" style="margin-bottom:10px">Prefer another channel?</div>
+            <div class="label" style="margin-bottom:10px">{t('contato.altChannelLabel')}</div>
             <a href="mailto:contato@dlabexperts.com" class="contact-alt-link">contato@dlabexperts.com</a>
             <a href="https://www.linkedin.com/company/d-lab-intelligence" target="_blank" rel="noopener noreferrer" class="contact-alt-link">LinkedIn</a>
           </div>
@@ -83,91 +79,88 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
             method="POST"
             data-track="contact_form_submit"
           >
-            <input type="hidden" name="_subject" value="[D.Lab Experts] New site contact" />
+            <input type="hidden" name="_subject" value={t('contato.formSubject')} />
             <!-- Honeypot anti-spam (Formspree ignores if filled) -->
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
             <div class="cf-row">
               <label class="cf-field">
-                <span class="cf-label">Full name</span>
-                <input type="text" name="name" required placeholder="Your name" autocomplete="name" />
+                <span class="cf-label">{t('contato.fieldName')}</span>
+                <input type="text" name="name" required placeholder={t('contato.fieldNamePh')} autocomplete="name" />
               </label>
               <label class="cf-field">
-                <span class="cf-label">Work email</span>
-                <input type="email" name="email" required placeholder="you@company.com" autocomplete="email" />
-              </label>
-            </div>
-
-            <div class="cf-row">
-              <label class="cf-field">
-                <span class="cf-label">Company</span>
-                <input type="text" name="company" required placeholder="Company name" autocomplete="organization" />
-              </label>
-              <label class="cf-field">
-                <span class="cf-label">Your role</span>
-                <input type="text" name="role" placeholder="e.g., CEO, Head of Data" />
+                <span class="cf-label">{t('contato.fieldEmail')}</span>
+                <input type="email" name="email" required placeholder={t('contato.fieldEmailPh')} autocomplete="email" />
               </label>
             </div>
 
             <div class="cf-row">
               <label class="cf-field">
-                <span class="cf-label">Practice of interest</span>
+                <span class="cf-label">{t('contato.fieldCompany')}</span>
+                <input type="text" name="company" required placeholder={t('contato.fieldCompanyPh')} autocomplete="organization" />
+              </label>
+              <label class="cf-field">
+                <span class="cf-label">{t('contato.fieldRole')}</span>
+                <input type="text" name="role" placeholder={t('contato.fieldRolePh')} />
+              </label>
+            </div>
+
+            <div class="cf-row">
+              <label class="cf-field">
+                <span class="cf-label">{t('contato.fieldVertical')}</span>
                 <select name="vertical" required>
-                  <option value="">Select…</option>
-                  <option>Strategic market analysis</option>
-                  <option>Competitive intelligence</option>
-                  <option>Audience and demand analysis</option>
-                  <option>Trend studies</option>
-                  <option>AI and automation deployment</option>
-                  <option>Pentest and vulnerability analysis</option>
-                  <option>Digital security consulting</option>
-                  <option>Politics and electoral research</option>
-                  <option>Not sure yet / want to talk</option>
+                  <option value="">{t('contato.fieldSelectPlaceholder')}</option>
+                  <option>{t('contato.verticalMarket')}</option>
+                  <option>{t('contato.verticalCompetitive')}</option>
+                  <option>{t('contato.verticalAudience')}</option>
+                  <option>{t('contato.verticalTrends')}</option>
+                  <option>{t('contato.verticalAI')}</option>
+                  <option>{t('contato.verticalPentest')}</option>
+                  <option>{t('contato.verticalSecurity')}</option>
+                  <option>{t('contato.verticalPolitics')}</option>
+                  <option>{t('contato.verticalUnsure')}</option>
                 </select>
               </label>
               <label class="cf-field">
-                <span class="cf-label">Company size</span>
+                <span class="cf-label">{t('contato.fieldSize')}</span>
                 <select name="size" required>
-                  <option value="">Select…</option>
-                  <option>Micro (up to 9 people)</option>
-                  <option>Small (10–49)</option>
-                  <option>Mid-size (50–249)</option>
-                  <option>Large (250+)</option>
-                  <option>Prefer not to say</option>
+                  <option value="">{t('contato.fieldSelectPlaceholder')}</option>
+                  <option>{t('contato.sizeMicro')}</option>
+                  <option>{t('contato.sizeSmall')}</option>
+                  <option>{t('contato.sizeMid')}</option>
+                  <option>{t('contato.sizeLarge')}</option>
+                  <option>{t('contato.sizeSkip')}</option>
                 </select>
               </label>
             </div>
 
             <label class="cf-field">
-              <span class="cf-label">Describe the problem or the decision</span>
+              <span class="cf-label">{t('contato.fieldMessage')}</span>
               <textarea
                 name="message"
                 rows="5"
                 required
-                placeholder="e.g., Considering opening a new unit in São Paulo and need to validate demand before committing capital…"
+                placeholder={t('contato.fieldMessagePh')}
               ></textarea>
             </label>
 
             <div class="cf-consent">
               <label>
                 <input type="checkbox" name="consent" required />
-                <span>I agree to receive a response from D.Lab Experts about this proposal.</span>
+                <span>{t('contato.consent')}</span>
               </label>
             </div>
 
-            <button type="submit" class="btn btn-primary cf-submit">
-              Send proposal →
+            <button type="submit" class="btn btn-primary cf-submit" data-sending={t('contato.submitSending')}>
+              {t('contato.submit')}
             </button>
 
             <div class="cf-error" role="alert" hidden>
-              We couldn't send right now. Please try again, or email us directly at
+              {t('contato.errorLead')}
               <a href="mailto:contato@dlabexperts.com">contato@dlabexperts.com</a>.
             </div>
 
-            <p class="cf-footnote">
-              Your data is used exclusively to respond to this contact. No mailing list, no
-              third-party sharing.
-            </p>
+            <p class="cf-footnote">{t('contato.footnote')}</p>
           </form>
         </div>
       </div>
@@ -187,12 +180,13 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
 
   if (form && submitBtn && errorBox) {
     const originalBtnText = submitBtn.textContent?.trim() ?? 'Send proposal →';
+    const sendingText = submitBtn.dataset.sending ?? 'Sending…';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       errorBox.hidden = true;
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
+      submitBtn.textContent = sendingText;
 
       // Fire Vercel Analytics custom event (non-blocking, guarded).
       const vertical = (form.querySelector('select[name="vertical"]') as HTMLSelectElement | null)?.value;
