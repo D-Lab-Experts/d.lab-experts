@@ -11,6 +11,10 @@ const year = new Date().getFullYear();
 
 const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
 const href = (path: string) => `${localePrefix}${path}`;
+
+// The diagnostic page has a different slug per locale
+// (/diagnostic vs. /pt/diagnostico) to read naturally in each language.
+const diagnosticHref = locale === 'pt' ? '/pt/diagnostico' : '/diagnostic';
 ---
 
 <footer id="footer">
@@ -31,6 +35,7 @@ const href = (path: string) => `${localePrefix}${path}`;
           <li><a href={href('/blog')}>{t('footer.linkPublications')}</a></li>
           <li><a href={href('/#segments')}>{t('footer.linkAgenda')}</a></li>
           <li><a href={href('/colaborar')}>{t('footer.linkCollaborate')}</a></li>
+          <li><a href={diagnosticHref}>{t('footer.linkDiagnostic')}</a></li>
           <li><a href="/rss.xml">{t('footer.linkRss')}</a></li>
         </ul>
       </div>

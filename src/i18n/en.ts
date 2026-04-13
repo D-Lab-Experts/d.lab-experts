@@ -38,6 +38,9 @@ const en = {
     contato: 'Contact | D.Lab Experts · Research Hub',
     contatoDescription:
       'Reach D.Lab Experts. For consulting projects under NDA, research partnerships or press. We respond within one business day.',
+    diagnostic: 'Decision Diagnostic | D.Lab Experts · Research Hub',
+    diagnosticDescription:
+      'Quantify the risk of deciding without data. Five inputs, two outputs, every coefficient sourced from peer-reviewed research.',
     colaborar: 'Collaborate | D.Lab Experts · Research Hub',
     colaborarDescription:
       'D.Lab Experts is an open research hub. Propose a study, submit finished research, share data, or serve as a peer reviewer. Research is a collective effort.',
@@ -240,6 +243,7 @@ const en = {
     linkPublications: 'Open Publications',
     linkAgenda: 'Research agenda',
     linkCollaborate: 'Collaborate with the Hub',
+    linkDiagnostic: 'Decision Diagnostic',
     linkRss: 'Publications RSS',
     linkPractices: 'Consulting practices',
     linkMethod: 'Methodology',
@@ -683,6 +687,104 @@ const en = {
     ctaLead: 'Research Hub first. Consulting when the context calls for it. Start with the open publications, or talk to us directly.',
     ctaPrimary: 'Read open publications →',
     ctaSecondary: 'Talk about a project',
+  },
+
+  // Decision Diagnostic — interactive /diagnostic page. Computes a
+  // quality probability + value-at-stake range from 5 inputs, every
+  // coefficient cited to peer-reviewed research. Positioned as a
+  // research artifact, not an oracle: ranges, confidence intervals,
+  // full methodology exposed below the result.
+  diagnostic: {
+    heroEyebrow: 'Decision Diagnostic',
+    heroTitleLead: 'Quantify the risk of',
+    heroTitleAccent: 'deciding without data.',
+    heroSub: 'Five questions, two outputs, every coefficient anchored in peer-reviewed research. An illustrative reference — not a forecast.',
+    heroStep1: '5 inputs',
+    heroStep2: '~60 seconds',
+    heroStep3: 'Open sources',
+
+    formTitle: 'Describe the decision',
+    formSub: 'The answer panel updates live as you fill in.',
+
+    q1Title: '01 · Decision size',
+    q1Desc: 'Approximate financial weight of the decision (the capital, revenue or cost at stake).',
+    q1Opt1: 'Up to R$ 100k',
+    q1Opt2: 'R$ 100k – R$ 1M',
+    q1Opt3: 'R$ 1M – R$ 10M',
+    q1Opt4: 'Above R$ 10M',
+
+    q2Title: '02 · Reversibility',
+    q2Desc: "Two-way door (can roll back within weeks) or one-way door (can't easily undo)? Bezos framework.",
+    q2Opt1: 'Two-way door — can roll back',
+    q2Opt2: 'One-way door — commits the org',
+
+    q3Title: '03 · Data maturity',
+    q3Desc: 'How the organization typically gets information that shapes the decision.',
+    q3Opt1: 'None — pure intuition / hearsay',
+    q3Opt2: 'Ad-hoc — spreadsheets, scattered sources',
+    q3Opt3: 'Systematic — documented, cross-referenced, audited',
+
+    q4Title: '04 · Time pressure',
+    q4Desc: 'How much time you have before the decision must be made.',
+    q4Opt1: 'Urgent — under a week',
+    q4Opt2: 'Standard — 1 to 4 weeks',
+    q4Opt3: 'Exploratory — weeks to quarters',
+
+    q5Title: '05 · Stakeholders',
+    q5Desc: 'How many people must align on the final call.',
+    q5Opt1: '1 decider',
+    q5Opt2: '2 to 5 deciders',
+    q5Opt3: '6 or more deciders',
+
+    resultTitle: 'Preliminary reading',
+    resultStaleHint: 'Answer the 5 questions to see a reading.',
+    resultQualityLabel: 'Estimated probability of high-quality decision',
+    resultQualityVsBase: 'vs. baseline of 37% (McKinsey, 2019)',
+    resultExposureLabel: 'Value at stake — exposure range',
+    resultExposureHint: 'Illustrative — based on published coefficients',
+    resultBadgeRed: 'High-risk zone',
+    resultBadgeYellow: 'Attention zone',
+    resultBadgeGreen: 'Managed-risk zone',
+    resultBadgeRedSub: 'The combination of answers places this decision in the bottom quartile of decision quality reported in the literature. Worth slowing down.',
+    resultBadgeYellowSub: 'The answers put the decision near the overall industry median. Pick one or two of the actions below to push into the top quartile.',
+    resultBadgeGreenSub: 'The answers put the decision above the industry baseline. The methodology is broadly aligned with the high-quality-decision literature.',
+
+    actionsTitle: 'Recommended next actions',
+    actionBriefingTitle: 'Read: "Deciding in the Dark"',
+    actionBriefingDesc: 'Starts with the 73%-by-intuition baseline and lays out a structured decision framework.',
+    actionBriefingCta: 'Read study →',
+    actionResearchTitle: 'Commission a diagnostic briefing',
+    actionResearchDesc: 'A scoped, paid diagnostic that applies the same rigor to your specific decision. Typical turnaround: 2–3 weeks.',
+    actionResearchCta: 'Talk to D.Lab →',
+    actionFrameworkTitle: 'Slow the decision down',
+    actionFrameworkDesc: 'One-way doors with urgent pressure have the worst expected value in the literature. Negotiate 1 extra week before committing.',
+    actionFrameworkCta: 'Learn the framework →',
+    actionDataTitle: 'Close the data gap first',
+    actionDataDesc: 'With zero data maturity, the expected quality sits ~15pp below baseline. A 2-week discovery sprint often pays for itself.',
+    actionDataCta: 'Propose a sprint →',
+
+    methodologyTitle: 'How we calculate',
+    methodologySub: 'Every coefficient below is pulled from a peer-reviewed source or a published industry study. The goal is a defensible range, not a precise forecast.',
+    methodologyFormulaTitle: 'The model',
+    methodologyFormulaQuality: '<strong>Quality</strong> = 37% (baseline) + adjustments by data maturity, time pressure, and stakeholders. Capped between 5% and 75%.',
+    methodologyFormulaExposure: '<strong>Exposure range</strong> = decision size × (1 − quality) × [5% .. 25%], multiplied by 1.5 for one-way-door decisions.',
+    methodologySourcesTitle: 'Sources',
+
+    srcMcKinsey: 'McKinsey & Company, "Decision Making in the Age of Urgency," 2019 — 37% of surveyed senior leaders reported their typical decisions as high-quality. This sets the baseline for our quality estimate.',
+    srcBrynjolfsson: 'Brynjolfsson, McAfee & Hitt, MIT Sloan / HBR, "Strength in Numbers: How Does Data-Driven Decisionmaking Affect Firm Performance?", 2011 — data-driven firms are 5–6% more productive and profitable than peers. We translate this conservatively into +12pp quality for systematic data maturity.',
+    srcPMI: 'PMI, "Pulse of the Profession" (2020) — organizations waste ~9.9% of every dollar invested due to poor project performance. Drives the lower bound of our exposure range (5%, conservative).',
+    srcBezos: 'Jeff Bezos, 1997 shareholder letter & subsequent writings — "one-way doors vs. two-way doors" decision framework. Irreversible decisions carry a 1.5× multiplier on downside exposure in our model.',
+    srcBain: 'Bain & Company, Blenko, Mankins, Rogers, "Decide & Deliver" (2010) — coordination overhead reduces decision quality as stakeholders grow. 6+ deciders → −6pp in our quality estimate.',
+    srcKahneman: 'Kahneman & Tversky, decades of bias literature (summarized in *Thinking, Fast and Slow*, 2011) — time pressure increases overconfidence and anchoring. Urgent decisions → −10pp quality.',
+    srcIBM: 'IBM, "Cost of a Data Breach Report 2024" — average global cost of a data breach is USD 4.88M. Context reference when the decision involves new exposed surfaces.',
+
+    disclaimerTitle: 'What this is not',
+    disclaimerBody: 'This diagnostic is an illustrative reference based on external benchmarks. It is not a forecast, not a valuation, not a consulting opinion. Actual outcomes depend on your data, your context and your execution. For a decision that matters, run the actual analysis — or book a scoped diagnostic with D.Lab.',
+
+    ctaFinal: 'Apply this rigor to your actual decision',
+    ctaFinalSub: 'The diagnostic is public because the method is the point. When you need the same rigor applied to your specific context, we have a scoped engagement for that.',
+    ctaFinalPrimary: 'Book a scoped diagnostic →',
+    ctaFinalSecondary: 'See open research',
   },
 } as const;
 
