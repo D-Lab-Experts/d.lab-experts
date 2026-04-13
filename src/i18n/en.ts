@@ -750,6 +750,38 @@ const en = {
     resultBadgeYellowSub: 'The answers put the decision near the overall industry median. Pick one or two of the actions below to push into the top quartile.',
     resultBadgeGreenSub: 'The answers put the decision above the industry baseline. The methodology is broadly aligned with the high-quality-decision literature.',
 
+    // Narrative block — two contextual paragraphs assembled from the
+    // fragments below. Lives between the metric cards and the actions.
+    narrativeReadingLead: 'Reading',
+    narrativeContextLead: 'Context',
+    narrativeIntro: 'Decision quality lands at <strong>{percent}%</strong>, {delta} the <strong>37%</strong> McKinsey 2019 baseline (n=1,300+ senior leaders).',
+    narrativeDeltaAbove: '{n}pp above',
+    narrativeDeltaBelow: '{n}pp below',
+    narrativeDeltaEqual: 'right on',
+    narrativeCloseRed: 'Taken together, this is the profile the literature flags as most at risk — it is worth the pause.',
+    narrativeCloseYellow: 'This lands near the industry median. The strongest lever in the recommended actions is the one worth pulling first.',
+    narrativeCloseGreen: 'This profile aligns with the top quartile of decision quality in the reviewed studies. Keep the posture.',
+
+    narrDataNone: 'zero data maturity places this decision in the same cohort SEBRAE (2023) documents for the <strong>73% of SMB managers deciding by intuition</strong>',
+    narrDataAdhoc: 'ad-hoc data beats no data, but Brynjolfsson, McAfee & Hitt (MIT/HBR, 2011) only observed the <strong>5–6% productivity uplift</strong> in <em>systematic</em> data-driven practice',
+    narrDataSystematic: 'the systematic data posture is exactly what Brynjolfsson, McAfee & Hitt (MIT/HBR, 2011) correlated with <strong>+5–6% productivity and profitability</strong> over same-sector peers',
+
+    narrTimeUrgent: "the sub-one-week window amplifies anchoring and overconfidence — Kahneman & Tversky's body of work shows quality drops sharply when the decision is compressed",
+    narrTimeStandard: 'the 1–4-week horizon sits in the deliberate-decision zone where structured frameworks can actually run',
+    narrTimeExplor: "weeks-to-quarters leaves room for proper exploration, which is exactly what Kahneman's 'decision hygiene' framing recommends",
+
+    narrRevTwo: "it's a <strong>two-way door</strong> (Bezos, 1997), so the downside is bounded by rollback cost",
+    narrRevOne: "it's a <strong>one-way door</strong> (Bezos, 1997) — downside compounds because the decision can't be walked back in a few weeks",
+
+    narrStkSolo: "with a single decider, velocity is highest but there is no second opinion to catch the single-decider biases Kahneman catalogs (anchoring, availability, overconfidence)",
+    narrStkSmall: "2–5 deciders is the literature's sweet spot — enough for the wisdom-of-crowds effect Surowiecki (2004) documents, without the coordination overhead Bain flags in larger committees",
+    narrStkLarge: "6+ deciders introduces the coordination overhead and groupthink pressure Bain's <em>Decide & Deliver</em> (2010) associates with slower, lower-quality outcomes",
+
+    narrSize0: 'the financial scale is modest, so exposure stays contained even on the worst-case path',
+    narrSize1: 'the R$ 100k–R$ 1M range is precisely where most SMBs meet their year-one mortality curve (<strong>29%</strong>, BLS) — the quality calculus matters',
+    narrSize2: 'at R$ 1M–R$ 10M, decision quality translates directly into survivability of the bet itself',
+    narrSize3: 'above R$ 10M, every percentage point of quality probability moves material money — the exposure range below is not metaphorical',
+
     actionsTitle: 'Recommended next actions',
     actionBriefingTitle: 'Read: "Deciding in the Dark"',
     actionBriefingDesc: 'Starts with the 73%-by-intuition baseline and lays out a structured decision framework.',

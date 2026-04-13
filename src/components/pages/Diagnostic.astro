@@ -216,6 +216,20 @@ const alternateUrls = {
                 <div class="diag-metric-meta">{t('diagnostic.resultExposureHint')}</div>
               </div>
 
+              <!-- Narrative — 2 paragraphs assembled from the answer
+                   combination, with inline citations to the source
+                   behind each observation. -->
+              <div class="diag-narrative" id="diag-narrative">
+                <div class="diag-narr-block">
+                  <div class="diag-narr-lead" id="diag-narr-lead1">{t('diagnostic.narrativeReadingLead')}</div>
+                  <p id="diag-narr-p1"></p>
+                </div>
+                <div class="diag-narr-block">
+                  <div class="diag-narr-lead" id="diag-narr-lead2">{t('diagnostic.narrativeContextLead')}</div>
+                  <p id="diag-narr-p2"></p>
+                </div>
+              </div>
+
               <!-- Actions -->
               <div class="diag-actions">
                 <div class="diag-actions-label">{t('diagnostic.actionsTitle')}</div>
@@ -308,6 +322,28 @@ const alternateUrls = {
     actionDataTitle: t('diagnostic.actionDataTitle'),
     actionDataDesc: t('diagnostic.actionDataDesc'),
     actionDataCta: t('diagnostic.actionDataCta'),
+    narrativeIntro: t('diagnostic.narrativeIntro'),
+    narrativeDeltaAbove: t('diagnostic.narrativeDeltaAbove'),
+    narrativeDeltaBelow: t('diagnostic.narrativeDeltaBelow'),
+    narrativeDeltaEqual: t('diagnostic.narrativeDeltaEqual'),
+    narrativeCloseRed: t('diagnostic.narrativeCloseRed'),
+    narrativeCloseYellow: t('diagnostic.narrativeCloseYellow'),
+    narrativeCloseGreen: t('diagnostic.narrativeCloseGreen'),
+    narrDataNone: t('diagnostic.narrDataNone'),
+    narrDataAdhoc: t('diagnostic.narrDataAdhoc'),
+    narrDataSystematic: t('diagnostic.narrDataSystematic'),
+    narrTimeUrgent: t('diagnostic.narrTimeUrgent'),
+    narrTimeStandard: t('diagnostic.narrTimeStandard'),
+    narrTimeExplor: t('diagnostic.narrTimeExplor'),
+    narrRevTwo: t('diagnostic.narrRevTwo'),
+    narrRevOne: t('diagnostic.narrRevOne'),
+    narrStkSolo: t('diagnostic.narrStkSolo'),
+    narrStkSmall: t('diagnostic.narrStkSmall'),
+    narrStkLarge: t('diagnostic.narrStkLarge'),
+    narrSize0: t('diagnostic.narrSize0'),
+    narrSize1: t('diagnostic.narrSize1'),
+    narrSize2: t('diagnostic.narrSize2'),
+    narrSize3: t('diagnostic.narrSize3'),
   },
 }}>
   // ══════ DIAGNOSTIC MODEL ════════════════════════════════════════
@@ -341,6 +377,8 @@ const alternateUrls = {
   const exposureLow = document.getElementById('diag-exposure-low');
   const exposureHigh = document.getElementById('diag-exposure-high');
   const actionsList = document.getElementById('diag-actions-list');
+  const narrP1 = document.getElementById('diag-narr-p1');
+  const narrP2 = document.getElementById('diag-narr-p2');
 
   function readAnswers() {
     if (!form) return null;
@@ -407,6 +445,49 @@ const alternateUrls = {
       if (picked.length === 2) break;
     }
     return picked;
+  }
+
+  // Fragment lookups per answer choice. Mirrors the rating deltas
+  // in the model — so the copy reads consistent with the math.
+  const dataFragMap = { none: labels.narrDataNone, adhoc: labels.narrDataAdhoc, systematic: labels.narrDataSystematic };
+  const timeFragMap = { urgent: labels.narrTimeUrgent, standard: labels.narrTimeStandard, exploratory: labels.narrTimeExplor };
+  const revFragMap = { two: labels.narrRevTwo, one: labels.narrRevOne };
+  const stkFragMap = { solo: labels.narrStkSolo, small: labels.narrStkSmall, large: labels.narrStkLarge };
+  const sizeFragMap = [labels.narrSize0, labels.narrSize1, labels.narrSize2, labels.narrSize3];
+
+  function capitalizeFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  function buildNarrative(a, quality, badgeKey) {
+    const percent = Math.round(quality * 100);
+    const deltaPP = percent - 37;
+    let deltaStr;
+    if (deltaPP > 0) {
+      deltaStr = labels.narrativeDeltaAbove.replace('{n}', `+${deltaPP}`);
+    } else if (deltaPP < 0) {
+      deltaStr = labels.narrativeDeltaBelow.replace('{n}', `${deltaPP}`);
+    } else {
+      deltaStr = labels.narrativeDeltaEqual;
+    }
+    const intro = labels.narrativeIntro
+      .replace('{percent}', String(percent))
+      .replace('{delta}', deltaStr);
+    const closer =
+      badgeKey === 'red'    ? labels.narrativeCloseRed
+    : badgeKey === 'yellow' ? labels.narrativeCloseYellow
+                            : labels.narrativeCloseGreen;
+
+    const p1 = `${intro} ${capitalizeFirst(dataFragMap[a.q3])}; ${timeFragMap[a.q4]}; ${stkFragMap[a.q5]}.`;
+    const p2 = `${capitalizeFirst(sizeFragMap[a.q1])}. ${capitalizeFirst(revFragMap[a.q2])}. ${closer}`;
+    return { p1, p2 };
+  }
+
+  function renderNarrative(a, quality, badgeKey) {
+    if (!narrP1 || !narrP2) return;
+    const { p1, p2 } = buildNarrative(a, quality, badgeKey);
+    narrP1.innerHTML = p1;
+    narrP2.innerHTML = p2;
   }
 
   function renderActions(actions) {
@@ -481,6 +562,9 @@ const alternateUrls = {
       : badgeKey === 'yellow' ? labels.badgeYellowSub
                               : labels.badgeGreenSub;
     }
+
+    // Narrative (depends on badgeKey computed above)
+    renderNarrative(a, quality, badgeKey);
 
     // Actions
     renderActions(buildActions(a, quality));
@@ -957,6 +1041,58 @@ const alternateUrls = {
     font-weight: 700;
     letter-spacing: 0.08em;
     color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Narrative — two stacked "Reading" / "Context" paragraphs that
+     assemble from the user's answers and cite the relevant research
+     inline. Sits between the metric cards and the actions so the
+     reader sees numbers → explanation → what to do. */
+  .diag-narrative {
+    margin-top: 22px;
+    padding: 22px 22px 18px;
+    border: 1px solid rgba(177, 140, 255, 0.14);
+    background: linear-gradient(165deg, rgba(30, 30, 44, 0.7), rgba(14, 14, 22, 0.55));
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .diag-narr-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .diag-narr-lead {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lilac);
+  }
+  .diag-narr-lead::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 1px;
+    background: var(--lilac);
+    opacity: 0.6;
+  }
+  .diag-narrative p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .diag-narrative p strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+  .diag-narrative p em {
+    font-style: italic;
+    color: var(--lilac);
   }
 
   /* Actions — stacked cards with numbered step, description, and a

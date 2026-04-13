@@ -731,6 +731,36 @@ const pt: Translation = {
     resultBadgeYellowSub: 'As respostas colocam a decisão perto da mediana do setor. Pegue uma ou duas das ações abaixo para empurrar pro quartil superior.',
     resultBadgeGreenSub: 'As respostas colocam a decisão acima do baseline do setor. A metodologia está amplamente alinhada com a literatura de decisão de alta qualidade.',
 
+    narrativeReadingLead: 'Leitura',
+    narrativeContextLead: 'Contexto',
+    narrativeIntro: 'A qualidade da decisão fica em <strong>{percent}%</strong>, {delta} do baseline de <strong>37%</strong> da McKinsey 2019 (n=1.300+ executivos sêniores).',
+    narrativeDeltaAbove: '{n}pp acima',
+    narrativeDeltaBelow: '{n}pp abaixo',
+    narrativeDeltaEqual: 'exatamente em cima',
+    narrativeCloseRed: 'No conjunto, este é o perfil que a literatura aponta como o de maior risco — vale a pausa.',
+    narrativeCloseYellow: 'Isto está perto da mediana do setor. A alavanca mais forte entre as ações recomendadas é a que vale puxar primeiro.',
+    narrativeCloseGreen: 'Este perfil se alinha ao quartil superior de qualidade de decisão nos estudos revisados. Mantenha a postura.',
+
+    narrDataNone: 'maturidade de dados zero coloca esta decisão na mesma coorte que o SEBRAE (2023) documenta para os <strong>73% dos gestores de PMEs que decidem pela intuição</strong>',
+    narrDataAdhoc: 'dado ad-hoc é melhor que nada, mas Brynjolfsson, McAfee & Hitt (MIT/HBR, 2011) só observaram o <strong>ganho de 5–6% de produtividade</strong> em prática <em>sistemática</em>',
+    narrDataSystematic: 'a postura sistemática de dados é exatamente o que Brynjolfsson, McAfee & Hitt (MIT/HBR, 2011) correlacionaram com <strong>+5–6% de produtividade e lucratividade</strong> sobre pares do mesmo setor',
+
+    narrTimeUrgent: 'a janela de menos de uma semana amplifica anchoring e overconfidence — o corpo de trabalho de Kahneman & Tversky mostra que a qualidade cai bruscamente quando a decisão é comprimida',
+    narrTimeStandard: 'o horizonte de 1 a 4 semanas fica na zona de decisão deliberada, em que frameworks estruturados conseguem rodar',
+    narrTimeExplor: 'de semanas a trimestres deixa espaço para exploração de verdade — é exatamente o que o framing de "decision hygiene" de Kahneman recomenda',
+
+    narrRevTwo: 'é uma <strong>porta de mão dupla</strong> (Bezos, 1997), então o downside é limitado pelo custo de reversão',
+    narrRevOne: 'é uma <strong>porta de mão única</strong> (Bezos, 1997) — o downside se acumula porque a decisão não pode ser desfeita em poucas semanas',
+
+    narrStkSolo: 'com um decisor único, a velocidade é máxima, mas não existe segunda opinião para checar os vieses de um só catalogados por Kahneman (anchoring, disponibilidade, overconfidence)',
+    narrStkSmall: '2 a 5 decisores é o sweet spot da literatura — o suficiente para o efeito de wisdom-of-crowds documentado por Surowiecki (2004), sem o custo de coordenação que a Bain sinaliza em comitês maiores',
+    narrStkLarge: '6+ decisores introduz o custo de coordenação e a pressão de groupthink que o <em>Decide & Deliver</em> da Bain (2010) associa a resultados mais lentos e de menor qualidade',
+
+    narrSize0: 'a escala financeira é modesta, então a exposição fica contida mesmo no pior caminho',
+    narrSize1: 'a faixa de R$ 100 mil a R$ 1 mi é precisamente onde a maioria das PMEs bate na curva de mortalidade do primeiro ano (<strong>29%</strong>, BLS) — o cálculo de qualidade pesa',
+    narrSize2: 'entre R$ 1 mi e R$ 10 mi, a qualidade da decisão se traduz diretamente na sobrevivência da própria aposta',
+    narrSize3: 'acima de R$ 10 mi, cada ponto percentual de probabilidade de qualidade move capital material — a faixa de exposição abaixo não é metafórica',
+
     actionsTitle: 'Próximas ações recomendadas',
     actionBriefingTitle: 'Leia: "Decidindo no Escuro"',
     actionBriefingDesc: 'Começa pelo baseline dos 73% por intuição e expõe um framework estruturado de decisão.',
