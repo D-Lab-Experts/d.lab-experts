@@ -1,14 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import type { Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
+const t = useTranslations();
 
 // Formspree endpoint dedicated to research collaboration proposals.
 // Public-facing ID (visible in form action markup), so hardcoded with
@@ -21,7 +16,6 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
   title={t('pageTitles.colaborar')}
   description={t('pageTitles.colaborarDescription')}
   active="colaborar"
-  locale={locale}
 >
   <!-- ═══════════════ HERO ═══════════════════════════════════════════ -->
   <section class="colab-hero">
@@ -270,8 +264,7 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
         });
 
         if (response.ok) {
-          const localePrefix = location.pathname.startsWith('/pt/') ? '/pt' : '';
-          window.location.href = `${localePrefix}/contato/obrigado`;
+          window.location.href = '/contato/obrigado';
           return;
         }
 

@@ -1,24 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import { defaultLocale, type Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
-
-const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-const href = (path: string) => `${localePrefix}${path}`;
+const t = useTranslations();
 ---
 
 <Layout
   title={t('pageTitles.about')}
   description={t('pageTitles.aboutDescription')}
   active="about"
-  locale={locale}
 >
   <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
   <section class="about-hero">
@@ -275,8 +266,8 @@ const href = (path: string) => `${localePrefix}${path}`;
       <h2>{t('aboutPage.ctaTitleLead')}<br /><span class="gradient-text">{t('aboutPage.ctaTitleAccent')}</span></h2>
       <p>{t('aboutPage.ctaLead')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href={href('/blog')} class="btn btn-primary">{t('aboutPage.ctaPrimary')}</a>
-        <a href={href('/contato')} class="btn btn-ghost">{t('aboutPage.ctaSecondary')}</a>
+        <a href="/blog" class="btn btn-primary">{t('aboutPage.ctaPrimary')}</a>
+        <a href="/contato" class="btn btn-ghost">{t('aboutPage.ctaSecondary')}</a>
       </div>
     </div>
   </section>

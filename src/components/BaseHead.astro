@@ -1,11 +1,9 @@
 ---
-import { locales, type Locale } from '../i18n/ui';
-import { getLocalizedPath, useTranslations } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
 
 export interface Props {
   title: string;
   description: string;
-  locale: Locale;
   image?: string;
   canonical?: string;
   type?: 'website' | 'article';
@@ -13,13 +11,11 @@ export interface Props {
   modifiedTime?: string;
   author?: string;
   tags?: string[];
-  alternateUrls?: Partial<Record<Locale, string>>;
 }
 
 const {
   title,
   description,
-  locale,
   image = '/d.lab.png',
   canonical,
   type = 'website',
@@ -27,36 +23,14 @@ const {
   modifiedTime,
   author = 'D.Lab Experts',
   tags = [],
-  alternateUrls,
 } = Astro.props;
 
-const t = useTranslations(locale);
+const t = useTranslations();
 
 const canonicalURL = canonical
   ? new URL(canonical, Astro.site)
   : new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
-
-const ogLocale: Record<Locale, string> = {
-  en: 'en_US',
-  pt: 'pt_BR',
-};
-
-// hreflang alternates for the 2 locales, plus x-default pointing to EN.
-// Prefer explicit alternateUrls when the caller knows the real sibling
-// URL (posts with different slugs per locale); otherwise derive by
-// naive prefix swap.
-const alternates = locales.map((loc) => ({
-  locale: loc,
-  href: new URL(
-    alternateUrls?.[loc] ?? getLocalizedPath(Astro.url.pathname, loc),
-    Astro.site,
-  ).toString(),
-}));
-const xDefaultHref = new URL(
-  alternateUrls?.en ?? getLocalizedPath(Astro.url.pathname, 'en'),
-  Astro.site,
-).toString();
 ---
 
 <meta charset="UTF-8" />
@@ -77,11 +51,6 @@ const xDefaultHref = new URL(
 
 <link rel="alternate" type="application/rss+xml" title="D.Lab Experts · Research Hub" href="/rss.xml" />
 
-{alternates.map((alt) => (
-  <link rel="alternate" hreflang={alt.locale} href={alt.href} />
-))}
-<link rel="alternate" hreflang="x-default" href={xDefaultHref} />
-
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
 <link
   href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap"
@@ -94,7 +63,7 @@ const xDefaultHref = new URL(
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:locale" content={ogLocale[locale]} />
+<meta property="og:locale" content="pt_BR" />
 <meta property="og:site_name" content={t('meta.ogSiteName')} />
 
 <!-- Twitter -->

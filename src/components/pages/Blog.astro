@@ -2,20 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
 import { getCollection } from 'astro:content';
-import { defaultLocale, type Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
+const t = useTranslations();
 
-const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-const href = (path: string) => `${localePrefix}${path}`;
-
-// Readers on /blog see EN posts, /pt/blog sees PT posts.
-const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === locale))
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const intelligencePosts = allPosts.filter((p) => p.data.track === 'intelligence');
@@ -40,9 +31,8 @@ const cyberGroups = [
   { key: 'secondary', label: t('blog.cyberGroupSecondaryLabel'), sub: t('blog.cyberGroupSecondarySub'), posts: cyberSecondary },
 ] as const;
 
-const dateLocaleMap: Record<Locale, string> = { en: 'en-US', pt: 'pt-BR' };
 const formatDate = (d: Date) =>
-  d.toLocaleDateString(dateLocaleMap[locale], { year: 'numeric', month: 'long' });
+  d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
 
 const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string> = {
   briefing: t('formats.briefing'),
@@ -56,7 +46,6 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
   title={t('pageTitles.blog')}
   description={t('pageTitles.blogDescription')}
   active="blog"
-  locale={locale}
 >
   <!-- ═══════════════ BLOG HERO ═══════════════════════════════════ -->
   <section class="blog-hero">
@@ -115,7 +104,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
                 .filter((tag: string) => tag.toLowerCase() !== cat)
                 .slice(0, isOriginal ? 1 : 2);
               return (
-                <a href={href(`/posts/${post.slug}`)} class={cardClass}>
+                <a href={`/posts/${post.slug}`} class={cardClass}>
                   <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
                     {post.data.cover && (
                       <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
@@ -194,7 +183,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
                 .filter((tag: string) => tag.toLowerCase() !== cat)
                 .slice(0, isOriginal ? 1 : 2);
               return (
-                <a href={href(`/posts/${post.slug}`)} class={cardClass}>
+                <a href={`/posts/${post.slug}`} class={cardClass}>
                   <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
                     {post.data.cover && (
                       <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
@@ -243,7 +232,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
         <div class="blog-empty-title">{t('blog.emptyCyberTitle')}</div>
         <div class="blog-empty-text">{t('blog.emptyCyberText')}</div>
         <div class="blog-empty-cta">
-          <a href={href('/contato')} class="btn btn-ghost">{t('blog.emptyCyberCta')}</a>
+          <a href="/contato" class="btn btn-ghost">{t('blog.emptyCyberCta')}</a>
         </div>
       </div>
     )}
@@ -271,8 +260,8 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
           <span class="blog-colab-chip">{t('blog.colabChipPeer')}</span>
         </div>
         <div class="blog-colab-ctas">
-          <a href={href('/colaborar')} class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
-          <a href={href('/colaborar')} class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
+          <a href="/colaborar" class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
+          <a href="/colaborar" class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
         </div>
       </div>
     </div>

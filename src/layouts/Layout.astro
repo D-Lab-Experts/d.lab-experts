@@ -6,70 +6,53 @@ import SvgDefs from '../components/SvgDefs.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
-import { htmlLang, type Locale } from '../i18n/ui';
-import { getLocaleFromUrl } from '../i18n/utils';
+import { htmlLang } from '../i18n/ui';
 
 export interface Props {
   title: string;
   description: string;
   active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar' | 'diagnostic';
-  locale?: Locale;
   image?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
   tags?: string[];
-  /**
-   * Optional explicit per-locale URLs for this page. Passed by post
-   * pages where the PT and EN slugs differ (e.g., /posts/deciding-in-
-   * the-dark ↔ /pt/posts/decisao-no-escuro). Flows into hreflang
-   * alternates and the LanguageSwitcher.
-   */
-  alternateUrls?: Partial<Record<Locale, string>>;
 }
 
 const {
   title,
   description,
   active,
-  locale: explicitLocale,
   image,
   type,
   publishedTime,
   modifiedTime,
   author,
   tags,
-  alternateUrls,
 } = Astro.props;
-
-// Pages pass `locale` explicitly; fall back to URL-based detection
-// for any page that doesn't.
-const locale: Locale = explicitLocale ?? getLocaleFromUrl(Astro.url);
 ---
 
 <!DOCTYPE html>
-<html lang={htmlLang[locale]}>
+<html lang={htmlLang}>
   <head>
     <BaseHead
       title={title}
       description={description}
-      locale={locale}
       image={image}
       type={type}
       publishedTime={publishedTime}
       modifiedTime={modifiedTime}
       author={author}
       tags={tags}
-      alternateUrls={alternateUrls}
     />
   </head>
   <body>
     <canvas id="geo-canvas"></canvas>
     <SvgDefs />
-    <Header active={active} locale={locale} alternateUrls={alternateUrls} />
+    <Header active={active} />
     <slot />
-    <Footer locale={locale} />
+    <Footer />
 
     <script>
       // ══ GEOMETRIC INTELLIGENCE CANVAS ══════════════════════════════════

@@ -1,39 +1,20 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import { defaultLocale, type Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
+const t = useTranslations();
 
-const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-const href = (path: string) => `${localePrefix}${path}`;
-
-// Decision size tiers. Midpoint is what the model multiplies by, so the
-// result is a single representative figure per tier instead of a free
-// input (reduces fake precision).
+// Decision size tiers. Midpoint is what the model multiplies by, so
+// the result is a single representative figure per tier instead of a
+// free input (reduces fake precision).
 const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
-// Post slug for the "Deciding in the Dark" link per locale.
-const decidingSlug = locale === 'pt' ? 'decisao-no-escuro' : 'deciding-in-the-dark';
-
-// The EN and PT routes have different slugs so the language switcher
-// and hreflang alternates must use explicit URLs.
-const alternateUrls = {
-  en: '/diagnostic',
-  pt: '/pt/diagnostico',
-} as const;
 ---
 
 <Layout
   title={t('pageTitles.diagnostic')}
   description={t('pageTitles.diagnosticDescription')}
   active="diagnostic"
-  locale={locale}
-  alternateUrls={alternateUrls}
 >
   <!-- ═══════════════ HERO ═══════════════════════════════════════ -->
   <section class="diag-hero">
@@ -65,7 +46,7 @@ const alternateUrls = {
     <div class="container">
       <div class="diag-grid">
         <!-- FORM (left) -->
-        <form class="diag-form fi" id="diag-form" data-locale={locale}>
+        <form class="diag-form fi" id="diag-form">
           <header class="diag-form-head">
             <h2>{t('diagnostic.formTitle')}</h2>
             <p>{t('diagnostic.formSub')}</p>
@@ -285,8 +266,8 @@ const alternateUrls = {
       <h2>{t('diagnostic.ctaFinal')}</h2>
       <p>{t('diagnostic.ctaFinalSub')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href={href('/contato')} class="btn btn-primary">{t('diagnostic.ctaFinalPrimary')}</a>
-        <a href={href('/blog')} class="btn btn-ghost">{t('diagnostic.ctaFinalSecondary')}</a>
+        <a href="/contato" class="btn btn-primary">{t('diagnostic.ctaFinalPrimary')}</a>
+        <a href="/blog" class="btn btn-ghost">{t('diagnostic.ctaFinalSecondary')}</a>
       </div>
     </div>
   </section>
@@ -294,16 +275,14 @@ const alternateUrls = {
 
 <script define:vars={{
   q1Values,
-  locale,
-  decidingSlug,
   urls: {
-    briefing: href(`/posts/${decidingSlug}`),
-    contato: href('/contato'),
-    framework: href('/blog'),
-    sprint: href('/colaborar'),
+    briefing: '/posts/decisao-no-escuro',
+    contato: '/contato',
+    framework: '/blog',
+    sprint: '/colaborar',
   },
   labels: {
-    currency: locale === 'pt' ? 'R$' : 'R$',
+    currency: 'R$',
     badgeRed: t('diagnostic.resultBadgeRed'),
     badgeYellow: t('diagnostic.resultBadgeYellow'),
     badgeGreen: t('diagnostic.resultBadgeGreen'),
@@ -413,7 +392,7 @@ const alternateUrls = {
   function formatCurrency(n) {
     // Always format in BRL style since the amount tiers are in R$,
     // regardless of the visitor's locale. Use locale's grouping rules.
-    const formatter = new Intl.NumberFormat(locale === 'pt' ? 'pt-BR' : 'en-US', {
+    const formatter = new Intl.NumberFormat('pt-BR', {
       style: 'decimal',
       maximumFractionDigits: 0,
     });

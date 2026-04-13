@@ -1,22 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { defaultLocale, type Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
-
-const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-const href = (path: string) => `${localePrefix}${path}`;
+const t = useTranslations();
 ---
 
 <Layout
   title={t('pageTitles.obrigado')}
   description={t('pageTitles.obrigadoDescription')}
-  locale={locale}
 >
   <section class="ty-hero">
     <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:500px;height:400px"></div>
@@ -39,8 +30,8 @@ const href = (path: string) => `${localePrefix}${path}`;
         <div class="ty-next">
           <div class="label" style="margin-bottom:14px">{t('obrigadoPage.nextLabel')}</div>
           <div class="ty-ctas">
-            <a href={href('/blog')} class="btn btn-primary">{t('obrigadoPage.ctaPrimary')}</a>
-            <a href={href('/')} class="btn btn-ghost">{t('obrigadoPage.ctaSecondary')}</a>
+            <a href="/blog" class="btn btn-primary">{t('obrigadoPage.ctaPrimary')}</a>
+            <a href="/" class="btn btn-ghost">{t('obrigadoPage.ctaSecondary')}</a>
           </div>
         </div>
       </div>

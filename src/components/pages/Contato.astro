@@ -1,14 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import type { Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-export interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const t = useTranslations(locale);
+const t = useTranslations();
 
 // Formspree form ID. This is a public identifier (visible in the rendered
 // form action to any visitor), so there is no security benefit to reading
@@ -24,7 +19,6 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
   title={t('pageTitles.contato')}
   description={t('pageTitles.contatoDescription')}
   active="contato"
-  locale={locale}
 >
   <section class="contact-hero">
     <div class="section-glow lilac" style="top:-40px;left:50%;transform:translateX(-50%)"></div>
@@ -207,8 +201,7 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
         });
 
         if (response.ok) {
-          const localePrefix = location.pathname.startsWith('/pt/') ? '/pt' : '';
-          window.location.href = `${localePrefix}/contato/obrigado`;
+          window.location.href = '/contato/obrigado';
           return;
         }
 
