@@ -1,13 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import type { Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-const t = useTranslations();
+export interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <Layout
   title={t('pageTitles.obrigado')}
   description={t('pageTitles.obrigadoDescription')}
+  locale={locale}
 >
   <section class="ty-hero">
     <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:500px;height:400px"></div>

@@ -1,11 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import PostLayout from '../../layouts/PostLayout.astro';
+import PostLayout from '../../../layouts/PostLayout.astro';
 
-// EN-locale posts route. Only generates paths for posts marked
-// `lang: en` so PT posts render under /pt/posts/.
+// PT-locale posts route. Surfaces only `lang: pt` entries.
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en');
+  const posts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'pt');
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -20,6 +19,6 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<PostLayout post={post} locale="en">
+<PostLayout post={post} locale="pt">
   <Content />
 </PostLayout>

@@ -1,11 +1,19 @@
 ---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { defaultLocale, type Locale } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
 
 export interface Props {
   active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar';
+  locale: Locale;
 }
-const { active } = Astro.props;
-const t = useTranslations();
+const { active, locale } = Astro.props;
+const t = useTranslations(locale);
+
+// Locale-aware internal URLs. Hash anchors live on the locale home
+// so /pt/#segments scrolls on the PT homepage.
+const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
+const href = (path: string) => `${localePrefix}${path}`;
 
 type Link = {
   href: string;
@@ -15,18 +23,18 @@ type Link = {
 };
 
 const links: Array<Link> = [
-  { href: '/#hero', label: t('nav.home'), key: 'home' },
-  { href: '/about', label: t('nav.about'), key: 'about' },
-  { href: '/#segments', label: t('nav.segments'), key: 'segments' },
-  { href: '/#products', label: t('nav.products'), key: 'products' },
-  { href: '/blog', label: t('nav.blog'), key: 'blog', highlight: true },
-  { href: '/contato', label: t('nav.contato'), key: 'contato' },
+  { href: href('/#hero'), label: t('nav.home'), key: 'home' },
+  { href: href('/about'), label: t('nav.about'), key: 'about' },
+  { href: href('/#segments'), label: t('nav.segments'), key: 'segments' },
+  { href: href('/#products'), label: t('nav.products'), key: 'products' },
+  { href: href('/blog'), label: t('nav.blog'), key: 'blog', highlight: true },
+  { href: href('/contato'), label: t('nav.contato'), key: 'contato' },
 ];
 ---
 
 <nav id="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label={t('nav.ariaLogo')}>
+    <a href={href('/')} class="nav-logo" aria-label={t('nav.ariaLogo')}>
       <img src="/d.lab-mark.webp" alt="D.Lab Experts" class="nav-logo-img" width="71" height="16" />
     </a>
     <ul class="nav-links">
@@ -46,7 +54,8 @@ const links: Array<Link> = [
       })}
     </ul>
     <div class="nav-ctas">
-      <a href="/contato" class="btn btn-primary btn-sm">{t('nav.ctaProblem')}</a>
+      <LanguageSwitcher locale={locale} />
+      <a href={href('/contato')} class="btn btn-primary btn-sm">{t('nav.ctaProblem')}</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label={t('nav.ariaOpenMenu')}>
       <span></span><span></span><span></span>
@@ -68,11 +77,21 @@ const links: Array<Link> = [
       {link.highlight && <span class="nav-dot-dual" aria-hidden="true"></span>}
     </a>
   ))}
+  <div class="mobile-lang-switcher">
+    <LanguageSwitcher locale={locale} />
+  </div>
   <div class="mobile-ctas">
-    <a href="/contato" class="btn btn-primary">{t('nav.ctaProblem')}</a>
+    <a href={href('/contato')} class="btn btn-primary">{t('nav.ctaProblem')}</a>
   </div>
 </div>
 
 <style>
   .nav-ctas { display: inline-flex; align-items: center; gap: 14px; }
+  .mobile-lang-switcher {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
 </style>

@@ -6,12 +6,14 @@ import SvgDefs from '../components/SvgDefs.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
-import { htmlLang } from '../i18n/ui';
+import { htmlLang, type Locale } from '../i18n/ui';
+import { getLocaleFromUrl } from '../i18n/utils';
 
 export interface Props {
   title: string;
   description: string;
   active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar';
+  locale?: Locale;
   image?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
@@ -24,6 +26,7 @@ const {
   title,
   description,
   active,
+  locale: explicitLocale,
   image,
   type,
   publishedTime,
@@ -31,14 +34,19 @@ const {
   author,
   tags,
 } = Astro.props;
+
+// Pages pass `locale` explicitly; fall back to URL-based detection
+// for any page that doesn't.
+const locale: Locale = explicitLocale ?? getLocaleFromUrl(Astro.url);
 ---
 
 <!DOCTYPE html>
-<html lang={htmlLang}>
+<html lang={htmlLang[locale]}>
   <head>
     <BaseHead
       title={title}
       description={description}
+      locale={locale}
       image={image}
       type={type}
       publishedTime={publishedTime}
@@ -50,9 +58,9 @@ const {
   <body>
     <canvas id="geo-canvas"></canvas>
     <SvgDefs />
-    <Header active={active} />
+    <Header active={active} locale={locale} />
     <slot />
-    <Footer />
+    <Footer locale={locale} />
 
     <script>
       // ══ GEOMETRIC INTELLIGENCE CANVAS ══════════════════════════════════

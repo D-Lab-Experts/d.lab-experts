@@ -1,6 +1,23 @@
-// Kept as a one-locale stub so components can still call
-// useTranslations() without locale plumbing. The site is English only —
-// if PT/ES ever return, re-expand this registry and utils.ts.
-export type Locale = 'en';
+// Locale registry. English is the primary/default voice; PT-BR is a
+// first-class alternate for Brazilian partners. Display labels appear
+// verbatim in the LanguageSwitcher.
+export const locales = ['en', 'pt'] as const;
+export type Locale = (typeof locales)[number];
+
 export const defaultLocale: Locale = 'en';
-export const htmlLang = 'en';
+
+export const localeNames: Record<Locale, string> = {
+  en: 'English',
+  pt: 'Português',
+};
+
+export const localeShort: Record<Locale, string> = {
+  en: 'EN',
+  pt: 'PT',
+};
+
+// html lang attribute — full BCP 47 tags.
+export const htmlLang: Record<Locale, string> = {
+  en: 'en',
+  pt: 'pt-BR',
+};

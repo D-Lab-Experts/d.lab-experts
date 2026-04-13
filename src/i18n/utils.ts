@@ -1,14 +1,37 @@
+import { locales, defaultLocale, type Locale } from './ui';
 import en from './en';
+import pt from './pt';
 
-// Single English dictionary. `useTranslations()` keeps the same call
-// shape components were already using, so the transition to EN-only is
-// invisible at the call site.
+const dictionaries = { en, pt } as const;
+
+// EN is authoritative — PT must keep the same keys.
 export type Translation = typeof en;
 
-export function useTranslations() {
+/**
+ * Extract the active locale from a URL. Returns the default locale
+ * when the first path segment isn't a recognized locale.
+ */
+export function getLocaleFromUrl(url: URL): Locale {
+  const [, first] = url.pathname.split('/');
+  return (locales as readonly string[]).includes(first)
+    ? (first as Locale)
+    : defaultLocale;
+}
+
+/**
+ * Bind a locale and return a strongly-typed `t(key)` lookup. Falls
+ * back to the EN value if a key is missing in the requested locale —
+ * safer than throwing while translations are rolling out.
+ */
+export function useTranslations(locale: Locale = defaultLocale) {
+  const dict = dictionaries[locale];
+  const fallback = dictionaries[defaultLocale];
+
   return function t(key: TranslationKey): string {
-    const value = resolve(en, key);
-    if (value !== undefined) return value;
+    const fromLocale = resolve(dict, key);
+    if (fromLocale !== undefined) return fromLocale;
+    const fromFallback = resolve(fallback, key);
+    if (fromFallback !== undefined) return fromFallback;
     if (import.meta.env.DEV) {
       console.warn(`[i18n] Missing translation for key "${key}"`);
     }
@@ -27,6 +50,22 @@ function resolve(obj: unknown, key: string): string | undefined {
     }
   }
   return typeof cursor === 'string' ? cursor : undefined;
+}
+
+/**
+ * Build the URL for the same page in a different locale. Used by the
+ * LanguageSwitcher and hreflang link tags.
+ */
+export function getLocalizedPath(pathname: string, locale: Locale): string {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length && (locales as readonly string[]).includes(segments[0])) {
+    segments.shift();
+  }
+  const rest = segments.join('/');
+  if (locale === defaultLocale) {
+    return rest ? `/${rest}` : '/';
+  }
+  return rest ? `/${locale}/${rest}` : `/${locale}/`;
 }
 
 type Join<K, P> = K extends string

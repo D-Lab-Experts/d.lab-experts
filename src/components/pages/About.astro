@@ -1,15 +1,21 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
+import type { Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
-const t = useTranslations();
+export interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <Layout
   title={t('pageTitles.about')}
   description={t('pageTitles.aboutDescription')}
   active="about"
+  locale={locale}
 >
   <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
   <section class="about-hero">
