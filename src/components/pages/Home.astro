@@ -1,0 +1,869 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NeuralNetwork from '../NeuralNetwork.astro';
+import { getCollection } from 'astro:content';
+import type { Locale } from '../../i18n/ui';
+import { defaultLocale } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// Localized URL prefix for internal links (hash anchors + /blog etc.).
+const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
+const href = (path: string) => `${localePrefix}${path}`;
+
+// Research Hub surfaces publications in the visitor's own language when
+// available, falling back to the global pool if this locale has no
+// publications yet. Keeps the section useful during the translation
+// rollout instead of showing an empty state at /pt or /es.
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const localized = allPosts.filter((p) => p.data.lang === locale);
+const posts = (localized.length ? localized : allPosts).slice(0, 3);
+
+const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', string> = {
+  briefing: t('formats.briefing'),
+  report: t('formats.report'),
+  foresight: t('formats.foresight'),
+  sector: t('formats.sector'),
+};
+
+// BCP 47 map for Intl.DateTimeFormat. Hoisted out of the card map so
+// TypeScript type annotations stay out of the JSX expression.
+const dateLocaleMap: Record<Locale, string> = {
+  en: 'en-US',
+  pt: 'pt-BR',
+  es: 'es-419',
+};
+---
+
+<Layout
+  title={t('pageTitles.home')}
+  description={t('pageTitles.homeDescription')}
+  active="home"
+  locale={locale}
+>
+  <!-- ═══════════════ HERO ══════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-light-a"></div>
+    <div class="hero-light-b"></div>
+    <NeuralNetwork color="lilac" density="medium" opacity={0.32} />
+
+    <svg class="hero-orbital" viewBox="0 0 800 800" fill="none">
+      <circle cx="400" cy="400" r="300" stroke="rgba(177,140,255,0.15)" stroke-width="0.5" fill="none" stroke-dasharray="6 8"/>
+      <circle cx="400" cy="400" r="200" stroke="rgba(77,163,255,0.12)" stroke-width="0.5" fill="none" stroke-dasharray="4 10"/>
+      <circle cx="400" cy="400" r="100" stroke="rgba(177,140,255,0.1)" stroke-width="0.5" fill="none"/>
+      <circle r="3" fill="#B18CFF" opacity=".6">
+        <animateMotion dur="20s" repeatCount="indefinite" path="M400,100 A300,300 0 1,1 399.99,100"/>
+      </circle>
+      <circle r="2.5" fill="#4DA3FF" opacity=".5">
+        <animateMotion dur="15s" repeatCount="indefinite" path="M400,200 A200,200 0 1,1 399.99,200"/>
+      </circle>
+      <circle r="2" fill="#00E5A0" opacity=".4">
+        <animateMotion dur="10s" repeatCount="indefinite" path="M400,300 A100,100 0 1,1 399.99,300"/>
+      </circle>
+      <circle cx="400" cy="400" r="2" fill="rgba(177,140,255,0.3)"/>
+      <circle cx="250" cy="350" r="1.5" fill="rgba(77,163,255,0.25)"/>
+      <circle cx="550" cy="350" r="1.5" fill="rgba(77,163,255,0.25)"/>
+      <circle cx="400" cy="250" r="1.5" fill="rgba(177,140,255,0.2)"/>
+      <circle cx="400" cy="550" r="1.5" fill="rgba(177,140,255,0.2)"/>
+      <line x1="400" y1="400" x2="250" y2="350" stroke="rgba(177,140,255,0.08)" stroke-width="0.5"/>
+      <line x1="400" y1="400" x2="550" y2="350" stroke="rgba(77,163,255,0.08)" stroke-width="0.5"/>
+      <line x1="400" y1="400" x2="400" y2="250" stroke="rgba(177,140,255,0.06)" stroke-width="0.5"/>
+      <line x1="400" y1="400" x2="400" y2="550" stroke="rgba(177,140,255,0.06)" stroke-width="0.5"/>
+    </svg>
+
+    <div class="hero-inner">
+      <div class="fi d1">
+        <div class="hero-tag"><span class="tag-dot"></span>{t('hero.tag')}</div>
+        <h1 class="hero-h1">
+          {t('hero.h1Line1')}<br><span class="hero-accent">{t('hero.h1Accent')}</span>
+        </h1>
+        <p class="hero-sub">{t('hero.sub')}</p>
+        <div class="hero-ctas">
+          <a href={href('/blog')} class="btn btn-primary">{t('hero.ctaPrimary')}</a>
+          <a href={href('/#products')} class="btn btn-ghost">{t('hero.ctaSecondary')}</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-val">{t('hero.statNdaVal')}</div>
+            <div class="hero-stat-lbl">{t('hero.statNdaLbl')}</div>
+          </div>
+          <div>
+            <div class="hero-stat-val">{t('hero.statSeniorVal')}</div>
+            <div class="hero-stat-lbl">{t('hero.statSeniorLbl')}</div>
+          </div>
+          <div>
+            <div class="hero-stat-val">{t('hero.statProtocolVal')}</div>
+            <div class="hero-stat-lbl">{t('hero.statProtocolLbl')}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card-wrap fi d2">
+        <div class="hero-card">
+          <div class="hc-header">
+            <div style="display:flex;align-items:center">
+              <img src="/d.lab-icon.webp" alt="" class="hc-icon" width="28" height="28" />
+              <div>
+                <div class="hc-title">Affirmative Campaigns in Gaming</div>
+                <div class="hc-sub">Brazil · Original research · N=98</div>
+              </div>
+            </div>
+            <span class="badge badge-green badge-dot">Published</span>
+          </div>
+
+          <div class="hc-metrics">
+            <div class="hc-m"><div class="hc-m-val" style="color:var(--green)">87.8%</div><div class="hc-m-lbl">Perceived impact</div></div>
+            <div class="hc-m"><div class="hc-m-val" style="color:var(--yellow)">16.3%</div><div class="hc-m-lbl">Brand trust</div></div>
+            <div class="hc-m"><div class="hc-m-val" style="color:var(--lilac)">3.48×</div><div class="hc-m-lbl">Switch intent</div></div>
+          </div>
+
+          <div class="hc-chart">
+            <div class="hc-chart-label">Minority switch multiplier · 2023–2024</div>
+            <svg class="sparkline-svg" viewBox="0 0 320 56" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="spark-area" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#B18CFF" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#B18CFF" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4 L320,56 L0,56 Z" fill="url(#spark-area)"/>
+              <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4" fill="none" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" filter="url(#glow-f)"/>
+              <circle cx="320" cy="4" r="3" fill="#B18CFF" filter="url(#glow-f)">
+                <animate attributeName="opacity" values="1;0.4;1" dur="1.4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="320" cy="4" r="3" fill="none" stroke="#B18CFF" stroke-opacity=".6">
+                <animate attributeName="r" values="3;8;3" dur="1.4s" repeatCount="indefinite"/>
+                <animate attributeName="stroke-opacity" values=".6;0;.6" dur="1.4s" repeatCount="indefinite"/>
+              </circle>
+              <text x="0" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jan</text>
+              <text x="145" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jun</text>
+              <text x="300" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Dec</text>
+            </svg>
+          </div>
+
+          <div class="hc-bars">
+            <div class="hc-bar-row">
+              <div class="hc-bar-meta"><span class="hc-bar-name">Minority switch intent</span><span class="hc-bar-pct" style="color:var(--lilac)">73%</span></div>
+              <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="73"></div></div>
+            </div>
+            <div class="hc-bar-row">
+              <div class="hc-bar-meta"><span class="hc-bar-name">Non-minority switch intent</span><span class="hc-bar-pct" style="color:var(--blue)">44%</span></div>
+              <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="44"></div></div>
+            </div>
+          </div>
+
+          <div class="hc-verdict">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L10 6H15L11 9.5L12.5 15L8 11.5L3.5 15L5 9.5L1 6H6L8 1Z" fill="url(#g1)" opacity=".9"/></svg>
+            <div class="hc-verdict-text"><strong>D.Lab finding:</strong> Minority gamers are 3.48× more likely to switch brands for social commitment. Impact is real; brand trust is the challenge.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-ind">
+      <span class="label" style="font-size:9px">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ BRAND STATEMENT ═══════════════════════════════ -->
+  <section id="brand-statement">
+    <div class="brand-wave-bg">
+      <svg viewBox="0 0 1200 400" preserveAspectRatio="none">
+        <path class="brand-wave-line" d="M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200" stroke="rgba(177,140,255,0.25)" stroke-width="1">
+          <animate attributeName="d" dur="8s" repeatCount="indefinite" values="M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200;M0,200 Q150,260 300,200 T600,200 T900,200 T1200,200;M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200"/>
+        </path>
+        <path class="brand-wave-line" d="M0,200 Q200,160 400,200 T800,200 T1200,200" stroke="rgba(77,163,255,0.18)" stroke-width="0.8">
+          <animate attributeName="d" dur="10s" repeatCount="indefinite" values="M0,200 Q200,160 400,200 T800,200 T1200,200;M0,200 Q200,240 400,200 T800,200 T1200,200;M0,200 Q200,160 400,200 T800,200 T1200,200"/>
+        </path>
+        <path class="brand-wave-line" d="M0,200 Q300,180 600,200 T1200,200" stroke="rgba(0,229,160,0.1)" stroke-width="0.6">
+          <animate attributeName="d" dur="12s" repeatCount="indefinite" values="M0,200 Q300,180 600,200 T1200,200;M0,200 Q300,220 600,200 T1200,200;M0,200 Q300,180 600,200 T1200,200"/>
+        </path>
+      </svg>
+    </div>
+    <NeuralNetwork color="lilac" density="low" opacity={0.22} />
+    <div class="container">
+      <div class="brand-grid">
+        <div class="brand-text fi">
+          <h2 class="brand-title">
+            {t('brand.title')} <span class="gradient-text">{t('brand.titleAccent')}</span>
+          </h2>
+          <p class="brand-desc">{t('brand.desc')}</p>
+        </div>
+
+        <!-- Globe visualization: 6 labeled satellites orbiting a
+             wireframe Earth, signaling where our research lands in
+             the world. Outer rotation walks the points around the
+             globe; inner counter-rotation keeps each label upright. -->
+        <div class="brand-globe fi d1" aria-hidden="true">
+          <svg class="brand-globe-core" viewBox="0 0 280 280">
+            <defs>
+              <linearGradient id="globe-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#B18CFF" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#4DA3FF" stop-opacity="0.5"/>
+              </linearGradient>
+            </defs>
+            <!-- Outer wireframe sphere -->
+            <circle cx="140" cy="140" r="90" fill="none" stroke="url(#globe-grad)" stroke-width="1" stroke-opacity="0.55"/>
+            <!-- Latitude ellipses (horizontal slices) -->
+            <ellipse cx="140" cy="140" rx="90" ry="30" fill="none" stroke="rgba(177,140,255,0.22)" stroke-width="0.7"/>
+            <ellipse cx="140" cy="140" rx="90" ry="60" fill="none" stroke="rgba(177,140,255,0.18)" stroke-width="0.7"/>
+            <!-- Longitude ellipses (vertical slices) -->
+            <ellipse cx="140" cy="140" rx="30" ry="90" fill="none" stroke="rgba(77,163,255,0.22)" stroke-width="0.7"/>
+            <ellipse cx="140" cy="140" rx="60" ry="90" fill="none" stroke="rgba(77,163,255,0.18)" stroke-width="0.7"/>
+            <!-- Equator + prime meridian -->
+            <line x1="50" y1="140" x2="230" y2="140" stroke="rgba(177,140,255,0.35)" stroke-width="1"/>
+            <line x1="140" y1="50" x2="140" y2="230" stroke="rgba(177,140,255,0.35)" stroke-width="1"/>
+            <!-- Pulsing core dot (the Hub at the center) -->
+            <circle cx="140" cy="140" r="4" fill="url(#globe-grad)">
+              <animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="1;.5;1" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Ring pulse outward from core -->
+            <circle cx="140" cy="140" r="4" fill="none" stroke="url(#globe-grad)" stroke-width="1">
+              <animate attributeName="r" values="4;90;4" dur="5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values=".8;0;.8" dur="5s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- Impact connections: signal pulses traveling between
+                 points on the globe, each with a fading trace line so
+                 the viewer sees WHERE the connection runs. Staggered
+                 timing + different hues read as three independent
+                 channels of cross-reference happening inside the Hub. -->
+            <g class="globe-connections">
+              <!-- Connection 1: top → right (upper-right arc) -->
+              <path id="conn-path-1" d="M 140,50 Q 210,70 230,140" fill="none" stroke="none"/>
+              <path d="M 140,50 Q 210,70 230,140" fill="none" stroke="#B18CFF" stroke-width="1" stroke-opacity="0" stroke-linecap="round">
+                <animate attributeName="stroke-opacity" values="0;0.55;0" dur="4s" keyTimes="0;0.5;1" repeatCount="indefinite" begin="0s"/>
+              </path>
+              <circle r="3" fill="#B18CFF" opacity="0" filter="url(#glow-f)">
+                <animate attributeName="opacity" values="0;1;1;0" dur="4s" keyTimes="0;0.12;0.85;1" repeatCount="indefinite" begin="0s"/>
+                <animateMotion dur="4s" repeatCount="indefinite" begin="0s">
+                  <mpath href="#conn-path-1"/>
+                </animateMotion>
+              </circle>
+
+              <!-- Connection 2: left → bottom-right (diagonal chord) -->
+              <path id="conn-path-2" d="M 50,140 L 204,204" fill="none" stroke="none"/>
+              <path d="M 50,140 L 204,204" fill="none" stroke="#4DA3FF" stroke-width="1" stroke-opacity="0" stroke-linecap="round">
+                <animate attributeName="stroke-opacity" values="0;0.5;0" dur="4s" keyTimes="0;0.5;1" repeatCount="indefinite" begin="-2s"/>
+              </path>
+              <circle r="3" fill="#4DA3FF" opacity="0" filter="url(#glow-f)">
+                <animate attributeName="opacity" values="0;1;1;0" dur="4s" keyTimes="0;0.12;0.85;1" repeatCount="indefinite" begin="-2s"/>
+                <animateMotion dur="4s" repeatCount="indefinite" begin="-2s">
+                  <mpath href="#conn-path-2"/>
+                </animateMotion>
+              </circle>
+
+              <!-- Connection 3: top-right → bottom-left (curved through center) -->
+              <path id="conn-path-3" d="M 204,76 Q 140,140 76,204" fill="none" stroke="none"/>
+              <path d="M 204,76 Q 140,140 76,204" fill="none" stroke="#00E5A0" stroke-width="1" stroke-opacity="0" stroke-linecap="round">
+                <animate attributeName="stroke-opacity" values="0;0.45;0" dur="5s" keyTimes="0;0.5;1" repeatCount="indefinite" begin="-1.5s"/>
+              </path>
+              <circle r="3" fill="#00E5A0" opacity="0" filter="url(#glow-f)">
+                <animate attributeName="opacity" values="0;1;1;0" dur="5s" keyTimes="0;0.12;0.85;1" repeatCount="indefinite" begin="-1.5s"/>
+                <animateMotion dur="5s" repeatCount="indefinite" begin="-1.5s">
+                  <mpath href="#conn-path-3"/>
+                </animateMotion>
+              </circle>
+            </g>
+          </svg>
+
+          <!-- 6 orbiting labels. Each uses `transform: rotate(a)
+               translateX(r) rotate(-a)` keyframes: outer rotate
+               walks around the globe, inner counter-rotate keeps the
+               label upright. Delays distribute them at 60° intervals. -->
+          <div class="brand-point" style="--delay: 0s">
+            <span class="brand-point-dot"></span>
+            <span class="brand-point-label">Communication studies</span>
+          </div>
+          <div class="brand-point" style="--delay: -5s">
+            <span class="brand-point-dot"></span>
+            <span class="brand-point-label">ESG strategy</span>
+          </div>
+          <div class="brand-point" style="--delay: -10s">
+            <span class="brand-point-dot"></span>
+            <span class="brand-point-label">Venture capital</span>
+          </div>
+          <div class="brand-point" style="--delay: -15s">
+            <span class="brand-point-dot"></span>
+            <span class="brand-point-label">Policy analysis</span>
+          </div>
+          <div class="brand-point" style="--delay: -20s">
+            <span class="brand-point-dot"></span>
+            <span class="brand-point-label">Market foresight</span>
+          </div>
+          <div class="brand-point" style="--delay: -25s">
+            <span class="brand-point-dot"></span>
+            <span class="brand-point-label">Security posture</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ TRUST BAR ═════════════════════════════════════ -->
+  <div id="logos">
+    <div class="container">
+      <p class="logos-lbl label">{t('trust.title')}</p>
+      <div class="trust-row">
+        <div class="trust-item">
+          <div class="trust-val">{t('trust.ndaVal')}</div>
+          <div class="trust-lbl">{t('trust.ndaLbl')}</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">{t('trust.seniorVal')}</div>
+          <div class="trust-lbl">{t('trust.seniorLbl')}</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">{t('trust.dualVal')}</div>
+          <div class="trust-lbl">{t('trust.dualLbl')}</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">{t('trust.methodVal')}</div>
+          <div class="trust-lbl">{t('trust.methodLbl')}</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">{t('trust.openVal')}</div>
+          <div class="trust-lbl">{t('trust.openLbl')}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ LATEST PUBLICATIONS (Research Hub flagship) ═══════ -->
+  <div class="section-sep"></div>
+  <section id="research" class="section">
+    <div class="section-glow violet" style="top:-60px;right:-100px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(167,139,250,.05) 0%,transparent 70%);filter:blur(60px);position:absolute;pointer-events:none;border-radius:50%"></div>
+    <div class="section-glow blue" style="bottom:0;left:-80px"></div>
+    <canvas class="section-particles" data-color="lilac"></canvas>
+    <div class="container">
+      <div class="research-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">{t('research.eyebrow')}</span></div>
+        <h2 class="section-title">{t('research.title')}<br><span class="gradient-text">{t('research.titleAccent')}</span></h2>
+        <p class="section-sub" style="margin:0 auto">{t('research.sub')}</p>
+      </div>
+
+      <div class="research-grid fi">
+        {posts.map((post) => {
+          const isOriginal = post.data.researchType === 'original';
+          const cat = post.data.category.toLowerCase();
+          const extraTag = post.data.tags.find((tag: string) => tag.toLowerCase() !== cat);
+          const postHref = post.data.lang === defaultLocale
+            ? `/posts/${post.slug}`
+            : `/${post.data.lang}/posts/${post.slug}`;
+          return (
+          <a href={postHref} class="research-card fi d1" style="position:relative">
+            <div class="research-card-img" style="padding:0;background:#0B0B0F">
+              {post.data.cover && (
+                <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
+              )}
+            </div>
+            <div class="research-card-body">
+              <div class="research-card-tags">
+                {isOriginal && <span class="research-card-tag original">{t('blog.originalMarker')}</span>}
+                <span class="research-card-tag">{post.data.category}</span>
+                {!isOriginal && extraTag && (
+                  <span class="research-card-tag blue">{extraTag}</span>
+                )}
+              </div>
+              <h3 class="research-card-title">{post.data.title}</h3>
+              <p class="research-card-excerpt">{post.data.description}</p>
+              <div class="research-card-format-row">
+                <span class={`research-card-format format-${post.data.format}`}>
+                  <span class="format-dot"></span>{formatLabelMap[post.data.format]}
+                </span>
+                {post.data.readingTime && (
+                  <>
+                    <span class="blog-card-dot"></span>
+                    <span class="research-card-time">{post.data.readingTime}</span>
+                  </>
+                )}
+              </div>
+              <div class="research-card-footer">
+                <span class="research-card-date">{post.data.pubDate.toLocaleDateString(dateLocaleMap[locale], { year: 'numeric', month: 'long' })}</span>
+                <span class="research-card-read">{t('research.readCta')} <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </div>
+          </a>
+          );
+        })}
+      </div>
+
+      <div class="research-cta fi">
+        <a href={href('/blog')} class="btn btn-ghost">{t('research.cta')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ RESEARCH AGENDA ════════════════════════════════ -->
+  <div class="section-sep"></div>
+  <section id="segments" class="section">
+    <div class="section-glow lilac" style="top:-100px;right:-150px"></div>
+    <div class="section-glow blue" style="bottom:-80px;left:-100px"></div>
+    <canvas class="section-particles" data-color="lilac"></canvas>
+    <div class="container">
+      <div class="seg-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">{t('segments.eyebrow')}</span></div>
+        <h2 class="section-title">{t('segments.title')}<br><span class="gradient-text">{t('segments.titleAccent')}</span></h2>
+        <p class="section-sub" style="margin:0 auto">{t('segments.sub')}</p>
+      </div>
+      <div class="seg-grid">
+        <div class="seg-card fi d1">
+          <div class="icon-wrap" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="url(#g1)" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="url(#g1)" stroke-width="1.5"/><path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="url(#g1)" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--lilac)">{t('segments.marketTag')}</div>
+          <div class="seg-name">{t('segments.marketName')}</div>
+          <p class="seg-desc">{t('segments.marketDesc')}</p>
+          <div class="seg-samples">
+            <span class="seg-sample">{t('segments.marketSample1')}</span>
+            <span class="seg-sample">{t('segments.marketSample2')}</span>
+            <span class="seg-sample">{t('segments.marketSample3')}</span>
+          </div>
+        </div>
+
+        <div class="seg-card blue fi d2">
+          <div class="icon-wrap blue" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="url(#g2)" stroke-width="1.5"/><path d="M15.5 12v7M12 15.5h7" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--blue)">{t('segments.stratTag')}</div>
+          <div class="seg-name">{t('segments.stratName')}</div>
+          <p class="seg-desc">{t('segments.stratDesc')}</p>
+          <div class="seg-samples">
+            <span class="seg-sample">{t('segments.stratSample1')}</span>
+            <span class="seg-sample">{t('segments.stratSample2')}</span>
+            <span class="seg-sample">{t('segments.stratSample3')}</span>
+          </div>
+        </div>
+
+        <div class="seg-card yellow fi d3">
+          <div class="icon-wrap yellow" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><path d="M11 3l8 8-8 8-8-8 8-8z" stroke="url(#g-yellow)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="11" cy="11" r="3.8" stroke="url(#g-yellow)" stroke-width="1.5"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--yellow)">{t('segments.politicsTag')}</div>
+          <div class="seg-name">{t('segments.politicsName')}</div>
+          <p class="seg-desc">{t('segments.politicsDesc')}</p>
+          <div class="seg-samples">
+            <span class="seg-sample">{t('segments.politicsSample1')}</span>
+            <span class="seg-sample">{t('segments.politicsSample2')}</span>
+            <span class="seg-sample">{t('segments.politicsSample3')}</span>
+          </div>
+        </div>
+
+        <div class="seg-card violet fi d2">
+          <div class="icon-wrap violet" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><polyline points="3,15 7,9 11,12 15,6 19,8" stroke="url(#g-violet)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="19" cy="8" r="2" fill="url(#g-violet)" opacity=".7"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--violet)">{t('segments.foresightTag')}</div>
+          <div class="seg-name">{t('segments.foresightName')}</div>
+          <p class="seg-desc">{t('segments.foresightDesc')}</p>
+          <div class="seg-samples">
+            <span class="seg-sample">{t('segments.foresightSample1')}</span>
+            <span class="seg-sample">{t('segments.foresightSample2')}</span>
+            <span class="seg-sample">{t('segments.foresightSample3')}</span>
+          </div>
+        </div>
+
+        <div class="seg-card green fi d3">
+          <div class="icon-wrap green" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><path d="M3 18l4-4 4 3 4-6 4-4" stroke="url(#g-green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="18" r="1.5" fill="url(#g-green)"/><circle cx="19" cy="7" r="1.5" fill="url(#g-green)"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--green)">{t('segments.compTag')}</div>
+          <div class="seg-name">{t('segments.compName')}</div>
+          <p class="seg-desc">{t('segments.compDesc')}</p>
+          <div class="seg-samples">
+            <span class="seg-sample">{t('segments.compSample1')}</span>
+            <span class="seg-sample">{t('segments.compSample2')}</span>
+            <span class="seg-sample">{t('segments.compSample3')}</span>
+          </div>
+        </div>
+
+        <div class="seg-card cyan fi d4">
+          <div class="icon-wrap cyan" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><path d="M11 2L4 5.5v5c0 4.7 3 8.5 7 10 4-1.5 7-5.3 7-10v-5L11 2z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11l2.5 2.5L14.5 9" stroke="url(#g-green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="seg-tag" style="color:var(--cyan)">{t('segments.cyberTag')}</div>
+          <div class="seg-name">{t('segments.cyberName')}</div>
+          <p class="seg-desc">{t('segments.cyberDesc')}</p>
+          <div class="seg-samples">
+            <span class="seg-sample">{t('segments.cyberSample1')}</span>
+            <span class="seg-sample">{t('segments.cyberSample2')}</span>
+            <span class="seg-sample">{t('segments.cyberSample3')}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ COMO FUNCIONA ════════════════════════════════ -->
+  <section id="how" class="section">
+    <div class="dot-bg"></div>
+    <div class="section-glow blue" style="top:50%;left:-120px;transform:translateY(-50%)"></div>
+    <canvas class="section-particles" data-color="blue"></canvas>
+    <div class="container">
+      <div class="how-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">{t('how.eyebrow')}</span></div>
+        <h2 class="section-title">{t('how.title')}</h2>
+        <p class="section-sub" style="margin:0 auto">{t('how.sub')}</p>
+      </div>
+      <div class="steps-grid fi">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><path d="M11 3L13.5 8.5H19L14.5 12L16.5 18L11 14.5L5.5 18L7.5 12L3 8.5H8.5L11 3Z" stroke="url(#g1)" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <div class="step-title">{t('how.step1Title')}</div>
+          <p class="step-desc">{t('how.step1Desc')}</p>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(177,140,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="icon-wrap blue"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke="url(#g2)" stroke-width="1.5"/><path d="M11 7v4l3 2" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="step-title">{t('how.step2Title')}</div>
+          <p class="step-desc">{t('how.step2Desc')}</p>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(77,163,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="icon-wrap cyan"><svg viewBox="0 0 22 22" fill="none"><rect x="3" y="13" width="3" height="6" rx="1" fill="url(#g-green)" opacity=".7"/><rect x="8" y="9" width="3" height="10" rx="1" fill="url(#g-green)"/><rect x="13" y="5" width="3" height="14" rx="1" fill="url(#g-green)"/><rect x="18" y="3" width="3" height="16" rx="1" fill="url(#g1)"/></svg></div>
+          <div class="step-title">{t('how.step3Title')}</div>
+          <p class="step-desc">{t('how.step3Desc')}</p>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(0,212,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="icon-wrap green"><svg viewBox="0 0 22 22" fill="none"><path d="M4 12l5 5L18 6" stroke="url(#g-green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="step-title">{t('how.step4Title')}</div>
+          <p class="step-desc">{t('how.step4Desc')}</p>
+        </div>
+      </div>
+
+      <!-- Data sources absorbed into the methodology section as a
+           compact pill strip: what we cross-reference is part of how
+           we research, not a separate product tour. -->
+      <div class="methodology-sources fi d1">
+        <div class="methodology-sources-label">{t('how.sourcesLabel')}</div>
+        <div class="methodology-sources-pills">
+          <span class="source-pill"><span class="source-pill-dot lilac"></span>{t('how.sourceApis')}</span>
+          <span class="source-pill"><span class="source-pill-dot green"></span>{t('how.sourceOpen')}</span>
+          <span class="source-pill"><span class="source-pill-dot blue"></span>{t('how.sourceTrends')}</span>
+          <span class="source-pill"><span class="source-pill-dot yellow"></span>{t('how.sourceScraping')}</span>
+          <span class="source-pill"><span class="source-pill-dot cyan"></span>{t('how.sourceWeb')}</span>
+          <span class="source-pill"><span class="source-pill-dot violet"></span>{t('how.sourcePrimary')}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ DEMO ══════════════════ -->
+  <section id="demo" class="section">
+    <div class="section-glow green" style="top:20%;right:-100px"></div>
+    <div class="section-glow lilac" style="bottom:10%;left:-120px"></div>
+    <canvas class="section-particles" data-color="green"></canvas>
+    <NeuralNetwork color="lilac" density="low" opacity={0.25} />
+    <div class="container">
+      <div class="demo-inner">
+        <div class="fi-l">
+          <div class="section-label"><span class="label">Anatomy of a publication</span></div>
+          <h2 class="section-title">What a D.Lab Experts<br>publication actually shows.</h2>
+          <p class="section-sub">Real findings from our study on affirmative campaigns in the Brazilian gaming market (N=98 gamers). Every metric computed from primary data, every recommendation with reasoning in the open, ready to be challenged.</p>
+          <div class="demo-points">
+            <div class="demo-pt">
+              <div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><rect x="3" y="11" width="3" height="8" rx="1" fill="url(#g1)" opacity=".6"/><rect x="8" y="7" width="3" height="12" rx="1" fill="url(#g1)" opacity=".8"/><rect x="13" y="4" width="3" height="15" rx="1" fill="url(#g1)"/><rect x="18" y="2" width="3" height="17" rx="1" fill="url(#g2)"/></svg></div>
+              <div>
+                <div class="demo-pt-title">Headline metrics, anchored in data</div>
+                <div class="demo-pt-desc">The numbers that carry the argument. Each one computed from primary survey data with documented methodology and statistical test.</div>
+              </div>
+            </div>
+            <div class="demo-pt">
+              <div class="icon-wrap blue"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="url(#g2)" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="url(#g2)" stroke-width="1.5"/><path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="url(#g2)" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+              <div>
+                <div class="demo-pt-title">Primary research, documented</div>
+                <div class="demo-pt-desc">98 Brazilian gamers surveyed across 2023–2024. Instrumentation, sample and Fisher's exact test published alongside the findings so the result is reproducible.</div>
+              </div>
+            </div>
+            <div class="demo-pt">
+              <div class="icon-wrap green"><svg viewBox="0 0 22 22" fill="none"><path d="M4 13l5 5L18 6" stroke="url(#g-green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div>
+                <div class="demo-pt-title">Analyst position, exposed</div>
+                <div class="demo-pt-desc">Not just data. The analyst's interpretation of what the numbers mean for marketing and ESG decisions, with the path from data to claim in the open so anyone can challenge it.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fi-r d1">
+          <div class="report-card">
+            <div class="rc-header">
+              <div class="rc-header-left">
+                <img src="/d.lab-icon.webp" alt="" class="rc-header-icon" width="24" height="24" loading="lazy" />
+                <div><div class="rc-title">Affirmative Campaigns in Gaming · Brazil</div><div class="rc-sub">Original research · D.Lab #0001 · N=98</div></div>
+              </div>
+              <span class="badge badge-green badge-dot">Published</span>
+            </div>
+            <div class="rc-tabs">
+              <button class="rc-tab active" data-tab="overview">Overview</button>
+              <button class="rc-tab" data-tab="demand">Findings</button>
+              <button class="rc-tab" data-tab="score">Groups</button>
+            </div>
+            <div class="rc-tab-panel active" data-panel="overview">
+              <div class="rc-metrics">
+                <div class="rc-m"><span class="badge badge-green">87.8%</span><div class="rc-m-name">Perceived impact</div></div>
+                <div class="rc-m"><span class="badge badge-yellow">16.3%</span><div class="rc-m-name">Brand trust</div></div>
+                <div class="rc-m"><span class="badge badge-lilac">3.48×</span><div class="rc-m-name">Switch multiplier</div></div>
+              </div>
+              <div class="rc-charts">
+                <div class="rc-chart-title">Response distribution</div>
+                <div class="donut-wrap">
+                  <svg class="donut-svg" width="90" height="90" viewBox="0 0 90 90">
+                    <circle cx="45" cy="45" r="38" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="8"/>
+                    <circle cx="45" cy="45" r="38" fill="none" stroke="url(#g-green)" stroke-width="8" stroke-linecap="round" stroke-dasharray="190 239" stroke-dashoffset="60"/>
+                    <circle cx="45" cy="45" r="28" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="7"/>
+                    <circle cx="45" cy="45" r="28" fill="none" stroke="url(#g2)" stroke-width="7" stroke-linecap="round" stroke-dasharray="150 176" stroke-dashoffset="44"/>
+                    <circle cx="45" cy="45" r="18" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="6"/>
+                    <circle cx="45" cy="45" r="18" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round" stroke-dasharray="95 113" stroke-dashoffset="28"/>
+                    <text x="45" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#EAEAF0" font-family="Satoshi">3.48×</text>
+                    <text x="45" y="54" text-anchor="middle" font-size="8" fill="rgba(234,234,240,0.35)" font-family="Satoshi">SWITCH</text>
+                  </svg>
+                  <div class="donut-legend">
+                    <div class="donut-leg-item"><div class="donut-leg-dot" style="background:var(--green)"></div>Perceived impact: 88%</div>
+                    <div class="donut-leg-item"><div class="donut-leg-dot" style="background:var(--blue)"></div>Minority switch intent: 73%</div>
+                    <div class="donut-leg-item"><div class="donut-leg-dot" style="background:var(--lilac)"></div>Brand trust: 16%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="line-chart-wrap">
+                <div class="rc-chart-title" style="padding-top:18px">Switch intent by group · % who would switch brands</div>
+                <svg class="line-chart-svg" viewBox="0 0 320 80" preserveAspectRatio="none">
+                  <line x1="0" y1="20" x2="320" y2="20" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+                  <line x1="0" y1="40" x2="320" y2="40" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+                  <line x1="0" y1="60" x2="320" y2="60" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+                  <path d="M0,62 C26,58 53,54 80,46 C106,38 133,40 160,32 C186,24 213,26 240,18 C266,10 293,12 320,6 L320,80 L0,80 Z" fill="url(#g-area)"/>
+                  <path class="line-draw" d="M0,62 C26,58 53,54 80,46 C106,38 133,40 160,32 C186,24 213,26 240,18 C266,10 293,12 320,6" fill="none" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" filter="url(#glow-f)"/>
+                  <path d="M0,70 C26,68 53,66 80,62 C106,58 133,60 160,56 C186,52 213,50 240,46 C266,42 293,44 320,40 L320,80 L0,80 Z" fill="url(#g-area2)"/>
+                  <path class="line-draw" d="M0,70 C26,68 53,66 80,62 C106,58 133,60 160,56 C186,52 213,50 240,46 C266,42 293,44 320,40" fill="none" stroke="url(#g-line2)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="4 2"/>
+                  <circle cx="320" cy="6" r="3" fill="#B18CFF" filter="url(#glow-f)"/>
+                  <circle cx="320" cy="40" r="3" fill="#00E5A0" filter="url(#glow-f)"/>
+                  <text x="0" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Jan</text>
+                  <text x="148" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Jun</text>
+                  <text x="305" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Dec</text>
+                </svg>
+              </div>
+              <div class="rc-bars">
+                <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Perceived impact of campaigns</span><span class="rc-bar-pct" style="color:var(--green)">88%</span></div><div class="rc-bar-track"><div class="rc-bar-fill demo-bar green" data-v="88"></div></div></div>
+                <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Minority gamer switch intent</span><span class="rc-bar-pct" style="color:var(--blue)">73%</span></div><div class="rc-bar-track"><div class="rc-bar-fill demo-bar" data-v="73"></div></div></div>
+                <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Non-minority switch intent</span><span class="rc-bar-pct" style="color:var(--lilac)">44%</span></div><div class="rc-bar-track"><div class="rc-bar-fill demo-bar" data-v="44"></div></div></div>
+                <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Trust in brand sincerity</span><span class="rc-bar-pct" style="color:var(--yellow)">16%</span></div><div class="rc-bar-track"><div class="rc-bar-fill demo-bar yellow" data-v="16"></div></div></div>
+              </div>
+              <div class="rc-verdict">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M9 1.5L11.5 7H17L12.5 10.5L14.5 17L9 13.5L3.5 17L5.5 10.5L1 7H6.5L9 1.5Z" fill="url(#g1)" opacity=".95"/></svg>
+                <div class="rc-verdict-text"><strong>D.Lab finding:</strong> Gamers from minority groups are <strong>3.48× more likely</strong> to switch brands for social commitment. But only 16.3% trust brands are sincere about it. Impact is real; sincerity is the narrative challenge.</div>
+              </div>
+            </div>
+            <div class="rc-tab-panel" data-panel="demand">
+              <div class="rc-demand-detail">
+                <div class="rc-demand-grid">
+                  <div class="rc-demand-card"><div class="rc-demand-val" style="color:var(--green)">98</div><div class="rc-demand-lbl">Respondents</div></div>
+                  <div class="rc-demand-card"><div class="rc-demand-val" style="color:var(--blue)">3.48×</div><div class="rc-demand-lbl">Switch multiplier</div></div>
+                  <div class="rc-demand-card"><div class="rc-demand-val" style="color:var(--lilac)">87.8%</div><div class="rc-demand-lbl">Perceived impact</div></div>
+                  <div class="rc-demand-card"><div class="rc-demand-val" style="color:var(--yellow)">16.3%</div><div class="rc-demand-lbl">Brand trust</div></div>
+                </div>
+                <div class="rc-demand-note">Survey of 98 Brazilian gamers (2023–2024). Statistical significance: Fisher's exact test, p &lt; 0.01. Sample profile and full methodology published alongside the report.</div>
+              </div>
+            </div>
+            <div class="rc-tab-panel" data-panel="score">
+              <div class="rc-score-detail">
+                <div class="rc-score-big">3.48×</div>
+                <div class="rc-score-label">Minority vs non-minority switch multiplier</div>
+                <div class="rc-score-bars">
+                  <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Minority switch intent</span><span class="rc-bar-pct" style="color:var(--green)">73%</span></div><div class="rc-bar-track"><div class="rc-bar-fill score-bar green" data-v="73"></div></div></div>
+                  <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Non-minority switch intent</span><span class="rc-bar-pct" style="color:var(--blue)">44%</span></div><div class="rc-bar-track"><div class="rc-bar-fill score-bar" data-v="44"></div></div></div>
+                  <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Perceived impact</span><span class="rc-bar-pct" style="color:var(--lilac)">88%</span></div><div class="rc-bar-track"><div class="rc-bar-fill score-bar" data-v="88"></div></div></div>
+                  <div class="rc-bar-row"><div class="rc-bar-meta"><span class="rc-bar-lbl">Brand trust (sincerity)</span><span class="rc-bar-pct" style="color:var(--cyan)">16%</span></div><div class="rc-bar-track"><div class="rc-bar-fill score-bar" data-v="16"></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+  <!-- ═══════════════ OPEN COLLABORATION ═════════════════════════════ -->
+  <section id="collaborate" class="home-colab-section">
+    <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:520px;height:380px"></div>
+    <div class="section-glow blue" style="bottom:-60px;right:-100px"></div>
+    <div class="container">
+      <div class="home-colab-inner fi">
+        <div class="section-label" style="justify-content:center;margin-bottom:20px">
+          <span class="label">{t('blog.colabLabel')}</span>
+        </div>
+        <h2 class="section-title">{t('blog.colabTitle')}<br><span class="gradient-text">{t('blog.colabTitleAccent')}</span></h2>
+        <p class="section-sub" style="margin:0 auto 28px;max-width:640px">{t('blog.colabSub')}</p>
+        <div class="home-colab-modes">
+          <span class="home-colab-chip">{t('blog.colabChipSubmit')}</span>
+          <span class="home-colab-chip">{t('blog.colabChipCo')}</span>
+          <span class="home-colab-chip">{t('blog.colabChipData')}</span>
+          <span class="home-colab-chip">{t('blog.colabChipReview')}</span>
+        </div>
+        <div class="home-colab-ctas">
+          <a href={href('/colaborar')} class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
+          <a href={href('/colaborar')} class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CONTRIBUTORS HALL ══════════════════════════════ -->
+  <section class="contributors-hall" aria-label={t('contributors.label')}>
+    <div class="contributors-marquee">
+      <div class="contributors-track">
+        <span class="contributors-label">{t('contributors.label')}</span>
+        <span class="contributor-sep">·</span>
+        <span class="contributor">Gabriel Olegário</span>
+        <span class="contributor-sep">·</span>
+        <span class="contributor">Lucas HCC Santos</span>
+        <span class="contributor-sep">·</span>
+        <span class="contributor">Gustavo Lima</span>
+        <span class="contributor-sep">·</span>
+        <span class="contributors-label" aria-hidden="true">{t('contributors.label')}</span>
+        <span class="contributor-sep" aria-hidden="true">·</span>
+        <span class="contributor" aria-hidden="true">Gabriel Olegário</span>
+        <span class="contributor-sep" aria-hidden="true">·</span>
+        <span class="contributor" aria-hidden="true">Lucas HCC Santos</span>
+        <span class="contributor-sep" aria-hidden="true">·</span>
+        <span class="contributor" aria-hidden="true">Gustavo Lima</span>
+        <span class="contributor-sep" aria-hidden="true">·</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+  <!-- ═══════════════ SOBRE ══════════════════════════════════════════ -->
+  <section id="about" class="section">
+    <div class="section-glow lilac" style="top:20%;left:-100px"></div>
+    <div class="section-glow blue" style="bottom:10%;right:-80px"></div>
+    <canvas class="section-particles" data-color="lilac"></canvas>
+    <div class="container">
+      <div class="fi" style="text-align:center;margin-bottom:56px">
+        <div class="section-label" style="justify-content:center"><span class="label">{t('about.eyebrow')}</span></div>
+        <h2 class="section-title">{t('about.title')}<br><span class="gradient-text">{t('about.titleAccent')}</span></h2>
+        <p class="section-sub" style="margin:0 auto">{t('about.sub')}</p>
+      </div>
+
+      <div class="home-about-layout">
+        <div class="home-about-text fi-l">
+          <p>{t('about.p1')}</p>
+          <p>{t('about.p2')}</p>
+          <p>{t('about.p3')}</p>
+          <p>{t('about.p4')}</p>
+        </div>
+        <div class="home-about-side fi-r d1">
+          <div class="home-about-pillars">
+            <div class="about-pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5L10 2Z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              <div class="about-pillar-title">{t('about.pillarMethodTitle')}</div>
+              <div class="about-pillar-desc">{t('about.pillarMethodDesc')}</div>
+            </div>
+            <div class="about-pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="url(#g1)" stroke-width="1.2"/><circle cx="10" cy="10" r="3" stroke="url(#g1)" stroke-width="1.2"/><path d="M10 3v2M10 15v2M3 10h2M15 10h2" stroke="url(#g1)" stroke-width="1" stroke-linecap="round"/></svg>
+              <div class="about-pillar-title">{t('about.pillarPrimaryTitle')}</div>
+              <div class="about-pillar-desc">{t('about.pillarPrimaryDesc')}</div>
+            </div>
+            <div class="about-pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 15l4-4 3 2.5 4-5.5 3-2" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="about-pillar-title">{t('about.pillarReasoningTitle')}</div>
+              <div class="about-pillar-desc">{t('about.pillarReasoningDesc')}</div>
+            </div>
+            <div class="about-pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L4 5.5v5c0 4 2.5 7.2 6 8.5 3.5-1.3 6-4.5 6-8.5v-5L10 2z" stroke="url(#g-green)" stroke-width="1.2" stroke-linejoin="round"/><path d="M7.5 10l2 2 3.5-4" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="about-pillar-title">{t('about.pillarIndepTitle')}</div>
+              <div class="about-pillar-desc">{t('about.pillarIndepDesc')}</div>
+            </div>
+          </div>
+          <div class="home-about-cta">
+            <a href={href('/about')} class="btn btn-ghost">{t('about.ctaAbout')}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+  <!-- ═══════════════ FRENTES DE CONSULTORIA (demoted to secondary) ═══ -->
+  <section id="products" class="section section-consulting-demoted">
+    <div class="section-glow lilac" style="top:-50px;left:50%;transform:translateX(-50%);opacity:.5"></div>
+    <div class="container">
+      <div class="how-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">{t('products.eyebrow')}</span></div>
+        <h2 class="section-title">{t('products.title')}<br><span class="gradient-text">{t('products.titleAccent')}</span></h2>
+        <p class="section-sub" style="margin:0 auto">{t('products.sub')}</p>
+      </div>
+
+      <div style="margin-bottom:12px" class="fi"><span class="label" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:16px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><rect x="8" y="1" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><rect x="1" y="8" width="5" height="5" rx="1.5" stroke="url(#g1)" stroke-width="1"/><path d="M10.5 8v5M8 10.5h5" stroke="url(#g1)" stroke-width="1" stroke-linecap="round"/></svg>{t('products.intHeader')}</span></div>
+      <div class="prod-grid fi">
+        <div class="prod-card fi-l d1">
+          <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="url(#g1)" stroke-width="1.6"/><path d="M13 8v5l3.5 2" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="prod-name">{t('products.intBaseName')}</div>
+          <p class="prod-desc">{t('products.intBaseDesc')}</p>
+          <a href={href('/contato')} class="prod-cta">{t('products.ctaPropose')}</a>
+        </div>
+        <div class="prod-card fi d2">
+          <div class="icon-wrap lg"><svg viewBox="0 0 26 26" fill="none"><path d="M5 20L13 4l8 16H5z" stroke="url(#g1)" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.5 15h11" stroke="url(#g1)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="prod-name">{t('products.intDeepName')}</div>
+          <p class="prod-desc">{t('products.intDeepDesc')}</p>
+          <a href={href('/contato')} class="prod-cta">{t('products.ctaPropose')}</a>
+        </div>
+        <div class="prod-card fi-r d1">
+          <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><rect x="4" y="7" width="18" height="13" rx="3" stroke="url(#g-green)" stroke-width="1.5"/><path d="M9 7V5.5a4 4 0 018 0V7" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="14" r="1.5" fill="url(#g-green)"/></svg></div>
+          <div class="prod-name">{t('products.intAIName')}</div>
+          <p class="prod-desc">{t('products.intAIDesc')}</p>
+          <a href={href('/contato')} class="prod-cta">{t('products.ctaStart')}</a>
+        </div>
+      </div>
+
+      <div style="margin:48px 0 12px" class="fi"><span class="label" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:16px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L2.5 3.5v3.5c0 3.2 1.9 5.8 4.5 6.5 2.6-.7 4.5-3.3 4.5-6.5V3.5L7 1z" stroke="url(#g-green)" stroke-width="1" stroke-linejoin="round"/><path d="M5 7l1.5 1.5L9.5 6" stroke="url(#g-green)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>{t('products.cyberHeader')}</span></div>
+      <div class="prod-grid prod-grid-2 fi">
+        <div class="prod-card fi-l d1">
+          <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><path d="M13 3L5 7v6c0 5.2 3.4 9.8 8 11.5 4.6-1.7 8-6.3 8-11.5V7L13 3z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 13l2 2 4.5-5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="prod-name">{t('products.cyberPentestName')}</div>
+          <p class="prod-desc">{t('products.cyberPentestDesc')}</p>
+          <a href={href('/contato')} class="prod-cta">{t('products.ctaPropose')}</a>
+        </div>
+        <div class="prod-card fi-r d1">
+          <div class="icon-wrap lg cyan"><svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="url(#g-green)" stroke-width="1.5"/><path d="M13 9v5" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="17.5" r="1" fill="url(#g-green)"/></svg></div>
+          <div class="prod-name">{t('products.cyberConsultName')}</div>
+          <p class="prod-desc">{t('products.cyberConsultDesc')}</p>
+          <a href={href('/contato')} class="prod-cta">{t('products.ctaPresent')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CTA FINAL ══════════════════════════════════════ -->
+  <section id="cta-final">
+    <div class="cta-glow"></div>
+    <div class="container">
+      <div class="cta-box fi">
+        <div class="cta-box-grid"></div>
+        <div style="position:relative;z-index:2">
+          <img src="/d.lab-icon2.webp" alt="" class="cta-icon" width="48" height="48" loading="lazy" />
+          <div class="hero-tag" style="display:inline-flex;margin-bottom:24px"><span class="tag-dot"></span>{t('ctaFinal.tag')}</div>
+          <h2>{t('ctaFinal.title')}<br><span class="gradient-text">{t('ctaFinal.titleAccent')}</span></h2>
+          <p>{t('ctaFinal.sub')}</p>
+          <div class="cta-btns">
+            <a href={href('/blog')} class="btn btn-primary">{t('ctaFinal.ctaPrimary')}</a>
+            <a href={href('/contato')} class="btn btn-ghost">{t('ctaFinal.ctaSecondary')}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

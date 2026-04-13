@@ -1,12 +1,20 @@
 ---
 import Layout from './Layout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import type { Locale } from '../i18n/ui';
+import { defaultLocale } from '../i18n/ui';
 
 export interface Props {
   post: CollectionEntry<'blog'>;
+  locale?: Locale;
 }
 
-const { post } = Astro.props;
+const { post, locale: explicitLocale } = Astro.props;
+// Posts can be reached via /posts/, /pt/posts/ or /es/posts/. Honor
+// the explicit locale prop when the route file passes one (so a PT
+// post served at /pt/posts/foo gets PT chrome) and fall back to the
+// post's frontmatter `lang` otherwise (legacy direct imports).
+const locale: Locale = explicitLocale ?? (post.data.lang as Locale ?? defaultLocale);
 const {
   title,
   subtitle,
@@ -138,10 +146,11 @@ const faqLd =
 ---
 
 <Layout
-  title={`${title} | D.Lab Research`}
+  title={`${title} | D.Lab Experts`}
   description={description}
   image={cover}
   active="blog"
+  locale={locale}
   type="article"
   publishedTime={isoPub}
   modifiedTime={isoMod}

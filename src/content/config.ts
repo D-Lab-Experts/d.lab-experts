@@ -11,6 +11,15 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     author: z.string().default('D.Lab Research'),
+    // Which locale this publication is written in. Drives filtering on
+    // /blog, /pt/blog and /es/blog so readers see posts in their language
+    // (or fall back to whatever exists when translations are missing).
+    lang: z.enum(['en', 'pt', 'es']).default('en'),
+    // Slug of the canonical publication this translation belongs to.
+    // When multiple language variants of the same study exist, they
+    // share a translationOf anchor so the post page can surface a
+    // "read in other languages" switch.
+    translationOf: z.string().optional(),
     // Track determines which section the post appears under on /blog.
     // 'intelligence' = pesquisa/inteligência (default); 'cybersec' = cybersegurança.
     track: z.enum(['intelligence', 'cybersec']).default('intelligence'),

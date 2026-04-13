@@ -6,11 +6,14 @@ import SvgDefs from '../components/SvgDefs.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
+import { htmlLang, type Locale } from '../i18n/ui';
+import { getLocaleFromUrl } from '../i18n/utils';
 
 export interface Props {
   title: string;
   description: string;
-  active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato';
+  active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar';
+  locale?: Locale;
   image?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
@@ -23,6 +26,7 @@ const {
   title,
   description,
   active,
+  locale: explicitLocale,
   image,
   type,
   publishedTime,
@@ -30,14 +34,19 @@ const {
   author,
   tags,
 } = Astro.props;
+
+// Pages can pass `locale` explicitly (cleanest), otherwise we derive
+// it from the URL prefix (/pt/..., /es/..., or root = en).
+const locale: Locale = explicitLocale ?? getLocaleFromUrl(Astro.url);
 ---
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang={htmlLang[locale]}>
   <head>
     <BaseHead
       title={title}
       description={description}
+      locale={locale}
       image={image}
       type={type}
       publishedTime={publishedTime}
@@ -49,9 +58,9 @@ const {
   <body>
     <canvas id="geo-canvas"></canvas>
     <SvgDefs />
-    <Header active={active} />
+    <Header active={active} locale={locale} />
     <slot />
-    <Footer />
+    <Footer locale={locale} />
 
     <script>
       // ══ REDUCED MOTION: skip all decorative animations ══════════════════

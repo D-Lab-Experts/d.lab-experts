@@ -1,0 +1,280 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NeuralNetwork from '../NeuralNetwork.astro';
+import type { Locale } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<Layout
+  title={t('pageTitles.about')}
+  description={t('pageTitles.aboutDescription')}
+  active="about"
+  locale={locale}
+>
+  <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
+  <section class="about-hero">
+    <div class="section-glow lilac" style="top:-50px;left:50%;transform:translateX(-50%)"></div>
+    <div class="section-glow blue" style="bottom:0;right:-100px"></div>
+    <NeuralNetwork color="lilac" density="medium" opacity={0.30} />
+    <div class="container">
+      <div class="about-hero-inner fi">
+        <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:24px"><span class="label" style="display:flex;align-items:center;gap:10px"><span style="width:20px;height:1px;background:var(--grad);display:block"></span>Sobre o D.Lab Experts</span></div>
+        <h1 class="about-hero-title">Research Hub.<br /><span class="gradient-text">Pegada vanguardista.</span></h1>
+        <p class="about-hero-sub">D.Lab Experts é um Research Hub em inteligência aplicada e cybersegurança. Pesquisamos, testamos e publicamos como prova de método — para que board, founder e gestor decidam com embasamento num mundo que moveu pra frente das próprias defesas.</p>
+      </div>
+
+      <div class="atom-container fi d1">
+        <div class="atom">
+          <div class="atom-glow"></div>
+          <div class="atom-nucleus"></div>
+          <div class="atom-orbit atom-orbit-1">
+            <div class="atom-orbit-wrap atom-orbit-wrap-1">
+              <div class="atom-orbit-ring"></div>
+              <div class="atom-electron atom-electron-1"></div>
+            </div>
+          </div>
+          <div class="atom-orbit atom-orbit-2">
+            <div class="atom-orbit-wrap atom-orbit-wrap-2">
+              <div class="atom-orbit-ring"></div>
+              <div class="atom-electron atom-electron-2"></div>
+            </div>
+          </div>
+          <div class="atom-orbit atom-orbit-3">
+            <div class="atom-orbit-wrap atom-orbit-wrap-3">
+              <div class="atom-orbit-ring"></div>
+              <div class="atom-electron atom-electron-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-stats fi d2">
+        <div class="about-stat">
+          <div class="about-stat-val" style="color:var(--lilac)">R$ 2,2 tri</div>
+          <div class="about-stat-lbl">Mercado de dados e IA até 2030 (IDC)</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val" style="color:var(--blue)">73%</div>
+          <div class="about-stat-lbl">das PMEs decidem sem dados (SEBRAE 2023)</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val" style="color:var(--cyan)">R$ 6,2 mi</div>
+          <div class="about-stat-lbl">Custo médio de data breach no BR (IBM 2024)</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val" style="color:var(--green)">Dual</div>
+          <div class="about-stat-lbl">Inteligência & cyber na mesma operação</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ QUEM SOMOS ════════════════════════════════════ -->
+  <section class="about-section">
+    <div class="section-glow lilac" style="top:30%;left:-120px"></div>
+    <div class="container">
+      <div class="about-split fi">
+        <aside class="about-split-aside">
+          <div class="about-split-eyebrow">Quem somos</div>
+          <h2>O que é o D.Lab Experts</h2>
+          <p class="lead">Um <strong style="color:var(--white)">Research Hub</strong> que trata <strong style="color:var(--white)">inteligência de dados</strong> e <strong style="color:var(--white)">cybersegurança</strong> como o mesmo problema: entender antes do movimento, proteger depois dele. Pesquisamos, publicamos e — quando o contexto pede — traduzimos a mesma metodologia em frentes de consultoria sob NDA.</p>
+          <div class="aside-stats">
+            <div class="aside-stat">
+              <div class="aside-stat-val" style="color:var(--lilac)">73%</div>
+              <div class="aside-stat-lbl">das PMEs decidem por intuição<br />SEBRAE, 2023</div>
+            </div>
+            <div class="aside-stat">
+              <div class="aside-stat-val" style="color:var(--blue)">23×</div>
+              <div class="aside-stat-lbl">mais clientes em empresas data-driven<br />McKinsey Global Institute</div>
+            </div>
+            <div class="aside-stat">
+              <div class="aside-stat-val" style="color:var(--cyan)">R$ 6,2 mi</div>
+              <div class="aside-stat-lbl">custo médio de um data breach no Brasil<br />IBM, 2024</div>
+            </div>
+          </div>
+        </aside>
+        <div class="about-split-content">
+          <p>O D.Lab Experts nasceu de uma premissa documentada. Segundo o SEBRAE (2023), <strong>73% dos gestores de PME tomam decisões críticas por intuição</strong>. Em paralelo, LLMs e agentes aceleram a execução mas multiplicam superfícies de ataque — e o custo médio de um vazamento de dados no Brasil é de <strong>R$ 6,2 milhões</strong> (IBM, 2024). Decisão no escuro e operação exposta são dois lados do mesmo problema.</p>
+          <p>Do lado da inteligência, cruzamos fontes públicas, APIs, scraping e pesquisa primária para responder o que trava decisão de board, founder e gestor. O mercado global de data analytics cresce 13,5% ao ano (Statista, 2024), e empresas data-driven têm <strong>23 vezes mais chance de adquirir clientes</strong> (McKinsey Global Institute).</p>
+          <div class="split-insight">
+            Dado acumulado é ruído. O que transforma dado disperso em decisão acionável é a <strong>arquitetura de interpretação</strong> por trás.
+            <span class="src">D.Lab Experts · Research Hub, 2026</span>
+          </div>
+          <p>Do lado cyber, executamos testes de intrusão, mapeamos vulnerabilidades e investigamos as novas superfícies que IA e automação inauguraram. O Brasil é o <strong>2º país mais atacado por ransomware do mundo</strong> (Trend Micro, 2024) e 83% das empresas brasileiras sofreram ao menos uma violação nos últimos 12 meses (Fortinet, 2023) — com agentes autônomos em operação, a janela só tende a encurtar.</p>
+          <p>Publicamos o método. Análise pública como prova de como pensamos. Trabalho sob NDA vira frente de consultoria quando alguém precisa do mesmo rigor aplicado ao próprio contexto. O resto é ruído.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ O QUE FAZEMOS ════════════════════════════════ -->
+  <section class="about-section">
+    <div class="section-glow blue" style="top:20%;right:-100px"></div>
+    <div class="section-glow cyan" style="bottom:10%;left:-80px"></div>
+    <div class="container">
+      <div class="about-section-header fi">
+        <div class="eyebrow">Escopo do Hub</div>
+        <h2>O que pesquisamos</h2>
+        <p class="lead">Duas frentes que se informam. A inteligência mostra onde mover; a segurança garante que o movimento sobrevive. Cada frente opera em dois modos — publicação aberta (Research Hub) e projeto fechado (consultoria sob NDA).</p>
+      </div>
+
+      <div class="services-split">
+        <div class="service-card data fi-l d1">
+          <div class="service-card-icon lilac">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><path d="M15.5 12v7M12 15.5h7" stroke="url(#g1)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Inteligência Aplicada</h3>
+          <p>Empresas que usam analytics avançado geram <strong>126% mais lucro</strong> que seus pares (Bain &amp; Company). O Hub pesquisa o que os modelos genéricos não capturam — mercado, comportamento, concorrência, foresight de IA — e publica metodologia aberta. Quando vira projeto, o mesmo protocolo atende o contexto fechado.</p>
+          <ul>
+            <li>Análise estratégica e dimensionamento de mercado</li>
+            <li>Inteligência competitiva e benchmarking</li>
+            <li>Perfil de público e análise de demanda</li>
+            <li>Foresight tech: IA, agentes e LLMs em operação</li>
+            <li>Adoção responsável de IA e automação</li>
+            <li>Política, opinião pública e movimento regulatório</li>
+          </ul>
+        </div>
+        <div class="service-card cyber fi-r d1">
+          <div class="service-card-icon cyan">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L4 5.5v5c0 4.7 3 8.5 7 10 4-1.5 7-5.3 7-10v-5L11 2z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11l2.5 2.5L14.5 9" stroke="url(#g-green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Cybersegurança</h3>
+          <p>O cibercrime custará <strong>US$ 10,5 trilhões por ano globalmente até 2025</strong> (Cybersecurity Ventures). Investigamos as superfícies modernas — incluindo as que IA e agentes autônomos inauguraram — e traduzimos em postura defensiva antes do custo virar manchete.</p>
+          <ul>
+            <li>Pentest em aplicações web, mobile e infraestrutura</li>
+            <li>Análise de vulnerabilidades e classificação de risco</li>
+            <li>LLM security e avaliação de agentes em operação</li>
+            <li>Adequação a LGPD, ISO 27001, NIST</li>
+            <li>Monitoramento e resposta a incidentes</li>
+            <li>Treinamento e conscientização de equipe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ COMO OPERAMOS ════════════════════════════════ -->
+  <section class="about-section">
+    <div class="section-glow lilac" style="top:50%;right:-100px"></div>
+    <div class="container">
+      <div class="about-section-header fi">
+        <div class="eyebrow">Metodologia</div>
+        <h2>Como operamos</h2>
+        <p class="lead">Protocolo único, quatro etapas, da pergunta à entrega. Quatro pilares atravessam cada etapa. Todos inegociáveis.</p>
+      </div>
+
+      <div class="method-steps fi d1">
+        <div class="method-step">
+          <div class="method-step-num">01</div>
+          <div class="method-step-title">Briefing</div>
+          <div class="method-step-desc">Entendemos o contexto, a hipótese e os critérios de decisão ou o perímetro de risco a mapear.</div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">02</div>
+          <div class="method-step-title">Coleta e Modelagem</div>
+          <div class="method-step-desc">Cruzamos dados de múltiplas fontes ou executamos os testes de segurança com escopo definido.</div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">03</div>
+          <div class="method-step-title">Síntese</div>
+          <div class="method-step-desc">Dados brutos transformados em insights estruturados com scores, classificações e visualizações.</div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">04</div>
+          <div class="method-step-title">Entrega</div>
+          <div class="method-step-desc">Relatório completo com recomendação clara, plano de ação priorizado e call de interpretação.</div>
+        </div>
+      </div>
+
+      <div class="pillars-grid fi">
+        <div class="pillar">
+          <div class="pillar-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5L10 2Z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
+          <div class="pillar-title">Rigor metodológico</div>
+          <div class="pillar-desc">Cada análise com metodologia documentada, replicável e transparente.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="url(#g1)" stroke-width="1.2"/><circle cx="10" cy="10" r="3" stroke="url(#g1)" stroke-width="1.2"/><path d="M10 3v2M10 15v2M3 10h2M15 10h2" stroke="url(#g1)" stroke-width="1" stroke-linecap="round"/></svg></div>
+          <div class="pillar-title">Dados primários</div>
+          <div class="pillar-desc">Coleta própria quando fontes abertas não são suficientes para a decisão.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 15l4-4 3 2.5 4-5.5 3-2" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pillar-title">Raciocínio exposto</div>
+          <div class="pillar-desc">Você entende exatamente como chegamos à recomendação ou ao diagnóstico.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L4 5.5v5c0 4 2.5 7.2 6 8.5 3.5-1.3 6-4.5 6-8.5v-5L10 2z" stroke="url(#g-green)" stroke-width="1.2" stroke-linejoin="round"/><path d="M7.5 10l2 2 3.5-4" stroke="url(#g-green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pillar-title">Independência</div>
+          <div class="pillar-desc">Sem viés. Reportamos o que os dados mostram e o que os testes revelam.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ POR QUE AGORA ════════════════════════════════ -->
+  <section class="about-section">
+    <div class="section-glow cyan" style="top:30%;left:-80px"></div>
+    <div class="container">
+      <div class="about-split fi">
+        <aside class="about-split-aside">
+          <div class="about-split-eyebrow">O cenário</div>
+          <h2>Por que isso importa <span class="gradient-text">agora</span></h2>
+          <p class="lead">A janela de decisão estratégica nunca foi tão estreita. O custo de errar (em mercado e em segurança) já está documentado e ele só aumenta.</p>
+          <div class="aside-stats">
+            <div class="aside-stat">
+              <div class="aside-stat-val" style="color:var(--lilac)">29%</div>
+              <div class="aside-stat-lbl">das empresas fecham no primeiro ano<br />IBGE / SEBRAE, 2023</div>
+            </div>
+            <div class="aside-stat">
+              <div class="aside-stat-val" style="color:var(--cyan)">103,1 bi</div>
+              <div class="aside-stat-lbl">tentativas de ciberataque no Brasil em 2022<br />Fortinet</div>
+            </div>
+            <div class="aside-stat">
+              <div class="aside-stat-val" style="color:var(--green)">US$ 3,2 bi</div>
+              <div class="aside-stat-lbl">mercado de BI no Brasil até 2027<br />Mordor Intelligence</div>
+            </div>
+          </div>
+        </aside>
+        <div class="about-split-content">
+          <p>O cenário brasileiro exige ação. <strong>29% das empresas fecham no primeiro ano</strong> e 50% antes de completar 4 anos (IBGE/SEBRAE, 2023). A principal causa não é falta de capital. É falta de informação para decidir.</p>
+          <p>Ao mesmo tempo, o Brasil registrou <strong>103,1 bilhões de tentativas de ciberataque em 2022</strong> (Fortinet), e a LGPD já aplicou multas de até R$ 50 milhões. O boom de LLMs e agentes autônomos só piora a matemática: execução mais rápida e superfícies novas expostas ao mesmo tempo.</p>
+          <div class="split-insight">
+            Empresas que adotam cultura data-driven têm <strong>5 a 8% mais produtividade e 6% mais lucratividade</strong> que seus pares.
+            <span class="src">Harvard Business Review</span>
+          </div>
+          <p>Do outro lado, os números mostram oportunidade. O mercado de Business Intelligence no Brasil deve atingir <strong>US$ 3,2 bilhões até 2027</strong> (Mordor Intelligence). Quem se mover com leitura de contexto sólida captura vantagem composta de quem espera o concorrente fazer primeiro.</p>
+          <p>O D.Lab Experts existe para fechar esse gap. Pesquisa aberta que fundamenta o movimento. Operação ofensiva de segurança que sobrevive à próxima tentativa. <strong>Método documentado no lugar de prosa.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ CTA ═══════════════════════════════════════════ -->
+  <section class="about-cta">
+    <div class="section-glow lilac" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="container fi">
+      <h2>Pesquisa que fundamenta o movimento.<br />Operação que <span class="gradient-text">sobrevive à próxima.</span></h2>
+      <p>Research Hub primeiro. Consultoria quando o contexto pede. Comece pelas publicações abertas ou fale com a gente direto.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/blog" class="btn btn-primary">Ler análises públicas →</a>
+        <a href="/contato" class="btn btn-ghost">Conversar sobre um projeto</a>
+      </div>
+    </div>
+  </section>
+</Layout>

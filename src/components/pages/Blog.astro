@@ -1,0 +1,371 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NeuralNetwork from '../NeuralNetwork.astro';
+import { getCollection } from 'astro:content';
+import type { Locale } from '../../i18n/ui';
+import { defaultLocale } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
+const href = (path: string) => `${localePrefix}${path}`;
+
+// Blog filters posts by locale so readers on /pt/blog see PT posts,
+// /es/blog sees ES, and / sees EN. When a locale has no posts yet we
+// still render the empty-state copy rather than show foreign-language
+// posts.
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === locale))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const intelligencePosts = allPosts.filter((p) => p.data.track === 'intelligence');
+const cybersecPosts = allPosts.filter((p) => p.data.track === 'cybersec');
+
+// Within each track, posts split by research type so the grid can be
+// grouped visually: primary-data studies (our own surveys/interviews/
+// pentests) vs. desk research over third-party sources.
+type Post = (typeof allPosts)[number];
+const byType = (posts: Post[], type: 'original' | 'secondary') =>
+  posts.filter((p) => p.data.researchType === type);
+
+const intelOriginal = byType(intelligencePosts, 'original');
+const intelSecondary = byType(intelligencePosts, 'secondary');
+const cyberOriginal = byType(cybersecPosts, 'original');
+const cyberSecondary = byType(cybersecPosts, 'secondary');
+
+// Sub-section copy. Kept per-track so each can explain the distinction in
+// its own vocabulary (research vs. offensive security).
+const intelGroups = [
+  {
+    key: 'original',
+    label: 'Pesquisas Originais',
+    sub: 'Estudos com dados coletados pelo próprio laboratório — questionários, entrevistas e análise primária.',
+    posts: intelOriginal,
+  },
+  {
+    key: 'secondary',
+    label: 'Pesquisas com Dados Secundários',
+    sub: 'Análises construídas sobre bases públicas, relatórios setoriais e fontes terceiras auditáveis.',
+    posts: intelSecondary,
+  },
+] as const;
+
+const cyberGroups = [
+  {
+    key: 'original',
+    label: 'Cases Originais',
+    sub: 'Análises técnicas com dados coletados em engajamentos próprios — pentests, forense e instrumentação.',
+    posts: cyberOriginal,
+  },
+  {
+    key: 'secondary',
+    label: 'Análises com Dados Secundários',
+    sub: 'Leituras construídas sobre feeds de threat intel, relatórios de fornecedores e inteligência aberta.',
+    posts: cyberSecondary,
+  },
+] as const;
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
+
+// Editorial format labels surfaced on each card meta row. Kept in EN
+// on purpose — reinforces the Research Hub's vanguard tone.
+const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string> = {
+  briefing: 'Briefing',
+  report: 'Report',
+  foresight: 'Foresight',
+  sector: 'Sector Report',
+};
+---
+
+<Layout
+  title={t('pageTitles.blog')}
+  description={t('pageTitles.blogDescription')}
+  active="blog"
+  locale={locale}
+>
+  <!-- ═══════════════ BLOG HERO ═══════════════════════════════════ -->
+  <section class="blog-hero">
+    <div class="blog-hero-glow"></div>
+    <NeuralNetwork color="lilac" density="medium" opacity={0.30} />
+    <div class="container">
+      <div class="blog-hero-inner fi">
+        <div class="section-label" style="justify-content:center"><span class="label">Pesquisas e Análises Públicas</span></div>
+        <h1 class="blog-hero-title">Pesquisas e análises <span class="gradient-text">públicas.</span></h1>
+        <p class="blog-hero-sub">Publicamos uma fração do que produzimos como prova pública do método. Inteligência aplicada e cybersegurança, sob o mesmo protocolo de rigor.</p>
+      </div>
+
+      <div class="blog-track-nav fi d1">
+        <a href="#inteligencia" class="blog-track-btn lilac">
+          <span class="blog-track-btn-dot"></span>
+          Inteligência &amp; Pesquisa
+          <span class="blog-track-btn-count">{intelligencePosts.length}</span>
+        </a>
+        <a href="#cybersec" class="blog-track-btn green">
+          <span class="blog-track-btn-dot"></span>
+          Cybersegurança
+          <span class="blog-track-btn-count">{cybersecPosts.length}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 01 · INTELIGÊNCIA ══════════════════════════ -->
+  <section class="container blog-track-section" id="inteligencia">
+    <div class="blog-track-header fi">
+      <div class="blog-track-eyebrow lilac">
+        <span class="blog-track-eyebrow-num">01</span>
+        Inteligência
+      </div>
+      <h2 class="blog-track-title">Inteligência &amp; <span class="gradient-text">Pesquisa Aplicada</span></h2>
+      <p class="blog-track-sub">Decisão estratégica, mercado, concorrência, tendências, público e política. Pesquisa que fundamenta o movimento antes dele acontecer.</p>
+    </div>
+
+    {intelligencePosts.length > 0 ? (
+      intelGroups.filter((g) => g.posts.length > 0).map((group) => (
+        <div class="blog-subtrack">
+          <div class="blog-subtrack-header fi">
+            <span class="blog-subtrack-tag lilac">
+              <span class="blog-subtrack-dot"></span>
+              {group.label}
+              <span class="blog-subtrack-count">{group.posts.length}</span>
+            </span>
+            <p class="blog-subtrack-sub">{group.sub}</p>
+          </div>
+          <div class="blog-grid">
+            {group.posts.map((post) => {
+              const cardClass = post.data.featured ? 'blog-card-featured fi d1' : 'blog-card fi d2';
+              const isOriginal = post.data.researchType === 'original';
+              // Drop any tag that duplicates the category label (case-
+              // insensitive) so the card never shows the same pill twice.
+              const cat = post.data.category.toLowerCase();
+              const extraTags = post.data.tags
+                .filter((t: string) => t.toLowerCase() !== cat)
+                .slice(0, isOriginal ? 1 : 2);
+              return (
+                <a href={`/posts/${post.slug}`} class={cardClass}>
+                  <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
+                    {post.data.cover && (
+                      <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
+                    )}
+                  </div>
+                  <div class="blog-card-body">
+                    <div class="blog-card-tags">
+                      {isOriginal && <span class="blog-card-tag original">Pesquisa Original</span>}
+                      <span class="blog-card-tag lilac">{post.data.category}</span>
+                      {extraTags.map((t: string) => (
+                        <span class="blog-card-tag blue">{t}</span>
+                      ))}
+                    </div>
+                    <h3 class="blog-card-title">{post.data.title}</h3>
+                    <p class="blog-card-excerpt">{post.data.description}</p>
+                    <div class="blog-card-meta">
+                      <span class={`blog-card-format format-${post.data.format}`}>
+                        <span class="format-dot"></span>{formatLabel[post.data.format]}
+                      </span>
+                      {post.data.readingTime && (
+                        <>
+                          <span class="blog-card-dot"></span>
+                          <span class="blog-card-time">{post.data.readingTime}</span>
+                        </>
+                      )}
+                    </div>
+                    <div class="blog-card-footer">
+                      <span class="blog-card-date">{formatDate(post.data.pubDate)}</span>
+                      <span class="blog-card-read">Ler pesquisa <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))
+    ) : (
+      <div class="blog-empty fi">
+        <div class="blog-empty-title">Em preparação.</div>
+        <div class="blog-empty-text">As próximas pesquisas serão publicadas após liberação pós-NDA.</div>
+      </div>
+    )}
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ 02 · CYBERSEGURANÇA ════════════════════════ -->
+  <section class="container blog-track-section blog-track-cyber" id="cybersec">
+    <div class="blog-track-header fi">
+      <div class="blog-track-eyebrow green">
+        <span class="blog-track-eyebrow-num">02</span>
+        Cybersegurança
+      </div>
+      <h2 class="blog-track-title">Cybersegurança &amp; <span class="gradient-text-green">Operação Ofensiva</span></h2>
+      <p class="blog-track-sub">Pentest, análise de vulnerabilidades, incidentes e posturas de segurança. Cases e análises técnicas publicadas quando o NDA permite.</p>
+    </div>
+
+    {cybersecPosts.length > 0 ? (
+      cyberGroups.filter((g) => g.posts.length > 0).map((group) => (
+        <div class="blog-subtrack">
+          <div class="blog-subtrack-header fi">
+            <span class="blog-subtrack-tag green">
+              <span class="blog-subtrack-dot"></span>
+              {group.label}
+              <span class="blog-subtrack-count">{group.posts.length}</span>
+            </span>
+            <p class="blog-subtrack-sub">{group.sub}</p>
+          </div>
+          <div class="blog-grid">
+            {group.posts.map((post) => {
+              const cardClass = post.data.featured ? 'blog-card-featured fi d1' : 'blog-card fi d2';
+              const isOriginal = post.data.researchType === 'original';
+              const cat = post.data.category.toLowerCase();
+              const extraTags = post.data.tags
+                .filter((t: string) => t.toLowerCase() !== cat)
+                .slice(0, isOriginal ? 1 : 2);
+              return (
+                <a href={`/posts/${post.slug}`} class={cardClass}>
+                  <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
+                    {post.data.cover && (
+                      <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
+                    )}
+                  </div>
+                  <div class="blog-card-body">
+                    <div class="blog-card-tags">
+                      {isOriginal && <span class="blog-card-tag original green">Case Original</span>}
+                      <span class="blog-card-tag green">{post.data.category}</span>
+                      {extraTags.map((t: string) => (
+                        <span class="blog-card-tag cyan">{t}</span>
+                      ))}
+                    </div>
+                    <h3 class="blog-card-title">{post.data.title}</h3>
+                    <p class="blog-card-excerpt">{post.data.description}</p>
+                    <div class="blog-card-meta">
+                      <span class={`blog-card-format format-${post.data.format}`}>
+                        <span class="format-dot"></span>{formatLabel[post.data.format]}
+                      </span>
+                      {post.data.readingTime && (
+                        <>
+                          <span class="blog-card-dot"></span>
+                          <span class="blog-card-time">{post.data.readingTime}</span>
+                        </>
+                      )}
+                    </div>
+                    <div class="blog-card-footer">
+                      <span class="blog-card-date">{formatDate(post.data.pubDate)}</span>
+                      <span class="blog-card-read green">Ler análise <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))
+    ) : (
+      <div class="blog-empty cyber fi">
+        <div class="blog-empty-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <path d="M18 3L6 8v9c0 7.5 5 14 12 16 7-2 12-8.5 12-16V8L18 3z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M13 18l3.5 3.5L23 14" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="blog-empty-title">Em preparação.</div>
+        <div class="blog-empty-text">Os primeiros cases públicos de cybersegurança serão publicados quando o NDA permitir. Enquanto isso, a frente segue ativa em pentest, análise de vulnerabilidades e consultoria ofensiva.</div>
+        <div class="blog-empty-cta">
+          <a href={href("/contato")} class="btn btn-ghost">Propor um escopo de segurança →</a>
+        </div>
+      </div>
+    )}
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ COLABORAÇÃO CIENTÍFICA ═════════════════════════ -->
+  <section class="blog-colab-cta">
+    <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:520px;height:380px"></div>
+    <div class="section-glow blue" style="bottom:-60px;right:-100px"></div>
+    <div class="container">
+      <div class="blog-colab-inner fi">
+        <div class="section-label" style="justify-content:center;margin-bottom:20px">
+          <span class="label">Research Hub aberto</span>
+        </div>
+        <h2 class="blog-colab-title">
+          Pesquisa é trabalho<br /><span class="gradient-text">coletivo.</span>
+        </h2>
+        <p class="blog-colab-sub">
+          Pesquisadores, vanguardistas, cientistas independentes — se você tem um estudo
+          pronto, um dataset relevante, ou uma pergunta que cabe numa das linhas da agenda,
+          a gente quer saber. Publicamos com coautoria explícita e raciocínio exposto, como
+          a ciência funciona.
+        </p>
+        <div class="blog-colab-modes">
+          <span class="blog-colab-chip">Submeter pesquisa</span>
+          <span class="blog-colab-chip">Propor co-pesquisa</span>
+          <span class="blog-colab-chip">Compartilhar dados</span>
+          <span class="blog-colab-chip">Peer review</span>
+        </div>
+        <div class="blog-colab-ctas">
+          <a href={href("/colaborar")} class="btn btn-primary">Proposta de colaboração →</a>
+          <a href={href("/colaborar")} class="btn btn-ghost">Como funciona</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .blog-colab-cta {
+    padding: 100px 28px 120px;
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-colab-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .blog-colab-title {
+    font-size: clamp(32px, 4.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    margin-bottom: 20px;
+    text-wrap: balance;
+  }
+  .blog-colab-sub {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin: 0 auto 28px;
+    max-width: 580px;
+  }
+  .blog-colab-modes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .blog-colab-chip {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(177, 140, 255, 0.22);
+    background: rgba(177, 140, 255, 0.04);
+    color: var(--lilac);
+  }
+  .blog-colab-ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>
