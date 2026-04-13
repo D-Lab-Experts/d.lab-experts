@@ -732,7 +732,7 @@ const en = {
     q4Opt3: 'Exploratory — weeks to quarters',
 
     q5Title: '05 · Stakeholders',
-    q5Desc: 'How many people must align on the final call.',
+    q5Desc: "How many people must align on the final call. The literature shows a sweet spot: 2–5 deciders typically outperform a lone decider (wisdom-of-crowds) and a large committee (coordination overhead).",
     q5Opt1: '1 decider',
     q5Opt2: '2 to 5 deciders',
     q5Opt3: '6 or more deciders',
@@ -775,7 +775,7 @@ const en = {
     srcBrynjolfsson: 'Brynjolfsson, McAfee & Hitt, MIT Sloan / HBR, "Strength in Numbers: How Does Data-Driven Decisionmaking Affect Firm Performance?", 2011 — data-driven firms are 5–6% more productive and profitable than peers. We translate this conservatively into +12pp quality for systematic data maturity.',
     srcPMI: 'PMI, "Pulse of the Profession" (2020) — organizations waste ~9.9% of every dollar invested due to poor project performance. Drives the lower bound of our exposure range (5%, conservative).',
     srcBezos: 'Jeff Bezos, 1997 shareholder letter & subsequent writings — "one-way doors vs. two-way doors" decision framework. Irreversible decisions carry a 1.5× multiplier on downside exposure in our model.',
-    srcBain: 'Bain & Company, Blenko, Mankins, Rogers, "Decide & Deliver" (2010) — coordination overhead reduces decision quality as stakeholders grow. 6+ deciders → −6pp in our quality estimate.',
+    srcBain: 'Bain & Company, Blenko, Mankins, Rogers, "Decide & Deliver" (2010) + Surowiecki, "The Wisdom of Crowds" (2004) + Kahneman\'s "decision hygiene" framing — decision quality is non-monotonic in group size. A small group (2–5) beats both the lone decider (single-point bias) and the large committee (coordination overhead, groupthink). We apply +3pp for a 2–5 group, −6pp for 6+, and 0pp for solo.',
     srcKahneman: 'Kahneman & Tversky, decades of bias literature (summarized in *Thinking, Fast and Slow*, 2011) — time pressure increases overconfidence and anchoring. Urgent decisions → −10pp quality.',
     srcIBM: 'IBM, "Cost of a Data Breach Report 2024" — average global cost of a data breach is USD 4.88M. Context reference when the decision involves new exposed surfaces.',
 

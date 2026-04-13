@@ -713,7 +713,7 @@ const pt: Translation = {
     q4Opt3: 'Exploratório — semanas a trimestres',
 
     q5Title: '05 · Stakeholders',
-    q5Desc: 'Quantas pessoas precisam alinhar na decisão final.',
+    q5Desc: 'Quantas pessoas precisam alinhar na decisão final. A literatura mostra um sweet spot: 2–5 decisores tendem a superar tanto o decisor solo (viés de um só) quanto o comitê grande (custo de coordenação).',
     q5Opt1: '1 decisor',
     q5Opt2: '2 a 5 decisores',
     q5Opt3: '6 ou mais decisores',
@@ -756,7 +756,7 @@ const pt: Translation = {
     srcBrynjolfsson: 'Brynjolfsson, McAfee & Hitt, MIT Sloan / HBR, "Strength in Numbers: How Does Data-Driven Decisionmaking Affect Firm Performance?", 2011 — empresas data-driven são 5–6% mais produtivas e lucrativas que os pares. Traduzimos isso conservadoramente em +12pp de qualidade para maturidade de dados sistemática.',
     srcPMI: 'PMI, "Pulse of the Profession" (2020) — organizações desperdiçam ~9,9% de cada dólar investido por má performance de projeto. Baseia o limite inferior da nossa faixa de exposição (5%, conservador).',
     srcBezos: 'Jeff Bezos, carta aos acionistas de 1997 e textos subsequentes — framework "portas de mão única vs. portas de mão dupla". Decisões irreversíveis carregam um multiplicador de 1,5× no downside no nosso modelo.',
-    srcBain: 'Bain & Company, Blenko, Mankins, Rogers, "Decide & Deliver" (2010) — o custo de coordenação reduz a qualidade de decisão à medida que crescem os stakeholders. 6+ decisores → −6pp na nossa estimativa.',
+    srcBain: 'Bain & Company, Blenko, Mankins, Rogers, "Decide & Deliver" (2010) + Surowiecki, "The Wisdom of Crowds" (2004) + "decision hygiene" de Kahneman — a qualidade de decisão é não-monotônica em relação ao tamanho do grupo. Um grupo pequeno (2–5) supera tanto o decisor solo (viés de ponto único) quanto o comitê grande (custo de coordenação, groupthink). Aplicamos +3pp para grupos de 2–5, −6pp para 6+, e 0pp para solo.',
     srcKahneman: 'Kahneman & Tversky, décadas de literatura sobre vieses (sintetizada em *Rápido e Devagar*, 2011) — pressão de tempo amplifica overconfidence e anchoring. Decisão urgente → −10pp de qualidade.',
     srcIBM: 'IBM, "Cost of a Data Breach Report 2024" — custo médio global de um vazamento é US$ 4,88 mi. Referência contextual quando a decisão envolve novas superfícies expostas.',
 

@@ -317,7 +317,11 @@ const alternateUrls = {
     baseQuality: 0.37, // McKinsey 2019
     dataMaturityDelta: { none: -0.15, adhoc: 0.0, systematic: 0.12 }, // Brynjolfsson/MIT
     timePressureDelta: { urgent: -0.10, standard: 0.0, exploratory: 0.05 }, // Kahneman/PMI
-    stakeholdersDelta: { solo: 0.03, small: 0.0, large: -0.06 }, // Bain "Decide & Deliver"
+    // Stakeholders sweet-spot (non-monotonic): 2-5 outperforms solo
+    // (wisdom-of-crowds, Kahneman decision hygiene) and large groups
+    // (Bain coordination overhead, groupthink). Solo has speed but
+    // carries single-decider bias risk.
+    stakeholdersDelta: { solo: 0.0, small: 0.03, large: -0.06 },
     qualityMin: 0.05,
     qualityMax: 0.75,
     exposureLowPct: 0.05, // PMI lower bound
@@ -1103,6 +1107,11 @@ const alternateUrls = {
     text-align: center;
     max-width: 720px;
     margin: 0 auto 36px;
+  }
+  /* `.section-sub` has its own max-width (520px) and no auto-margin,
+     so inside the centered head it would hug the left. Force center. */
+  .diag-method-head .section-sub {
+    margin: 0 auto;
   }
   .diag-formula {
     max-width: 840px;
