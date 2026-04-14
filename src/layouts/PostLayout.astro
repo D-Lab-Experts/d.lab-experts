@@ -64,6 +64,12 @@ const articleInLang = 'pt-BR';
 // Google Scholar citation metadata — passed to Layout/BaseHead which
 // renders <meta name="citation_*"> tags in <head>. Also powers the
 // "Como citar" block at the bottom of the article.
+//
+// Restricted to original research. Posts derivadas de dados secundários
+// (compilações de SEBRAE/IBGE/FGV etc.) têm formato mais próximo de
+// blogpost interpretativo, então não ganham tag acadêmica nem bloco de
+// citação (evita falso sinal de autoria primária).
+const isOriginalResearch = post.data.researchType === 'original';
 const yyyy = pubDate.getUTCFullYear();
 const mm = String(pubDate.getUTCMonth() + 1).padStart(2, '0');
 const dd = String(pubDate.getUTCDate()).padStart(2, '0');
@@ -74,14 +80,16 @@ const citationAuthorList =
   citationAuthors && citationAuthors.length > 0
     ? citationAuthors
     : author.split(/\s*&\s*/).filter(Boolean);
-const citationMeta = {
-  title,
-  authors: citationAuthorList,
-  date: citationDate,
-  volume: citationVolume,
-  language: citationLanguage,
-  keywords: allKeywords.join(', '),
-};
+const citationMeta = isOriginalResearch
+  ? {
+      title,
+      authors: citationAuthorList,
+      date: citationDate,
+      volume: citationVolume,
+      language: citationLanguage,
+      keywords: allKeywords.join(', '),
+    }
+  : undefined;
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -188,14 +196,16 @@ const originalResearchLabel = 'Pesquisa Original';
     <slot />
   </article>
 
-  <CitationBlock
-    title={title}
-    authors={citationAuthorList}
-    date={citationDate}
-    volume={citationVolume}
-    language={citationLanguage}
-    url={canonicalURL}
-  />
+  {isOriginalResearch && (
+    <CitationBlock
+      title={title}
+      authors={citationAuthorList}
+      date={citationDate}
+      volume={citationVolume}
+      language={citationLanguage}
+      url={canonicalURL}
+    />
+  )}
 
   {relatedPosts.length > 0 && (
     <section class="related-posts">
