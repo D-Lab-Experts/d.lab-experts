@@ -23,7 +23,7 @@ const pt: Translation = {
     collaborate: 'Colaborar',
     ariaLogo: 'D.Lab Experts, ir para a home',
     ariaOpenMenu: 'Abrir menu',
-    ctaProblem: 'Propor um problema →',
+    ctaProblem: 'Iniciar conversa →',
     langSwitcherLabel: 'Idioma',
   },
 
