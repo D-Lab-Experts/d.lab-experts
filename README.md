@@ -94,7 +94,7 @@ Catálogo atual em [dlabexperts.com/blog](https://dlabexperts.com/blog).
 Tem uma decisão para tomar ou uma operação para proteger? A porta está aberta.
 
 - **Propor um problema:** [dlabexperts.com/contato](https://dlabexperts.com/contato)
-- **E-mail direto:** [contato@dlabexperts.com](mailto:contato@dlabexperts.com)
+- **E-mail direto:** [gabriel@dlabexperts.com](mailto:gabriel@dlabexperts.com)
 - **LinkedIn:** [d-lab-intelligence](https://www.linkedin.com/company/d-lab-intelligence)
 
 ---
@@ -113,8 +113,8 @@ Rigor de laboratório. Aplicação de negócio.
 [website-url]: https://dlabexperts.com
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white
 [linkedin-url]: https://www.linkedin.com/company/d-lab-intelligence
-[email-shield]: https://img.shields.io/badge/contato@dlabexperts.com-00E5A0?style=for-the-badge&logo=gmail&logoColor=white
-[email-url]: mailto:contato@dlabexperts.com
+[email-shield]: https://img.shields.io/badge/gabriel@dlabexperts.com-00E5A0?style=for-the-badge&logo=gmail&logoColor=white
+[email-url]: mailto:gabriel@dlabexperts.com
 
 [astro-shield]: https://img.shields.io/badge/Astro-BC52EE?style=for-the-badge&logo=astro&logoColor=white
 [astro-url]: https://astro.build

@@ -22,7 +22,7 @@ Pesquisas e análises originais em formato aberto. Uma fração do que produzimo
 
 ## Contato
 
-- E-mail: contato@dlabexperts.com
+- E-mail: gabriel@dlabexperts.com
 - LinkedIn: https://www.linkedin.com/company/d-lab-intelligence
 - RSS de pesquisas: https://dlabexperts.com/rss.xml
 - Sitemap: https://dlabexperts.com/sitemap-index.xml
