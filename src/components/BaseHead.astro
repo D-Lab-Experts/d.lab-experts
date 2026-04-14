@@ -1,6 +1,16 @@
 ---
 import { useTranslations } from '../i18n/utils';
 
+export interface CitationMeta {
+  title: string;
+  authors: string[];
+  // YYYY/MM/DD — Scholar's expected format
+  date: string;
+  volume?: string;
+  language?: string;
+  keywords?: string;
+}
+
 export interface Props {
   title: string;
   description: string;
@@ -11,6 +21,9 @@ export interface Props {
   modifiedTime?: string;
   author?: string;
   tags?: string[];
+  // When passed (by PostLayout), renders Google Scholar citation_* meta
+  // tags in <head> so the post is indexable in academic search.
+  citationMeta?: CitationMeta;
 }
 
 const {
@@ -23,6 +36,7 @@ const {
   modifiedTime,
   author = 'D.Lab Experts',
   tags = [],
+  citationMeta,
 } = Astro.props;
 
 const t = useTranslations();
@@ -85,6 +99,24 @@ const imageURL = new URL(image, Astro.site);
 {type === 'article' && tags.map((tag) => (
   <meta property="article:tag" content={tag} />
 ))}
+
+{citationMeta && (
+  <>
+    <!-- Google Scholar citation metadata -->
+    <meta name="citation_title" content={citationMeta.title} />
+    {citationMeta.authors.map((a) => (
+      <meta name="citation_author" content={a} />
+    ))}
+    <meta name="citation_publication_date" content={citationMeta.date} />
+    <meta name="citation_journal_title" content="D.Lab Research Series" />
+    {citationMeta.volume && <meta name="citation_volume" content={citationMeta.volume} />}
+    <meta name="citation_abstract_html_url" content={canonicalURL.toString()} />
+    <meta name="citation_fulltext_html_url" content={canonicalURL.toString()} />
+    <meta name="citation_language" content={citationMeta.language ?? 'pt-BR'} />
+    {citationMeta.keywords && <meta name="citation_keywords" content={citationMeta.keywords} />}
+    <meta name="citation_publisher" content="D.Lab Experts" />
+  </>
+)}
 
 <!-- Structured data: Organization -->
 <script type="application/ld+json" set:html={JSON.stringify({

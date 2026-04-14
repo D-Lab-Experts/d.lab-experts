@@ -46,6 +46,17 @@ const blog = defineCollection({
         }),
       )
       .optional(),
+
+    // ── Citation metadata (Google Scholar + "Como citar" block) ──
+    // Title/date/keywords are reused from the fields above. Authors are
+    // declared as a proper array here so we can render one <meta
+    // name="citation_author"> per author and format a correct ABNT/APA
+    // citation without parsing the free-form `author` string.
+    citationAuthors: z.array(z.string()).optional(),
+    // Volume number in the D.Lab Research Series. Chronological.
+    citationVolume: z.string().optional(),
+    // BCP-47 language tag for the citation metadata. Defaults to pt-BR.
+    citationLanguage: z.string().default('pt-BR'),
   }),
 });
 

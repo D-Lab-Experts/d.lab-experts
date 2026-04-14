@@ -1,5 +1,6 @@
 ---
 import Layout from './Layout.astro';
+import CitationBlock from '../components/CitationBlock.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export interface Props {
@@ -21,6 +22,9 @@ const {
   cover,
   faq,
   readingTime,
+  citationAuthors,
+  citationVolume,
+  citationLanguage,
 } = post.data;
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -56,6 +60,28 @@ const imageURL = cover ? new URL(cover, Astro.site).toString() : new URL('/d.lab
 const allKeywords = Array.from(new Set([...(keywords ?? []), ...(tags ?? [])]));
 
 const articleInLang = 'pt-BR';
+
+// Google Scholar citation metadata — passed to Layout/BaseHead which
+// renders <meta name="citation_*"> tags in <head>. Also powers the
+// "Como citar" block at the bottom of the article.
+const yyyy = pubDate.getUTCFullYear();
+const mm = String(pubDate.getUTCMonth() + 1).padStart(2, '0');
+const dd = String(pubDate.getUTCDate()).padStart(2, '0');
+const citationDate = `${yyyy}/${mm}/${dd}`;
+// Fall back to splitting the free-form `author` string when
+// citationAuthors isn't declared (e.g. solo-author posts).
+const citationAuthorList =
+  citationAuthors && citationAuthors.length > 0
+    ? citationAuthors
+    : author.split(/\s*&\s*/).filter(Boolean);
+const citationMeta = {
+  title,
+  authors: citationAuthorList,
+  date: citationDate,
+  volume: citationVolume,
+  language: citationLanguage,
+  keywords: allKeywords.join(', '),
+};
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -149,6 +175,7 @@ const originalResearchLabel = 'Pesquisa Original';
   modifiedTime={isoMod}
   author={author}
   tags={allKeywords}
+  citationMeta={citationMeta}
 >
   <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
@@ -160,6 +187,15 @@ const originalResearchLabel = 'Pesquisa Original';
     <meta itemprop="inLanguage" content={articleInLang} />
     <slot />
   </article>
+
+  <CitationBlock
+    title={title}
+    authors={citationAuthorList}
+    date={citationDate}
+    volume={citationVolume}
+    language={citationLanguage}
+    url={canonicalURL}
+  />
 
   {relatedPosts.length > 0 && (
     <section class="related-posts">
