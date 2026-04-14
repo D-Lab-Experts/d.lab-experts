@@ -1,5 +1,4 @@
-// Site é monolíngue em PT-BR. Este stub fica só para manter tipagem
-// compatível com componentes que já importam o Locale type.
-export type Locale = 'pt';
-export const defaultLocale: Locale = 'pt';
+// Site é monolíngue em PT-BR. Arquivo reduzido ao mínimo usado —
+// apenas o atributo lang pro <html>. Se voltar a ser multilíngue,
+// restaurar Locale / defaultLocale daqui.
 export const htmlLang = 'pt-BR';
