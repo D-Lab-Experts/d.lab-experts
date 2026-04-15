@@ -18,7 +18,7 @@ const pt: Translation = {
     segments: 'Pesquisa',
     products: 'Consultoria',
     blog: 'Análises Públicas',
-    diagnostic: 'Diagnóstico',
+    solucoes: 'Soluções',
     contato: 'Contato',
     collaborate: 'Colaborar',
     ariaLogo: 'D.Lab Experts, ir para a home',
@@ -40,6 +40,9 @@ const pt: Translation = {
     contato: 'Contato | D.Lab Experts · Research Hub',
     contatoDescription:
       'Fale com o D.Lab Experts. Para projetos de consultoria sob NDA, parcerias de pesquisa ou imprensa. Respondemos em até um dia útil.',
+    solucoes: 'Soluções | D.Lab Experts',
+    solucoesDescription:
+      'Ferramentas práticas para profissionais de tecnologia e mercado. Construídas a partir dos mesmos princípios de rigor do Research Hub, abertas e ancoradas em pesquisa.',
     diagnostic: 'Diagnóstico de Decisão | D.Lab Experts · Research Hub',
     diagnosticDescription:
       'Quantifique o risco de decidir sem dados. Cinco entradas, duas saídas, cada coeficiente ancorado em pesquisa revisada.',
@@ -248,7 +251,7 @@ const pt: Translation = {
     linkPublications: 'Análises Públicas',
     linkAgenda: 'Agenda de pesquisa',
     linkCollaborate: 'Colaborar com o Hub',
-    linkDiagnostic: 'Diagnóstico de Decisão',
+    linkSolucoes: 'Soluções',
     linkImprensa: 'Sala de imprensa',
     linkRss: 'RSS das análises',
     linkPractices: 'Frentes de consultoria',
@@ -567,6 +570,40 @@ const pt: Translation = {
     nextLabel: 'Enquanto isso, explore',
     ctaPrimary: 'Ler análises abertas →',
     ctaSecondary: 'Voltar para o início',
+  },
+
+  solucoesPage: {
+    heroEyebrow: 'Ferramentas & Soluções',
+    heroTitleLead: 'Soluções úteis para',
+    heroTitleAccent: 'tech e mercado.',
+    heroSub: 'Ferramentas práticas construídas a partir dos mesmos princípios de rigor do Research Hub. Abertas, transparentes e ancoradas em pesquisa externa. Cada solução nasce de um problema que a gente encontrou na operação — ou que alguém nos perguntou.',
+
+    // Tool 1 — Decision Diagnostic (live)
+    tool1Status: 'Disponível',
+    tool1Category: 'Decisão estratégica',
+    tool1Title: 'Diagnóstico de Decisão',
+    tool1Desc: 'Quantifica o risco de decidir sem dados. Estima a probabilidade de decisão de alta qualidade e a faixa de exposição em R$ a partir de 5 entradas. Cada coeficiente ancorado em pesquisa externa (McKinsey, Brynjolfsson/MIT, Bain, PMI, Kahneman, Bezos, IBM).',
+    tool1Chip1: '5 entradas',
+    tool1Chip2: '~60 segundos',
+    tool1Chip3: '7 fontes citadas',
+    tool1Chip4: 'Método aberto',
+    tool1Cta: 'Abrir diagnóstico →',
+
+    // Tool 2 — AI Skills Repo (coming soon)
+    tool2Status: 'Em desenvolvimento',
+    tool2Category: 'Agentes de IA',
+    tool2Title: 'Skills para Agentes de IA',
+    tool2Desc: 'Repositório aberto de skills, ferramentas e workflows curados para uso em agentes de IA em operação. Cada skill documentada com metodologia, casos de uso e performance observada em produção.',
+    tool2Chip1: 'Open source',
+    tool2Chip2: 'Curadoria D.Lab',
+    tool2Chip3: 'Roadmap público',
+    tool2Chip4: 'Em breve',
+    tool2Cta: 'Avisar quando sair →',
+
+    ctaTitle: 'Tem ideia de ferramenta útil?',
+    ctaSub: 'A gente gosta de construir soluções que nascem de problemas reais. Se você tem uma ideia, fala com a gente. Pode virar a próxima solução do hub.',
+    ctaPrimary: 'Propor uma solução →',
+    ctaSecondary: 'Ver pesquisas publicadas',
   },
 
   imprensaPage: {

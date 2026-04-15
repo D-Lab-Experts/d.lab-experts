@@ -1,0 +1,407 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NeuralNetwork from '../NeuralNetwork.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations();
+---
+
+<Layout
+  title={t('pageTitles.solucoes')}
+  description={t('pageTitles.solucoesDescription')}
+  active="solucoes"
+>
+  <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
+  <section class="sol-hero">
+    <div class="section-glow lilac" style="top:-40px;left:50%;transform:translateX(-50%)"></div>
+    <div class="section-glow blue" style="bottom:0;right:-60px"></div>
+    <NeuralNetwork color="lilac" density="low" opacity={0.24} />
+    <div class="container">
+      <div class="sol-hero-inner fi">
+        <div class="sol-eyebrow">
+          <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
+          {t('solucoesPage.heroEyebrow')}
+        </div>
+        <h1 class="sol-title">
+          {t('solucoesPage.heroTitleLead')} <span class="gradient-text">{t('solucoesPage.heroTitleAccent')}</span>
+        </h1>
+        <p class="sol-sub">{t('solucoesPage.heroSub')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ TOOLS GRID ══════════════════════════════════ -->
+  <section class="sol-section">
+    <div class="container">
+      <div class="sol-tools-grid">
+        <!-- TOOL 1 — Decision Diagnostic -->
+        <a class="sol-tool sol-tool-live fi" href="/diagnostico">
+          <div class="sol-tool-head">
+            <span class="sol-tool-status sol-status-live">
+              <span class="sol-status-dot"></span>
+              {t('solucoesPage.tool1Status')}
+            </span>
+            <span class="sol-tool-category">{t('solucoesPage.tool1Category')}</span>
+          </div>
+
+          <div class="sol-tool-icon sol-icon-diagnostic" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+              <defs>
+                <linearGradient id="sol-g-diag" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#B18CFF"/>
+                  <stop offset="100%" stop-color="#4DA3FF"/>
+                </linearGradient>
+              </defs>
+              <circle cx="24" cy="24" r="18" stroke="url(#sol-g-diag)" stroke-width="1.4" stroke-dasharray="3 4" opacity="0.5"/>
+              <circle cx="24" cy="24" r="12" stroke="url(#sol-g-diag)" stroke-width="1.4" opacity="0.7"/>
+              <circle cx="24" cy="24" r="3" fill="url(#sol-g-diag)"/>
+              <path d="M24 6v6M24 36v6M6 24h6M36 24h6" stroke="url(#sol-g-diag)" stroke-width="1.4" stroke-linecap="round"/>
+              <circle cx="37" cy="11" r="2" fill="#B18CFF"/>
+            </svg>
+          </div>
+
+          <h2 class="sol-tool-title">{t('solucoesPage.tool1Title')}</h2>
+          <p class="sol-tool-desc">{t('solucoesPage.tool1Desc')}</p>
+
+          <div class="sol-tool-chips">
+            <span class="sol-chip">{t('solucoesPage.tool1Chip1')}</span>
+            <span class="sol-chip">{t('solucoesPage.tool1Chip2')}</span>
+            <span class="sol-chip">{t('solucoesPage.tool1Chip3')}</span>
+            <span class="sol-chip">{t('solucoesPage.tool1Chip4')}</span>
+          </div>
+
+          <span class="sol-tool-cta">
+            {t('solucoesPage.tool1Cta')}
+          </span>
+        </a>
+
+        <!-- TOOL 2 — AI Skills Repository (coming soon) -->
+        <a class="sol-tool sol-tool-wip fi d1" href="/contato?interest=agentes-ia">
+          <div class="sol-tool-head">
+            <span class="sol-tool-status sol-status-wip">
+              <span class="sol-status-dot"></span>
+              {t('solucoesPage.tool2Status')}
+            </span>
+            <span class="sol-tool-category">{t('solucoesPage.tool2Category')}</span>
+          </div>
+
+          <div class="sol-tool-icon sol-icon-agents" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+              <defs>
+                <linearGradient id="sol-g-agent" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00E5A0"/>
+                  <stop offset="100%" stop-color="#00D4FF"/>
+                </linearGradient>
+              </defs>
+              <circle cx="12" cy="14" r="4" stroke="url(#sol-g-agent)" stroke-width="1.5"/>
+              <circle cx="36" cy="14" r="4" stroke="url(#sol-g-agent)" stroke-width="1.5"/>
+              <circle cx="12" cy="34" r="4" stroke="url(#sol-g-agent)" stroke-width="1.5"/>
+              <circle cx="36" cy="34" r="4" stroke="url(#sol-g-agent)" stroke-width="1.5"/>
+              <circle cx="24" cy="24" r="6" fill="none" stroke="url(#sol-g-agent)" stroke-width="1.5"/>
+              <path d="M16 14 L22 20 M32 14 L26 20 M16 34 L22 28 M32 34 L26 28" stroke="url(#sol-g-agent)" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/>
+              <circle cx="24" cy="24" r="2" fill="url(#sol-g-agent)"/>
+            </svg>
+          </div>
+
+          <h2 class="sol-tool-title">{t('solucoesPage.tool2Title')}</h2>
+          <p class="sol-tool-desc">{t('solucoesPage.tool2Desc')}</p>
+
+          <div class="sol-tool-chips">
+            <span class="sol-chip">{t('solucoesPage.tool2Chip1')}</span>
+            <span class="sol-chip">{t('solucoesPage.tool2Chip2')}</span>
+            <span class="sol-chip">{t('solucoesPage.tool2Chip3')}</span>
+            <span class="sol-chip sol-chip-wip">{t('solucoesPage.tool2Chip4')}</span>
+          </div>
+
+          <span class="sol-tool-cta sol-tool-cta-wip">
+            {t('solucoesPage.tool2Cta')}
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FINAL CTA ═══════════════════════════════════ -->
+  <section class="sol-cta">
+    <div class="section-glow lilac" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="container fi">
+      <h2>{t('solucoesPage.ctaTitle')}</h2>
+      <p>{t('solucoesPage.ctaSub')}</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/colaborar" class="btn btn-primary">{t('solucoesPage.ctaPrimary')}</a>
+        <a href="/blog" class="btn btn-ghost">{t('solucoesPage.ctaSecondary')}</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ═══════════ HERO ═══════════════════════════════════════════ */
+  .sol-hero {
+    padding: 150px 0 60px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .sol-hero-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .sol-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 24px;
+  }
+  .sol-title {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    margin-bottom: 22px;
+    text-wrap: balance;
+  }
+  .sol-sub {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    text-wrap: pretty;
+  }
+
+  /* ═══════════ TOOLS GRID ══════════════════════════════════════ */
+  .sol-section {
+    padding: 40px 0 60px;
+    position: relative;
+    z-index: 1;
+  }
+  .sol-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .sol-tool {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 34px 30px;
+    background: linear-gradient(165deg, rgba(26, 26, 40, 0.85), rgba(22, 22, 32, 0.65));
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(.16, 1, .3, 1), border-color 0.3s, box-shadow 0.3s;
+  }
+  .sol-tool::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(165deg, rgba(177, 140, 255, 0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .sol-tool-live:hover {
+    transform: translateY(-4px);
+    border-color: rgba(177, 140, 255, 0.42);
+    box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4), 0 0 60px rgba(177, 140, 255, 0.06);
+  }
+  .sol-tool-wip:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 229, 160, 0.3);
+  }
+  .sol-tool:hover::before { opacity: 1; }
+
+  .sol-tool-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .sol-tool-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .sol-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .sol-status-live {
+    background: rgba(0, 229, 160, 0.1);
+    border: 1px solid rgba(0, 229, 160, 0.28);
+    color: var(--green);
+  }
+  .sol-status-live .sol-status-dot {
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(0, 229, 160, 0.7);
+    animation: solPulse 2.2s ease-in-out infinite;
+  }
+  .sol-status-wip {
+    background: rgba(255, 209, 102, 0.08);
+    border: 1px solid rgba(255, 209, 102, 0.24);
+    color: var(--yellow);
+  }
+  .sol-status-wip .sol-status-dot {
+    background: var(--yellow);
+    box-shadow: 0 0 8px rgba(255, 209, 102, 0.6);
+  }
+  @keyframes solPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.55; transform: scale(1.3); }
+  }
+  .sol-tool-category {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dimmed);
+  }
+
+  .sol-tool-icon {
+    margin-bottom: 22px;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(22, 22, 32, 0.6);
+    border: 1px solid rgba(177, 140, 255, 0.14);
+  }
+  .sol-tool-wip .sol-tool-icon {
+    border-color: rgba(0, 229, 160, 0.16);
+  }
+
+  .sol-tool-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+  .sol-tool-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0 0 20px;
+    flex: 1;
+  }
+
+  .sol-tool-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .sol-chip {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(177, 140, 255, 0.06);
+    border: 1px solid rgba(177, 140, 255, 0.14);
+    color: var(--muted);
+  }
+  .sol-tool-wip .sol-chip {
+    background: rgba(0, 229, 160, 0.04);
+    border-color: rgba(0, 229, 160, 0.14);
+  }
+  .sol-chip-wip {
+    color: var(--yellow);
+    background: rgba(255, 209, 102, 0.08);
+    border-color: rgba(255, 209, 102, 0.22);
+  }
+
+  .sol-tool-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    padding: 11px 20px;
+    border-radius: 100px;
+    border: 1px solid rgba(177, 140, 255, 0.32);
+    background: rgba(177, 140, 255, 0.06);
+    transition: gap 0.25s, border-color 0.25s, background 0.25s;
+  }
+  .sol-tool-live:hover .sol-tool-cta {
+    gap: 12px;
+    border-color: rgba(177, 140, 255, 0.55);
+    background: rgba(177, 140, 255, 0.14);
+  }
+  .sol-tool-cta-wip {
+    color: var(--green);
+    border-color: rgba(0, 229, 160, 0.28);
+    background: rgba(0, 229, 160, 0.05);
+  }
+  .sol-tool-wip:hover .sol-tool-cta-wip {
+    gap: 12px;
+    border-color: rgba(0, 229, 160, 0.5);
+    background: rgba(0, 229, 160, 0.1);
+  }
+
+  /* ═══════════ FINAL CTA ══════════════════════════════════════ */
+  .sol-cta {
+    padding: 80px 0 120px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .sol-cta h2 {
+    font-size: clamp(26px, 3.2vw, 38px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .sol-cta p {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 900px) {
+    .sol-tools-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .sol-hero { padding: 130px 0 40px; }
+    .sol-tool { padding: 26px 24px 24px; }
+    .sol-tool-head { flex-wrap: wrap; }
+    .sol-tool-title { font-size: 19px; }
+  }
+</style>
