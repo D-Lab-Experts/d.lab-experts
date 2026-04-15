@@ -119,7 +119,7 @@ const t = useTranslations();
       <div class="about-section-header fi">
         <div class="eyebrow">{t('aboutPage.scopeEyebrow')}</div>
         <h2>{t('aboutPage.scopeTitle')}</h2>
-        <p class="lead">{t('aboutPage.scopeLead')}</p>
+        <p class="lead" set:html={t('aboutPage.scopeLead')}></p>
       </div>
 
       <div class="services-split">

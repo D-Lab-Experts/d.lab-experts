@@ -1537,6 +1537,17 @@ ul, ol { list-style: none; }
 .about-section h2 { font-size: clamp(26px,3.5vw,36px); font-weight: 700; letter-spacing: -.03em; margin-bottom: 20px; line-height: 1.15; }
 .about-section p { font-size: 16.5px; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
 .about-section p strong { color: var(--white); font-weight: 600; }
+/* <em> em parágrafos do about vira ênfase sublinhada (dashed), não
+   itálico. Mesmo tratamento do bloco "quem somos", aplicado agora em
+   toda a página. */
+.about-section p em,
+.service-card p em {
+  font-style: normal;
+  color: var(--white);
+  border-bottom: 1px dashed rgba(177,140,255,0.4);
+  padding-bottom: 1px;
+}
+.service-card p strong { color: var(--white); font-weight: 600; }
 .pillars-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin: 40px 0; }
 .pillar { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: all .3s cubic-bezier(.16,1,.3,1); position: relative; overflow: hidden; }
 .pillar:hover { border-color: var(--border-h); transform: translateY(-3px); }
