@@ -762,9 +762,9 @@ const pt: Translation = {
     narrSize3: 'acima de R$ 10 mi, cada ponto percentual de probabilidade de qualidade move capital material. A faixa de exposição abaixo não é metafórica',
 
     actionsTitle: 'Próximas ações recomendadas',
-    actionBriefingTitle: 'Leia: "Decidindo no Escuro"',
-    actionBriefingDesc: 'Começa pelo baseline dos 73% por intuição e expõe um framework estruturado de decisão.',
-    actionBriefingCta: 'Ler estudo →',
+    actionBriefingTitle: 'Explore as pesquisas do D.Lab',
+    actionBriefingDesc: 'Estudos originais sobre decisão, mercado e risco, com metodologia documentada e dado primário.',
+    actionBriefingCta: 'Ver publicações →',
     actionResearchTitle: 'Encomende um briefing diagnóstico',
     actionResearchDesc: 'Um diagnóstico pago, com escopo fechado, aplicando o mesmo rigor à sua decisão específica. Prazo típico: 2 a 3 semanas.',
     actionResearchCta: 'Falar com o D.Lab →',

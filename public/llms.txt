@@ -11,7 +11,6 @@
 
 Pesquisas e análises originais em formato aberto. Uma fração do que produzimos, publicada como prova de método. Cada estudo inclui metodologia explícita, dados-fonte e implicações práticas para empresas.
 
-- [Decisão no Escuro: o custo da maturidade de dados zero nas PMEs brasileiras](https://dlabexperts.com/posts/decisao-no-escuro): 74% dos gestores de PME tomam decisões críticas por intuição. 29% das empresas fecham no primeiro ano. Pesquisa baseada em dados de SEBRAE, IBGE, FGV, RAIS/MTE e 80 entrevistas com gestores.
 - [Campanhas afirmativas no mercado de games: percepção, confiança e intenção de compra](https://dlabexperts.com/posts/campanhas-afirmativas-gaming): Estudo piloto com 98 gamers brasileiros mostra que 87,8% acreditam que campanhas geram impacto real, mas só 16,3% confiam na sinceridade das marcas. Gamers minorizados têm 3,48× mais chance de trocar de marca por compromisso social.
 
 ## Serviços

@@ -3,7 +3,8 @@
     { "source": "/pt", "destination": "/", "permanent": true },
     { "source": "/pt/:path*", "destination": "/:path*", "permanent": true },
     { "source": "/diagnostic", "destination": "/diagnostico", "permanent": true },
-    { "source": "/posts/deciding-in-the-dark", "destination": "/posts/decisao-no-escuro", "permanent": true },
+    { "source": "/posts/deciding-in-the-dark", "destination": "/blog", "permanent": true },
+    { "source": "/posts/decisao-no-escuro", "destination": "/blog", "permanent": true },
     { "source": "/posts/affirmative-campaigns-gaming", "destination": "/posts/campanhas-afirmativas-gaming", "permanent": true }
   ]
 }
