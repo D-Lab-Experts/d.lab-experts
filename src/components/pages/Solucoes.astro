@@ -30,6 +30,24 @@ const t = useTranslations();
     </div>
   </section>
 
+  <!-- ═══════════════ COMMITMENT STRIP ════════════════════════════ -->
+  <section class="sol-commitment">
+    <div class="container">
+      <div class="sol-commitment-inner fi">
+        <div class="sol-commitment-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 2l2.5 5L18 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L10 2z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round" fill="rgba(177,140,255,0.08)"/>
+          </svg>
+        </div>
+        <div class="sol-commitment-copy">
+          <span class="sol-commitment-label">{t('solucoesPage.commitmentLabel')}</span>
+          <h2 class="sol-commitment-title">{t('solucoesPage.commitmentTitle')}</h2>
+          <p class="sol-commitment-body">{t('solucoesPage.commitmentBody')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════ TOOLS GRID ══════════════════════════════════ -->
   <section class="sol-section">
     <div class="container">
@@ -64,6 +82,7 @@ const t = useTranslations();
           <p class="sol-tool-desc">{t('solucoesPage.tool1Desc')}</p>
 
           <div class="sol-tool-chips">
+            <span class="sol-chip sol-chip-free">{t('solucoesPage.tool1Chip0')}</span>
             <span class="sol-chip">{t('solucoesPage.tool1Chip1')}</span>
             <span class="sol-chip">{t('solucoesPage.tool1Chip2')}</span>
             <span class="sol-chip">{t('solucoesPage.tool1Chip3')}</span>
@@ -107,6 +126,7 @@ const t = useTranslations();
           <p class="sol-tool-desc">{t('solucoesPage.tool2Desc')}</p>
 
           <div class="sol-tool-chips">
+            <span class="sol-chip sol-chip-free">{t('solucoesPage.tool2Chip0')}</span>
             <span class="sol-chip">{t('solucoesPage.tool2Chip1')}</span>
             <span class="sol-chip">{t('solucoesPage.tool2Chip2')}</span>
             <span class="sol-chip">{t('solucoesPage.tool2Chip3')}</span>
@@ -176,6 +196,67 @@ const t = useTranslations();
     max-width: 680px;
     margin: 0 auto;
     text-wrap: pretty;
+  }
+
+  /* ═══════════ COMMITMENT STRIP ═════════════════════════════════
+     Fica entre hero e tools. Carrega dois sinais: (1) tudo gratuito,
+     (2) comunidade que agrega valor. Sem competir com a hero. */
+  .sol-commitment {
+    padding: 24px 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .sol-commitment-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 22px;
+    align-items: start;
+    padding: 22px 28px;
+    background: linear-gradient(120deg, rgba(177, 140, 255, 0.08), rgba(0, 229, 160, 0.04) 70%, transparent);
+    border: 1px solid rgba(177, 140, 255, 0.22);
+    border-radius: 16px;
+  }
+  .sol-commitment-mark {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(177, 140, 255, 0.1);
+    border: 1px solid rgba(177, 140, 255, 0.28);
+    flex-shrink: 0;
+  }
+  .sol-commitment-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .sol-commitment-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lilac);
+  }
+  .sol-commitment-title {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--white);
+    line-height: 1.25;
+    margin: 0;
+  }
+  .sol-commitment-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 4px 0 0;
+  }
+  @media (max-width: 640px) {
+    .sol-commitment-inner { grid-template-columns: 1fr; padding: 20px 22px; }
   }
 
   /* ═══════════ TOOLS GRID ══════════════════════════════════════ */
@@ -337,6 +418,14 @@ const t = useTranslations();
     color: var(--yellow);
     background: rgba(255, 209, 102, 0.08);
     border-color: rgba(255, 209, 102, 0.22);
+  }
+  /* "Gratuito" — mais destaque que os demais chips, já que é o
+     diferencial mais visível da estratégia. */
+  .sol-chip-free {
+    color: var(--green);
+    background: rgba(0, 229, 160, 0.1);
+    border-color: rgba(0, 229, 160, 0.3);
+    font-weight: 700;
   }
 
   .sol-tool-cta {

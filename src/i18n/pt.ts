@@ -576,13 +576,20 @@ const pt: Translation = {
     heroEyebrow: 'Ferramentas & Soluções',
     heroTitleLead: 'Soluções úteis para',
     heroTitleAccent: 'tech e mercado.',
-    heroSub: 'Ferramentas práticas construídas a partir dos mesmos princípios de rigor do Research Hub. Abertas, transparentes e ancoradas em pesquisa externa. Cada solução nasce de um problema que a gente encontrou na operação — ou que alguém nos perguntou.',
+    heroSub: 'Ferramentas práticas construídas a partir dos mesmos princípios de rigor do Research Hub. Abertas, transparentes e ancoradas em pesquisa externa. Cada solução nasce de um problema real que a gente encontrou na operação, ou que alguém nos perguntou.',
+
+    // Strip de posicionamento — ancorar o "gratuito" e o
+    // compromisso com a comunidade logo abaixo da hero.
+    commitmentLabel: 'Compromisso',
+    commitmentTitle: 'Todas as soluções são gratuitas.',
+    commitmentBody: 'Faz parte do jeito D.Lab: somos uma comunidade de pesquisadores, engenheiros e inovadores que quer agregar valor para quem decide, opera e constrói. Consultoria paga quando o contexto pede. Pesquisa e ferramentas, sempre livres.',
 
     // Tool 1 — Decision Diagnostic (live)
     tool1Status: 'Disponível',
     tool1Category: 'Decisão estratégica',
     tool1Title: 'Diagnóstico de Decisão',
     tool1Desc: 'Quantifica o risco de decidir sem dados. Estima a probabilidade de decisão de alta qualidade e a faixa de exposição em R$ a partir de 5 entradas. Cada coeficiente ancorado em pesquisa externa (McKinsey, Brynjolfsson/MIT, Bain, PMI, Kahneman, Bezos, IBM).',
+    tool1Chip0: 'Gratuito',
     tool1Chip1: '5 entradas',
     tool1Chip2: '~60 segundos',
     tool1Chip3: '7 fontes citadas',
@@ -594,6 +601,7 @@ const pt: Translation = {
     tool2Category: 'Agentes de IA',
     tool2Title: 'Skills para Agentes de IA',
     tool2Desc: 'Repositório aberto de skills, ferramentas e workflows curados para uso em agentes de IA em operação. Cada skill documentada com metodologia, casos de uso e performance observada em produção.',
+    tool2Chip0: 'Gratuito',
     tool2Chip1: 'Open source',
     tool2Chip2: 'Curadoria D.Lab',
     tool2Chip3: 'Roadmap público',
@@ -601,7 +609,7 @@ const pt: Translation = {
     tool2Cta: 'Avisar quando sair →',
 
     ctaTitle: 'Tem ideia de ferramenta útil?',
-    ctaSub: 'A gente gosta de construir soluções que nascem de problemas reais. Se você tem uma ideia, fala com a gente. Pode virar a próxima solução do hub.',
+    ctaSub: 'A gente quer ser uma comunidade que agrega valor de verdade. Se você tem uma ideia de ferramenta, um problema recorrente na sua área, ou quer contribuir com uma solução existente, fala com a gente. Pesquisadores, engenheiros, founders, professores, jornalistas: todo mundo é bem-vindo.',
     ctaPrimary: 'Propor uma solução →',
     ctaSecondary: 'Ver pesquisas publicadas',
   },

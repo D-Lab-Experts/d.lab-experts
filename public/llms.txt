@@ -1,6 +1,6 @@
 # D.Lab · Data Intelligence & Cybersecurity
 
-> D.Lab é um laboratório brasileiro de pesquisa aplicada. Cruzamos inteligência de dados e cybersegurança numa única operação, trabalhando sob NDA para empresas que tomam decisões de alto impacto. Pesquisa aberta como prova pública de método. O resto vive fechado, nas mãos de quem encomendou.
+> D.Lab é um laboratório brasileiro de pesquisa aplicada e uma comunidade de pesquisadores, engenheiros e inovadores com a missão de agregar valor a quem decide, opera e constrói. Cruzamos inteligência de dados e cybersegurança na mesma operação, publicamos pesquisa aberta como prova pública de método e construímos ferramentas gratuitas para profissionais de tecnologia e mercado. Consultoria paga existe quando o contexto pede; pesquisa e ferramentas são sempre livres.
 
 ## Sobre nós
 
@@ -20,7 +20,11 @@ Pesquisas e análises originais em formato aberto. Uma fração do que produzimo
 
 ## Ferramentas públicas
 
-- [Diagnóstico de Decisão](https://dlabexperts.com/diagnostico): ferramenta interativa que estima a probabilidade de decisão de alta qualidade e a faixa de exposição em R$ a partir de 5 entradas (porte, reversibilidade, maturidade de dados, pressão de tempo, stakeholders). Cada coeficiente referenciado em pesquisa externa (McKinsey 2019, Brynjolfsson MIT 2011, PMI, Bain, Kahneman, Bezos, IBM 2024). Não é previsão.
+Todas as soluções abaixo são gratuitas e abertas. Parte do compromisso do D.Lab com a comunidade de tecnologia e mercado.
+
+- [Hub de Soluções](https://dlabexperts.com/solucoes): página-índice das ferramentas D.Lab. Catálogo vivo; novas soluções entram quando saem da curadoria.
+- [Diagnóstico de Decisão](https://dlabexperts.com/diagnostico): ferramenta interativa que estima a probabilidade de decisão de alta qualidade e a faixa de exposição em R$ a partir de 5 entradas (porte, reversibilidade, maturidade de dados, pressão de tempo, stakeholders). Cada coeficiente referenciado em pesquisa externa (McKinsey 2019, Brynjolfsson MIT 2011, PMI, Bain, Kahneman, Bezos, IBM 2024). Não é previsão. Gratuito.
+- Skills para Agentes de IA (em desenvolvimento): repositório aberto de skills, ferramentas e workflows curados para uso em agentes de IA em operação. Cada skill documentada com metodologia, casos de uso e performance observada em produção. Gratuito, open source.
 
 ## Contato
 
