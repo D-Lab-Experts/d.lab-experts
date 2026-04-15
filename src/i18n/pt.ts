@@ -43,6 +43,9 @@ const pt: Translation = {
     diagnostic: 'Diagnóstico de Decisão | D.Lab Experts · Research Hub',
     diagnosticDescription:
       'Quantifique o risco de decidir sem dados. Cinco entradas, duas saídas, cada coeficiente ancorado em pesquisa revisada.',
+    imprensa: 'Imprensa | D.Lab Experts · Research Hub',
+    imprensaDescription:
+      'Kit de imprensa do D.Lab Experts: contato de mídia, bios dos pesquisadores, logos em alta resolução, principais achados das pesquisas publicadas e ativos gráficos para download.',
     colaborar: 'Colaborar | D.Lab Experts · Research Hub',
     colaborarDescription:
       'O D.Lab Experts é um Research Hub aberto a colaboradores. Proponha uma pesquisa, submeta um estudo, compartilhe dados ou participe como peer reviewer. Pesquisa é trabalho coletivo.',
@@ -246,6 +249,7 @@ const pt: Translation = {
     linkAgenda: 'Agenda de pesquisa',
     linkCollaborate: 'Colaborar com o Hub',
     linkDiagnostic: 'Diagnóstico de Decisão',
+    linkImprensa: 'Sala de imprensa',
     linkRss: 'RSS das análises',
     linkPractices: 'Frentes de consultoria',
     linkMethod: 'Metodologia',
@@ -563,6 +567,52 @@ const pt: Translation = {
     nextLabel: 'Enquanto isso, explore',
     ctaPrimary: 'Ler análises abertas →',
     ctaSecondary: 'Voltar para o início',
+  },
+
+  imprensaPage: {
+    heroEyebrow: 'Sala de imprensa',
+    heroTitleLead: 'D.Lab Experts',
+    heroTitleAccent: 'para jornalistas.',
+    heroSub: 'Contato direto, bios dos pesquisadores, logos em alta resolução e principais achados das pesquisas publicadas. Use, cite e publique. Só pedimos atribuição explícita ao D.Lab Experts e link para o estudo de origem.',
+
+    contactLabel: 'Contato de imprensa',
+    contactEmailLabel: 'E-mail direto',
+    contactEmail: 'gabriel@dlabexperts.com',
+    contactResponse: 'Resposta em até 1 dia útil',
+    contactLinkedinLabel: 'LinkedIn',
+    contactLinkedinHandle: '@d-lab-intelligence',
+    contactNote: 'Para entrevistas, dados adicionais, embargos ou acesso antecipado a pesquisas em preparação, fale direto com o responsável.',
+
+    authorsLabel: 'Pesquisadores disponíveis',
+    author1Name: 'Gabriel Olegário',
+    author1Role: 'Fundador e pesquisador principal',
+    author1Bio: 'Lidera a frente de inteligência aplicada no D.Lab Experts. Pesquisa decisão estratégica, mercado e comportamento do consumidor, com foco em traduzir dados primários em recomendações acionáveis para boards, founders e operadores. Autor das pesquisas originais publicadas no Research Hub.',
+    author1Expertise: 'Decision intelligence, pesquisa de mercado, comportamento do consumidor, metodologia quantitativa',
+    author2Name: 'Lucas H.C.C. Santos',
+    author2Role: 'Pesquisador associado',
+    author2Bio: 'Pesquisador associado ao D.Lab Experts. Participa como co-autor em estudos de comportamento do consumidor e marketing, com trabalho recente sobre campanhas afirmativas no mercado de games.',
+    author2Expertise: 'Marketing, branding, gaming & diversidade, pesquisa aplicada',
+
+    findingsLabel: 'Principais achados (prontos para citação)',
+    findingsSub: 'Estatísticas-âncora das pesquisas publicadas. Cada número está ligado à metodologia e fonte primária no estudo correspondente.',
+
+    assetsLabel: 'Logos e ativos visuais',
+    assetsSub: 'Use os logos em alta resolução em materiais editoriais e redes sociais. Não modifique cores, proporções ou adicione efeitos.',
+    assetLogoFull: 'Logo horizontal (recomendado)',
+    assetLogoMark: 'Símbolo D.Lab',
+    assetLogoIcon: 'Ícone quadrado (redes sociais)',
+    assetDownload: 'Baixar',
+
+    usageLabel: 'Diretrizes de uso',
+    usageItem1: 'Atribuição obrigatória ao D.Lab Experts, com link para o estudo de origem quando citado online.',
+    usageItem2: 'Ao citar uma estatística, inclua contexto mínimo: amostra, período e fonte do dado primário (todos declarados em cada estudo).',
+    usageItem3: 'Gráficos e tabelas das pesquisas podem ser reproduzidos mantendo o crédito visível ("Fonte: D.Lab Experts, Ano").',
+    usageItem4: 'Para adaptações ou reportagens mais aprofundadas, pedimos uma conversa prévia de 15 minutos com o pesquisador responsável.',
+
+    ctaLabel: 'Pronto para publicar?',
+    ctaSub: 'Fale com a gente direto. Respondemos em até um dia útil com os materiais extras que você precisar.',
+    ctaPrimary: 'Falar com o D.Lab →',
+    ctaSecondary: 'Ver todas as pesquisas',
   },
 
   notFoundPage: {

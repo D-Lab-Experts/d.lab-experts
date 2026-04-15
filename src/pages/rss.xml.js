@@ -13,7 +13,9 @@ export async function GET(context) {
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.pubDate,
-      description: post.data.description,
+      // Prefer the longer excerpt when declared — richer feed for
+      // aggregators, press readers and research discovery tools.
+      description: post.data.excerpt ?? post.data.description,
       author: post.data.author,
       categories: [post.data.category, ...post.data.tags],
       link: `/posts/${post.slug}/`,

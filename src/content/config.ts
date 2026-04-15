@@ -82,6 +82,21 @@ const blog = defineCollection({
         }),
       )
       .optional(),
+    // Key findings — surfaced as a "Principais achados" block at the
+    // top of the post AND aggregated on /imprensa for journalists.
+    // Each item gets an anchor id so stats can be deep-linked.
+    keyFindings: z
+      .array(
+        z.object({
+          stat: z.string(),
+          label: z.string(),
+          id: z.string(),
+          color: z
+            .enum(['lilac', 'blue', 'cyan', 'green', 'yellow'])
+            .default('lilac'),
+        }),
+      )
+      .optional(),
   }),
 });
 
