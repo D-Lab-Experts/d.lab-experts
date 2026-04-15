@@ -872,10 +872,10 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
 
       <div class="home-about-layout">
         <div class="home-about-text fi-l">
-          <p>{t('about.p1')}</p>
-          <p>{t('about.p2')}</p>
-          <p>{t('about.p3')}</p>
-          <p>{t('about.p4')}</p>
+          <p set:html={t('about.p1')}></p>
+          <p set:html={t('about.p2')}></p>
+          <p set:html={t('about.p3')}></p>
+          <p set:html={t('about.p4')}></p>
         </div>
         <div class="home-about-side fi-r d1">
           <div class="home-about-pillars">

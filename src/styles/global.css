@@ -1450,7 +1450,15 @@ ul, ol { list-style: none; }
 .home-about-text { font-size: 16px; color: var(--muted); line-height: 1.8; }
 .home-about-text p { margin-bottom: 18px; }
 .home-about-text p:last-child { margin-bottom: 0; }
-.home-about-text strong { color: var(--white); }
+.home-about-text strong { color: var(--white); font-weight: 600; }
+/* <em> nos parágrafos do About-mini da home: ênfase sublinhada,
+   não itálico — mesmo tratamento do bloco "Quem somos" no /about. */
+.home-about-text em {
+  font-style: normal;
+  color: var(--white);
+  border-bottom: 1px dashed rgba(177, 140, 255, 0.4);
+  padding-bottom: 1px;
+}
 .home-about-pillars {
   display: grid;
   grid-template-columns: 1fr 1fr;
