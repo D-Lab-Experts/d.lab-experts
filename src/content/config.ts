@@ -57,6 +57,31 @@ const blog = defineCollection({
     citationVolume: z.string().optional(),
     // BCP-47 language tag for the citation metadata. Defaults to pt-BR.
     citationLanguage: z.string().default('pt-BR'),
+    // Per-author metadata for the Article's `author` schema. When
+    // declared, each author becomes a `Person` (not just a name string),
+    // with optional LinkedIn / ORCID / role. Improves E-E-A-T signals.
+    authorsMeta: z
+      .array(
+        z.object({
+          name: z.string(),
+          linkedin: z.string().url().optional(),
+          orcid: z.string().optional(),
+          jobTitle: z.string().optional(),
+        }),
+      )
+      .optional(),
+    // Works cited in the post (references/bibliography). Emitted as
+    // `mentions` on the Article schema so Scholar + LLMs can parse
+    // the citation graph. Free-form `name` + optional URL per entry.
+    mentions: z
+      .array(
+        z.object({
+          name: z.string(),
+          url: z.string().url().optional(),
+          author: z.string().optional(),
+        }),
+      )
+      .optional(),
   }),
 });
 

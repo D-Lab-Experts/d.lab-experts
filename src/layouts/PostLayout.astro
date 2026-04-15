@@ -20,11 +20,14 @@ const {
   tags,
   keywords,
   cover,
+  coverAlt,
   faq,
   readingTime,
   citationAuthors,
   citationVolume,
   citationLanguage,
+  authorsMeta,
+  mentions,
 } = post.data;
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -91,6 +94,70 @@ const citationMeta = isOriginalResearch
     }
   : undefined;
 
+// Word count — derived from the raw MDX body, stripped of code fences,
+// HTML tags and markdown syntax. Rough but defensible; strengthens
+// the "depth" signal for both Scholar and mainstream SEO.
+const bodyText = (post.body ?? '')
+  .replace(/```[\s\S]*?```/g, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/[#*_`~\[\]()!]/g, ' ');
+const wordCount = bodyText.split(/\s+/).filter((w) => w.length > 0).length;
+
+// Author schema: prefer Person[] when the post declares authorsMeta
+// (LinkedIn/ORCID/jobTitle for E-E-A-T). Fall back to a per-author
+// Person[] built from citationAuthors. If neither is available
+// (e.g. non-original posts without citation), keep the legacy
+// Organization-as-author shape for backward compatibility.
+const siteOrigin = new URL('/', Astro.site).toString();
+type AuthorSchema =
+  | { '@type': 'Person'; name: string; jobTitle?: string; sameAs?: string[]; url?: string }
+  | { '@type': 'Organization'; '@id': string; name: string; url: string };
+const authorSchema: AuthorSchema | AuthorSchema[] = (() => {
+  if (authorsMeta && authorsMeta.length > 0) {
+    return authorsMeta.map((a): AuthorSchema => {
+      const sameAs: string[] = [];
+      if (a.linkedin) sameAs.push(a.linkedin);
+      if (a.orcid) sameAs.push(a.orcid.startsWith('http') ? a.orcid : `https://orcid.org/${a.orcid}`);
+      return {
+        '@type': 'Person',
+        name: a.name,
+        ...(a.jobTitle ? { jobTitle: a.jobTitle } : {}),
+        ...(sameAs.length ? { sameAs } : {}),
+      };
+    });
+  }
+  if (citationAuthorList.length > 0 && isOriginalResearch) {
+    return citationAuthorList.map((name): AuthorSchema => ({ '@type': 'Person', name }));
+  }
+  return {
+    '@type': 'Organization',
+    '@id': siteOrigin + '#org',
+    name: author,
+    url: siteOrigin,
+  };
+})();
+
+// Periodical wrapper for the research series. Scholar uses isPartOf
+// to group articles under the same publication banner.
+const periodicalLd = {
+  '@type': 'Periodical',
+  '@id': new URL('/blog', Astro.site).toString() + '#series',
+  name: 'D.Lab Research Series',
+  publisher: { '@id': siteOrigin + '#org' },
+  inLanguage: articleInLang,
+};
+
+// Citations mapped to CreativeWork. Free-form text in `name`
+// (reference string); URL/author optional per entry.
+const mentionsLd = mentions && mentions.length > 0
+  ? mentions.map((m) => ({
+      '@type': 'CreativeWork',
+      name: m.name,
+      ...(m.url ? { url: m.url } : {}),
+      ...(m.author ? { author: { '@type': 'Person', name: m.author } } : {}),
+    }))
+  : undefined;
+
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -113,30 +180,31 @@ const articleLd = {
     url: imageURL,
     width: 1200,
     height: 675,
+    ...(coverAlt ? { caption: coverAlt } : {}),
   },
-  author: {
-    '@type': 'Organization',
-    '@id': new URL('/', Astro.site).toString() + '#org',
-    name: author,
-    url: new URL('/', Astro.site).toString(),
-  },
+  author: authorSchema,
   publisher: {
     '@type': 'Organization',
-    '@id': new URL('/', Astro.site).toString() + '#org',
+    '@id': siteOrigin + '#org',
     name: 'D.Lab',
-    url: new URL('/', Astro.site).toString(),
+    url: siteOrigin,
     logo: {
       '@type': 'ImageObject',
       url: new URL('/d.lab.png', Astro.site).toString(),
+      width: 512,
+      height: 512,
     },
   },
+  isPartOf: periodicalLd,
   keywords: allKeywords.join(', '),
   articleSection: category,
   about: tags.map((t) => ({ '@type': 'Thing', name: t })),
+  wordCount,
   speakable: {
     '@type': 'SpeakableSpecification',
     cssSelector: ['.article-title', '.post-title', '.tldr-card', '.article-subtitle', '.post-subtitle'],
   },
+  ...(mentionsLd ? { mentions: mentionsLd } : {}),
   ...(readingTime
     ? {
         timeRequired: 'PT' + (parseInt(readingTime, 10) || 10) + 'M',
@@ -177,6 +245,7 @@ const originalResearchLabel = 'Pesquisa Original';
   title={`${title} | D.Lab Experts`}
   description={description}
   image={cover}
+  imageAlt={coverAlt}
   active="blog"
   type="article"
   publishedTime={isoPub}

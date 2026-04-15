@@ -15,6 +15,7 @@ export interface Props {
   title: string;
   description: string;
   image?: string;
+  imageAlt?: string;
   canonical?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
@@ -30,6 +31,7 @@ const {
   title,
   description,
   image = '/d.lab.png',
+  imageAlt,
   canonical,
   type = 'website',
   publishedTime,
@@ -77,6 +79,9 @@ const imageURL = new URL(image, Astro.site);
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="675" />
+{imageAlt && <meta property="og:image:alt" content={imageAlt} />}
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:site_name" content={t('meta.ogSiteName')} />
 

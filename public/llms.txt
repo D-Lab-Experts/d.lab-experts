@@ -15,9 +15,12 @@ Pesquisas e análises originais em formato aberto. Uma fração do que produzimo
 
 ## Serviços
 
-- **Inteligência de Dados**: Análise estratégica de mercado, inteligência competitiva, perfil de público, estudos de tendência, implementação de IA.
-- **Cybersegurança**: Pentest, análise de vulnerabilidades, consultoria de segurança digital, adequação a LGPD/ISO 27001/NIST.
-- **Pesquisa Política e Eleitoral**: Pesquisa de opinião pública, mapeamento de eleitorado, análise de sentimento.
+- **Inteligência Aplicada**: análise estratégica de mercado, inteligência competitiva, perfil de público e demanda, estudos de tendência, implementação de IA e automação.
+- **Cybersegurança · SOC**: Security Operations Center com foco em cobertura fora do expediente. Monitoramento de logs, correlação de alertas, triagem de incidentes em tempo real, resposta e escalonamento. Adequação a LGPD/ISO 27001/NIST quando combinado com consultoria de postura.
+
+## Ferramentas públicas
+
+- [Diagnóstico de Decisão](https://dlabexperts.com/diagnostico): ferramenta interativa que estima a probabilidade de decisão de alta qualidade e a faixa de exposição em R$ a partir de 5 entradas (porte, reversibilidade, maturidade de dados, pressão de tempo, stakeholders). Cada coeficiente referenciado em pesquisa externa (McKinsey 2019, Brynjolfsson MIT 2011, PMI, Bain, Kahneman, Bezos, IBM 2024). Não é previsão.
 
 ## Contato
 

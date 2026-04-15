@@ -14,6 +14,7 @@ export interface Props {
   description: string;
   active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar' | 'diagnostic';
   image?: string;
+  imageAlt?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
@@ -27,6 +28,7 @@ const {
   description,
   active,
   image,
+  imageAlt,
   type,
   publishedTime,
   modifiedTime,
@@ -43,6 +45,7 @@ const {
       title={title}
       description={description}
       image={image}
+      imageAlt={imageAlt}
       type={type}
       publishedTime={publishedTime}
       modifiedTime={modifiedTime}
