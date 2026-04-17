@@ -193,9 +193,9 @@ const pt: Translation = {
       'Implementação de IA, automação e processos na operação. Para quando o que trava não é a decisão. É a execução.',
 
     cyberHeader: 'Cybersegurança',
-    cyberPentestName: 'SOC · Security Operations Center',
+    cyberPentestName: 'Cyber Research & CVE',
     cyberPentestDesc:
-      'Monitoramento fora do expediente com resposta a incidentes. Ficamos atentos a logs e alertas enquanto o time do cliente dorme, triagem em tempo real das anomalias e entregamos pela manhã um briefing limpo com cada evento, decisão e ação tomada na madrugada.',
+      'Pesquisa aplicada em segurança ofensiva com metodologia explícita e forte ênfase em dados. Partimos de vulnerabilidades públicas (CVE), reproduzimos a cadeia de exploração em ambiente controlado e medimos o que ela significa em produção, não no paper. Entregamos método, prova técnica e impacto observado, para que o defensor leia a ameaça pelo mesmo ângulo de quem ataca.',
     cyberConsultName: 'Consultoria de Segurança Digital',
     cyberConsultDesc:
       'Diagnóstico completo da postura de segurança, definição de políticas, adequação a frameworks e acompanhamento contínuo junto à operação do SOC.',
@@ -215,10 +215,10 @@ const pt: Translation = {
     title: 'Rigor de laboratório.',
     titleAccent: 'Pegada vanguardista.',
     sub: 'Research Hub em inteligência aplicada e cybersegurança. Pesquisamos, testamos e publicamos como prova de método.',
-    p1: 'O D.Lab Experts nasceu de uma <strong>premissa</strong>: decisão estratégica ainda é <em>majoritariamente palpite</em> em boa parte do mundo, e agora <strong>o risco ficou mais caro</strong>. <span class="hl-blue">LLMs e agentes</span> aceleram a execução, mas <span class="hl-yellow">expõem novas superfícies de ataque</span>.',
-    p2: 'Somos um <strong><span class="hl-lilac">Research Hub</span> em inteligência aplicada e cybersegurança</strong>: pesquisamos, testamos e publicamos como prova de método. No lado da <span class="hl-lilac">inteligência</span>, cruzamos <strong>fontes públicas, APIs e dados primários</strong> para responder o que trava decisão, quem é o concorrente real, onde está o mercado, <em>qual a próxima aposta viável</em>.',
-    p3: 'No lado <span class="hl-green">cyber</span>, operamos um <strong><span class="hl-green">Security Operations Center</span></strong> com foco em <strong>cobertura fora do expediente</strong>: monitoramos logs, correlacionamos alertas e fazemos <strong>triagem de incidentes em tempo real</strong>, na janela em que o atacante de fato se move. Incluindo as superfícies novas que <span class="hl-blue">IA e automação</span> inauguraram.',
-    p4: 'Publicamos o método. <strong><span class="hl-lilac">Análise aberta como prova de como pensamos.</span></strong> Trabalho sob <strong>NDA</strong> vira frente de consultoria quando alguém precisa do <strong>mesmo rigor</strong> aplicado ao próprio contexto. <em>O resto é ruído.</em>',
+    p1: 'O D.Lab Experts nasceu de uma <strong>premissa</strong>: decisão estratégica ainda é <em>majoritariamente palpite</em> em boa parte do mundo, e agora <strong>o risco ficou mais caro</strong>. LLMs e agentes aceleram a execução, mas <strong>expõem novas superfícies de ataque</strong>.',
+    p2: 'Somos um <strong>Research Hub em inteligência aplicada e cybersegurança</strong>: pesquisamos, testamos e publicamos como prova de método. No lado da inteligência, cruzamos <strong>fontes públicas, APIs e dados primários</strong> para responder o que trava decisão, quem é o concorrente real, onde está o mercado, <em>qual a próxima aposta viável</em>.',
+    p3: 'No lado cyber, operamos um <strong>Security Operations Center</strong> com foco em <strong>cobertura fora do expediente</strong>: monitoramos logs, correlacionamos alertas e fazemos <strong>triagem de incidentes em tempo real</strong>, na janela em que o atacante de fato se move. Incluindo as superfícies novas que IA e automação inauguraram.',
+    p4: 'Publicamos o método. <strong>Análise aberta como prova de como pensamos.</strong> Trabalho sob <strong>NDA</strong> vira frente de consultoria quando alguém precisa do <strong>mesmo rigor</strong> aplicado ao próprio contexto. <em>O resto é ruído.</em>',
     ctaAbout: 'Conheça o D.Lab Experts →',
     pillarMethodTitle: 'Rigor metodológico',
     pillarMethodDesc: 'Cada análise com metodologia documentada e replicável',
@@ -674,12 +674,12 @@ const pt: Translation = {
   },
 
   aboutBody: {
-    p1: 'O D.Lab Experts nasceu de uma <strong>premissa documentada</strong>. Segundo o SEBRAE (2023), <strong><span class="hl-lilac">73% dos gestores de PMEs</span> tomam decisões críticas pela intuição</strong>. Em paralelo, <span class="hl-blue">LLMs e agentes</span> aceleram a execução enquanto <span class="hl-yellow">multiplicam a superfície de ataque</span>, e o custo médio global de um vazamento de dados é <strong><span class="hl-cyan">$4,88 milhões</span></strong> (IBM, 2024). <em>Decisão às cegas e operação exposta</em> são os dois lados do mesmo problema.',
-    p2: 'No lado de <span class="hl-lilac">inteligência</span>, cruzamos <strong>fontes públicas, APIs, scraping e pesquisa primária</strong> para responder o que trava decisões de <strong>boards, founders e operadores</strong>. O mercado global de analytics cresce <span class="hl-blue">13,5% ao ano</span> (Statista, 2024), e empresas data-driven têm <strong><span class="hl-blue">23× mais chance de adquirir clientes</span></strong> (McKinsey Global Institute).',
+    p1: 'O D.Lab Experts nasceu de uma <strong>premissa documentada</strong>. Segundo o SEBRAE (2023), <strong>73% dos gestores de PMEs tomam decisões críticas pela intuição</strong>. Em paralelo, LLMs e agentes aceleram a execução enquanto <strong>multiplicam a superfície de ataque</strong>, e o custo médio global de um vazamento de dados é <strong>$4,88 milhões</strong> (IBM, 2024). <em>Decisão às cegas e operação exposta</em> são os dois lados do mesmo problema.',
+    p2: 'No lado de inteligência, cruzamos <strong>fontes públicas, APIs, scraping e pesquisa primária</strong> para responder o que trava decisões de <strong>boards, founders e operadores</strong>. O mercado global de analytics cresce <strong>13,5% ao ano</strong> (Statista, 2024), e empresas data-driven têm <strong>23× mais chance de adquirir clientes</strong> (McKinsey Global Institute).',
     insight: 'Dado acumulado é ruído. O que transforma dados dispersos em decisão acionável é a <strong>arquitetura de interpretação</strong> por trás.',
     insightSource: 'D.Lab Experts · Research Hub, 2026',
-    p3: 'No lado <span class="hl-green">cyber</span>, operamos um <strong><span class="hl-green">Security Operations Center</span></strong> com foco em cobertura fora do expediente. Monitoramos logs, correlacionamos alertas e fazemos <strong>triagem de incidentes em tempo real</strong>, na janela em que o atacante de fato se move. Os ataques de ransomware cresceram <strong><span class="hl-yellow">73% globalmente ano a ano</span></strong> (Statista, 2024), e mais de <span class="hl-yellow">80% das organizações</span> tiveram ao menos um incidente nos últimos 12 meses. Com <span class="hl-blue">agentes autônomos em operação</span>, <em>a janela só encurta</em>.',
-    p4: 'Publicamos o método. <strong><span class="hl-lilac">Análise aberta como prova de como pensamos.</span></strong> Trabalho sob <strong>NDA</strong> vira consultoria quando alguém precisa do <strong>mesmo rigor</strong> aplicado ao próprio contexto. <em>O resto é ruído.</em>',
+    p3: 'No lado cyber, operamos um <strong>Security Operations Center</strong> com foco em cobertura fora do expediente. Monitoramos logs, correlacionamos alertas e fazemos <strong>triagem de incidentes em tempo real</strong>, na janela em que o atacante de fato se move. Os ataques de ransomware cresceram <strong>73% globalmente ano a ano</strong> (Statista, 2024), e mais de <strong>80% das organizações</strong> tiveram ao menos um incidente nos últimos 12 meses. Com agentes autônomos em operação, <em>a janela só encurta</em>.',
+    p4: 'Publicamos o método. <strong>Análise aberta como prova de como pensamos.</strong> Trabalho sob <strong>NDA</strong> vira consultoria quando alguém precisa do <strong>mesmo rigor</strong> aplicado ao próprio contexto. <em>O resto é ruído.</em>',
   },
 
   aboutPage: {
@@ -705,10 +705,10 @@ const pt: Translation = {
 
     scopeEyebrow: 'Escopo do Hub',
     scopeTitle: 'O que pesquisamos',
-    scopeLead: 'Duas práticas que se informam. <strong><span class="hl-lilac">Inteligência</span></strong> mostra pra onde mover; <strong><span class="hl-green">segurança</span></strong> garante que o movimento sobrevive. Cada uma opera em dois modos: <strong>publicação aberta</strong> (Research Hub) e engajamento fechado (consultoria sob NDA).',
+    scopeLead: 'Duas práticas que se informam. <strong>Inteligência</strong> mostra pra onde mover; <strong>segurança</strong> garante que o movimento sobrevive. Cada uma opera em dois modos: <strong>publicação aberta</strong> (Research Hub) e engajamento fechado (consultoria sob NDA).',
 
     intelName: 'Inteligência Aplicada',
-    intelDesc: 'Empresas que usam analytics avançado geram <strong><span class="hl-blue">126% mais lucro</span></strong> que os pares (Bain & Company). O Hub pesquisa o que modelos genéricos ignoram: <strong>mercado, comportamento, concorrência, tech foresight em IA</strong>. Publicamos <span class="hl-lilac">metodologia aberta</span>, e quando um projeto aparece, o mesmo protocolo atende ao contexto fechado.',
+    intelDesc: 'Empresas que usam analytics avançado geram <strong>126% mais lucro</strong> que os pares (Bain & Company). O Hub pesquisa o que modelos genéricos ignoram: <strong>mercado, comportamento, concorrência, tech foresight em IA</strong>. Publicamos <strong>metodologia aberta</strong>, e quando um projeto aparece, o mesmo protocolo atende ao contexto fechado.',
     intelItem1: 'Análise estratégica e sizing de mercado',
     intelItem2: 'Inteligência competitiva e benchmarking',
     intelItem3: 'Perfil de público e análise de demanda',
@@ -717,7 +717,7 @@ const pt: Translation = {
     intelItem6: 'Política, opinião pública e movimentos regulatórios',
 
     cyberName: 'Cybersegurança',
-    cyberDesc: 'Projeta-se que o cibercrime custe <strong><span class="hl-yellow">US$ 10,5 trilhões por ano globalmente até 2025</span></strong> (Cybersecurity Ventures). Operamos um <strong><span class="hl-green">Security Operations Center</span></strong> focado em <strong>cobertura fora do expediente</strong> (a janela em que a atividade do atacante de fato acontece), para que o primeiro sinal de comprometimento chegue a alguém <em>acordado e em plantão</em>.',
+    cyberDesc: 'Projeta-se que o cibercrime custe <strong>US$ 10,5 trilhões por ano globalmente até 2025</strong> (Cybersecurity Ventures). Operamos um <strong>Security Operations Center</strong> focado em <strong>cobertura fora do expediente</strong> (a janela em que a atividade do atacante de fato acontece), para que o primeiro sinal de comprometimento chegue a alguém <em>acordado e em plantão</em>.',
     cyberItem1: 'SOC · monitoramento fora do expediente e madrugada',
     cyberItem2: 'Correlação de logs e triagem de alertas',
     cyberItem3: 'Resposta a incidentes e escalonamento em tempo real',
@@ -757,12 +757,12 @@ const pt: Translation = {
     whyAsideBiLabel: 'Mercado de Business Intelligence até 2027',
     whyAsideBiSrc: 'Mordor Intelligence',
 
-    whyP1: 'O cenário exige ação. <strong><span class="hl-yellow">29% dos novos negócios fecham no primeiro ano</span></strong> e <span class="hl-yellow">50% antes do quinto</span>. A causa principal não é falta de capital. <em>É falta de informação para decidir.</em>',
-    whyP2: 'Ao mesmo tempo, os ataques de ransomware cresceram <strong><span class="hl-yellow">72% globalmente ano a ano</span></strong> (Statista, 2024), e reguladores aplicaram multas que chegaram a <span class="hl-cyan">dezenas de milhões de dólares</span>. O boom de <span class="hl-blue">LLMs e agentes autônomos</span> só piora a matemática: <strong>execução mais rápida e superfícies recém-expostas ao mesmo tempo</strong>.',
+    whyP1: 'O cenário exige ação. <strong>29% dos novos negócios fecham no primeiro ano</strong> e <strong>50% antes do quinto</strong>. A causa principal não é falta de capital. <em>É falta de informação para decidir.</em>',
+    whyP2: 'Ao mesmo tempo, os ataques de ransomware cresceram <strong>72% globalmente ano a ano</strong> (Statista, 2024), e reguladores aplicaram multas que chegaram a <strong>dezenas de milhões de dólares</strong>. O boom de LLMs e agentes autônomos só piora a matemática: <strong>execução mais rápida e superfícies recém-expostas ao mesmo tempo</strong>.',
     whyInsight: 'Empresas que adotam cultura data-driven observam <strong>5 a 8% mais produtividade e 6% mais lucratividade</strong> que os pares.',
     whyInsightSrc: 'Harvard Business Review',
-    whyP3: 'Do lado positivo, os números mostram oportunidade. O mercado de Business Intelligence deve atingir <strong><span class="hl-green">US$ 33 bilhões até 2027</span></strong> (Mordor Intelligence). Quem se move com uma <strong>leitura sólida de contexto</strong> captura <em>vantagem composta</em> sobre quem espera o concorrente ir primeiro.',
-    whyP4: 'O D.Lab Experts existe para fechar essa lacuna. <strong><span class="hl-lilac">Pesquisa aberta</span> que embasa o movimento.</strong> <strong><span class="hl-green">Operação de segurança contínua</span> que captura o próximo incidente antes de ele virar vazamento.</strong> <em>Método documentado em vez de prosa.</em>',
+    whyP3: 'Do lado positivo, os números mostram oportunidade. O mercado de Business Intelligence deve atingir <strong>US$ 33 bilhões até 2027</strong> (Mordor Intelligence). Quem se move com uma <strong>leitura sólida de contexto</strong> captura <em>vantagem composta</em> sobre quem espera o concorrente ir primeiro.',
+    whyP4: 'O D.Lab Experts existe para fechar essa lacuna. <strong>Pesquisa aberta que embasa o movimento.</strong> <strong>Operação de segurança contínua que captura o próximo incidente antes de ele virar vazamento.</strong> <em>Método documentado em vez de prosa.</em>',
 
     ctaTitleLead: 'Pesquisa que embasa o movimento.',
     ctaTitleAccent: 'Operação que captura o próximo incidente.',
