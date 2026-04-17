@@ -163,12 +163,12 @@ const pt: Translation = {
     compSample3: 'Posicionamento estratégico',
 
     cyberTag: 'Cyber',
-    cyberName: 'Security Operations Center',
+    cyberName: 'Cyber Research & CVE',
     cyberDesc:
-      'Monitoramento contínuo nas horas em que o atacante realmente age. Olhamos logs, correlacionamos alertas e triagem de incidentes para que o primeiro sinal de comprometimento chegue a alguém acordado, e não a um dashboard esperando o sol nascer.',
-    cyberSample1: 'Monitoramento SOC',
-    cyberSample2: 'Triagem de incidentes',
-    cyberSample3: 'Detecção de ameaças',
+      'Pesquisa aplicada em segurança ofensiva com metodologia explícita e forte ênfase em dados. Partimos de vulnerabilidades públicas (CVE) e reproduzimos o caminho da falha em ambiente controlado para medir o que ela significa em produção, não no paper. Publicamos o método, a cadeia de exploração e o impacto observado, para que o defensor leia a ameaça pelo mesmo ângulo de quem ataca.',
+    cyberSample1: 'Análise de CVEs',
+    cyberSample2: 'Impacto em produção',
+    cyberSample3: 'Cadeias de exploração',
   },
 
   products: {
@@ -596,11 +596,11 @@ const pt: Translation = {
     tool1Chip4: 'Método aberto',
     tool1Cta: 'Abrir diagnóstico →',
 
-    // Tool 2 — AI Skills Repo (coming soon)
+    // Tool 2 — Componentes para uso de IA (coming soon)
     tool2Status: 'Em desenvolvimento',
-    tool2Category: 'Agentes de IA',
-    tool2Title: 'Skills para Agentes de IA',
-    tool2Desc: 'Repositório aberto de skills, ferramentas e workflows curados para uso em agentes de IA em operação. Cada skill documentada com metodologia, casos de uso e performance observada em produção.',
+    tool2Category: 'IA Aplicada',
+    tool2Title: 'Componentes para uso de IA',
+    tool2Desc: 'Repositório aberto de componentes, ferramentas e workflows curados para uso de IA em operação. Cada componente documentado com metodologia, casos de uso e performance observada em produção.',
     tool2Chip0: 'Gratuito',
     tool2Chip1: 'Open source',
     tool2Chip2: 'Curadoria D.Lab',

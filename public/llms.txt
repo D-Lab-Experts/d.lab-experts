@@ -24,7 +24,7 @@ Todas as soluções abaixo são gratuitas e abertas. Parte do compromisso do D.L
 
 - [Hub de Soluções](https://dlabexperts.com/solucoes): página-índice das ferramentas D.Lab. Catálogo vivo; novas soluções entram quando saem da curadoria.
 - [Diagnóstico de Decisão](https://dlabexperts.com/diagnostico): ferramenta interativa que estima a probabilidade de decisão de alta qualidade e a faixa de exposição em R$ a partir de 5 entradas (porte, reversibilidade, maturidade de dados, pressão de tempo, stakeholders). Cada coeficiente referenciado em pesquisa externa (McKinsey 2019, Brynjolfsson MIT 2011, PMI, Bain, Kahneman, Bezos, IBM 2024). Não é previsão. Gratuito.
-- Skills para Agentes de IA (em desenvolvimento): repositório aberto de skills, ferramentas e workflows curados para uso em agentes de IA em operação. Cada skill documentada com metodologia, casos de uso e performance observada em produção. Gratuito, open source.
+- Componentes para uso de IA (em desenvolvimento): repositório aberto de componentes, ferramentas e workflows curados para uso de IA em operação. Cada componente documentado com metodologia, casos de uso e performance observada em produção. Gratuito, open source.
 
 ## Contato
 
