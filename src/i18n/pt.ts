@@ -46,6 +46,12 @@ const pt: Translation = {
     diagnostic: 'Diagnóstico de Decisão | D.Lab Experts · Research Hub',
     diagnosticDescription:
       'Quantifique o risco de decidir sem dados. Cinco entradas, duas saídas, cada coeficiente ancorado em pesquisa revisada.',
+    componentesIa: 'Componentes para uso de IA | D.Lab Experts',
+    componentesIaDescription:
+      'Repositório aberto de skills, componentes e workflows para acoplar a sistemas de IA. Curadoria do D.Lab Experts, com download direto e metodologia documentada.',
+    componentesIaResearchStats: 'Research & Statistics Engine — Skill Claude | D.Lab Experts',
+    componentesIaResearchStatsDescription:
+      'Skill para Claude Code que opera como pesquisador quantitativo sênior: estatística, análise de dados, epidemiologia e inteligência de mercado. Download direto, metodologia aberta.',
     imprensa: 'Imprensa | D.Lab Experts · Research Hub',
     imprensaDescription:
       'Kit de imprensa do D.Lab Experts: contato de mídia, bios dos pesquisadores, logos em alta resolução, principais achados das pesquisas publicadas e ativos gráficos para download.',
@@ -596,22 +602,141 @@ const pt: Translation = {
     tool1Chip4: 'Método aberto',
     tool1Cta: 'Abrir diagnóstico →',
 
-    // Tool 2 — Componentes para uso de IA (coming soon)
-    tool2Status: 'Em desenvolvimento',
+    // Tool 2 — Componentes para uso de IA (disponível, em expansão)
+    tool2Status: 'Disponível',
     tool2Category: 'IA Aplicada',
     tool2Title: 'Componentes para uso de IA',
-    tool2Desc: 'Repositório aberto de componentes, ferramentas e workflows curados para uso de IA em operação. Cada componente documentado com metodologia, casos de uso e performance observada em produção.',
+    tool2Desc: 'Repositório aberto de skills, componentes e workflows pra acoplar a sistemas de IA. Cada item documentado com metodologia, casos de uso e download direto. Primeiro componente já publicado, outros entrando.',
     tool2Chip0: 'Gratuito',
     tool2Chip1: 'Open source',
     tool2Chip2: 'Curadoria D.Lab',
-    tool2Chip3: 'Roadmap público',
-    tool2Chip4: 'Em breve',
-    tool2Cta: 'Avisar quando sair →',
+    tool2Chip3: 'Download direto',
+    tool2Chip4: 'Em expansão',
+    tool2Cta: 'Explorar componentes →',
 
     ctaTitle: 'Tem ideia de ferramenta útil?',
     ctaSub: 'A gente quer ser uma comunidade que agrega valor de verdade. Se você tem uma ideia de ferramenta, um problema recorrente na sua área, ou quer contribuir com uma solução existente, fala com a gente. Pesquisadores, engenheiros, founders, professores, jornalistas: todo mundo é bem-vindo.',
     ctaPrimary: 'Propor uma solução →',
     ctaSecondary: 'Ver pesquisas publicadas',
+  },
+
+  componentesIaPage: {
+    // Hero
+    heroBreadcrumbBack: '← Soluções',
+    heroEyebrow: 'Componentes para uso de IA',
+    heroTitleLead: 'Skills, componentes e workflows pra',
+    heroTitleAccent: 'acoplar a sistemas de IA.',
+    heroSub: 'Curadoria aberta do D.Lab Experts. Cada item tem metodologia documentada, caso de uso real e download direto. Gratuito, sem cadastro, sem dark pattern.',
+
+    // Strip / commitment
+    commitmentLabel: 'Compromisso',
+    commitmentTitle: 'Tudo aberto, tudo gratuito.',
+    commitmentBody: 'Publicamos pesquisa como prova de método. Componentes pra IA seguem a mesma lógica: o que funciona na operação, a gente abre. Use, adapte, contribua.',
+
+    // Index — list section
+    listLabel: 'Componentes disponíveis',
+    listSub: 'Atualmente 1 componente publicado. Outros já em curadoria — se quiser propor o seu, fala com a gente.',
+    listEmpty: 'Mais componentes entrando em breve.',
+
+    // Skill card (research-statistics-engine)
+    skill1Status: 'Disponível',
+    skill1Type: 'Claude Skill',
+    skill1Title: 'Research & Statistics Engine',
+    skill1Subtitle: 'Pesquisa científica, estatística e inteligência de mercado',
+    skill1Desc: 'Skill que faz o Claude operar como pesquisador quantitativo sênior. Análise de dados, testes estatísticos, regressão e forecasting, revisão de literatura, sizing de mercado (TAM/SAM/SOM), epidemiologia e desenho de estudo. Dispara sozinha quando o usuário pede pra analisar dados ou pesquisar evidência — não precisa invocar.',
+    skill1Tag1: 'Estatística',
+    skill1Tag2: 'Data analysis',
+    skill1Tag3: 'Market intelligence',
+    skill1Tag4: 'Epidemiologia',
+    skill1Cta: 'Ver detalhes & baixar →',
+
+    // CTA at the bottom
+    ctaTitle: 'Tem um componente pra contribuir?',
+    ctaSub: 'Skills úteis pra IA aplicada são raras. Se você construiu uma que funciona em produção e quer publicar com a gente, manda mensagem.',
+    ctaPrimary: 'Propor um componente →',
+    ctaSecondary: 'Ver outras soluções',
+  },
+
+  componentesIaResearchStats: {
+    // Breadcrumb / hero
+    breadcrumbBack: '← Componentes para uso de IA',
+    heroEyebrow: 'Claude Skill · Research & Statistics',
+    heroTitle: 'Research & Statistics Engine',
+    heroSubtitle: 'Pesquisa científica, estatística, análise de dados, epidemiologia e inteligência de mercado.',
+    heroStatusLive: 'Disponível',
+    heroVersion: 'v1.0',
+    heroSize: '~36 KB',
+    heroLicense: 'Aberto',
+
+    // Download primary card
+    downloadLabel: 'Download',
+    downloadTitle: 'Baixar a skill',
+    downloadDesc: 'Arquivo .skill (pacote oficial Claude Skill). Importe diretamente no Claude Code via /skills ou descompacte em ~/.claude/skills/.',
+    downloadButton: 'Baixar research-statistics-engine.skill',
+    downloadHint: 'Sem cadastro. Sem analytics. Apenas download direto.',
+
+    // What it does
+    whatLabel: 'O que faz',
+    whatTitle: 'Pesquisador quantitativo sênior, em forma de skill.',
+    whatBody: 'Faz o Claude operar com o padrão de peer reviewer de journal forte e de analista principal de consultoria top — rigoroso, transparente sobre incerteza, útil pra decisão real. Dispara automaticamente em pedidos como "isso é estatisticamente significativo?", "analise estes números", "qual o tamanho desse mercado?", "o que a literatura diz sobre X?", "desenhe um estudo de coorte". Não precisa invocar manualmente.',
+
+    // Two modes
+    modesLabel: 'Dois modos de operação',
+    modeATitle: 'Modo A — Análise empírica',
+    modeABody: 'Usuário entrega dados (arquivo, tabela colada, lista de números) e quer análise. Inspeção antes de modelar (script de EDA incluído), checagem de premissas, escolha deliberada do método, execução em Python real, interpretação com effect size + intervalo de confiança, limitações honestas.',
+    modeBTitle: 'Modo B — Pesquisa & inteligência',
+    modeBBody: 'Pergunta sem dataset: "o que a pesquisa diz sobre", "qual o tamanho desse mercado", "desenhe um estudo". Busca evidência em fontes primárias (PubMed, IBGE, DATASUS, IPEA, OECD, World Bank, WHO, BACEN), valida data/metodologia/viés, reconcilia conflitos sem médias preguiçosas, cita sempre.',
+
+    // Principles
+    principlesLabel: 'Princípios não-negociáveis',
+    principlesIntro: 'Existem porque resposta confiante e errada nesse domínio gera decisão ruim de verdade.',
+    principle1Title: 'Nunca fabricar',
+    principle1Body: 'Sem fontes inventadas, sem números chutados, sem citações de placeholder. Se o número não vem dos dados do usuário ou de fonte real consultada, não é dito.',
+    principle2Title: 'Rotular o status epistêmico',
+    principle2Body: 'FACT (vem de dado ou fonte), INTERPRETATION (leitura), HYPOTHESIS (proposição testável), SPECULATION (palpite informado). Leitor nunca tem que adivinhar.',
+    principle3Title: 'Correlação não é causalidade',
+    principle3Body: 'Linguagem causal só quando o desenho permite (RCT, experimento natural, método de inferência causal) — e o desenho fica explícito.',
+    principle4Title: 'Quantificar incerteza',
+    principle4Body: 'Intervalos de confiança, effect sizes, amostras e p-values aparecem juntos. Nunca p-value sozinho. Nunca effect size sem intervalo.',
+    principle5Title: 'Hierarquia de evidência',
+    principle5Body: 'Meta-análise > revisão sistemática > RCT > coorte > caso-controle > transversal > dataset institucional > relatório de indústria > opinião.',
+    principle6Title: 'Expor limitações',
+    principle6Body: 'Toda análise termina com o que pode estar errado: confundimento, viés, n pequeno, seleção, generalização, qualidade do dado.',
+
+    // What's inside
+    insideLabel: 'O que vem dentro',
+    inside1Name: 'SKILL.md',
+    inside1Desc: 'Especificação completa: triggers, workflows, princípios, router de testes estatísticos, templates de output, checklist de rigor.',
+    inside2Name: 'references/methods.md',
+    inside2Desc: 'Catálogo de métodos estatísticos e de ML: quando usar, premissas, fórmulas, métricas de avaliação, guia de pré-processamento.',
+    inside3Name: 'references/data-sources.md',
+    inside3Desc: 'Fontes de dados brasileiras (IBGE, DATASUS, IPEA, Fiocruz, SciELO, BACEN) e internacionais (PubMed, WHO, OECD, World Bank, OWID) mapeadas com confiabilidade e tipo de dado.',
+    inside4Name: 'scripts/eda.py',
+    inside4Desc: 'Script automatizado de exploratory data analysis. Roda em CSV/Excel: shape, dtypes, missingness, descritivas, distribuições, outliers, correlações.',
+
+    // Install
+    installLabel: 'Como instalar',
+    installStep1Title: 'Baixe o arquivo .skill',
+    installStep1Body: 'Clique em "Baixar research-statistics-engine.skill" acima.',
+    installStep2Title: 'Adicione ao Claude Code',
+    installStep2Body: 'Mova o arquivo pra ~/.claude/skills/ (ou descompacte como pasta lá dentro). O Claude Code carrega automaticamente.',
+    installStep3Title: 'Use sem invocar',
+    installStep3Body: 'A skill dispara sozinha quando o pedido envolve dados ou evidência. Pergunte "isso é estatisticamente significativo?" e ela ativa.',
+
+    // Use cases
+    casesLabel: 'Quando usar',
+    case1: '"Analise estes números, isso é uma diferença real?" → Mode A, teste de hipótese com checagem de premissas e effect size.',
+    case2: '"Quanto vale o mercado de X no Brasil?" → Mode B, TAM/SAM/SOM com fontes primárias, faixa conservador/base/otimista.',
+    case3: '"O que a pesquisa diz sobre Y?" → Mode B, revisão com hierarquia de evidência e conflitos sinalizados.',
+    case4: '"Faça forecast desse histórico de vendas." → Mode A, ARIMA/SARIMA/Prophet com intervalo de confiança.',
+    case5: '"Desenhe um estudo pra responder Z." → Modo B, escolha de design (coorte, caso-controle, transversal) com justificativa.',
+    case6: '"Qual a prevalência de hipertensão em SP?" → Mode B, epidemiologia via DATASUS/Fiocruz/WHO com método de cálculo.',
+
+    // CTA
+    ctaTitle: 'Construiu algo parecido?',
+    ctaSub: 'A gente cura componentes pra IA aplicada. Se sua skill funciona em produção e você quer publicar, fala com a gente.',
+    ctaPrimary: 'Propor um componente →',
+    ctaSecondary: 'Ver outros componentes',
   },
 
   imprensaPage: {
