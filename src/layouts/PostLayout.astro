@@ -68,11 +68,14 @@ const articleInLang = 'pt-BR';
 // renders <meta name="citation_*"> tags in <head>. Also powers the
 // "Como citar" block at the bottom of the article.
 //
-// Restricted to original research. Posts derivadas de dados secundários
-// (compilações de SEBRAE/IBGE/FGV etc.) têm formato mais próximo de
-// blogpost interpretativo, então não ganham tag acadêmica nem bloco de
-// citação (evita falso sinal de autoria primária).
+// Padrão: apenas pesquisa original recebe tags acadêmicas + bloco de
+// citação, para evitar falso sinal de autoria primária em compilações
+// interpretativas. Estudos de dados secundários com co-autoria formal
+// (ex.: parcerias institucionais com método publicado) opt-in via
+// `citationAuthors` no frontmatter, que sinaliza intenção explícita
+// do autor de tornar o trabalho citável.
 const isOriginalResearch = post.data.researchType === 'original';
+const isCitable = isOriginalResearch || (citationAuthors !== undefined && citationAuthors.length > 0);
 const yyyy = pubDate.getUTCFullYear();
 const mm = String(pubDate.getUTCMonth() + 1).padStart(2, '0');
 const dd = String(pubDate.getUTCDate()).padStart(2, '0');
@@ -83,7 +86,7 @@ const citationAuthorList =
   citationAuthors && citationAuthors.length > 0
     ? citationAuthors
     : author.split(/\s*&\s*/).filter(Boolean);
-const citationMeta = isOriginalResearch
+const citationMeta = isCitable
   ? {
       title,
       authors: citationAuthorList,
@@ -126,7 +129,7 @@ const authorSchema: AuthorSchema | AuthorSchema[] = (() => {
       };
     });
   }
-  if (citationAuthorList.length > 0 && isOriginalResearch) {
+  if (citationAuthorList.length > 0 && isCitable) {
     return citationAuthorList.map((name): AuthorSchema => ({ '@type': 'Person', name }));
   }
   return {
@@ -265,7 +268,7 @@ const originalResearchLabel = 'Pesquisa Original';
     <slot />
   </article>
 
-  {isOriginalResearch && (
+  {isCitable && (
     <CitationBlock
       title={title}
       authors={citationAuthorList}

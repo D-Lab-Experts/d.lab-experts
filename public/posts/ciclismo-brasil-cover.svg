@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none" role="img" aria-label="Quem morre pedalando no Brasil — estudo D.Lab × IMPS">
+  <defs>
+    <linearGradient id="cbG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B18CFF"/>
+      <stop offset="100%" stop-color="#4DA3FF"/>
+    </linearGradient>
+    <linearGradient id="cbFatal" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF5C7A" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#FF5C7A" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="cbHosp" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFD166" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#FFD166" stop-opacity="0.30"/>
+    </linearGradient>
+    <filter id="cbBlur"><feGaussianBlur stdDeviation="42"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="#0B0B0F"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.04" stroke="#B18CFF" stroke-width="0.5">
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="450"/>
+    <line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="500" y1="0" x2="500" y2="450"/>
+    <line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+    <line x1="0" y1="90"  x2="800" y2="90"/>
+    <line x1="0" y1="180" x2="800" y2="180"/>
+    <line x1="0" y1="270" x2="800" y2="270"/>
+    <line x1="0" y1="360" x2="800" y2="360"/>
+  </g>
+
+  <!-- Ambient halos -->
+  <circle cx="180" cy="220" r="200" fill="#B18CFF" opacity="0.06" filter="url(#cbBlur)"/>
+  <circle cx="640" cy="200" r="170" fill="#FF5C7A" opacity="0.05" filter="url(#cbBlur)"/>
+
+  <!-- "Scissor" chart: two lines diverging (deaths stable, hospitalizations rising) -->
+  <g>
+    <!-- Baseline -->
+    <line x1="260" y1="320" x2="600" y2="320" stroke="#B18CFF" stroke-width="1" opacity="0.18"/>
+
+    <!-- Y axis labels -->
+    <text x="245" y="200" text-anchor="end" font-family="Satoshi,system-ui,sans-serif" font-size="9" letter-spacing="0.10em" fill="#EAEAF0" opacity="0.35">INTERNAÇÕES</text>
+    <text x="245" y="304" text-anchor="end" font-family="Satoshi,system-ui,sans-serif" font-size="9" letter-spacing="0.10em" fill="#EAEAF0" opacity="0.35">MORTES</text>
+
+    <!-- Hospitalizations rising line (yellow) -->
+    <path d="M 260 270 L 312 262 L 364 250 L 416 232 L 468 214 L 520 196 L 572 184 L 600 178"
+          stroke="url(#cbHosp)" stroke-width="2.4" fill="none"/>
+    <!-- Area under hospitalizations -->
+    <path d="M 260 270 L 312 262 L 364 250 L 416 232 L 468 214 L 520 196 L 572 184 L 600 178 L 600 320 L 260 320 Z"
+          fill="#FFD166" opacity="0.08"/>
+
+    <!-- Deaths stable line (red) -->
+    <path d="M 260 300 L 312 295 L 364 304 L 416 298 L 468 292 L 520 296 L 572 290 L 600 288"
+          stroke="url(#cbFatal)" stroke-width="2.4" fill="none"/>
+
+    <!-- Endpoint dots -->
+    <circle cx="600" cy="178" r="3.6" fill="#FFD166"/>
+    <circle cx="600" cy="288" r="3.6" fill="#FF5C7A"/>
+
+    <!-- Endpoint labels -->
+    <text x="612" y="178" font-family="Satoshi,system-ui,sans-serif" font-size="12" font-weight="700" fill="#FFD166">+71%</text>
+    <text x="612" y="290" font-family="Satoshi,system-ui,sans-serif" font-size="12" font-weight="700" fill="#FF5C7A">~1.300/ano</text>
+
+    <!-- Year ticks -->
+    <g font-family="Satoshi,system-ui,sans-serif" font-size="9" letter-spacing="0.10em" fill="#EAEAF0" opacity="0.35" text-anchor="middle">
+      <text x="260" y="338">2014</text>
+      <text x="430" y="338">2018</text>
+      <text x="600" y="338">2023</text>
+    </g>
+  </g>
+
+  <!-- Anchor value: cyclist silhouette + 1.300 callout -->
+  <g opacity="0.92">
+    <!-- Minimal bicycle glyph (left) -->
+    <g transform="translate(110,180)" stroke="#B18CFF" stroke-width="1.6" fill="none" opacity="0.85">
+      <circle cx="0" cy="40" r="20"/>
+      <circle cx="60" cy="40" r="20"/>
+      <line x1="0" y1="40" x2="34" y2="10"/>
+      <line x1="60" y1="40" x2="34" y2="10"/>
+      <line x1="34" y1="10" x2="22" y2="40"/>
+      <line x1="22" y1="40" x2="60" y2="40"/>
+      <line x1="34" y1="10" x2="42" y2="2"/>
+    </g>
+
+    <!-- 1.300 mark -->
+    <text x="110" y="120" font-family="Satoshi,system-ui,sans-serif"
+          font-size="36" font-weight="900" fill="#EAEAF0" letter-spacing="-0.03em">~1.300</text>
+    <text x="110" y="140" font-family="Satoshi,system-ui,sans-serif"
+          font-size="9" letter-spacing="0.14em" fill="#EAEAF0" opacity="0.55">MORTES DE CICLISTAS / ANO</text>
+  </g>
+
+  <!-- Network nodes (community / data hint) -->
+  <g>
+    <circle cx="70" cy="380" r="2.2" fill="#B18CFF" opacity="0.55"/>
+    <circle cx="120" cy="400" r="1.8" fill="#4DA3FF" opacity="0.45"/>
+    <circle cx="180" cy="395" r="1.6" fill="#00E5A0" opacity="0.40"/>
+    <circle cx="720" cy="380" r="2.0" fill="#B18CFF" opacity="0.45"/>
+    <circle cx="680" cy="410" r="1.6" fill="#4DA3FF" opacity="0.40"/>
+  </g>
+
+  <g stroke-width="0.5" opacity="0.18">
+    <line x1="70" y1="380" x2="120" y2="400" stroke="#B18CFF"/>
+    <line x1="120" y1="400" x2="180" y2="395" stroke="#4DA3FF"/>
+    <line x1="720" y1="380" x2="680" y2="410" stroke="#B18CFF"/>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="400" y="420" text-anchor="middle" font-family="Satoshi,system-ui,sans-serif"
+        font-size="10" letter-spacing="0.16em" fill="#EAEAF0" opacity="0.30">SEGURANÇA VIÁRIA · SAÚDE PÚBLICA · D.LAB × IMPS</text>
+</svg>

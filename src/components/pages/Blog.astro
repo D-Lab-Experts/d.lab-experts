@@ -97,7 +97,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
           </div>
           <div class="blog-grid">
             {group.posts.map((post) => {
-              const cardClass = post.data.featured ? 'blog-card-featured fi d1' : 'blog-card fi d2';
+              const cardClass = 'blog-card fi d2';
               const isOriginal = post.data.researchType === 'original';
               const cat = post.data.category.toLowerCase();
               const extraTags = post.data.tags
@@ -176,7 +176,7 @@ const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string
           </div>
           <div class="blog-grid">
             {group.posts.map((post) => {
-              const cardClass = post.data.featured ? 'blog-card-featured fi d1' : 'blog-card fi d2';
+              const cardClass = 'blog-card fi d2';
               const isOriginal = post.data.researchType === 'original';
               const cat = post.data.category.toLowerCase();
               const extraTags = post.data.tags
