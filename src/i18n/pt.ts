@@ -73,12 +73,15 @@ const pt: Translation = {
     sub: 'Research Hub em inteligência aplicada e cybersegurança. Publicamos pesquisa pra fundamentar decisões de board, founder e gestor num mundo que moveu pra frente das próprias defesas.',
     ctaPrimary: 'Ler análises públicas →',
     ctaSecondary: 'Frentes de consultoria',
-    statNdaVal: 'NDA',
-    statNdaLbl: 'Padrão de entrega',
-    statSeniorVal: 'Sênior',
-    statSeniorLbl: 'Sem juniores entre você e o analista',
-    statProtocolVal: 'Protocolo',
-    statProtocolLbl: 'Mesma metodologia documentada em todo projeto',
+    statNdaVal: 'N=98',
+    statNdaLbl: 'Pesquisa original em gaming',
+    statNdaSrc: 'D.Lab Research Series, n. 1 · 2026',
+    statSeniorVal: '~1.300/ano',
+    statSeniorLbl: 'Mortes de ciclistas no Brasil',
+    statSeniorSrc: 'SIM/DATASUS · D.Lab × IMPS, n. 2 · 2026',
+    statProtocolVal: '+71%',
+    statProtocolLbl: 'Internações por acidente com bicicleta na década',
+    statProtocolSrc: 'SIH/DATASUS · 2014–2023',
   },
 
   trust: {
@@ -358,8 +361,8 @@ const pt: Translation = {
     leftEyebrow: 'Gaming · 2026',
     leftLbl: 'Intenção de troca',
     topMarkSub: 'Research Hub',
-    bottomEyebrow: 'Método',
-    bottomLbl: 'Crescimento de clientes',
+    bottomEyebrow: 'Mobilidade · 2026',
+    bottomLbl: 'Internações por óbito · SIH',
   },
 
   featured: {
