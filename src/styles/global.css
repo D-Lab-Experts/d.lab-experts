@@ -89,7 +89,16 @@ ul, ol { list-style: none; }
 .section { padding: 110px 0; position: relative; overflow: hidden; }
 .section-label { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px; }
 .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--grad); }
-.section-title { font-size: clamp(30px,3.8vw,46px); font-weight: 700; letter-spacing: -.03em; line-height: 1.08; margin-bottom: 16px; }
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(30px,3.8vw,46px);
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  font-variation-settings: 'opsz' 48;
+  text-wrap: balance;
+}
 .section-sub { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7; }
 
 /* ── ANIMATIONS ─────────────────────────────────────────────── */
@@ -319,10 +328,14 @@ ul, ol { list-style: none; }
 .tag-dot { width: 6px; height: 6px; background: var(--lilac); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 .hero-h1 {
+  font-family: var(--font-serif);
   font-size: clamp(40px, 5.2vw, 76px);
-  font-weight: 700; letter-spacing: -.035em; line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.05;
   margin-bottom: 24px;
   text-wrap: balance;
+  font-variation-settings: 'opsz' 60;
 }
 .hero-h1 .hero-accent {
   background: linear-gradient(135deg, #B18CFF 0%, #7B9EFF 50%, #4DA3FF 100%);
@@ -916,7 +929,16 @@ ul, ol { list-style: none; }
   z-index: 2;
 }
 .brand-text { max-width: 480px; }
-.brand-title { font-size: clamp(32px,4.2vw,54px); font-weight: 700; letter-spacing: -.04em; line-height: 1.08; margin-bottom: 24px; }
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px,4.2vw,54px);
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  font-variation-settings: 'opsz' 54;
+  text-wrap: balance;
+}
 .brand-desc { font-size: 17px; color: var(--muted); line-height: 1.75; }
 
 /* Orbital globe visualization. Container is square (aspect-ratio: 1)
