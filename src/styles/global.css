@@ -1331,6 +1331,130 @@ ul, ol { list-style: none; }
 .prod-cta { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border: 1px solid rgba(177,140,255,.18); border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--lilac); transition: all .25s; }
 .prod-cta:hover { background: rgba(177,140,255,.08); border-color: rgba(177,140,255,.35); gap: 12px; }
 
+/* ═══════════ CONSULT TRACK (editorial register) ════════════════
+   Substitui o padrão de cards-tier por uma série numerada de
+   frentes (01-05). Prosa de abertura, número grande em mono,
+   nome em serif, descrição em sans. Sem CTA por frente. */
+.consult-lead {
+  max-width: 720px;
+  margin: 0 auto 56px;
+  padding-top: 8px;
+}
+.consult-lead p {
+  font-family: var(--font-serif);
+  font-size: 17.5px;
+  line-height: 1.7;
+  color: rgba(234,234,240,0.72);
+  font-variation-settings: 'opsz' 14;
+  text-align: center;
+}
+.consult-track { max-width: 880px; margin: 0 auto 48px; }
+.consult-track:last-of-type { margin-bottom: 56px; }
+.consult-track-head {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  padding-bottom: 14px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.consult-track-head-cyber { color: var(--green); }
+.consult-fronts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: consult-front;
+}
+.consult-front {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+.consult-front:last-child { border-bottom: none; }
+.consult-front-num {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--dimmed);
+  letter-spacing: -.02em;
+  font-feature-settings: 'tnum' 1;
+  line-height: 1;
+}
+.consult-front-cyber .consult-front-num { color: rgba(0,229,160,0.5); }
+.consult-front-body { display: flex; flex-direction: column; gap: 8px; }
+.consult-front-name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  color: var(--white);
+  font-variation-settings: 'opsz' 28;
+  margin: 0;
+}
+.consult-front-desc {
+  font-family: var(--font-serif);
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: rgba(234,234,240,0.68);
+  font-variation-settings: 'opsz' 14;
+  margin: 0;
+}
+.consult-front-name a {
+  color: inherit;
+  transition: color .2s;
+}
+.consult-front-name a:hover { color: var(--lilac); }
+.consult-front-cyber .consult-front-name a:hover { color: var(--green); }
+.consult-front-meta {
+  font-size: 11.5px;
+  color: var(--dimmed);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.consult-front-metasep { opacity: 0.5; }
+.consult-front-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--lilac);
+  margin-top: 6px;
+  transition: gap .2s;
+}
+.consult-front-link:hover { gap: 10px; }
+.consult-front-cyber .consult-front-link { color: var(--green); }
+.consult-closing {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 36px 0 16px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.consult-closing p {
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: rgba(234,234,240,0.65);
+  font-variation-settings: 'opsz' 14;
+  margin: 0 0 24px;
+}
+@media (max-width: 640px) {
+  .consult-front { grid-template-columns: 56px 1fr; gap: 18px; padding: 22px 0; }
+  .consult-front-num { font-size: 22px; }
+  .consult-front-name { font-size: 19px; }
+  .consult-front-desc { font-size: 14.5px; }
+}
+
 /* ═══════════ DEMO (Interactive Dashboard) ════════════════════════ */
 #demo { background: var(--black); position: relative; z-index: 1; }
 .demo-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }

@@ -184,30 +184,30 @@ const pt: Translation = {
     eyebrow: 'Frentes de Consultoria',
     title: 'Quando a pesquisa',
     titleAccent: 'vira projeto fechado.',
-    sub: 'O Research Hub é o flagship. Quando uma organização precisa de dado próprio com o mesmo rigor metodológico, a pesquisa vira projeto fechado, sob NDA, com escopo, prazo e profundidade calibrados pela decisão em jogo.',
-    ctaPropose: 'Apresentar o contexto →',
-    ctaPresent: 'Apresentar o cenário →',
-    ctaStart: 'Iniciar conversa →',
+    sub: 'O Research Hub é o flagship. Quando uma organização precisa de dado próprio com o mesmo rigor metodológico, a pesquisa vira projeto fechado, sob NDA, com escopo e profundidade calibrados pela decisão em jogo.',
+    lead: 'Trabalhar com o D.Lab por dentro é o que acontece quando a pesquisa pública precisa ser feita para um contexto específico. O ponto de partida não muda: a mesma hierarquia de fontes, o mesmo método documentado, a mesma honestidade sobre incerteza. O que muda é a entrega, que passa a ser confidencial e ancorada na decisão do cliente.',
+    closing: 'Não temos uma grade de produtos. Cada frente abaixo é um formato de trabalho que já fizemos mais de uma vez, com escopo desenhado a partir do que a pesquisa pública não cobre. Quando o pedido é claro, a primeira conversa serve para enquadrar a pergunta. Quando o pedido ainda não está claro, ela serve para descobrir qual é.',
+    oneCta: 'Apresentar um contexto →',
     ctaMost: '★ Mais solicitado',
 
-    intHeader: 'Inteligência de Dados',
+    intHeader: 'Inteligência aplicada',
     intBaseName: 'Relatório de Base',
     intBaseDesc:
       'Pesquisa aplicada focada em uma pergunta-chave. Para quando a hipótese já existe e falta o rigor antes de mover.',
     intDeepName: 'Relatório Aprofundado',
     intDeepDesc:
-      'Pesquisa multidimensional com dados temporais, cruzamento de múltiplas fontes e sessão de interpretação com o analista. Para decisões de alto impacto.',
-    intAIName: 'Consultoria de IA',
+      'Pesquisa multidimensional com dados temporais, cruzamento de múltiplas fontes e sessão de interpretação com o analista. Para decisões com impacto duradouro.',
+    intAIName: 'Inteligência de IA',
     intAIDesc:
-      'Implementação de IA, automação e processos na operação. Para quando o que trava não é a decisão. É a execução.',
+      'Acoplagem de IA e agentes a processos internos, com avaliação do que vale automatizar e do que vale instrumentar. Para quando o que trava deixou de ser a decisão e passou a ser a execução.',
 
     cyberHeader: 'Cybersegurança',
     cyberPentestName: 'Cyber Research & CVE',
     cyberPentestDesc:
-      'Pesquisa aplicada em segurança ofensiva com metodologia explícita e forte ênfase em dados. Partimos de vulnerabilidades públicas (CVE), reproduzimos a cadeia de exploração em ambiente controlado e medimos o que ela significa em produção, não no paper. Entregamos método, prova técnica e impacto observado, para que o defensor leia a ameaça pelo mesmo ângulo de quem ataca.',
-    cyberConsultName: 'Consultoria de Segurança Digital',
+      'Pesquisa aplicada em segurança ofensiva, com metodologia explícita e ênfase em dado. Partimos de vulnerabilidades públicas (CVE), reproduzimos a cadeia de exploração em ambiente controlado e medimos o que ela significa em produção, não no paper. Entregamos método, prova técnica e impacto observado, para que o defensor leia a ameaça pelo mesmo ângulo de quem ataca.',
+    cyberConsultName: 'Segurança Digital',
     cyberConsultDesc:
-      'Diagnóstico completo da postura de segurança, definição de políticas, adequação a frameworks e acompanhamento contínuo junto à operação do SOC.',
+      'Diagnóstico de postura, definição de políticas, adequação a frameworks e acompanhamento contínuo junto à operação do SOC. Para quem precisa de um par de olhos seniores ancorado em pesquisa, não em catálogo de tooling.',
   },
 
   research: {
@@ -603,6 +603,7 @@ const pt: Translation = {
     tool1Chip2: '~60 segundos',
     tool1Chip3: '7 fontes citadas',
     tool1Chip4: 'Método aberto',
+    tool1Meta: '5 entradas · 7 fontes citadas · método aberto',
     tool1Cta: 'Abrir diagnóstico →',
 
     // Tool 2 — Componentes para uso de IA (disponível, em expansão)
@@ -615,6 +616,7 @@ const pt: Translation = {
     tool2Chip2: 'Curadoria D.Lab',
     tool2Chip3: 'Download direto',
     tool2Chip4: 'Em expansão',
+    tool2Meta: 'Open source · curadoria D.Lab · download direto',
     tool2Cta: 'Explorar componentes →',
 
     ctaTitle: 'Tem ideia de ferramenta útil?',
