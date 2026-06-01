@@ -127,8 +127,8 @@ ul, ol { list-style: none; }
   opacity: 0; transition: opacity .3s;
 }
 .btn:hover::before { opacity: 1; }
-.btn-primary { background: var(--grad-btn); color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.3), 0 0 28px rgba(109,40,217,.32); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.4), 0 0 36px rgba(109,40,217,.48); }
+.btn-primary { background: var(--grad-btn); color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.4); }
 .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.08); }
 .btn-ghost:hover { border-color: var(--border-h); background: rgba(177,140,255,.05); transform: translateY(-2px); }
 .btn-sm { padding: 11px 22px; font-size: 14px; }
@@ -280,13 +280,13 @@ ul, ol { list-style: none; }
 }
 @keyframes gridDrift { 0%{background-position:0 0} 100%{background-position:72px 72px} }
 .hero-light-a {
-  position: absolute; width: 500px; height: 500px;
-  background: radial-gradient(ellipse at center, rgba(177,140,255,.08) 0%, transparent 70%);
+  position: absolute; width: 420px; height: 420px;
+  background: radial-gradient(ellipse at center, rgba(177,140,255,.030) 0%, transparent 70%);
   top: -100px; left: -50px; filter: blur(40px); pointer-events: none;
 }
 .hero-light-b {
-  position: absolute; width: 400px; height: 400px;
-  background: radial-gradient(ellipse at center, rgba(77,163,255,.05) 0%, transparent 70%);
+  position: absolute; width: 340px; height: 340px;
+  background: radial-gradient(ellipse at center, rgba(77,163,255,.020) 0%, transparent 70%);
   bottom: 60px; right: -40px; filter: blur(40px); pointer-events: none;
 }
 .hero-orbital {
@@ -360,7 +360,7 @@ ul, ol { list-style: none; }
   inset: 18%;
   /* Pre-blurred radial via background only — no `filter: blur()` on a
      constantly animated element (filter blur recomputes every frame). */
-  background: radial-gradient(circle, rgba(177,140,255,0.22) 0%, rgba(77,163,255,0.08) 50%, transparent 75%);
+  background: radial-gradient(circle, rgba(177,140,255,0.09) 0%, rgba(77,163,255,0.03) 50%, transparent 75%);
   z-index: 0;
   animation: cubeGlowPulse 6s ease-in-out infinite;
   will-change: opacity;
@@ -640,7 +640,7 @@ ul, ol { list-style: none; }
 .diag-promo-card:hover {
   transform: translateY(-3px);
   border-color: rgba(177, 140, 255, 0.5);
-  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4), 0 0 60px rgba(177, 140, 255, 0.08);
+  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4);
 }
 .diag-promo-card:hover::before { opacity: 1; }
 .diag-promo-eyebrow {
@@ -850,7 +850,7 @@ ul, ol { list-style: none; }
   padding: 36px 40px;
   width: 100%;
   animation: float 7s ease-in-out infinite;
-  box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 0 60px rgba(177,140,255,.03);
+  box-shadow: 0 32px 80px rgba(0,0,0,.5);
 }
 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 .hc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
@@ -999,12 +999,15 @@ ul, ol { list-style: none; }
 .brand-wave-bg svg { width: 100%; height: 100%; }
 .brand-wave-line { fill: none; stroke-width: 1; stroke-linecap: round; }
 
-/* ── SECTION GLOWS & PARTICLES ───────────────────────────────── */
-.section-glow { position: absolute; pointer-events: none; filter: blur(60px); border-radius: 50%; z-index: 0; }
-.section-glow.lilac { width: 500px; height: 400px; background: radial-gradient(ellipse, rgba(177,140,255,.06) 0%, transparent 70%); }
-.section-glow.blue { width: 400px; height: 400px; background: radial-gradient(ellipse, rgba(77,163,255,.05) 0%, transparent 70%); }
-.section-glow.green { width: 400px; height: 350px; background: radial-gradient(ellipse, rgba(0,229,160,.04) 0%, transparent 70%); }
-.section-glow.cyan { width: 350px; height: 350px; background: radial-gradient(ellipse, rgba(0,212,255,.04) 0%, transparent 70%); }
+/* ── SECTION GLOWS & PARTICLES ───────────────────────────────────
+   Ambient lighting is intentionally matte. Lilás e azul são pontuação
+   rara em superfícies de leitura, não decoração ambient. Opacidade
+   máxima de 0.025 e raio menor — registro de publicação, não SaaS. */
+.section-glow { position: absolute; pointer-events: none; filter: blur(50px); border-radius: 50%; z-index: 0; }
+.section-glow.lilac { width: 420px; height: 320px; background: radial-gradient(ellipse, rgba(177,140,255,.025) 0%, transparent 70%); }
+.section-glow.blue { width: 340px; height: 320px; background: radial-gradient(ellipse, rgba(77,163,255,.020) 0%, transparent 70%); }
+.section-glow.green { width: 340px; height: 280px; background: radial-gradient(ellipse, rgba(0,229,160,.018) 0%, transparent 70%); }
+.section-glow.cyan { width: 300px; height: 280px; background: radial-gradient(ellipse, rgba(0,212,255,.018) 0%, transparent 70%); }
 .section-particles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .section-sep { height: 1px; position: relative; z-index: 1; background: linear-gradient(90deg, transparent 0%, rgba(177,140,255,.08) 20%, rgba(77,163,255,.06) 80%, transparent 100%); }
 
@@ -2387,7 +2390,7 @@ ul, ol { list-style: none; }
 .post-cta { padding: 80px 0; border-top: 1px solid var(--border); text-align: center; position: relative; z-index: 1; }
 .post-cta h2 { font-size: clamp(28px,4vw,44px); font-weight: 700; letter-spacing: -.03em; margin-bottom: 16px; }
 .post-cta p { font-size: 17px; color: var(--muted); max-width: 480px; margin: 0 auto 36px; }
-.cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--grad-btn); color: #fff; font-weight: 600; font-size: 15px; padding: 16px 32px; border-radius: 10px; font-family: inherit; border: none; cursor: pointer; transition: all .25s; box-shadow: 0 8px 28px rgba(0,0,0,.35), 0 0 28px rgba(109,40,217,.28); }
+.cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--grad-btn); color: #fff; font-weight: 600; font-size: 15px; padding: 16px 32px; border-radius: 10px; font-family: inherit; border: none; cursor: pointer; transition: all .25s; box-shadow: 0 8px 28px rgba(0,0,0,.35); }
 .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,.45), 0 0 36px rgba(109,40,217,.42); }
 .post-footer-area { max-width: 1100px; margin: 0 auto; padding: 0 28px 80px; position: relative; z-index: 1; }
 .post-share { display: flex; align-items: center; gap: 12px; padding: 24px 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
