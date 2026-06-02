@@ -37,7 +37,7 @@ const t = useTranslations();
       <div class="cia-commitment-inner fi">
         <div class="cia-commitment-mark" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2l2.5 5L18 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L10 2z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round" fill="rgba(177,140,255,0.08)"/>
+            <path d="M10 2l2.5 5L18 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L10 2z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round" fill="rgba(234,234,240,0.08)"/>
           </svg>
         </div>
         <div class="cia-commitment-copy">
@@ -72,8 +72,8 @@ const t = useTranslations();
             <svg viewBox="0 0 48 48" fill="none" width="48" height="48">
               <defs>
                 <linearGradient id="cia-g-stats" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#B18CFF"/>
-                  <stop offset="100%" stop-color="#4DA3FF"/>
+                  <stop offset="0%" stop-color="#EAEAF0"/>
+                  <stop offset="100%" stop-color="#EAEAF0"/>
                 </linearGradient>
               </defs>
               <!-- Bar chart -->
@@ -82,8 +82,8 @@ const t = useTranslations();
               <rect x="28" y="12" width="6" height="30" rx="1" fill="url(#cia-g-stats)"/>
               <rect x="38" y="22" width="6" height="20" rx="1" fill="url(#cia-g-stats)" opacity="0.6"/>
               <!-- Trendline -->
-              <path d="M8 26 L21 18 L31 10 L41 18" stroke="#B18CFF" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.85"/>
-              <circle cx="31" cy="10" r="2.4" fill="#B18CFF"/>
+              <path d="M8 26 L21 18 L31 10 L41 18" stroke="rgba(234,234,240,0.55)" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.85"/>
+              <circle cx="31" cy="10" r="2.4" fill="rgba(234,234,240,0.85)"/>
             </svg>
           </div>
 
@@ -194,8 +194,8 @@ const t = useTranslations();
     gap: 22px;
     align-items: start;
     padding: 22px 28px;
-    background: linear-gradient(120deg, rgba(177, 140, 255, 0.08), rgba(0, 229, 160, 0.04) 70%, transparent);
-    border: 1px solid rgba(177, 140, 255, 0.22);
+    background: linear-gradient(120deg, rgba(234,234,240, 0.08), rgba(234,234,240, 0.04) 70%, transparent);
+    border: 1px solid rgba(234,234,240, 0.22);
     border-radius: 16px;
   }
   .cia-commitment-mark {
@@ -205,8 +205,8 @@ const t = useTranslations();
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    background: rgba(177, 140, 255, 0.1);
-    border: 1px solid rgba(177, 140, 255, 0.28);
+    background: rgba(234,234,240, 0.1);
+    border: 1px solid rgba(234,234,240, 0.28);
     flex-shrink: 0;
   }
   .cia-commitment-copy { display: flex; flex-direction: column; gap: 6px; }
@@ -267,15 +267,15 @@ const t = useTranslations();
     position: absolute;
     inset: 0;
     border-radius: 20px;
-    background: linear-gradient(165deg, rgba(177, 140, 255, 0.08), transparent 60%);
+    background: linear-gradient(165deg, rgba(234,234,240, 0.08), transparent 60%);
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
   }
   a.cia-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(177, 140, 255, 0.42);
-    box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4), 0 0 60px rgba(177, 140, 255, 0.06);
+    border-color: rgba(234,234,240, 0.42);
+    box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4), 0 0 60px rgba(234,234,240, 0.06);
   }
   a.cia-card:hover::before { opacity: 1; }
 
@@ -296,8 +296,8 @@ const t = useTranslations();
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    background: rgba(0, 229, 160, 0.1);
-    border: 1px solid rgba(0, 229, 160, 0.28);
+    background: rgba(234,234,240, 0.1);
+    border: 1px solid rgba(234,234,240, 0.28);
     color: var(--green);
   }
   .cia-card-dot {
@@ -305,7 +305,7 @@ const t = useTranslations();
     height: 6px;
     border-radius: 50%;
     background: var(--green);
-    box-shadow: 0 0 10px rgba(0, 229, 160, 0.7);
+    box-shadow: 0 0 10px rgba(234,234,240, 0.7);
     animation: ciaPulse 2.2s ease-in-out infinite;
   }
   @keyframes ciaPulse {
@@ -326,7 +326,7 @@ const t = useTranslations();
     justify-content: center;
     border-radius: 14px;
     background: rgba(22, 22, 32, 0.6);
-    border: 1px solid rgba(177, 140, 255, 0.14);
+    border: 1px solid rgba(234,234,240, 0.14);
   }
 
   .cia-card-title {
@@ -366,8 +366,8 @@ const t = useTranslations();
     text-transform: uppercase;
     padding: 4px 10px;
     border-radius: 100px;
-    background: rgba(177, 140, 255, 0.06);
-    border: 1px solid rgba(177, 140, 255, 0.14);
+    background: rgba(234,234,240, 0.06);
+    border: 1px solid rgba(234,234,240, 0.14);
     color: var(--muted);
   }
   .cia-card-cta {
@@ -382,14 +382,14 @@ const t = useTranslations();
     color: var(--lilac);
     padding: 11px 20px;
     border-radius: 100px;
-    border: 1px solid rgba(177, 140, 255, 0.32);
-    background: rgba(177, 140, 255, 0.06);
+    border: 1px solid rgba(234,234,240, 0.32);
+    background: rgba(234,234,240, 0.06);
     transition: gap 0.25s, border-color 0.25s, background 0.25s;
   }
   a.cia-card:hover .cia-card-cta {
     gap: 12px;
-    border-color: rgba(177, 140, 255, 0.55);
-    background: rgba(177, 140, 255, 0.14);
+    border-color: rgba(234,234,240, 0.55);
+    background: rgba(234,234,240, 0.14);
   }
 
   /* Placeholder slot — discrete, only signaling rhythm */
@@ -412,8 +412,8 @@ const t = useTranslations();
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(177, 140, 255, 0.18);
-    box-shadow: 0 0 16px rgba(177, 140, 255, 0.25);
+    background: rgba(234,234,240, 0.18);
+    box-shadow: 0 0 16px rgba(234,234,240, 0.25);
   }
   .cia-card-empty p {
     font-size: 13px;

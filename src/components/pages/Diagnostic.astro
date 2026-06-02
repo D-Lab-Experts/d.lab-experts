@@ -610,8 +610,8 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     gap: 8px;
     padding: 6px 14px;
     border-radius: 100px;
-    border: 1px solid rgba(177, 140, 255, 0.22);
-    background: rgba(177, 140, 255, 0.04);
+    border: 1px solid rgba(234,234,240, 0.22);
+    background: rgba(234,234,240, 0.04);
     color: var(--lilac);
     font-size: 11px;
     font-weight: 600;
@@ -623,7 +623,7 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     height: 5px;
     border-radius: 50%;
     background: var(--lilac);
-    box-shadow: 0 0 8px rgba(177, 140, 255, 0.6);
+    box-shadow: 0 0 8px rgba(234,234,240, 0.6);
   }
 
   /* ═══════════ WORKBENCH (form + result) ══════════════════════ */
@@ -698,8 +698,8 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     transition: border-color 0.2s, background 0.2s;
   }
   .diag-opt:hover {
-    border-color: rgba(177, 140, 255, 0.4);
-    background: rgba(177, 140, 255, 0.05);
+    border-color: rgba(234,234,240, 0.4);
+    background: rgba(234,234,240, 0.05);
   }
   .diag-opt input[type="radio"] {
     position: absolute;
@@ -719,19 +719,19 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    border: 1.5px solid rgba(177, 140, 255, 0.45);
+    border: 1.5px solid rgba(234,234,240, 0.45);
     background: transparent;
     flex-shrink: 0;
     transition: border-color 0.2s, background 0.2s;
   }
   .diag-opt:has(input:checked) {
-    border-color: rgba(177, 140, 255, 0.55);
-    background: rgba(177, 140, 255, 0.08);
+    border-color: rgba(234,234,240, 0.55);
+    background: rgba(234,234,240, 0.08);
   }
   .diag-opt:has(input:checked) .diag-opt-label::before {
     background: var(--lilac);
     border-color: var(--lilac);
-    box-shadow: 0 0 0 3px rgba(177, 140, 255, 0.18);
+    box-shadow: 0 0 0 3px rgba(234,234,240, 0.18);
   }
 
   /* ═══════════ RESULT PANEL ════════════════════════════════════
@@ -745,7 +745,7 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
   .diag-result-inner {
     position: relative;
     background: linear-gradient(165deg, rgba(26, 26, 40, 0.85), rgba(22, 22, 32, 0.7));
-    border: 1px solid rgba(177, 140, 255, 0.2);
+    border: 1px solid rgba(234,234,240, 0.2);
     border-radius: 22px;
     overflow: hidden;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
@@ -761,22 +761,22 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     background: linear-gradient(90deg, var(--red), var(--amber));
   }
   .diag-result-inner.state-red {
-    border-color: rgba(255, 92, 122, 0.32);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 92, 122, 0.06);
+    border-color: rgba(234,234,240, 0.32);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(234,234,240, 0.06);
   }
   .diag-result-inner.state-yellow .diag-result-accent {
     background: linear-gradient(90deg, var(--amber), var(--yellow));
   }
   .diag-result-inner.state-yellow {
-    border-color: rgba(255, 209, 102, 0.3);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 209, 102, 0.05);
+    border-color: rgba(234,234,240, 0.3);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(234,234,240, 0.05);
   }
   .diag-result-inner.state-green .diag-result-accent {
     background: linear-gradient(90deg, var(--green), var(--cyan));
   }
   .diag-result-inner.state-green {
-    border-color: rgba(0, 229, 160, 0.3);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(0, 229, 160, 0.06);
+    border-color: rgba(234,234,240, 0.3);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(234,234,240, 0.06);
   }
 
   .diag-result-head {
@@ -822,33 +822,33 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     border-radius: 50%;
   }
   .diag-badge.diag-badge-red {
-    background: rgba(255, 92, 122, 0.12);
-    border: 1px solid rgba(255, 92, 122, 0.36);
+    background: rgba(234,234,240, 0.12);
+    border: 1px solid rgba(234,234,240, 0.36);
     color: var(--red);
   }
   .diag-badge.diag-badge-red .diag-badge-dot {
     background: var(--red);
-    box-shadow: 0 0 10px rgba(255, 92, 122, 0.8);
+    box-shadow: 0 0 10px rgba(234,234,240, 0.8);
     animation: diagBadgePulse 2s ease-in-out infinite;
   }
   .diag-badge.diag-badge-yellow {
-    background: rgba(255, 209, 102, 0.12);
-    border: 1px solid rgba(255, 209, 102, 0.36);
+    background: rgba(234,234,240, 0.12);
+    border: 1px solid rgba(234,234,240, 0.36);
     color: var(--yellow);
   }
   .diag-badge.diag-badge-yellow .diag-badge-dot {
     background: var(--yellow);
-    box-shadow: 0 0 10px rgba(255, 209, 102, 0.8);
+    box-shadow: 0 0 10px rgba(234,234,240, 0.8);
     animation: diagBadgePulse 2.4s ease-in-out infinite;
   }
   .diag-badge.diag-badge-green {
-    background: rgba(0, 229, 160, 0.12);
-    border: 1px solid rgba(0, 229, 160, 0.36);
+    background: rgba(234,234,240, 0.12);
+    border: 1px solid rgba(234,234,240, 0.36);
     color: var(--green);
   }
   .diag-badge.diag-badge-green .diag-badge-dot {
     background: var(--green);
-    box-shadow: 0 0 10px rgba(0, 229, 160, 0.8);
+    box-shadow: 0 0 10px rgba(234,234,240, 0.8);
     animation: diagBadgePulse 2.8s ease-in-out infinite;
   }
   @keyframes diagBadgePulse {
@@ -890,13 +890,13 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     box-shadow: 0 0 8px currentColor;
   }
   .diag-metric-quality {
-    border-color: rgba(177, 140, 255, 0.22);
-    background: linear-gradient(165deg, rgba(177, 140, 255, 0.08), rgba(14, 14, 22, 0.55) 70%);
+    border-color: rgba(234,234,240, 0.22);
+    background: linear-gradient(165deg, rgba(234,234,240, 0.08), rgba(14, 14, 22, 0.55) 70%);
   }
   .diag-metric-quality .diag-metric-tag { color: var(--lilac); }
   .diag-metric-exposure {
-    border-color: rgba(255, 209, 102, 0.22);
-    background: linear-gradient(165deg, rgba(255, 209, 102, 0.06), rgba(255, 92, 122, 0.04) 60%, rgba(14, 14, 22, 0.55));
+    border-color: rgba(234,234,240, 0.22);
+    background: linear-gradient(165deg, rgba(234,234,240, 0.06), rgba(234,234,240, 0.04) 60%, rgba(14, 14, 22, 0.55));
   }
   .diag-metric-exposure .diag-metric-tag { color: var(--yellow); }
 
@@ -906,7 +906,7 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     letter-spacing: -0.035em;
     line-height: 1;
     margin-bottom: 14px;
-    background: linear-gradient(135deg, #B18CFF 0%, #7B9EFF 60%, #4DA3FF 100%);
+    background: linear-gradient(135deg, rgba(234,234,240,0.20) 0%, rgba(234,234,240,0.12) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -973,12 +973,12 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
   .diag-range-bar::before {
     left: -4px;
     background: var(--yellow);
-    box-shadow: 0 0 10px rgba(255, 209, 102, 0.7);
+    box-shadow: 0 0 10px rgba(234,234,240, 0.7);
   }
   .diag-range-bar::after {
     right: -4px;
     background: var(--red);
-    box-shadow: 0 0 10px rgba(255, 92, 122, 0.7);
+    box-shadow: 0 0 10px rgba(234,234,240, 0.7);
   }
 
   /* Quality bar */
@@ -986,7 +986,7 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     position: relative;
     height: 8px;
     background: rgba(14, 14, 22, 0.9);
-    border: 1px solid rgba(177, 140, 255, 0.12);
+    border: 1px solid rgba(234,234,240, 0.12);
     border-radius: 6px;
     overflow: hidden;
   }
@@ -994,9 +994,9 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     position: absolute;
     inset: 0 auto 0 0;
     width: 0%;
-    background: linear-gradient(90deg, #B18CFF, #7B9EFF, #4DA3FF);
+    background: linear-gradient(90deg, rgba(234,234,240,0.18), rgba(234,234,240,0.10));
     border-radius: 4px;
-    box-shadow: 0 0 12px rgba(177, 140, 255, 0.55);
+    box-shadow: 0 0 12px rgba(234,234,240, 0.55);
     transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .diag-quality-bar-baseline {
@@ -1029,7 +1029,7 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
   .diag-narrative {
     margin-top: 22px;
     padding: 22px 22px 18px;
-    border: 1px solid rgba(177, 140, 255, 0.14);
+    border: 1px solid rgba(234,234,240, 0.14);
     background: linear-gradient(165deg, rgba(30, 30, 44, 0.7), rgba(14, 14, 22, 0.55));
     border-radius: 14px;
     display: flex;
@@ -1116,13 +1116,13 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
   .diag-action:nth-child(2)::before { background: var(--green); }
   .diag-action:last-child { margin-bottom: 0; }
   .diag-action:hover {
-    border-color: rgba(177, 140, 255, 0.4);
-    background: rgba(177, 140, 255, 0.06);
+    border-color: rgba(234,234,240, 0.4);
+    background: rgba(234,234,240, 0.06);
     transform: translateX(3px);
   }
   .diag-action:nth-child(2):hover {
-    border-color: rgba(0, 229, 160, 0.4);
-    background: rgba(0, 229, 160, 0.05);
+    border-color: rgba(234,234,240, 0.4);
+    background: rgba(234,234,240, 0.05);
   }
   .diag-action:hover::before { width: 4px; }
 
@@ -1140,18 +1140,18 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    background: rgba(177, 140, 255, 0.14);
+    background: rgba(234,234,240, 0.14);
     color: var(--lilac);
-    border: 1px solid rgba(177, 140, 255, 0.3);
+    border: 1px solid rgba(234,234,240, 0.3);
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.08em;
     flex-shrink: 0;
   }
   .diag-action:nth-child(2) .diag-action-step {
-    background: rgba(0, 229, 160, 0.14);
+    background: rgba(234,234,240, 0.14);
     color: var(--green);
-    border-color: rgba(0, 229, 160, 0.3);
+    border-color: rgba(234,234,240, 0.3);
   }
   .diag-action-title {
     font-size: 15px;
@@ -1191,24 +1191,24 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    border: 1px solid rgba(177, 140, 255, 0.3);
-    background: rgba(177, 140, 255, 0.08);
+    border: 1px solid rgba(234,234,240, 0.3);
+    background: rgba(234,234,240, 0.08);
     color: var(--lilac);
     transition: transform 0.25s, background 0.25s, border-color 0.25s;
   }
   .diag-action:nth-child(2) .diag-action-arrow {
-    border-color: rgba(0, 229, 160, 0.3);
-    background: rgba(0, 229, 160, 0.08);
+    border-color: rgba(234,234,240, 0.3);
+    background: rgba(234,234,240, 0.08);
     color: var(--green);
   }
   .diag-action:hover .diag-action-arrow {
     transform: translateX(3px);
-    background: rgba(177, 140, 255, 0.2);
-    border-color: rgba(177, 140, 255, 0.55);
+    background: rgba(234,234,240, 0.2);
+    border-color: rgba(234,234,240, 0.55);
   }
   .diag-action:nth-child(2):hover .diag-action-arrow {
-    background: rgba(0, 229, 160, 0.18);
-    border-color: rgba(0, 229, 160, 0.55);
+    background: rgba(234,234,240, 0.18);
+    border-color: rgba(234,234,240, 0.55);
   }
 
   /* ═══════════ METHODOLOGY ════════════════════════════════════ */
@@ -1282,8 +1282,8 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
     max-width: 840px;
     margin: 40px auto 0;
     padding: 20px 22px;
-    background: rgba(255, 209, 102, 0.05);
-    border: 1px solid rgba(255, 209, 102, 0.18);
+    background: rgba(234,234,240, 0.05);
+    border: 1px solid rgba(234,234,240, 0.18);
     border-left: 3px solid var(--yellow);
     border-radius: 12px;
   }

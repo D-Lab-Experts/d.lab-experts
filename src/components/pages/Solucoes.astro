@@ -36,7 +36,7 @@ const t = useTranslations();
       <div class="sol-commitment-inner fi">
         <div class="sol-commitment-mark" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2l2.5 5L18 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L10 2z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round" fill="rgba(177,140,255,0.08)"/>
+            <path d="M10 2l2.5 5L18 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L10 2z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round" fill="rgba(234,234,240,0.08)"/>
           </svg>
         </div>
         <div class="sol-commitment-copy">
@@ -165,8 +165,8 @@ const t = useTranslations();
     gap: 22px;
     align-items: start;
     padding: 22px 28px;
-    background: linear-gradient(120deg, rgba(177, 140, 255, 0.08), rgba(0, 229, 160, 0.04) 70%, transparent);
-    border: 1px solid rgba(177, 140, 255, 0.22);
+    background: linear-gradient(120deg, rgba(234,234,240, 0.08), rgba(234,234,240, 0.04) 70%, transparent);
+    border: 1px solid rgba(234,234,240, 0.22);
     border-radius: 16px;
   }
   .sol-commitment-mark {
@@ -176,8 +176,8 @@ const t = useTranslations();
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    background: rgba(177, 140, 255, 0.1);
-    border: 1px solid rgba(177, 140, 255, 0.28);
+    background: rgba(234,234,240, 0.1);
+    border: 1px solid rgba(234,234,240, 0.28);
     flex-shrink: 0;
   }
   .sol-commitment-copy {
@@ -241,19 +241,19 @@ const t = useTranslations();
     position: absolute;
     inset: 0;
     border-radius: 20px;
-    background: linear-gradient(165deg, rgba(177, 140, 255, 0.08), transparent 60%);
+    background: linear-gradient(165deg, rgba(234,234,240, 0.08), transparent 60%);
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
   }
   .sol-tool-live:hover {
     transform: translateY(-4px);
-    border-color: rgba(177, 140, 255, 0.42);
-    box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4), 0 0 60px rgba(177, 140, 255, 0.06);
+    border-color: rgba(234,234,240, 0.42);
+    box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4), 0 0 60px rgba(234,234,240, 0.06);
   }
   .sol-tool-wip:hover {
     transform: translateY(-2px);
-    border-color: rgba(0, 229, 160, 0.3);
+    border-color: rgba(234,234,240, 0.3);
   }
   .sol-tool:hover::before { opacity: 1; }
 
@@ -281,23 +281,23 @@ const t = useTranslations();
     border-radius: 50%;
   }
   .sol-status-live {
-    background: rgba(0, 229, 160, 0.1);
-    border: 1px solid rgba(0, 229, 160, 0.28);
+    background: rgba(234,234,240, 0.1);
+    border: 1px solid rgba(234,234,240, 0.28);
     color: var(--green);
   }
   .sol-status-live .sol-status-dot {
     background: var(--green);
-    box-shadow: 0 0 10px rgba(0, 229, 160, 0.7);
+    box-shadow: 0 0 10px rgba(234,234,240, 0.7);
     animation: solPulse 2.2s ease-in-out infinite;
   }
   .sol-status-wip {
-    background: rgba(255, 209, 102, 0.08);
-    border: 1px solid rgba(255, 209, 102, 0.24);
+    background: rgba(234,234,240, 0.08);
+    border: 1px solid rgba(234,234,240, 0.24);
     color: var(--yellow);
   }
   .sol-status-wip .sol-status-dot {
     background: var(--yellow);
-    box-shadow: 0 0 8px rgba(255, 209, 102, 0.6);
+    box-shadow: 0 0 8px rgba(234,234,240, 0.6);
   }
   @keyframes solPulse {
     0%, 100% { opacity: 1; transform: scale(1); }
@@ -320,10 +320,10 @@ const t = useTranslations();
     justify-content: center;
     border-radius: 14px;
     background: rgba(22, 22, 32, 0.6);
-    border: 1px solid rgba(177, 140, 255, 0.14);
+    border: 1px solid rgba(234,234,240, 0.14);
   }
   .sol-tool-wip .sol-tool-icon {
-    border-color: rgba(0, 229, 160, 0.16);
+    border-color: rgba(234,234,240, 0.16);
   }
 
   .sol-tool-title {
@@ -357,25 +357,25 @@ const t = useTranslations();
     text-transform: uppercase;
     padding: 4px 10px;
     border-radius: 100px;
-    background: rgba(177, 140, 255, 0.06);
-    border: 1px solid rgba(177, 140, 255, 0.14);
+    background: rgba(234,234,240, 0.06);
+    border: 1px solid rgba(234,234,240, 0.14);
     color: var(--muted);
   }
   .sol-tool-wip .sol-chip {
-    background: rgba(0, 229, 160, 0.04);
-    border-color: rgba(0, 229, 160, 0.14);
+    background: rgba(234,234,240, 0.04);
+    border-color: rgba(234,234,240, 0.14);
   }
   .sol-chip-wip {
     color: var(--yellow);
-    background: rgba(255, 209, 102, 0.08);
-    border-color: rgba(255, 209, 102, 0.22);
+    background: rgba(234,234,240, 0.08);
+    border-color: rgba(234,234,240, 0.22);
   }
   /* "Gratuito" — mais destaque que os demais chips, já que é o
      diferencial mais visível da estratégia. */
   .sol-chip-free {
     color: var(--green);
-    background: rgba(0, 229, 160, 0.1);
-    border-color: rgba(0, 229, 160, 0.3);
+    background: rgba(234,234,240, 0.1);
+    border-color: rgba(234,234,240, 0.3);
     font-weight: 700;
   }
 
@@ -391,24 +391,24 @@ const t = useTranslations();
     color: var(--lilac);
     padding: 11px 20px;
     border-radius: 100px;
-    border: 1px solid rgba(177, 140, 255, 0.32);
-    background: rgba(177, 140, 255, 0.06);
+    border: 1px solid rgba(234,234,240, 0.32);
+    background: rgba(234,234,240, 0.06);
     transition: gap 0.25s, border-color 0.25s, background 0.25s;
   }
   .sol-tool-live:hover .sol-tool-cta {
     gap: 12px;
-    border-color: rgba(177, 140, 255, 0.55);
-    background: rgba(177, 140, 255, 0.14);
+    border-color: rgba(234,234,240, 0.55);
+    background: rgba(234,234,240, 0.14);
   }
   .sol-tool-cta-wip {
     color: var(--green);
-    border-color: rgba(0, 229, 160, 0.28);
-    background: rgba(0, 229, 160, 0.05);
+    border-color: rgba(234,234,240, 0.28);
+    background: rgba(234,234,240, 0.05);
   }
   .sol-tool-wip:hover .sol-tool-cta-wip {
     gap: 12px;
-    border-color: rgba(0, 229, 160, 0.5);
-    background: rgba(0, 229, 160, 0.1);
+    border-color: rgba(234,234,240, 0.5);
+    background: rgba(234,234,240, 0.1);
   }
 
   /* ═══════════ FINAL CTA ══════════════════════════════════════ */
