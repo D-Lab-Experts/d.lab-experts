@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none" role="img" aria-label="Campanhas afirmativas no mercado de games">
   <defs>
     <linearGradient id="cagG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#B18CFF"/>
-      <stop offset="100%" stop-color="#4DA3FF"/>
+      <stop offset="0%" stop-color="#EAEAF0"/>
+      <stop offset="100%" stop-color="#EAEAF0"/>
     </linearGradient>
     <linearGradient id="cagG2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00E5A0"/>
-      <stop offset="100%" stop-color="#00D4FF"/>
+      <stop offset="0%" stop-color="#EAEAF0"/>
+      <stop offset="100%" stop-color="#EAEAF0"/>
     </linearGradient>
     <linearGradient id="cagBar1" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#B18CFF" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#B18CFF" stop-opacity="0.65"/>
+      <stop offset="0%" stop-color="#EAEAF0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#EAEAF0" stop-opacity="0.65"/>
     </linearGradient>
     <linearGradient id="cagBar2" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#4DA3FF" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#4DA3FF" stop-opacity="0.65"/>
+      <stop offset="0%" stop-color="#EAEAF0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#EAEAF0" stop-opacity="0.65"/>
     </linearGradient>
     <linearGradient id="cagBar3" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#00E5A0" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#00E5A0" stop-opacity="0.65"/>
+      <stop offset="0%" stop-color="#EAEAF0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#EAEAF0" stop-opacity="0.65"/>
     </linearGradient>
     <filter id="cagBlur"><feGaussianBlur stdDeviation="40"/></filter>
   </defs>
@@ -27,7 +27,7 @@
   <rect width="800" height="450" fill="#0B0B0F"/>
 
   <!-- Subtle grid -->
-  <g opacity="0.04" stroke="#B18CFF" stroke-width="0.5">
+  <g opacity="0.04" stroke="rgba(234,234,240,0.85)" stroke-width="0.5">
     <line x1="100" y1="0" x2="100" y2="450"/>
     <line x1="200" y1="0" x2="200" y2="450"/>
     <line x1="300" y1="0" x2="300" y2="450"/>
@@ -42,13 +42,13 @@
   </g>
 
   <!-- Ambient halos -->
-  <circle cx="200" cy="240" r="180" fill="#B18CFF" opacity="0.05" filter="url(#cagBlur)"/>
-  <circle cx="620" cy="200" r="160" fill="#00E5A0" opacity="0.04" filter="url(#cagBlur)"/>
+  <circle cx="200" cy="240" r="180" fill="rgba(234,234,240,0.85)" opacity="0.05" filter="url(#cagBlur)"/>
+  <circle cx="620" cy="200" r="160" fill="rgba(234,234,240,0.60)" opacity="0.04" filter="url(#cagBlur)"/>
 
   <!-- Bar chart silhouette (representing the data) -->
   <g>
     <!-- Baseline -->
-    <line x1="240" y1="320" x2="560" y2="320" stroke="#B18CFF" stroke-width="1" opacity="0.18"/>
+    <line x1="240" y1="320" x2="560" y2="320" stroke="rgba(234,234,240,0.85)" stroke-width="1" opacity="0.18"/>
 
     <!-- 6 bars with varying heights, lilac to green gradient progression -->
     <rect x="252" y="180" width="34" height="140" rx="3" fill="url(#cagBar1)"/>
@@ -59,12 +59,12 @@
     <rect x="482" y="288" width="34" height="32"  rx="3" fill="url(#cagBar3)"/>
 
     <!-- Bar value markers -->
-    <circle cx="269" cy="180" r="2.2" fill="#B18CFF"/>
-    <circle cx="315" cy="200" r="2.2" fill="#B18CFF"/>
-    <circle cx="361" cy="206" r="2.2" fill="#B18CFF"/>
-    <circle cx="407" cy="226" r="2.2" fill="#4DA3FF"/>
-    <circle cx="453" cy="240" r="2.2" fill="#4DA3FF"/>
-    <circle cx="499" cy="288" r="2.2" fill="#00E5A0"/>
+    <circle cx="269" cy="180" r="2.2" fill="rgba(234,234,240,0.85)"/>
+    <circle cx="315" cy="200" r="2.2" fill="rgba(234,234,240,0.85)"/>
+    <circle cx="361" cy="206" r="2.2" fill="rgba(234,234,240,0.85)"/>
+    <circle cx="407" cy="226" r="2.2" fill="rgba(234,234,240,0.70)"/>
+    <circle cx="453" cy="240" r="2.2" fill="rgba(234,234,240,0.70)"/>
+    <circle cx="499" cy="288" r="2.2" fill="rgba(234,234,240,0.60)"/>
 
     <!-- Connecting line through bar tops (data trend) -->
     <path d="M 269 180 L 315 200 L 361 206 L 407 226 L 453 240 L 499 288"
@@ -73,28 +73,28 @@
 
   <!-- Value highlight: 3.48x callout floating at top right of chart -->
   <g opacity="0.85">
-    <line x1="269" y1="180" x2="269" y2="120" stroke="#B18CFF" stroke-width="0.7" opacity="0.5" stroke-dasharray="3 3"/>
+    <line x1="269" y1="180" x2="269" y2="120" stroke="rgba(234,234,240,0.85)" stroke-width="0.7" opacity="0.5" stroke-dasharray="3 3"/>
     <text x="269" y="108" text-anchor="middle" font-family="Satoshi,system-ui,sans-serif"
-          font-size="22" font-weight="700" fill="#B18CFF" opacity="0.85">3,48×</text>
+          font-size="22" font-weight="700" fill="rgba(234,234,240,0.85)" opacity="0.85">3,48×</text>
     <text x="269" y="124" text-anchor="middle" font-family="Satoshi,system-ui,sans-serif"
           font-size="8" letter-spacing="0.10em" fill="#EAEAF0" opacity="0.45">CHANCE DE TROCAR</text>
   </g>
 
   <!-- Network nodes (community / diversity hint) -->
   <g>
-    <circle cx="120" cy="140" r="2.5" fill="#B18CFF" opacity="0.55"/>
-    <circle cx="160" cy="190" r="2"   fill="#4DA3FF" opacity="0.50"/>
-    <circle cx="100" cy="220" r="1.8" fill="#00E5A0" opacity="0.45"/>
-    <circle cx="680" cy="130" r="2.2" fill="#B18CFF" opacity="0.50"/>
-    <circle cx="720" cy="180" r="1.8" fill="#4DA3FF" opacity="0.40"/>
-    <circle cx="660" cy="220" r="2"   fill="#00E5A0" opacity="0.40"/>
+    <circle cx="120" cy="140" r="2.5" fill="rgba(234,234,240,0.85)" opacity="0.55"/>
+    <circle cx="160" cy="190" r="2"   fill="rgba(234,234,240,0.70)" opacity="0.50"/>
+    <circle cx="100" cy="220" r="1.8" fill="rgba(234,234,240,0.60)" opacity="0.45"/>
+    <circle cx="680" cy="130" r="2.2" fill="rgba(234,234,240,0.85)" opacity="0.50"/>
+    <circle cx="720" cy="180" r="1.8" fill="rgba(234,234,240,0.70)" opacity="0.40"/>
+    <circle cx="660" cy="220" r="2"   fill="rgba(234,234,240,0.60)" opacity="0.40"/>
   </g>
 
   <g stroke-width="0.5" opacity="0.18">
-    <line x1="120" y1="140" x2="160" y2="190" stroke="#B18CFF"/>
-    <line x1="160" y1="190" x2="100" y2="220" stroke="#4DA3FF"/>
-    <line x1="680" y1="130" x2="720" y2="180" stroke="#B18CFF"/>
-    <line x1="720" y1="180" x2="660" y2="220" stroke="#4DA3FF"/>
+    <line x1="120" y1="140" x2="160" y2="190" stroke="rgba(234,234,240,0.85)"/>
+    <line x1="160" y1="190" x2="100" y2="220" stroke="rgba(234,234,240,0.55)"/>
+    <line x1="680" y1="130" x2="720" y2="180" stroke="rgba(234,234,240,0.85)"/>
+    <line x1="720" y1="180" x2="660" y2="220" stroke="rgba(234,234,240,0.55)"/>
   </g>
 
   <!-- Subtle label -->

@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none" role="img" aria-label="Quem morre pedalando no Brasil — estudo D.Lab × IMPS">
   <defs>
     <linearGradient id="cbG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#B18CFF"/>
-      <stop offset="100%" stop-color="#4DA3FF"/>
+      <stop offset="0%" stop-color="#EAEAF0"/>
+      <stop offset="100%" stop-color="#EAEAF0"/>
     </linearGradient>
     <linearGradient id="cbFatal" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FF5C7A" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#FF5C7A" stop-opacity="0.35"/>
+      <stop offset="0%" stop-color="#EAEAF0" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#EAEAF0" stop-opacity="0.35"/>
     </linearGradient>
     <linearGradient id="cbHosp" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FFD166" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#FFD166" stop-opacity="0.30"/>
+      <stop offset="0%" stop-color="#EAEAF0" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#EAEAF0" stop-opacity="0.30"/>
     </linearGradient>
     <filter id="cbBlur"><feGaussianBlur stdDeviation="42"/></filter>
   </defs>
@@ -19,7 +19,7 @@
   <rect width="800" height="450" fill="#0B0B0F"/>
 
   <!-- Subtle grid -->
-  <g opacity="0.04" stroke="#B18CFF" stroke-width="0.5">
+  <g opacity="0.04" stroke="rgba(234,234,240,0.85)" stroke-width="0.5">
     <line x1="100" y1="0" x2="100" y2="450"/>
     <line x1="200" y1="0" x2="200" y2="450"/>
     <line x1="300" y1="0" x2="300" y2="450"/>
@@ -34,13 +34,13 @@
   </g>
 
   <!-- Ambient halos -->
-  <circle cx="180" cy="220" r="200" fill="#B18CFF" opacity="0.06" filter="url(#cbBlur)"/>
-  <circle cx="640" cy="200" r="170" fill="#FF5C7A" opacity="0.05" filter="url(#cbBlur)"/>
+  <circle cx="180" cy="220" r="200" fill="rgba(234,234,240,0.85)" opacity="0.06" filter="url(#cbBlur)"/>
+  <circle cx="640" cy="200" r="170" fill="rgba(234,234,240,0.85)" opacity="0.05" filter="url(#cbBlur)"/>
 
   <!-- "Scissor" chart: two lines diverging (deaths stable, hospitalizations rising) -->
   <g>
     <!-- Baseline -->
-    <line x1="260" y1="320" x2="600" y2="320" stroke="#B18CFF" stroke-width="1" opacity="0.18"/>
+    <line x1="260" y1="320" x2="600" y2="320" stroke="rgba(234,234,240,0.85)" stroke-width="1" opacity="0.18"/>
 
     <!-- Y axis labels -->
     <text x="245" y="200" text-anchor="end" font-family="Satoshi,system-ui,sans-serif" font-size="9" letter-spacing="0.10em" fill="#EAEAF0" opacity="0.35">INTERNAÇÕES</text>
@@ -51,19 +51,19 @@
           stroke="url(#cbHosp)" stroke-width="2.4" fill="none"/>
     <!-- Area under hospitalizations -->
     <path d="M 260 270 L 312 262 L 364 250 L 416 232 L 468 214 L 520 196 L 572 184 L 600 178 L 600 320 L 260 320 Z"
-          fill="#FFD166" opacity="0.08"/>
+          fill="rgba(234,234,240,0.70)" opacity="0.08"/>
 
     <!-- Deaths stable line (red) -->
     <path d="M 260 300 L 312 295 L 364 304 L 416 298 L 468 292 L 520 296 L 572 290 L 600 288"
           stroke="url(#cbFatal)" stroke-width="2.4" fill="none"/>
 
     <!-- Endpoint dots -->
-    <circle cx="600" cy="178" r="3.6" fill="#FFD166"/>
-    <circle cx="600" cy="288" r="3.6" fill="#FF5C7A"/>
+    <circle cx="600" cy="178" r="3.6" fill="rgba(234,234,240,0.70)"/>
+    <circle cx="600" cy="288" r="3.6" fill="rgba(234,234,240,0.85)"/>
 
     <!-- Endpoint labels -->
-    <text x="612" y="178" font-family="Satoshi,system-ui,sans-serif" font-size="12" font-weight="700" fill="#FFD166">+71%</text>
-    <text x="612" y="290" font-family="Satoshi,system-ui,sans-serif" font-size="12" font-weight="700" fill="#FF5C7A">~1.300/ano</text>
+    <text x="612" y="178" font-family="Satoshi,system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(234,234,240,0.70)">+71%</text>
+    <text x="612" y="290" font-family="Satoshi,system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(234,234,240,0.85)">~1.300/ano</text>
 
     <!-- Year ticks -->
     <g font-family="Satoshi,system-ui,sans-serif" font-size="9" letter-spacing="0.10em" fill="#EAEAF0" opacity="0.35" text-anchor="middle">
@@ -76,7 +76,7 @@
   <!-- Anchor value: cyclist silhouette + 1.300 callout -->
   <g opacity="0.92">
     <!-- Minimal bicycle glyph (left) -->
-    <g transform="translate(110,180)" stroke="#B18CFF" stroke-width="1.6" fill="none" opacity="0.85">
+    <g transform="translate(110,180)" stroke="rgba(234,234,240,0.85)" stroke-width="1.6" fill="none" opacity="0.85">
       <circle cx="0" cy="40" r="20"/>
       <circle cx="60" cy="40" r="20"/>
       <line x1="0" y1="40" x2="34" y2="10"/>
@@ -95,17 +95,17 @@
 
   <!-- Network nodes (community / data hint) -->
   <g>
-    <circle cx="70" cy="380" r="2.2" fill="#B18CFF" opacity="0.55"/>
-    <circle cx="120" cy="400" r="1.8" fill="#4DA3FF" opacity="0.45"/>
-    <circle cx="180" cy="395" r="1.6" fill="#00E5A0" opacity="0.40"/>
-    <circle cx="720" cy="380" r="2.0" fill="#B18CFF" opacity="0.45"/>
-    <circle cx="680" cy="410" r="1.6" fill="#4DA3FF" opacity="0.40"/>
+    <circle cx="70" cy="380" r="2.2" fill="rgba(234,234,240,0.85)" opacity="0.55"/>
+    <circle cx="120" cy="400" r="1.8" fill="rgba(234,234,240,0.70)" opacity="0.45"/>
+    <circle cx="180" cy="395" r="1.6" fill="rgba(234,234,240,0.60)" opacity="0.40"/>
+    <circle cx="720" cy="380" r="2.0" fill="rgba(234,234,240,0.85)" opacity="0.45"/>
+    <circle cx="680" cy="410" r="1.6" fill="rgba(234,234,240,0.70)" opacity="0.40"/>
   </g>
 
   <g stroke-width="0.5" opacity="0.18">
-    <line x1="70" y1="380" x2="120" y2="400" stroke="#B18CFF"/>
-    <line x1="120" y1="400" x2="180" y2="395" stroke="#4DA3FF"/>
-    <line x1="720" y1="380" x2="680" y2="410" stroke="#B18CFF"/>
+    <line x1="70" y1="380" x2="120" y2="400" stroke="rgba(234,234,240,0.85)"/>
+    <line x1="120" y1="400" x2="180" y2="395" stroke="rgba(234,234,240,0.55)"/>
+    <line x1="720" y1="380" x2="680" y2="410" stroke="rgba(234,234,240,0.85)"/>
   </g>
 
   <!-- Bottom label -->

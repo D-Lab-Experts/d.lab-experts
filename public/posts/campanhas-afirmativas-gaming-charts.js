@@ -28,7 +28,7 @@
       titleFont: { weight: 700, size: 13 },
       bodyColor: 'rgba(234,234,240,0.85)',
       bodyFont: { size: 12, weight: 500 },
-      borderColor: 'rgba(177,140,255,0.25)',
+      borderColor: 'rgba(234,234,240,0.20)',
       borderWidth: 1,
       padding: 12,
       cornerRadius: 8,
@@ -38,18 +38,22 @@
     });
   }
 
-  // Color tokens
-  var LILAC = 'rgba(177,140,255,0.75)';
-  var LILAC_BORDER = '#B18CFF';
-  var BLUE = 'rgba(120,165,240,0.70)';
-  var BLUE_BORDER = '#78A5F0';
-  var GREEN = 'rgba(120,200,170,0.75)';
-  var GREEN_BORDER = '#78C8AA';
-  var CYAN = 'rgba(110,190,220,0.70)';
-  var CYAN_BORDER = '#6EBEDC';
-  var YELLOW = 'rgba(255,209,102,0.70)';
-  var YELLOW_BORDER = '#FFD166';
-  var DIM = 'rgba(234,234,240,0.30)';
+  // Color tokens — todos viraram tons cinza/branco. As variáveis com
+  // nomes "cromáticos" (LILAC, BLUE, GREEN, CYAN, YELLOW) só preservam
+  // a API. Diferenciação semântica nos charts vem da OPACIDADE (peso
+  // visual) e da ORDEM (primário primeiro, secundário a seguir), não
+  // do hue.
+  var LILAC = 'rgba(234,234,240,0.85)';
+  var LILAC_BORDER = 'rgba(234,234,240,0.95)';
+  var BLUE = 'rgba(234,234,240,0.55)';
+  var BLUE_BORDER = 'rgba(234,234,240,0.70)';
+  var GREEN = 'rgba(234,234,240,0.45)';
+  var GREEN_BORDER = 'rgba(234,234,240,0.60)';
+  var CYAN = 'rgba(234,234,240,0.35)';
+  var CYAN_BORDER = 'rgba(234,234,240,0.50)';
+  var YELLOW = 'rgba(234,234,240,0.25)';
+  var YELLOW_BORDER = 'rgba(234,234,240,0.40)';
+  var DIM = 'rgba(234,234,240,0.18)';
 
   function gridStyle() {
     return {

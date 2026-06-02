@@ -87,10 +87,12 @@ if (!source) {
     border-radius: 50%;
     flex-shrink: 0;
   }
-  .chart-accent-lilac  .chart-title-dot { background: var(--lilac); }
-  .chart-accent-blue   .chart-title-dot { background: var(--blue); }
-  .chart-accent-green  .chart-title-dot { background: var(--green); }
-  .chart-accent-yellow .chart-title-dot { background: var(--yellow); }
+  /* Accent prop API preservada, mas todas as variantes resolvem
+     para o mesmo dot branco neutro. Cor saiu do papel de diferenciação. */
+  .chart-accent-lilac  .chart-title-dot,
+  .chart-accent-blue   .chart-title-dot,
+  .chart-accent-green  .chart-title-dot,
+  .chart-accent-yellow .chart-title-dot { background: rgba(234,234,240,0.55); }
   .chart-note {
     font-size: 12px;
     color: var(--dimmed);
