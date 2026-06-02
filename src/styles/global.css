@@ -77,10 +77,17 @@ ul, ol { list-style: none; }
   z-index: 0; opacity: .45;
 }
 
-/* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+/* ── TYPOGRAPHY ───────────────────────────────────────────────
+   .gradient-text era branding-tier antigo (lilás→cyan). Em
+   registro de consultoria monocromática, headlines pedem cor
+   sólida. O "destaque" agora vem da hierarquia tipográfica
+   (serif italic), não da cor. */
 .gradient-text {
-  background: var(--grad);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  color: var(--white);
+  font-style: italic;
+  font-weight: 500;
+  background: none;
+  -webkit-text-fill-color: currentColor;
 }
 .label { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--dimmed); }
 
@@ -88,7 +95,7 @@ ul, ol { list-style: none; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
 .section { padding: 110px 0; position: relative; overflow: hidden; }
 .section-label { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-.section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--grad); }
+.section-label::before { content: ''; display: block; width: 20px; height: 1px; background: rgba(234,234,240,0.18); }
 .section-title {
   font-family: var(--font-serif);
   font-size: clamp(30px,3.8vw,46px);
@@ -142,10 +149,25 @@ ul, ol { list-style: none; }
   opacity: 0; transition: opacity .3s;
 }
 .btn:hover::before { opacity: 1; }
-.btn-primary { background: var(--grad-btn); color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.3); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.4); }
-.btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.08); }
-.btn-ghost:hover { border-color: var(--border-h); background: rgba(177,140,255,.05); transform: translateY(-2px); }
+/* Botão primary em registro de consultoria sênior: superfície
+   branca sólida, texto preto, peso 600. Empresta o repertório
+   visual de Stripe Press / McKinsey ao invés do "btn gradient
+   roxo" típico de SaaS. */
+.btn-primary {
+  background: var(--white);
+  color: var(--black);
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+  border: 1px solid var(--white);
+  font-weight: 600;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: rgba(234,234,240,0.92);
+  border-color: rgba(234,234,240,0.92);
+  box-shadow: 0 10px 28px rgba(0,0,0,.4);
+}
+.btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.18); }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.40); background: rgba(255,255,255,0.03); transform: translateY(-2px); }
 .btn-sm { padding: 11px 22px; font-size: 14px; }
 
 /* ── ICONS ──────────────────────────────────────────────────── */
@@ -296,12 +318,12 @@ ul, ol { list-style: none; }
 @keyframes gridDrift { 0%{background-position:0 0} 100%{background-position:72px 72px} }
 .hero-light-a {
   position: absolute; width: 420px; height: 420px;
-  background: radial-gradient(ellipse at center, rgba(177,140,255,.030) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(234,234,240,0.020) 0%, transparent 70%);
   top: -100px; left: -50px; filter: blur(40px); pointer-events: none;
 }
 .hero-light-b {
   position: absolute; width: 340px; height: 340px;
-  background: radial-gradient(ellipse at center, rgba(77,163,255,.020) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(234,234,240,0.014) 0%, transparent 70%);
   bottom: 60px; right: -40px; filter: blur(40px); pointer-events: none;
 }
 .hero-orbital {
@@ -338,8 +360,10 @@ ul, ol { list-style: none; }
   font-variation-settings: 'opsz' 60;
 }
 .hero-h1 .hero-accent {
-  background: linear-gradient(135deg, #B18CFF 0%, #7B9EFF 50%, #4DA3FF 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  color: var(--white);
+  font-style: italic;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 60;
 }
 .hero-sub {
   font-size: 17px; color: var(--muted); max-width: 520px; margin-bottom: 36px; line-height: 1.65;
@@ -472,14 +496,13 @@ ul, ol { list-style: none; }
   margin-bottom: 10px;
 }
 .cube-num {
-  font-size: 44px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
   line-height: 1;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--white);
+  font-feature-settings: 'tnum' 1;
 }
 .cube-lbl {
   font-size: 11px;
@@ -492,12 +515,9 @@ ul, ol { list-style: none; }
 }
 .cube-mark {
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.18em;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--white);
 }
 .cube-mark-sub {
   font-size: 9px;
@@ -1032,12 +1052,14 @@ ul, ol { list-style: none; }
    rara em superfícies de leitura, não decoração ambient. Opacidade
    máxima de 0.025 e raio menor — registro de publicação, não SaaS. */
 .section-glow { position: absolute; pointer-events: none; filter: blur(50px); border-radius: 50%; z-index: 0; }
-.section-glow.lilac { width: 420px; height: 320px; background: radial-gradient(ellipse, rgba(177,140,255,.025) 0%, transparent 70%); }
-.section-glow.blue { width: 340px; height: 320px; background: radial-gradient(ellipse, rgba(77,163,255,.020) 0%, transparent 70%); }
-.section-glow.green { width: 340px; height: 280px; background: radial-gradient(ellipse, rgba(0,229,160,.018) 0%, transparent 70%); }
-.section-glow.cyan { width: 300px; height: 280px; background: radial-gradient(ellipse, rgba(0,212,255,.018) 0%, transparent 70%); }
+/* Glows reduzidos para um tom branco neutro quase imperceptível.
+   Lê como variação de profundidade, não como acento de cor. */
+.section-glow.lilac { width: 420px; height: 320px; background: radial-gradient(ellipse, rgba(234,234,240,.018) 0%, transparent 70%); }
+.section-glow.blue { width: 340px; height: 320px; background: radial-gradient(ellipse, rgba(234,234,240,.012) 0%, transparent 70%); }
+.section-glow.green { width: 340px; height: 280px; background: radial-gradient(ellipse, rgba(234,234,240,.012) 0%, transparent 70%); }
+.section-glow.cyan { width: 300px; height: 280px; background: radial-gradient(ellipse, rgba(234,234,240,.012) 0%, transparent 70%); }
 .section-particles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.section-sep { height: 1px; position: relative; z-index: 1; background: linear-gradient(90deg, transparent 0%, rgba(177,140,255,.08) 20%, rgba(77,163,255,.06) 80%, transparent 100%); }
+.section-sep { height: 1px; position: relative; z-index: 1; background: linear-gradient(90deg, transparent 0%, rgba(234,234,240,0.10) 25%, rgba(234,234,240,0.10) 75%, transparent 100%); }
 
 /* ═══════════ CONTRIBUTORS HALL ══════════════════════════════════ */
 /* Whisper-thin marquee — deliberately subtle so it reads as a quiet
@@ -1574,9 +1596,13 @@ ul, ol { list-style: none; }
   padding: 3px 9px; border-radius: 6px; background: rgba(177,140,255,.08);
   color: var(--lilac); border: 1px solid rgba(177,140,255,.12);
 }
-.research-card-tag.blue { background: rgba(77,163,255,.08); color: var(--blue); border-color: rgba(77,163,255,.12); }
-.research-card-tag.green { background: rgba(0,229,160,.08); color: var(--green); border-color: rgba(0,229,160,.12); }
-.research-card-tag.violet { background: rgba(167,139,250,.08); color: var(--violet); border-color: rgba(167,139,250,.12); }
+.research-card-tag.blue,
+.research-card-tag.green,
+.research-card-tag.violet {
+  background: rgba(234,234,240,0.04);
+  color: var(--muted);
+  border-color: rgba(234,234,240,0.10);
+}
 .research-card-title { font-size: 18px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; margin-bottom: 10px; }
 .research-card-excerpt { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; flex: 1; }
 .research-card-footer { display: flex; justify-content: space-between; align-items: center; }
@@ -1837,9 +1863,9 @@ ul, ol { list-style: none; }
 
 /* Mini insight cards used inside about-split-content for visual rhythm */
 .split-insight {
-  background: linear-gradient(135deg, rgba(177,140,255,.06), rgba(77,163,255,.04));
-  border: 1px solid rgba(177,140,255,.14);
-  border-left: 3px solid var(--lilac);
+  background: rgba(234,234,240,0.025);
+  border: 1px solid rgba(234,234,240,0.10);
+  border-left: 3px solid rgba(234,234,240,0.45);
   border-radius: 12px;
   padding: 18px 22px;
   margin: 28px 0;
@@ -1936,11 +1962,19 @@ ul, ol { list-style: none; }
 .blog-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
 .blog-card-tags { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
 .blog-card-tag { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; }
-.blog-card-tag.lilac  { background: rgba(177,140,255,.08); color: var(--lilac); border: 1px solid rgba(177,140,255,.12); }
-.blog-card-tag.blue   { background: rgba(77,163,255,.08); color: var(--blue); border: 1px solid rgba(77,163,255,.12); }
-.blog-card-tag.green  { background: rgba(0,229,160,.08); color: var(--green); border: 1px solid rgba(0,229,160,.12); }
-.blog-card-tag.violet { background: rgba(167,139,250,.08); color: var(--violet); border: 1px solid rgba(167,139,250,.12); }
-.blog-card-tag.cyan   { background: rgba(0,212,255,.08); color: var(--cyan); border: 1px solid rgba(0,212,255,.12); }
+/* Tags em registro monocromático. Todas as variantes coloridas
+   (lilac/blue/green/violet/cyan) viram um tom neutro único.
+   A única exceção é .original (mais abaixo): marker raro de
+   pesquisa primária, mantém o lilás como sinal editorial. */
+.blog-card-tag.lilac,
+.blog-card-tag.blue,
+.blog-card-tag.green,
+.blog-card-tag.violet,
+.blog-card-tag.cyan {
+  background: rgba(234,234,240,0.04);
+  color: var(--muted);
+  border: 1px solid rgba(234,234,240,0.10);
+}
 
 /* ── Research type marker — "Pesquisa Original" pill ─────────────────
    Applied wherever a post has researchType: original. Gradient fill
@@ -2038,14 +2072,16 @@ ul, ol { list-style: none; }
   padding-bottom: 12px; border-bottom: 1px solid var(--border);
   margin-bottom: 16px;
 }
+/* ID do catálogo é o único elemento dos cards que mantém um
+   ressaibo de lilás - sinal editorial raro, não decoração. */
 .blog-card-catalogid {
   font-family: var(--font-mono);
   font-size: 10.5px;
   font-weight: 500;
   letter-spacing: 0.14em;
-  color: var(--lilac);
+  color: rgba(177,140,255,0.85);
 }
-.blog-card-catalog-cyber .blog-card-catalogid { color: var(--green); }
+.blog-card-catalog-cyber .blog-card-catalogid { color: rgba(234,234,240,0.55); }
 .blog-card-catalogdate {
   font-size: 11px;
   color: var(--dimmed);
@@ -2090,16 +2126,16 @@ ul, ol { list-style: none; }
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--lilac);
-  background: rgba(177,140,255,.07);
-  border: 1px solid rgba(177,140,255,.14);
+  color: var(--muted);
+  background: rgba(234,234,240,0.04);
+  border: 1px solid rgba(234,234,240,0.10);
   padding: 4px 10px;
   border-radius: 100px;
 }
 .blog-card-catalog-cyber .blog-card-methodtag {
-  color: var(--green);
-  background: rgba(0,229,160,.06);
-  border-color: rgba(0,229,160,.16);
+  color: var(--muted);
+  background: rgba(234,234,240,0.04);
+  border-color: rgba(234,234,240,0.10);
 }
 .blog-card-catalogmeta {
   font-size: 11px;
@@ -2154,8 +2190,11 @@ ul, ol { list-style: none; }
 
 /* ── Blog · tracks (Inteligência | Cybersegurança) ──────────── */
 .gradient-text-green {
-  background: linear-gradient(135deg, #00E5A0 0%, #00D4FF 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  color: var(--white);
+  font-style: italic;
+  font-weight: 500;
+  background: none;
+  -webkit-text-fill-color: currentColor;
 }
 
 .blog-track-nav {
@@ -2505,7 +2544,7 @@ ul, ol { list-style: none; }
 .chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: 12px; color: var(--muted); }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-.callout { background: rgba(177,140,255,.05); border: 1px solid rgba(177,140,255,.12); border-left: 3px solid var(--lilac); border-radius: 12px; padding: 24px 28px; margin: 36px 0; }
+.callout { background: rgba(234,234,240,0.025); border: 1px solid rgba(234,234,240,0.10); border-left: 3px solid rgba(234,234,240,0.50); border-radius: 12px; padding: 24px 28px; margin: 36px 0; }
 .callout-label { font-size: 10px; font-weight: 600; letter-spacing: .12em; color: var(--lilac); text-transform: uppercase; margin-bottom: 8px; display: block; }
 .callout p { font-size: 16px; font-weight: 400; color: var(--white); line-height: 1.65; margin: 0; }
 .framework-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin: 36px 0; }
@@ -2529,24 +2568,32 @@ ul, ol { list-style: none; }
 .tag-blue  { background: rgba(77,163,255,.08); color: var(--blue); border: 1px solid rgba(77,163,255,.15); }
 .tag-red   { background: rgba(255,92,92,.08); color: var(--red); border: 1px solid rgba(255,92,92,.15); }
 
-/* ── Inline color helpers (use within prose to draw the eye) ────── */
-.hl-lilac  { color: var(--lilac); font-weight: 600; }
-.hl-blue   { color: var(--blue); font-weight: 600; }
-.hl-cyan   { color: var(--cyan); font-weight: 600; }
-.hl-green  { color: var(--green); font-weight: 600; }
-.hl-yellow { color: var(--yellow); font-weight: 600; }
-.hl-violet { color: var(--violet); font-weight: 600; }
-.hl-white  { color: var(--white); font-weight: 600; }
-.hl-bg-lilac  { background: rgba(177,140,255,.10); color: var(--lilac); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
-.hl-bg-green  { background: rgba(0,229,160,.10); color: var(--green); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
-.hl-bg-yellow { background: rgba(255,209,102,.10); color: var(--yellow); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
-.hl-bg-blue   { background: rgba(77,163,255,.10); color: var(--blue); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+/* Inline highlights em registro monocromático: todos viram
+   ênfase branca peso 600. As variantes _bg ganham um fundo
+   neutro discreto pra preservar leitura de marca-texto. */
+.hl-lilac,
+.hl-blue,
+.hl-cyan,
+.hl-green,
+.hl-yellow,
+.hl-violet,
+.hl-white { color: var(--white); font-weight: 600; }
+.hl-bg-lilac,
+.hl-bg-green,
+.hl-bg-yellow,
+.hl-bg-blue {
+  background: rgba(234,234,240,0.06);
+  color: var(--white);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
 
 /* ── Business insight callouts (bigger than .callout, w/ eyebrow) ─ */
 .biz-insight {
-  background: linear-gradient(135deg, rgba(177,140,255,.06), rgba(77,163,255,.04));
-  border: 1px solid rgba(177,140,255,.16);
-  border-left: 4px solid var(--lilac);
+  background: rgba(234,234,240,0.03);
+  border: 1px solid rgba(234,234,240,0.12);
+  border-left: 4px solid rgba(234,234,240,0.55);
   border-radius: 14px;
   padding: 26px 30px;
   margin: 36px 0;
@@ -2635,7 +2682,8 @@ ul, ol { list-style: none; }
 .post-cta { padding: 80px 0; border-top: 1px solid var(--border); text-align: center; position: relative; z-index: 1; }
 .post-cta h2 { font-size: clamp(28px,4vw,44px); font-weight: 700; letter-spacing: -.03em; margin-bottom: 16px; }
 .post-cta p { font-size: 17px; color: var(--muted); max-width: 480px; margin: 0 auto 36px; }
-.cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--grad-btn); color: #fff; font-weight: 600; font-size: 15px; padding: 16px 32px; border-radius: 10px; font-family: inherit; border: none; cursor: pointer; transition: all .25s; box-shadow: 0 8px 28px rgba(0,0,0,.35); }
+.cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: var(--black); font-weight: 600; font-size: 15px; padding: 16px 32px; border-radius: 10px; font-family: inherit; border: 1px solid var(--white); cursor: pointer; transition: all .25s; box-shadow: 0 8px 28px rgba(0,0,0,.35); }
+.cta-btn:hover { background: rgba(234,234,240,0.92); border-color: rgba(234,234,240,0.92); }
 .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,.45), 0 0 36px rgba(109,40,217,.42); }
 .post-footer-area { max-width: 1100px; margin: 0 auto; padding: 0 28px 80px; position: relative; z-index: 1; }
 .post-share { display: flex; align-items: center; gap: 12px; padding: 24px 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
@@ -2655,9 +2703,13 @@ ul, ol { list-style: none; }
 .article-hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; text-align: center; }
 .article-meta { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
 .article-tag { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 6px; }
-.article-tag.lilac { background: rgba(177,140,255,.08); color: var(--lilac); border: 1px solid rgba(177,140,255,.12); }
-.article-tag.blue { background: rgba(77,163,255,.08); color: var(--blue); border: 1px solid rgba(77,163,255,.12); }
-.article-tag.green { background: rgba(0,229,160,.08); color: var(--green); border: 1px solid rgba(0,229,160,.12); }
+.article-tag.lilac,
+.article-tag.blue,
+.article-tag.green {
+  background: rgba(234,234,240,0.04);
+  color: var(--muted);
+  border: 1px solid rgba(234,234,240,0.10);
+}
 .article-date { font-size: 12px; color: var(--dimmed); }
 /* Título de publicação em serif editorial — registro de paper, não de
    post de blog. opsz 60 (display) + tracking levemente negativo. */
@@ -2678,7 +2730,7 @@ ul, ol { list-style: none; }
 .article-body h3 { font-family: var(--font-serif); font-size: 19px; font-weight: 600; margin: 32px 0 12px; letter-spacing: -.01em; color: var(--white); font-variation-settings: 'opsz' 24; }
 .article-body p { font-family: var(--font-serif); font-size: 17.5px; color: rgba(234,234,240,0.78); line-height: 1.75; margin-bottom: 22px; font-variation-settings: 'opsz' 14; }
 .article-body p strong { color: var(--white); font-weight: 600; }
-.article-body blockquote { border-left: 3px solid var(--lilac); padding: 16px 24px; margin: 28px 0; background: rgba(177,140,255,.03); border-radius: 0 12px 12px 0; }
+.article-body blockquote { border-left: 3px solid rgba(234,234,240,0.50); padding: 16px 24px; margin: 28px 0; background: rgba(234,234,240,0.025); border-radius: 0 12px 12px 0; }
 .article-body blockquote p { font-family: var(--font-serif); font-size: 17px; font-style: italic; color: var(--white); margin: 0; font-weight: 400; }
 .data-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin: 28px 0; overflow: hidden; }
 .data-card-title { font-size: 14px; font-weight: 600; letter-spacing: .02em; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
