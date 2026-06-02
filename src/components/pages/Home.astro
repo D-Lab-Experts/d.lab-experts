@@ -202,14 +202,14 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
       <div class="hero-card-wrap fi d1">
         <div class="hero-card">
           <div class="hc-header">
-            <div style="display:flex;align-items:center">
+            <div style="display:flex;align-items:center;gap:14px">
               <img src="/d.lab-icon.webp" alt="" class="hc-icon" width="28" height="28" />
               <div>
                 <div class="hc-title">{t('featured.cardTitle')}</div>
                 <div class="hc-sub">{t('featured.cardSub')}</div>
               </div>
             </div>
-            <span class="badge badge-green badge-dot">{t('featured.badgePublished')}</span>
+            <span class="hc-catalogid">D.LAB #001</span>
           </div>
 
           <div class="hc-body">
@@ -221,37 +221,13 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
               </div>
 
               <div class="hc-verdict">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L10 6H15L11 9.5L12.5 15L8 11.5L3.5 15L5 9.5L1 6H6L8 1Z" fill="url(#g1)" opacity=".9"/></svg>
                 <div class="hc-verdict-text"><strong>{t('featured.verdictLead')}</strong> {t('featured.verdictText')}</div>
               </div>
             </div>
 
             <div class="hc-body-right">
-              <div class="hc-chart">
-                <div class="hc-chart-label">{t('featured.chartLabel')}</div>
-                <svg class="sparkline-svg" viewBox="0 0 320 56" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="spark-area" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#B18CFF" stop-opacity="0.2"/>
-                      <stop offset="100%" stop-color="#B18CFF" stop-opacity="0"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4 L320,56 L0,56 Z" fill="url(#spark-area)"/>
-                  <path d="M0,42 C20,40 40,36 60,32 C80,28 100,30 120,24 C140,18 160,20 180,16 C200,12 220,14 240,10 C260,6 280,8 320,4" fill="none" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" filter="url(#glow-f)"/>
-                  <circle cx="320" cy="4" r="3" fill="#B18CFF" filter="url(#glow-f)">
-                    <animate attributeName="opacity" values="1;0.4;1" dur="1.4s" repeatCount="indefinite"/>
-                  </circle>
-                  <circle cx="320" cy="4" r="3" fill="none" stroke="#B18CFF" stroke-opacity=".6">
-                    <animate attributeName="r" values="3;8;3" dur="1.4s" repeatCount="indefinite"/>
-                    <animate attributeName="stroke-opacity" values=".6;0;.6" dur="1.4s" repeatCount="indefinite"/>
-                  </circle>
-                  <text x="0" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jan</text>
-                  <text x="145" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Jun</text>
-                  <text x="300" y="56" font-size="8" fill="rgba(234,234,240,0.22)" font-family="Satoshi">Dec</text>
-                </svg>
-              </div>
-
               <div class="hc-bars">
+                <div class="hc-bars-label">{t('featured.chartLabel')}</div>
                 <div class="hc-bar-row">
                   <div class="hc-bar-meta"><span class="hc-bar-name">{t('featured.barMinority')}</span><span class="hc-bar-pct">73%</span></div>
                   <div class="hc-bar-track"><div class="hc-bar-fill hero-bar" data-v="73"></div></div>
@@ -348,7 +324,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
         </path>
       </svg>
     </div>
-    <NeuralNetwork color="lilac" density="low" opacity={0.22} />
+    <NeuralNetwork color="white" density="low" opacity={0.12} />
     <div class="container">
       <div class="brand-grid">
         <div class="brand-text fi">
@@ -681,7 +657,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
     <div class="section-glow green" style="top:20%;right:-100px"></div>
     <div class="section-glow lilac" style="bottom:10%;left:-120px"></div>
     <canvas class="section-particles" data-color="green"></canvas>
-    <NeuralNetwork color="lilac" density="low" opacity={0.25} />
+    <NeuralNetwork color="white" density="low" opacity={0.12} />
     <div class="container">
       <div class="demo-inner">
         <div class="fi-l">
