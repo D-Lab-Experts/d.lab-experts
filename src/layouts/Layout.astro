@@ -202,21 +202,6 @@ const {
         draw();
       })();
 
-      // ══ HERO CUBE: pause when offscreen ═══════════════════════════════
-      // The cube has 3 layered animations (outer spin, inner spin,
-      // particle drift). Letting them tick while the user is reading
-      // sections far below burns frame-budget and slows scroll. Pause
-      // via animation-play-state when the hero leaves the viewport.
-      const cubeStage = document.querySelector('.hero-cube-stage');
-      if (cubeStage) {
-        const cubeObs = new IntersectionObserver((entries) => {
-          entries.forEach((e) => {
-            cubeStage.classList.toggle('cube-paused', !e.isIntersecting);
-          });
-        }, { threshold: 0 });
-        cubeObs.observe(cubeStage);
-      }
-
       // ══ NAV SCROLL + PROGRESS BAR ═════════════════════════════════════
       // Single scroll listener drives both the nav shrink state and the
       // progress bar underneath it. rAF-throttled so it never does more

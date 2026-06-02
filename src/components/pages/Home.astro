@@ -23,35 +23,14 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   description={t('pageTitles.homeDescription')}
   active="home"
 >
-  <!-- ═══════════════ HERO ══════════════════════════════════════════ -->
+  <!-- ═══════════════ HERO ══════════════════════════════════════════
+       Coluna única centralizada (estilo Stripe Press / Anthropic).
+       Cubo 3D + SVG orbital animado removidos para entregar o registro
+       editorial que o resto do site já adotou. -->
   <section id="hero">
     <div class="hero-grid"></div>
     <div class="hero-light-a"></div>
     <div class="hero-light-b"></div>
-
-    <svg class="hero-orbital" viewBox="0 0 800 800" fill="none">
-      <circle cx="400" cy="400" r="300" stroke="rgba(234,234,240,0.15)" stroke-width="0.5" fill="none" stroke-dasharray="6 8"/>
-      <circle cx="400" cy="400" r="200" stroke="rgba(234,234,240,0.12)" stroke-width="0.5" fill="none" stroke-dasharray="4 10"/>
-      <circle cx="400" cy="400" r="100" stroke="rgba(234,234,240,0.1)" stroke-width="0.5" fill="none"/>
-      <circle r="3" fill="rgba(234,234,240,0.85)" opacity=".6">
-        <animateMotion dur="20s" repeatCount="indefinite" path="M400,100 A300,300 0 1,1 399.99,100"/>
-      </circle>
-      <circle r="2.5" fill="rgba(234,234,240,0.70)" opacity=".5">
-        <animateMotion dur="15s" repeatCount="indefinite" path="M400,200 A200,200 0 1,1 399.99,200"/>
-      </circle>
-      <circle r="2" fill="rgba(234,234,240,0.65)" opacity=".4">
-        <animateMotion dur="10s" repeatCount="indefinite" path="M400,300 A100,100 0 1,1 399.99,300"/>
-      </circle>
-      <circle cx="400" cy="400" r="2" fill="rgba(234,234,240,0.3)"/>
-      <circle cx="250" cy="350" r="1.5" fill="rgba(234,234,240,0.25)"/>
-      <circle cx="550" cy="350" r="1.5" fill="rgba(234,234,240,0.25)"/>
-      <circle cx="400" cy="250" r="1.5" fill="rgba(234,234,240,0.2)"/>
-      <circle cx="400" cy="550" r="1.5" fill="rgba(234,234,240,0.2)"/>
-      <line x1="400" y1="400" x2="250" y2="350" stroke="rgba(234,234,240,0.08)" stroke-width="0.5"/>
-      <line x1="400" y1="400" x2="550" y2="350" stroke="rgba(234,234,240,0.08)" stroke-width="0.5"/>
-      <line x1="400" y1="400" x2="400" y2="250" stroke="rgba(234,234,240,0.06)" stroke-width="0.5"/>
-      <line x1="400" y1="400" x2="400" y2="550" stroke="rgba(234,234,240,0.06)" stroke-width="0.5"/>
-    </svg>
 
     <div class="hero-inner">
       <div class="hero-text fi">
@@ -81,99 +60,6 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
             <div class="hero-stat-src">{t('hero.statProtocolSrc')}</div>
           </div>
         </div>
-      </div>
-
-      <!-- ── 3D Research Cube ─────────────────────────────────────────
-           Six-face data cube with grid overlays, corner brackets and
-           one headline metric per face. The outer cube spins on Y;
-           inside, a smaller wireframe cube counter-rotates on X+Y for
-           parallax depth. Pure CSS 3D, no JS. -->
-      <div class="hero-cube-stage fi d2" aria-hidden="true">
-        <div class="hero-cube-glow"></div>
-        <div class="hero-cube-shadow"></div>
-        <div class="hero-cube">
-          <!-- Inner counter-rotating wireframe -->
-          <div class="hero-cube-inner">
-            <div class="cube-inner-face inner-front"></div>
-            <div class="cube-inner-face inner-back"></div>
-            <div class="cube-inner-face inner-right"></div>
-            <div class="cube-inner-face inner-left"></div>
-            <div class="cube-inner-face inner-top"></div>
-            <div class="cube-inner-face inner-bottom"></div>
-          </div>
-
-          <!-- Outer faces with research data -->
-          <div class="cube-face cube-front">
-            <div class="cube-grid"></div>
-            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
-            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
-            <div class="cube-content">
-              <div class="cube-eyebrow">{t('cube.frontEyebrow')}</div>
-              <div class="cube-num">N=98</div>
-              <div class="cube-lbl">{t('cube.frontLbl')}</div>
-            </div>
-          </div>
-
-          <div class="cube-face cube-back">
-            <div class="cube-grid"></div>
-            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
-            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
-            <div class="cube-content">
-              <div class="cube-eyebrow">{t('cube.backEyebrow')}</div>
-              <div class="cube-num">$4.88M</div>
-              <div class="cube-lbl">{t('cube.backLbl')}</div>
-            </div>
-          </div>
-
-          <div class="cube-face cube-right">
-            <div class="cube-grid"></div>
-            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
-            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
-            <div class="cube-content">
-              <div class="cube-eyebrow">{t('cube.rightEyebrow')}</div>
-              <div class="cube-num">73%</div>
-              <div class="cube-lbl">{t('cube.rightLbl')}</div>
-            </div>
-          </div>
-
-          <div class="cube-face cube-left">
-            <div class="cube-grid"></div>
-            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
-            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
-            <div class="cube-content">
-              <div class="cube-eyebrow">{t('cube.leftEyebrow')}</div>
-              <div class="cube-num">3.48×</div>
-              <div class="cube-lbl">{t('cube.leftLbl')}</div>
-            </div>
-          </div>
-
-          <div class="cube-face cube-top">
-            <div class="cube-grid"></div>
-            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
-            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
-            <div class="cube-content">
-              <div class="cube-mark">D.LAB</div>
-              <div class="cube-mark-sub">{t('cube.topMarkSub')}</div>
-            </div>
-          </div>
-
-          <div class="cube-face cube-bottom">
-            <div class="cube-grid"></div>
-            <div class="cube-corner tl"></div><div class="cube-corner tr"></div>
-            <div class="cube-corner bl"></div><div class="cube-corner br"></div>
-            <div class="cube-content">
-              <div class="cube-eyebrow">{t('cube.bottomEyebrow')}</div>
-              <div class="cube-num">12:1</div>
-              <div class="cube-lbl">{t('cube.bottomLbl')}</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Floating particles around the cube (decorative) -->
-        <span class="cube-particle p1"></span>
-        <span class="cube-particle p2"></span>
-        <span class="cube-particle p3"></span>
-        <span class="cube-particle p4"></span>
       </div>
     </div>
 
