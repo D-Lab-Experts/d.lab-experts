@@ -445,8 +445,8 @@ const pt: Translation = {
     altChannelLabel: 'Canais diretos',
     altIntentClientTitle: 'Conversa sobre projeto',
     altIntentClientDesc: 'Para entender escopo, formatos de trabalho e leitura de contexto do D.Lab.',
-    altIntentColabTitle: 'Proposta de colaboração',
-    altIntentColabDesc: 'Para pesquisadores, parceiros institucionais e contribuidores do Research Hub.',
+    altIntentColabTitle: 'Conversa sobre colaboração',
+    altIntentColabDesc: 'Para pesquisadores, estudantes, parceiros institucionais e quem quer contribuir com a agenda do Hub. Não precisa chegar com pesquisa pronta, dataset ou proposta fechada.',
     altChannelWhatsapp: 'WhatsApp',
     altChannelEmail: 'E-mail',
     altClientWaText:
@@ -455,10 +455,10 @@ const pt: Translation = {
     altClientMailBody:
       'Olá Gabriel,\n\nEstou explorando como o D.Lab pode ajudar a minha organização. Abaixo um pouco do contexto, e gostaria de entender quais formatos de trabalho fazem sentido.\n\nQuem fala:\nOrganização:\nProblema / decisão em jogo:\n\nObrigado.',
     altColabWaText:
-      'Olá Gabriel, gostaria de propor uma colaboração com o D.Lab. Tenho uma pesquisa, dataset ou agenda que pode dialogar com a agenda do Hub, e queria explorar formatos.',
-    altColabMailSubject: 'Proposta de colaboração com o D.Lab',
+      'Olá Gabriel, gostaria de conversar sobre colaborar com o D.Lab. Posso te contar um pouco do meu interesse e entender como faz sentido contribuir, mesmo que eu ainda não tenha algo estruturado?',
+    altColabMailSubject: 'Conversa sobre colaboração com o D.Lab',
     altColabMailBody:
-      'Olá Gabriel,\n\nQueria propor uma colaboração com o D.Lab. Abaixo um resumo do que tenho em mãos e do que imagino para a parceria.\n\nQuem fala:\nVínculo institucional:\nPesquisa, dataset ou agenda que proponho:\nFormato de colaboração que faz sentido:\n\nObrigado.',
+      'Olá Gabriel,\n\nQueria conversar sobre colaborar com o D.Lab. Abaixo um pouco do meu interesse, mesmo que ainda não tenha nada estruturado para propor.\n\nQuem fala:\nVínculo (instituição, área, momento profissional):\nO que me interessa na agenda do D.Lab:\nPesquisa, dataset ou pergunta que trago (opcional):\n\nObrigado.',
     altRawLabel: 'Direto',
     altRawEmail: 'gabriel@dlabexperts.com',
     altRawWhatsapp: '+55 11 93327-9420',
