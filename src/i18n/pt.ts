@@ -73,7 +73,7 @@ const pt: Translation = {
     sub: 'Research Hub em inteligência aplicada e cybersegurança. Publicamos pesquisa pra fundamentar decisões de board, founder e gestor num mundo que moveu pra frente das próprias defesas.',
     ctaPrimary: 'Ler análises públicas →',
     ctaSecondary: 'Frentes de consultoria',
-    statsEyebrow: 'Três achados, três publicações abertas',
+    statsEyebrow: 'Da agenda recente de pesquisa',
     statNdaVal: 'N=98',
     statNdaLbl: 'Por que gamers de grupos minorizados trocam de marca 3,5× mais por compromisso social',
     statNdaSrc: 'Pesquisa original · gaming · D.Lab #001 · 2026',
