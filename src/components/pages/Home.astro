@@ -43,21 +43,27 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
           <a href="/blog" class="btn btn-primary">{t('hero.ctaPrimary')}</a>
           <a href="/#products" class="btn btn-ghost">{t('hero.ctaSecondary')}</a>
         </div>
-        <div class="hero-stats">
-          <div>
-            <div class="hero-stat-val">{t('hero.statNdaVal')}</div>
-            <div class="hero-stat-lbl">{t('hero.statNdaLbl')}</div>
-            <div class="hero-stat-src">{t('hero.statNdaSrc')}</div>
+        <div class="hero-stats-wrap">
+          <div class="hero-stats-eyebrow">
+            <span class="hero-stats-eyebrow-line" aria-hidden="true"></span>
+            {t('hero.statsEyebrow')}
           </div>
-          <div>
-            <div class="hero-stat-val">{t('hero.statSeniorVal')}</div>
-            <div class="hero-stat-lbl">{t('hero.statSeniorLbl')}</div>
-            <div class="hero-stat-src">{t('hero.statSeniorSrc')}</div>
-          </div>
-          <div>
-            <div class="hero-stat-val">{t('hero.statProtocolVal')}</div>
-            <div class="hero-stat-lbl">{t('hero.statProtocolLbl')}</div>
-            <div class="hero-stat-src">{t('hero.statProtocolSrc')}</div>
+          <div class="hero-stats">
+            <a href="/posts/campanhas-afirmativas-gaming" class="hero-stat">
+              <div class="hero-stat-val">{t('hero.statNdaVal')}</div>
+              <div class="hero-stat-lbl">{t('hero.statNdaLbl')}</div>
+              <div class="hero-stat-src">{t('hero.statNdaSrc')}</div>
+            </a>
+            <a href="/posts/ciclismo-brasil" class="hero-stat">
+              <div class="hero-stat-val">{t('hero.statSeniorVal')}</div>
+              <div class="hero-stat-lbl">{t('hero.statSeniorLbl')}</div>
+              <div class="hero-stat-src">{t('hero.statSeniorSrc')}</div>
+            </a>
+            <a href="/posts/ciclismo-brasil" class="hero-stat">
+              <div class="hero-stat-val">{t('hero.statProtocolVal')}</div>
+              <div class="hero-stat-lbl">{t('hero.statProtocolLbl')}</div>
+              <div class="hero-stat-src">{t('hero.statProtocolSrc')}</div>
+            </a>
           </div>
         </div>
       </div>
