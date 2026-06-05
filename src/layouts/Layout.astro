@@ -220,6 +220,57 @@ const {
         });
         sections.forEach((s) => observer.observe(s));
       })();
+
+      // ══ 3D TILT + PARALLAX ════════════════════════════════════════════
+      // Profundidade elegante estilo Apple/Resend: cards .tilt inclinam
+      // levemente seguindo o ponteiro; elementos [data-parallax] deslizam
+      // no scroll. rAF-throttled, listeners passivos, e tudo desligado
+      // sob prefers-reduced-motion.
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) {
+        // — tilt reativo ao ponteiro —
+        const MAX_TILT = 6; // graus
+        document.querySelectorAll<HTMLElement>('.tilt').forEach((card) => {
+          const inner = card.querySelector<HTMLElement>('.tilt-inner');
+          if (!inner) return;
+          let raf = 0;
+          card.addEventListener('pointermove', (e) => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            if (raf) return;
+            raf = requestAnimationFrame(() => {
+              inner.style.setProperty('--rx', (px * MAX_TILT).toFixed(2) + 'deg');
+              inner.style.setProperty('--ry', (-py * MAX_TILT).toFixed(2) + 'deg');
+              raf = 0;
+            });
+          }, { passive: true });
+          card.addEventListener('pointerleave', () => {
+            inner.style.setProperty('--rx', '0deg');
+            inner.style.setProperty('--ry', '0deg');
+          });
+        });
+
+        // — parallax no scroll —
+        const plx = Array.from(document.querySelectorAll<HTMLElement>('[data-parallax]'));
+        if (plx.length) {
+          let pTicking = false;
+          const updPlx = () => {
+            const vh = window.innerHeight;
+            for (const el of plx) {
+              const speed = parseFloat(el.getAttribute('data-parallax') || '0.15');
+              const r = el.getBoundingClientRect();
+              const center = r.top + r.height / 2 - vh / 2;
+              el.style.transform = `translate3d(0, ${(-center * speed).toFixed(1)}px, 0)`;
+            }
+            pTicking = false;
+          };
+          const onPlx = () => { if (!pTicking) { requestAnimationFrame(updPlx); pTicking = true; } };
+          window.addEventListener('scroll', onPlx, { passive: true });
+          window.addEventListener('resize', onPlx, { passive: true });
+          updPlx();
+        }
+      }
     </script>
 
     <!-- Vercel Analytics + Speed Insights (idiomatic Astro integration,

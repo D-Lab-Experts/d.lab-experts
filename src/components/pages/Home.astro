@@ -30,7 +30,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
        abaixo (.hero-b-*). Alto contraste por preto×branco, sem cor. -->
   <section id="hero" class="hero-b">
     <div class="hero-b-grid" aria-hidden="true"></div>
-    <div class="hero-b-glow" aria-hidden="true"></div>
+    <div class="hero-b-glow" data-parallax="0.18" aria-hidden="true"></div>
 
     <div class="hero-b-wrap">
       <div class="hero-b-brandrow fi">
@@ -90,8 +90,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
        This card is the most recent original study — readers land, see
        the claim, then immediately encounter the proof. -->
   <section id="featured-study">
-    <div class="section-glow lilac" style="top:-40px;left:20%;width:480px;height:360px"></div>
-    <div class="section-glow blue" style="bottom:-60px;right:-40px;width:520px;height:380px"></div>
+    <div class="section-glow lilac" data-parallax="0.12" style="top:-40px;left:20%;width:480px;height:360px"></div>
+    <div class="section-glow blue" data-parallax="-0.1" style="bottom:-60px;right:-40px;width:520px;height:380px"></div>
     <div class="container">
       <div class="featured-study-header fi">
         <span class="label" style="display:inline-flex;align-items:center;gap:10px">
@@ -101,8 +101,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
         <h2 class="featured-study-title">{t('featured.titleLead')} <span class="gradient-text">{t('featured.titleAccent')}</span></h2>
       </div>
 
-      <div class="hero-card-wrap fi d1">
-        <div class="hero-card">
+      <div class="hero-card-wrap fi d1 tilt">
+        <div class="hero-card glass-panel tilt-inner">
           <div class="hc-header">
             <div style="display:flex;align-items:center;gap:14px">
               <img src="/d.lab-icon.webp" alt="" class="hc-icon" width="28" height="28" />
@@ -288,12 +288,12 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
       </div>
 
       <div class="research-grid fi">
-        {posts.map((post) => {
+        {posts.map((post, i) => {
           const isOriginal = post.data.researchType === 'original';
           const cat = post.data.category.toLowerCase();
           const extraTag = post.data.tags.find((tag: string) => tag.toLowerCase() !== cat);
           return (
-          <a href={`/posts/${post.slug}`} class="research-card fi d1" style="position:relative">
+          <a href={`/posts/${post.slug}`} class={`research-card fi d${i + 1}`} style="position:relative">
             <div class="research-card-img" style="padding:0;background:#000000">
               {post.data.cover && (
                 <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
