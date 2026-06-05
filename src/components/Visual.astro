@@ -1,0 +1,227 @@
+---
+/**
+ * Visual — arte vetorial monocromática elegante (registro Apple/Resend)
+ * que substitui a pixel art. Linhas finas brancas sobre fundo escuro,
+ * com animação sutil (draw / sweep / scan / pulse / orbit). Respeita
+ * prefers-reduced-motion. Mantém o frame .pixel-art (borda + cantos
+ * arredondados) para não mexer no layout das chamadas existentes.
+ *
+ * variants: signal (hero) · attack (radar/brand) · market (competitiva) ·
+ *           audience (comportamento) · cyber · lab (sobre)
+ */
+interface Props { variant: string; alt?: string; class?: string; }
+const { variant, alt = '', class: className = '' } = Astro.props;
+
+const VB: Record<string, [number, number]> = {
+  signal:   [600, 258],
+  attack:   [400, 400],
+  market:   [400, 300],
+  audience: [400, 300],
+  cyber:    [400, 300],
+  lab:      [320, 400],
+};
+const [W, H] = VB[variant] ?? VB.signal;
+const uid = `v-${variant}`;
+---
+
+<figure
+  class={`visual pixel-art ${className}`}
+  style={`aspect-ratio:${W} / ${H}`}
+  role="img"
+  aria-label={alt || variant}
+>
+  <svg viewBox={`0 0 ${W} ${H}`} xmlns="http://www.w3.org/2000/svg" fill="none">
+    <defs>
+      <radialGradient id={`${uid}-bg`} cx="50%" cy="42%" r="75%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.06)" />
+        <stop offset="55%" stop-color="rgba(255,255,255,0.015)" />
+        <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+      </radialGradient>
+      <linearGradient id={`${uid}-area`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.16)" />
+        <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+      </linearGradient>
+    </defs>
+
+    <rect x="0" y="0" width={W} height={H} fill="#000" />
+    <rect x="0" y="0" width={W} height={H} fill={`url(#${uid}-bg)`} />
+
+    {variant === 'signal' && (
+      <g>
+        {/* gridlines */}
+        {[64, 112, 160, 208].map((y) => (
+          <line x1="0" y1={y} x2={W} y2={y} stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+        ))}
+        {[100, 200, 300, 400, 500].map((x) => (
+          <line x1={x} y1="0" x2={x} y2={H} stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+        ))}
+        {/* área + onda principal */}
+        <path
+          d="M0,200 C70,190 110,140 170,150 C230,160 250,90 320,86 C390,82 410,40 470,52 C530,64 560,30 600,28 L600,258 L0,258 Z"
+          fill={`url(#${uid}-area)`}
+        />
+        <path
+          class="v-draw"
+          pathLength="1"
+          d="M0,200 C70,190 110,140 170,150 C230,160 250,90 320,86 C390,82 410,40 470,52 C530,64 560,30 600,28"
+          stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round"
+        />
+        {/* onda secundária tracejada */}
+        <path
+          d="M0,224 C80,220 120,196 190,198 C260,200 290,170 360,168 C430,166 470,150 540,150 C570,150 590,146 600,144"
+          stroke="rgba(255,255,255,0.28)" stroke-width="1.4" stroke-dasharray="5 4" stroke-linecap="round"
+        />
+        {/* nós */}
+        <circle cx="320" cy="86" r="3.2" fill="#fff" class="v-pulse" />
+        <circle cx="600" cy="28" r="3.6" fill="#fff" class="v-pulse" style="animation-delay:.8s" />
+        {/* scan */}
+        <line class="v-scan" x1="0" y1="0" x2="0" y2={H} stroke="rgba(255,255,255,0.5)" stroke-width="1" />
+      </g>
+    )}
+
+    {variant === 'attack' && (
+      <g transform="translate(200 200)">
+        {[180, 138, 96, 54].map((r) => (
+          <circle cx="0" cy="0" r={r} stroke="rgba(255,255,255,0.10)" stroke-width="1" />
+        ))}
+        <line x1="-188" y1="0" x2="188" y2="0" stroke="rgba(255,255,255,0.07)" stroke-width="1" />
+        <line x1="0" y1="-188" x2="0" y2="188" stroke="rgba(255,255,255,0.07)" stroke-width="1" />
+        {/* sweep (círculo invisível equilibra a bbox p/ girar no centro) */}
+        <g class="v-sweep">
+          <circle cx="0" cy="0" r="184" fill="none" stroke="none" />
+          <path d="M0,0 L184,0 A184,184 0 0,0 130,-130 Z" fill={`url(#${uid}-area)`} opacity="0.5" />
+          <line x1="0" y1="0" x2="184" y2="0" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" />
+        </g>
+        {/* blips */}
+        <circle cx="96" cy="-44" r="3.4" fill="#fff" class="v-pulse" />
+        <circle cx="-70" cy="80" r="3" fill="#fff" class="v-pulse" style="animation-delay:1.1s" />
+        <circle cx="40" cy="120" r="2.6" fill="#fff" class="v-pulse" style="animation-delay:1.9s" />
+        <circle cx="0" cy="0" r="3" fill="#fff" />
+      </g>
+    )}
+
+    {variant === 'market' && (
+      <g>
+        {[75, 150, 225].map((y) => (
+          <line x1="0" y1={y} x2={W} y2={y} stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+        ))}
+        {/* barras ascendentes */}
+        {[
+          [60, 210], [120, 176], [180, 196], [240, 132], [300, 150], [360, 92],
+        ].map(([x, y], i) => (
+          <rect x={x - 13} y={y} width="26" height={272 - y} rx="3"
+            fill={`rgba(255,255,255,${0.06 + i * 0.03})`}
+            stroke="rgba(255,255,255,0.14)" stroke-width="1" />
+        ))}
+        <line x1="0" y1="272" x2={W} y2="272" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
+        {/* trend */}
+        <path class="v-draw" pathLength="1"
+          d="M60,196 L120,162 L180,180 L240,118 L300,134 L360,78"
+          stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="360" cy="78" r="4" fill="#fff" class="v-pulse" />
+      </g>
+    )}
+
+    {variant === 'audience' && (
+      <g>
+        {/* ondas concêntricas (audiência) a partir do foco */}
+        <g transform="translate(200 250)">
+          {[0, 1, 2].map((i) => (
+            <circle class="v-ripple" cx="0" cy="0" r="40" stroke="rgba(255,255,255,0.22)"
+              stroke-width="1.4" style={`animation-delay:${i * 1.2}s`} />
+          ))}
+          <circle cx="0" cy="0" r="5" fill="#fff" />
+        </g>
+        {/* nuvem de pontos (público) */}
+        {[
+          [110, 70], [150, 52], [196, 64], [240, 48], [288, 70],
+          [90, 120], [136, 104], [256, 104], [310, 122], [200, 96],
+        ].map(([x, y], i) => (
+          <circle cx={x} cy={y} r={i % 3 === 0 ? 3 : 2} fill="rgba(255,255,255,0.7)" class="v-pulse"
+            style={`animation-delay:${(i % 5) * 0.5}s`} />
+        ))}
+        {/* curva de distribuição */}
+        <path d="M40,150 C110,150 150,90 200,90 C250,90 290,150 360,150"
+          stroke="rgba(255,255,255,0.3)" stroke-width="1.4" stroke-dasharray="4 4" />
+      </g>
+    )}
+
+    {variant === 'cyber' && (
+      <g>
+        {/* malha de pontos */}
+        {Array.from({ length: 7 }).map((_, r) =>
+          Array.from({ length: 9 }).map((__, c) => (
+            <circle cx={40 + c * 40} cy={36 + r * 36} r="1" fill="rgba(255,255,255,0.10)" />
+          ))
+        )}
+        {/* escudo */}
+        <g transform="translate(200 150)">
+          <path class="v-draw" pathLength="1"
+            d="M0,-88 L72,-58 V8 C72,58 40,92 0,108 C-40,92 -72,58 -72,8 V-58 Z"
+            stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linejoin="round" />
+          <path class="v-draw" pathLength="1" style="animation-delay:1.1s"
+            d="M-30,4 L-8,28 L34,-26"
+            stroke="rgba(255,255,255,0.92)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+          <line class="v-scanY" x1="-72" y1="0" x2="72" y2="0" stroke="rgba(255,255,255,0.45)" stroke-width="1" />
+        </g>
+      </g>
+    )}
+
+    {variant === 'lab' && (
+      <g transform="translate(160 200)">
+        {/* órbitas (pesquisa) */}
+        {[
+          { rx: 120, ry: 44, rot: 0, d: '16s' },
+          { rx: 120, ry: 44, rot: 60, d: '20s' },
+          { rx: 120, ry: 44, rot: 120, d: '24s' },
+        ].map((o) => (
+          <g transform={`rotate(${o.rot})`}>
+            <g class="v-orbit" style={`animation-duration:${o.d}`}>
+              <ellipse cx="0" cy="0" rx={o.rx} ry={o.ry} stroke="rgba(255,255,255,0.16)" stroke-width="1" />
+              <circle cx={o.rx} cy="0" r="3.4" fill="#fff" />
+            </g>
+          </g>
+        ))}
+        <circle cx="0" cy="0" r="6" fill="#fff" />
+        <circle cx="0" cy="0" r="13" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+      </g>
+    )}
+  </svg>
+</figure>
+
+<style>
+  .visual { position: relative; }
+  .visual svg { width: 100%; height: 100%; display: block; }
+
+  /* draw: caminhos com pathLength=1 “desenham” da ponta */
+  .v-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: vDraw 2.4s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  @keyframes vDraw { to { stroke-dashoffset: 0; } }
+
+  .v-pulse { animation: vPulse 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes vPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.6); } }
+
+  .v-scan { animation: vScan 4.5s cubic-bezier(.4,0,.2,1) infinite; }
+  @keyframes vScan { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translateX(600px); opacity: 0; } }
+
+  .v-scanY { animation: vScanY 3.6s ease-in-out infinite; }
+  @keyframes vScanY { 0%,100% { transform: translateY(-86px); opacity: .15; } 50% { transform: translateY(96px); opacity: .6; } }
+
+  .v-sweep { animation: vSweep 5s linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes vSweep { to { transform: rotate(360deg); } }
+
+  .v-ripple { transform-box: fill-box; transform-origin: center; animation: vRipple 3.6s ease-out infinite; opacity: 0; }
+  @keyframes vRipple { 0% { transform: scale(.18); opacity: .8; } 80% { opacity: 0; } 100% { transform: scale(3.2); opacity: 0; } }
+
+  .v-orbit { animation: vOrbit linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes vOrbit { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .v-draw { stroke-dasharray: none; stroke-dashoffset: 0; animation: none; }
+    .v-pulse, .v-scan, .v-scanY, .v-sweep, .v-ripple, .v-orbit { animation: none; }
+    .v-scan, .v-ripple { opacity: 0; }
+  }
+</style>

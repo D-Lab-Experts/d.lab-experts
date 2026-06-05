@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import PixelArt from '../PixelArt.astro';
+import Visual from '../Visual.astro';
 import { getCollection } from 'astro:content';
 import { useTranslations } from '../../i18n/utils';
 
@@ -81,7 +81,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <!-- ═══════════════ HERO VISUAL (banner) ══════════════════════════ -->
   <section id="hero-visual">
     <div class="hero-visual-inner fi">
-      <PixelArt variant="signal" alt="Skyline de sinal e dados em pixel art" />
+      <Visual variant="signal" alt="Onda de sinal e dados em linha, monocromática" />
     </div>
   </section>
 
@@ -241,7 +241,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
              globe; inner counter-rotation keeps each label upright. -->
         <div class="brand-visual fi d1 tilt">
           <div class="tilt-inner">
-            <PixelArt variant="attack" alt="Radar de superfície de ataque em pixel art" />
+            <Visual variant="attack" alt="Radar monocromático varrendo uma superfície de ataque" />
           </div>
         </div>
       </div>
@@ -348,15 +348,15 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
       </div>
       <div class="themes-grid fi d1">
         <figure class="theme-tile">
-          <PixelArt variant="market" alt="Rei de xadrez sob luz lateral, em pixel art" />
+          <Visual variant="market" alt="Barras ascendentes com linha de tendência, inteligência competitiva" />
           <figcaption class="theme-tile-cap">Inteligência competitiva</figcaption>
         </figure>
         <figure class="theme-tile">
-          <PixelArt variant="audience" alt="Plateia diante de uma tela luminosa, em pixel art" />
+          <Visual variant="audience" alt="Ondas concêntricas e nuvem de pontos, comportamento de audiência" />
           <figcaption class="theme-tile-cap">Comportamento &amp; audiência</figcaption>
         </figure>
         <figure class="theme-tile">
-          <PixelArt variant="cyber" alt="Figura encapuzada diante de monitor com cadeado, em pixel art" />
+          <Visual variant="cyber" alt="Escudo em linha com varredura, cybersegurança" />
           <figcaption class="theme-tile-cap">Cybersegurança</figcaption>
         </figure>
       </div>
@@ -719,7 +719,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
 
       <div class="home-about-layout">
         <div class="home-about-text fi-l">
-          <PixelArt variant="lab" alt="Frasco de laboratório em pixel art" class="home-about-img" />
+          <Visual variant="lab" alt="Órbitas de pesquisa em torno de um núcleo" class="home-about-img" />
           <p set:html={t('about.p1')}></p>
           <p set:html={t('about.p2')}></p>
           <p set:html={t('about.p3')}></p>
