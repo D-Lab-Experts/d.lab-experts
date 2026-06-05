@@ -122,8 +122,8 @@ const t = useTranslations();
         <p class="lead" set:html={t('aboutPage.scopeLead')}></p>
       </div>
 
-      <div class="services-split">
-        <div class="service-card data fi-l d1">
+      <div class="services-split" style="grid-template-columns:1fr;max-width:720px;margin:0 auto">
+        <div class="service-card data fi d1">
           <div class="service-card-icon lilac">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><path d="M15.5 12v7M12 15.5h7" stroke="url(#g1)" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
@@ -136,21 +136,6 @@ const t = useTranslations();
             <li>{t('aboutPage.intelItem4')}</li>
             <li>{t('aboutPage.intelItem5')}</li>
             <li>{t('aboutPage.intelItem6')}</li>
-          </ul>
-        </div>
-        <div class="service-card cyber fi-r d1">
-          <div class="service-card-icon cyan">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L4 5.5v5c0 4.7 3 8.5 7 10 4-1.5 7-5.3 7-10v-5L11 2z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11l2.5 2.5L14.5 9" stroke="url(#g-green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>{t('aboutPage.cyberName')}</h3>
-          <p set:html={t('aboutPage.cyberDesc')}></p>
-          <ul>
-            <li>{t('aboutPage.cyberItem1')}</li>
-            <li>{t('aboutPage.cyberItem2')}</li>
-            <li>{t('aboutPage.cyberItem3')}</li>
-            <li>{t('aboutPage.cyberItem4')}</li>
-            <li>{t('aboutPage.cyberItem5')}</li>
-            <li>{t('aboutPage.cyberItem6')}</li>
           </ul>
         </div>
       </div>

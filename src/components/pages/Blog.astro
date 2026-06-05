@@ -10,7 +10,6 @@ const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const intelligencePosts = allPosts.filter((p) => p.data.track === 'intelligence');
-const cybersecPosts = allPosts.filter((p) => p.data.track === 'cybersec');
 
 type Post = (typeof allPosts)[number];
 const byType = (posts: Post[], type: 'original' | 'secondary') =>
@@ -18,17 +17,10 @@ const byType = (posts: Post[], type: 'original' | 'secondary') =>
 
 const intelOriginal = byType(intelligencePosts, 'original');
 const intelSecondary = byType(intelligencePosts, 'secondary');
-const cyberOriginal = byType(cybersecPosts, 'original');
-const cyberSecondary = byType(cybersecPosts, 'secondary');
 
 const intelGroups = [
   { key: 'original',  label: t('blog.groupOriginalLabel'),  sub: t('blog.groupOriginalSub'),  posts: intelOriginal },
   { key: 'secondary', label: t('blog.groupSecondaryLabel'), sub: t('blog.groupSecondarySub'), posts: intelSecondary },
-] as const;
-
-const cyberGroups = [
-  { key: 'original',  label: t('blog.cyberGroupOriginalLabel'),  sub: t('blog.cyberGroupOriginalSub'),  posts: cyberOriginal },
-  { key: 'secondary', label: t('blog.cyberGroupSecondaryLabel'), sub: t('blog.cyberGroupSecondarySub'), posts: cyberSecondary },
 ] as const;
 
 const formatDate = (d: Date) =>
@@ -81,18 +73,6 @@ const methodLabel: Record<'original' | 'secondary', string> = {
         <p class="blog-hero-sub">{t('blog.heroSub')}</p>
       </div>
 
-      <div class="blog-track-nav fi d1">
-        <a href="#inteligencia" class="blog-track-btn lilac">
-          <span class="blog-track-btn-dot"></span>
-          {t('blog.navIntel')}
-          <span class="blog-track-btn-count">{intelligencePosts.length}</span>
-        </a>
-        <a href="#cybersec" class="blog-track-btn green">
-          <span class="blog-track-btn-dot"></span>
-          {t('blog.navCyber')}
-          <span class="blog-track-btn-count">{cybersecPosts.length}</span>
-        </a>
-      </div>
     </div>
   </section>
 
@@ -100,7 +80,6 @@ const methodLabel: Record<'original' | 'secondary', string> = {
   <section class="container blog-track-section" id="inteligencia">
     <div class="blog-track-header fi">
       <div class="blog-track-eyebrow lilac">
-        <span class="blog-track-eyebrow-num">01</span>
         {t('blog.intelEyebrow')}
       </div>
       <h2 class="blog-track-title">{t('blog.intelTitle')} <span class="gradient-text">{t('blog.intelTitleAccent')}</span></h2>
@@ -164,83 +143,6 @@ const methodLabel: Record<'original' | 'secondary', string> = {
 
   <div class="section-sep"></div>
 
-  <!-- ═══════════════ 02 · CYBERSECURITY ════════════════════════ -->
-  <section class="container blog-track-section blog-track-cyber" id="cybersec">
-    <div class="blog-track-header fi">
-      <div class="blog-track-eyebrow green">
-        <span class="blog-track-eyebrow-num">02</span>
-        {t('blog.cyberEyebrow')}
-      </div>
-      <h2 class="blog-track-title">{t('blog.cyberTitle')} <span class="gradient-text-green">{t('blog.cyberTitleAccent')}</span></h2>
-      <p class="blog-track-sub">{t('blog.cyberSub')}</p>
-    </div>
-
-    {cybersecPosts.length > 0 ? (
-      cyberGroups.filter((g) => g.posts.length > 0).map((group) => (
-        <div class="blog-subtrack">
-          <div class="blog-subtrack-header fi">
-            <span class="blog-subtrack-tag green">
-              <span class="blog-subtrack-dot"></span>
-              {group.label}
-              <span class="blog-subtrack-count">{group.posts.length}</span>
-            </span>
-            <p class="blog-subtrack-sub">{group.sub}</p>
-          </div>
-          <div class="blog-grid">
-            {group.posts.map((post) => {
-              const cardClass = 'blog-card blog-card-catalog blog-card-catalog-cyber fi d2';
-              const catalogId = formatCatalogId(post.data.citationVolume);
-              const authors = formatAuthors(post.data);
-              const method = methodLabel[post.data.researchType];
-              return (
-                <a href={`/posts/${post.slug}`} class={cardClass}>
-                  <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
-                    {post.data.cover && (
-                      <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
-                    )}
-                  </div>
-                  <div class="blog-card-body">
-                    <div class="blog-card-cataloghead">
-                      {catalogId && <span class="blog-card-catalogid">{catalogId}</span>}
-                      <span class="blog-card-catalogdate">{formatDate(post.data.pubDate)}</span>
-                    </div>
-                    <h3 class="blog-card-title">{post.data.title}</h3>
-                    <div class="blog-card-authors">{authors}</div>
-                    <p class="blog-card-excerpt">{post.data.description}</p>
-                    <div class="blog-card-catalogfoot">
-                      <span class="blog-card-methodtag">{method}</span>
-                      <span class="blog-card-catalogmeta">
-                        {formatLabel[post.data.format]}
-                        {post.data.readingTime && <span class="blog-card-metasep">·</span>}
-                        {post.data.readingTime}
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      ))
-    ) : (
-      <div class="blog-empty cyber fi">
-        <div class="blog-empty-icon">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <path d="M18 3L6 8v9c0 7.5 5 14 12 16 7-2 12-8.5 12-16V8L18 3z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M13 18l3.5 3.5L23 14" stroke="url(#g-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="blog-empty-title">{t('blog.emptyCyberTitle')}</div>
-        <div class="blog-empty-text">{t('blog.emptyCyberText')}</div>
-        <div class="blog-empty-cta">
-          <a href="/contato" class="btn btn-ghost">{t('blog.emptyCyberCta')}</a>
-        </div>
-      </div>
-    )}
-  </section>
-
-  <div class="section-sep"></div>
-
   <!-- ═══════════════ SCIENTIFIC COLLABORATION ═════════════════════════ -->
   <section class="blog-colab-cta">
     <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:520px;height:380px"></div>
@@ -284,9 +186,9 @@ const methodLabel: Record<'original' | 'secondary', string> = {
   }
   .blog-colab-title {
     font-size: clamp(32px, 4.5vw, 52px);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.12;
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
     margin-bottom: 20px;
     text-wrap: balance;
   }
