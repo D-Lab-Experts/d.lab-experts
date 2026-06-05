@@ -947,4 +947,63 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   @media (prefers-reduced-motion: reduce) {
     .hero-b-btn:hover { transform: none; }
   }
+
+  /* glifos ruidosos do decode (gimmick) lêem como "decodificando" */
+  .hero-b-headline .scramble-glyph { opacity: .82; }
 </style>
+
+<script>
+  // ══ GIMMICK · DECODE DO TÍTULO ════════════════════════════════════
+  // A frase-afirmação do hero "decodifica": cada caractere passa por
+  // glifos aleatórios antes de assentar, da esquerda p/ direita. Vibe
+  // de IA/terminal resolvendo. Roda uma vez no load; desligado sob
+  // prefers-reduced-motion (texto aparece direto).
+  (function () {
+    const el = document.querySelector<HTMLElement>('.hero-b-headline .ink');
+    if (!el) return;
+    const finalText = (el.textContent || '').trim();
+    if (!finalText) return;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>#*+=-_·';
+    interface Slot { to: string; start: number; end: number; char?: string; }
+    let frame = 0;
+    let raf = 0;
+    const queue: Slot[] = [];
+    for (let i = 0; i < finalText.length; i++) {
+      const start = Math.floor(Math.random() * 18);
+      const end = start + 16 + Math.floor(Math.random() * 26);
+      queue.push({ to: finalText[i], start, end });
+    }
+
+    const tick = () => {
+      let out = '';
+      let done = 0;
+      for (const slot of queue) {
+        if (slot.to === ' ') { out += ' '; done++; continue; }
+        if (frame >= slot.end) {
+          out += slot.to;
+          done++;
+        } else if (frame >= slot.start) {
+          if (!slot.char || Math.random() < 0.3) {
+            slot.char = CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+          out += '<span class="scramble-glyph">' + slot.char + '</span>';
+        } else {
+          out += '<span class="scramble-glyph" style="opacity:.35">' + CHARS[Math.floor(Math.random() * CHARS.length)] + '</span>';
+        }
+      }
+      el.innerHTML = out;
+      if (done >= queue.length) { el.textContent = finalText; return; }
+      frame++;
+      raf = requestAnimationFrame(tick);
+    };
+
+    // começa após o fade-in do hero (.fi) pra ler em sequência
+    const startDelay = 360;
+    window.setTimeout(() => { raf = requestAnimationFrame(tick); }, startDelay);
+    void raf;
+  })();
+</script>
