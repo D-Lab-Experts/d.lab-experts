@@ -1,0 +1,21 @@
+---
+/**
+ * PixelArt — renderiza uma cena do engine compartilhado (src/lib/pixelart.mjs).
+ * Cenas P&B com luz/sombra/granulado via dithering. variants:
+ *  signal (hero) · attack (brand) · market (competitiva) · audience
+ *  (comportamento) · cyber · lab (sobre) · cover-gaming · cover-cycling
+ */
+import { buildScene } from '../lib/pixelart.mjs';
+interface Props { variant: string; alt?: string; class?: string; }
+const { variant, alt = '', class: className = '' } = Astro.props;
+const { W, H, rects } = buildScene(variant);
+---
+
+<figure class={`pixel-art ${className}`} style={`aspect-ratio:${W} / ${H}`} role="img" aria-label={alt || variant}>
+  <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width={W} height={H} fill="#000" />
+    <g fill="#fff">
+      {rects.map((r) => <rect x={r[0]} y={r[1]} width={r[2]} height="1" />)}
+    </g>
+  </svg>
+</figure>

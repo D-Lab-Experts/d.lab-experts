@@ -1,0 +1,112 @@
+---
+/**
+ * MascotDot — "O ponto" do D.Lab.
+ * Mascote em pixel art (SVG, shape-rendering=crispEdges) com dois olhos
+ * que seguem o mouse com easing (lerp) e piscam em intervalos randômicos.
+ * Sob prefers-reduced-motion os olhos ficam centrados e estáticos.
+ *
+ * Pixel map (10×10) — silhueta arredondada (o "ponto"); os dois vãos das
+ * linhas 4–5 viram pupilas pretas agrupadas em [data-eyes].
+ */
+interface Props {
+  /** Tamanho de cada pixel em px (12–16 recomendado). */
+  cell?: number;
+  class?: string;
+}
+const { cell = 14, class: className = '' } = Astro.props;
+
+// Faixa de colunas preenchidas (branco) por linha — silhueta do "ponto".
+const ROWS: [number, number][] = [
+  [2, 7], // 0
+  [1, 8], // 1
+  [0, 9], // 2
+  [0, 9], // 3
+  [0, 9], // 4
+  [0, 9], // 5
+  [0, 9], // 6
+  [0, 9], // 7
+  [1, 8], // 8
+  [2, 7], // 9
+];
+const size = 10 * cell;
+// Pupilas: 1 célula de largura × 2 de altura, nas colunas 2 e 7, linhas 3–4.
+const pupilW = cell;
+const pupilH = cell * 2;
+const pupilY = 3 * cell;
+const eyeLeftX = 2 * cell;
+const eyeRightX = 7 * cell;
+---
+
+<svg
+  class={`mascot-dot ${className}`}
+  data-mascot
+  width={size}
+  height={size}
+  viewBox={`0 0 ${size} ${size}`}
+  shape-rendering="crispEdges"
+  aria-hidden="true"
+  focusable="false"
+>
+  <!-- corpo branco (uma rect por linha) -->
+  {ROWS.map(([start, end], i) => (
+    <rect
+      x={start * cell}
+      y={i * cell}
+      width={(end - start + 1) * cell}
+      height={cell}
+      fill="#fff"
+    />
+  ))}
+  <!-- olhos: pupilas pretas que se deslocam em direção ao cursor -->
+  <g data-eyes>
+    <rect x={eyeLeftX} y={pupilY} width={pupilW} height={pupilH} fill="#000" />
+    <rect x={eyeRightX} y={pupilY} width={pupilW} height={pupilH} fill="#000" />
+  </g>
+</svg>
+
+<style>
+  .mascot-dot { display: block; }
+  .mascot-dot [data-eyes] { transition: opacity .12s linear; }
+</style>
+
+<script>
+  const MAX = 2; // px de curso dos olhos
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<SVGSVGElement>('[data-mascot]').forEach((mascot) => {
+    const eyes = mascot.querySelector<SVGGElement>('[data-eyes]');
+    if (!eyes) return;
+
+    if (reduce) {
+      eyes.style.transform = 'translate(0,0)';
+      return;
+    }
+
+    let tx = 0, ty = 0, cx = 0, cy = 0;
+
+    addEventListener('pointermove', (e) => {
+      const r = mascot.getBoundingClientRect();
+      const ex = r.left + r.width / 2;
+      const ey = r.top + r.height / 2;
+      const a = Math.atan2(e.clientY - ey, e.clientX - ex);
+      tx = Math.cos(a);
+      ty = Math.sin(a);
+    }, { passive: true });
+
+    function loop() {
+      cx += (tx - cx) * 0.12;
+      cy += (ty - cy) * 0.12;
+      eyes!.style.transform = `translate(${cx * MAX}px, ${cy * MAX}px)`;
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    // Piscar ambiente: olhos somem ~120ms a cada 4–7s (intervalo randômico).
+    const blink = () => {
+      eyes.style.opacity = '0';
+      setTimeout(() => { eyes.style.opacity = '1'; }, 120);
+      setTimeout(blink, 4000 + Math.random() * 3000);
+    };
+    setTimeout(blink, 4000 + Math.random() * 3000);
+  });
+</script>

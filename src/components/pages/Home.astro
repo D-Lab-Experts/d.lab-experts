@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import NeuralNetwork from '../NeuralNetwork.astro';
+import PixelArt from '../PixelArt.astro';
 import { getCollection } from 'astro:content';
 import { useTranslations } from '../../i18n/utils';
 
@@ -24,54 +24,56 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   active="home"
 >
   <!-- ═══════════════ HERO ══════════════════════════════════════════
-       Coluna única centralizada (estilo Stripe Press / Anthropic).
-       Cubo 3D + SVG orbital animado removidos para entregar o registro
-       editorial que o resto do site já adotou. -->
+       Rebrand monocromático: wordmark D.Lab em Syne (o ponto é o mascote
+       "O ponto", que segue o mouse), eyebrow em DM Mono, tagline por
+       negação e bloco de prova com os números reais da pesquisa. -->
   <section id="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-light-a"></div>
-    <div class="hero-light-b"></div>
-
+    <div class="pixel-grid" aria-hidden="true"></div>
     <div class="hero-inner">
       <div class="hero-text fi">
-        <div class="hero-tag"><span class="tag-dot"></span>{t('hero.tag')}</div>
-        <h1 class="hero-h1">
-          {t('hero.h1Line1')}<br><span class="hero-accent">{t('hero.h1Accent')}</span>
+        <div class="hero-eyebrow">{t('hero.eyebrow')}</div>
+        <h1 class="hero-wordmark">
+          <span class="hero-wordmark-text">D</span><span class="hero-wordmark-dot" aria-hidden="true"></span><span class="hero-wordmark-text">Lab</span>
         </h1>
-        <p class="hero-sub">{t('hero.sub')}</p>
+        <p class="hero-tagline">
+          <span class="tg-faint">{t('hero.taglineLine1')}</span><br />
+          <span class="tg-faint">{t('hero.taglineLine2')}</span><br />
+          <span class="tg-ink">{t('hero.taglineLine3')}</span>
+        </p>
         <div class="hero-ctas">
-          <a href="/blog" class="btn btn-primary">{t('hero.ctaPrimary')}</a>
-          <a href="/#products" class="btn btn-ghost">{t('hero.ctaSecondary')}</a>
+          <a href="/contato" class="cta-invert sweep">{t('hero.ctaPrimary')}</a>
+          <a href="/blog" class="btn btn-ghost sweep">{t('hero.ctaSecondary')}</a>
         </div>
-        <div class="hero-stats-wrap">
-          <div class="hero-stats-eyebrow">
-            <span class="hero-stats-eyebrow-line" aria-hidden="true"></span>
-            {t('hero.statsEyebrow')}
-          </div>
-          <div class="hero-stats">
-            <a href="/posts/campanhas-afirmativas-gaming" class="hero-stat">
-              <div class="hero-stat-val">{t('hero.statNdaVal')}</div>
-              <div class="hero-stat-lbl">{t('hero.statNdaLbl')}</div>
-              <div class="hero-stat-src">{t('hero.statNdaSrc')}</div>
-            </a>
-            <a href="/posts/ciclismo-brasil" class="hero-stat">
-              <div class="hero-stat-val">{t('hero.statSeniorVal')}</div>
-              <div class="hero-stat-lbl">{t('hero.statSeniorLbl')}</div>
-              <div class="hero-stat-src">{t('hero.statSeniorSrc')}</div>
-            </a>
-            <a href="/posts/ciclismo-brasil" class="hero-stat">
-              <div class="hero-stat-val">{t('hero.statProtocolVal')}</div>
-              <div class="hero-stat-lbl">{t('hero.statProtocolLbl')}</div>
-              <div class="hero-stat-src">{t('hero.statProtocolSrc')}</div>
-            </a>
-          </div>
+        <div class="hero-proof">
+          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
+            <span class="hero-proof-val">{t('hero.proof1Val')}</span>
+            <span class="hero-proof-lbl">{t('hero.proof1Lbl')}</span>
+          </a>
+          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
+            <span class="hero-proof-val">{t('hero.proof2Val')}</span>
+            <span class="hero-proof-lbl">{t('hero.proof2Lbl')}</span>
+          </a>
+          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
+            <span class="hero-proof-val">{t('hero.proof3Val')}</span>
+            <span class="hero-proof-lbl">{t('hero.proof3Lbl')}</span>
+          </a>
+          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
+            <span class="hero-proof-val">{t('hero.proof4Val')}</span>
+            <span class="hero-proof-lbl">{t('hero.proof4Lbl')}</span>
+          </a>
+          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
+            <span class="hero-proof-val">{t('hero.proof5Val')}</span>
+            <span class="hero-proof-lbl">{t('hero.proof5Lbl')}</span>
+          </a>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="scroll-ind">
-      <span class="label" style="font-size:9px">Scroll</span>
-      <div class="scroll-line"></div>
+  <!-- ═══════════════ HERO VISUAL (banner) ══════════════════════════ -->
+  <section id="hero-visual">
+    <div class="hero-visual-inner fi">
+      <PixelArt variant="signal" alt="Skyline de sinal e dados em pixel art" />
     </div>
   </section>
 
@@ -205,18 +207,17 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <section id="brand-statement">
     <div class="brand-wave-bg">
       <svg viewBox="0 0 1200 400" preserveAspectRatio="none">
-        <path class="brand-wave-line" d="M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200" stroke="rgba(234,234,240,0.25)" stroke-width="1">
+        <path class="brand-wave-line" d="M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200" stroke="rgba(255,255,255,0.25)" stroke-width="1">
           <animate attributeName="d" dur="8s" repeatCount="indefinite" values="M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200;M0,200 Q150,260 300,200 T600,200 T900,200 T1200,200;M0,200 Q150,140 300,200 T600,200 T900,200 T1200,200"/>
         </path>
-        <path class="brand-wave-line" d="M0,200 Q200,160 400,200 T800,200 T1200,200" stroke="rgba(234,234,240,0.18)" stroke-width="0.8">
+        <path class="brand-wave-line" d="M0,200 Q200,160 400,200 T800,200 T1200,200" stroke="rgba(255,255,255,0.18)" stroke-width="0.8">
           <animate attributeName="d" dur="10s" repeatCount="indefinite" values="M0,200 Q200,160 400,200 T800,200 T1200,200;M0,200 Q200,240 400,200 T800,200 T1200,200;M0,200 Q200,160 400,200 T800,200 T1200,200"/>
         </path>
-        <path class="brand-wave-line" d="M0,200 Q300,180 600,200 T1200,200" stroke="rgba(234,234,240,0.1)" stroke-width="0.6">
+        <path class="brand-wave-line" d="M0,200 Q300,180 600,200 T1200,200" stroke="rgba(255,255,255,0.1)" stroke-width="0.6">
           <animate attributeName="d" dur="12s" repeatCount="indefinite" values="M0,200 Q300,180 600,200 T1200,200;M0,200 Q300,220 600,200 T1200,200;M0,200 Q300,180 600,200 T1200,200"/>
         </path>
       </svg>
     </div>
-    <NeuralNetwork color="white" density="low" opacity={0.12} />
     <div class="container">
       <div class="brand-grid">
         <div class="brand-text fi">
@@ -230,66 +231,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
              wireframe Earth, signaling where our research lands in
              the world. Outer rotation walks the points around the
              globe; inner counter-rotation keeps each label upright. -->
-        <div class="brand-globe fi d1" aria-hidden="true">
-          <svg class="brand-globe-core" viewBox="0 0 280 280">
-            <defs>
-              <linearGradient id="globe-grad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#EAEAF0" stop-opacity="0.7"/>
-                <stop offset="100%" stop-color="#EAEAF0" stop-opacity="0.5"/>
-              </linearGradient>
-            </defs>
-            <!-- Outer wireframe sphere -->
-            <circle cx="140" cy="140" r="90" fill="none" stroke="url(#globe-grad)" stroke-width="1" stroke-opacity="0.55"/>
-            <!-- Latitude ellipses (horizontal slices) -->
-            <ellipse cx="140" cy="140" rx="90" ry="30" fill="none" stroke="rgba(234,234,240,0.22)" stroke-width="0.7"/>
-            <ellipse cx="140" cy="140" rx="90" ry="60" fill="none" stroke="rgba(234,234,240,0.18)" stroke-width="0.7"/>
-            <!-- Longitude ellipses (vertical slices) -->
-            <ellipse cx="140" cy="140" rx="30" ry="90" fill="none" stroke="rgba(234,234,240,0.22)" stroke-width="0.7"/>
-            <ellipse cx="140" cy="140" rx="60" ry="90" fill="none" stroke="rgba(234,234,240,0.18)" stroke-width="0.7"/>
-            <!-- Equator + prime meridian -->
-            <line x1="50" y1="140" x2="230" y2="140" stroke="rgba(234,234,240,0.35)" stroke-width="1"/>
-            <line x1="140" y1="50" x2="140" y2="230" stroke="rgba(234,234,240,0.35)" stroke-width="1"/>
-            <!-- Pulsing core dot (the Hub at the center) -->
-            <circle cx="140" cy="140" r="4" fill="url(#globe-grad)">
-              <animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="1;.5;1" dur="3s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Ring pulse outward from core -->
-            <circle cx="140" cy="140" r="4" fill="none" stroke="url(#globe-grad)" stroke-width="1">
-              <animate attributeName="r" values="4;90;4" dur="5s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values=".8;0;.8" dur="5s" repeatCount="indefinite"/>
-            </circle>
-
-          </svg>
-
-          <!-- 6 orbiting labels. Each uses `transform: rotate(a)
-               translateX(r) rotate(-a)` keyframes: outer rotate
-               walks around the globe, inner counter-rotate keeps the
-               label upright. Delays distribute them at 60° intervals. -->
-          <div class="brand-point" style="--delay: 0s">
-            <span class="brand-point-dot"></span>
-            <span class="brand-point-label">Communication studies</span>
-          </div>
-          <div class="brand-point" style="--delay: -10s">
-            <span class="brand-point-dot"></span>
-            <span class="brand-point-label">ESG strategy</span>
-          </div>
-          <div class="brand-point" style="--delay: -20s">
-            <span class="brand-point-dot"></span>
-            <span class="brand-point-label">Venture capital</span>
-          </div>
-          <div class="brand-point" style="--delay: -30s">
-            <span class="brand-point-dot"></span>
-            <span class="brand-point-label">Policy analysis</span>
-          </div>
-          <div class="brand-point" style="--delay: -40s">
-            <span class="brand-point-dot"></span>
-            <span class="brand-point-label">Market foresight</span>
-          </div>
-          <div class="brand-point" style="--delay: -50s">
-            <span class="brand-point-dot"></span>
-            <span class="brand-point-label">Security posture</span>
-          </div>
+        <div class="brand-visual fi d1">
+          <PixelArt variant="attack" alt="Radar de superfície de ataque em pixel art" />
         </div>
       </div>
     </div>
@@ -327,9 +270,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <!-- ═══════════════ LATEST PUBLICATIONS (Research Hub flagship) ═══════ -->
   <div class="section-sep"></div>
   <section id="research" class="section">
-    <div class="section-glow violet" style="top:-60px;right:-100px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(234,234,240,.05) 0%,transparent 70%);filter:blur(60px);position:absolute;pointer-events:none;border-radius:50%"></div>
+    <div class="section-glow violet" style="top:-60px;right:-100px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(255,255,255,.05) 0%,transparent 70%);filter:blur(60px);position:absolute;pointer-events:none;border-radius:50%"></div>
     <div class="section-glow blue" style="bottom:0;left:-80px"></div>
-    <canvas class="section-particles" data-color="lilac"></canvas>
     <div class="container">
       <div class="research-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">{t('research.eyebrow')}</span></div>
@@ -344,7 +286,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
           const extraTag = post.data.tags.find((tag: string) => tag.toLowerCase() !== cat);
           return (
           <a href={`/posts/${post.slug}`} class="research-card fi d1" style="position:relative">
-            <div class="research-card-img" style="padding:0;background:#0B0B0F">
+            <div class="research-card-img" style="padding:0;background:#000000">
               {post.data.cover && (
                 <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
               )}
@@ -386,12 +328,36 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
     </div>
   </section>
 
+  <!-- ═══════════════ FRENTES EM IMAGEM (3 tiles) ═══════════════════ -->
+  <div class="section-sep"></div>
+  <section id="themes" class="section">
+    <div class="container">
+      <div class="themes-head fi">
+        <div class="section-label" style="justify-content:center"><span class="label">Frentes de pesquisa</span></div>
+        <h2 class="section-title">Onde a inteligência<br><span class="gradient-text">encontra a decisão.</span></h2>
+      </div>
+      <div class="themes-grid fi d1">
+        <figure class="theme-tile">
+          <PixelArt variant="market" alt="Rei de xadrez sob luz lateral, em pixel art" />
+          <figcaption class="theme-tile-cap">Inteligência competitiva</figcaption>
+        </figure>
+        <figure class="theme-tile">
+          <PixelArt variant="audience" alt="Plateia diante de uma tela luminosa, em pixel art" />
+          <figcaption class="theme-tile-cap">Comportamento &amp; audiência</figcaption>
+        </figure>
+        <figure class="theme-tile">
+          <PixelArt variant="cyber" alt="Figura encapuzada diante de monitor com cadeado, em pixel art" />
+          <figcaption class="theme-tile-cap">Cybersegurança</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════ RESEARCH AGENDA ════════════════════════════════ -->
   <div class="section-sep"></div>
   <section id="segments" class="section">
     <div class="section-glow lilac" style="top:-100px;right:-150px"></div>
     <div class="section-glow blue" style="bottom:-80px;left:-100px"></div>
-    <canvas class="section-particles" data-color="lilac"></canvas>
     <div class="container">
       <div class="seg-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">{t('segments.eyebrow')}</span></div>
@@ -490,7 +456,6 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <section id="how" class="section">
     <div class="dot-bg"></div>
     <div class="section-glow blue" style="top:50%;left:-120px;transform:translateY(-50%)"></div>
-    <canvas class="section-particles" data-color="blue"></canvas>
     <div class="container">
       <div class="how-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">{t('how.eyebrow')}</span></div>
@@ -503,21 +468,21 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
           <div class="icon-wrap"><svg viewBox="0 0 22 22" fill="none"><path d="M11 3L13.5 8.5H19L14.5 12L16.5 18L11 14.5L5.5 18L7.5 12L3 8.5H8.5L11 3Z" stroke="url(#g1)" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
           <div class="step-title">{t('how.step1Title')}</div>
           <p class="step-desc">{t('how.step1Desc')}</p>
-          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(234,234,240,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="step">
           <div class="step-num">02</div>
           <div class="icon-wrap blue"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke="url(#g2)" stroke-width="1.5"/><path d="M11 7v4l3 2" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
           <div class="step-title">{t('how.step2Title')}</div>
           <p class="step-desc">{t('how.step2Desc')}</p>
-          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(234,234,240,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="step">
           <div class="step-num">03</div>
           <div class="icon-wrap cyan"><svg viewBox="0 0 22 22" fill="none"><rect x="3" y="13" width="3" height="6" rx="1" fill="url(#g-green)" opacity=".7"/><rect x="8" y="9" width="3" height="10" rx="1" fill="url(#g-green)"/><rect x="13" y="5" width="3" height="14" rx="1" fill="url(#g-green)"/><rect x="18" y="3" width="3" height="16" rx="1" fill="url(#g1)"/></svg></div>
           <div class="step-title">{t('how.step3Title')}</div>
           <p class="step-desc">{t('how.step3Desc')}</p>
-          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(234,234,240,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="step-connector"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M12 7l3 3-3 3" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="step">
           <div class="step-num">04</div>
@@ -548,8 +513,6 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <section id="demo" class="section">
     <div class="section-glow green" style="top:20%;right:-100px"></div>
     <div class="section-glow lilac" style="bottom:10%;left:-120px"></div>
-    <canvas class="section-particles" data-color="green"></canvas>
-    <NeuralNetwork color="white" density="low" opacity={0.12} />
     <div class="container">
       <div class="demo-inner">
         <div class="fi-l">
@@ -611,8 +574,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
                     <circle cx="45" cy="45" r="28" fill="none" stroke="url(#g2)" stroke-width="7" stroke-linecap="round" stroke-dasharray="150 176" stroke-dashoffset="44"/>
                     <circle cx="45" cy="45" r="18" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="6"/>
                     <circle cx="45" cy="45" r="18" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round" stroke-dasharray="95 113" stroke-dashoffset="28"/>
-                    <text x="45" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#EAEAF0" font-family="Satoshi">3.48×</text>
-                    <text x="45" y="54" text-anchor="middle" font-size="8" fill="rgba(234,234,240,0.35)" font-family="Satoshi">{t('demo.rcDonutLbl')}</text>
+                    <text x="45" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF" font-family="DM Mono">3.48×</text>
+                    <text x="45" y="54" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.35)" font-family="DM Mono">{t('demo.rcDonutLbl')}</text>
                   </svg>
                   <div class="donut-legend">
                     <div class="donut-leg-item"><div class="donut-leg-dot" style="background:var(--green)"></div>{t('demo.rcLegendPerceived')}</div>
@@ -631,11 +594,11 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
                   <path class="line-draw" d="M0,62 C26,58 53,54 80,46 C106,38 133,40 160,32 C186,24 213,26 240,18 C266,10 293,12 320,6" fill="none" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" filter="url(#glow-f)"/>
                   <path d="M0,70 C26,68 53,66 80,62 C106,58 133,60 160,56 C186,52 213,50 240,46 C266,42 293,44 320,40 L320,80 L0,80 Z" fill="url(#g-area2)"/>
                   <path class="line-draw" d="M0,70 C26,68 53,66 80,62 C106,58 133,60 160,56 C186,52 213,50 240,46 C266,42 293,44 320,40" fill="none" stroke="url(#g-line2)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="4 2"/>
-                  <circle cx="320" cy="6" r="3" fill="rgba(234,234,240,0.85)" filter="url(#glow-f)"/>
-                  <circle cx="320" cy="40" r="3" fill="rgba(234,234,240,0.65)" filter="url(#glow-f)"/>
-                  <text x="0" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Jan</text>
-                  <text x="148" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Jun</text>
-                  <text x="305" y="78" font-size="7" fill="rgba(234,234,240,.2)" font-family="Satoshi">Dec</text>
+                  <circle cx="320" cy="6" r="3" fill="rgba(255,255,255,0.85)" filter="url(#glow-f)"/>
+                  <circle cx="320" cy="40" r="3" fill="rgba(255,255,255,0.65)" filter="url(#glow-f)"/>
+                  <text x="0" y="78" font-size="7" fill="rgba(255,255,255,.2)" font-family="DM Mono">Jan</text>
+                  <text x="148" y="78" font-size="7" fill="rgba(255,255,255,.2)" font-family="DM Mono">Jun</text>
+                  <text x="305" y="78" font-size="7" fill="rgba(255,255,255,.2)" font-family="DM Mono">Dec</text>
                 </svg>
               </div>
               <div class="rc-bars">
@@ -737,7 +700,6 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <section id="about" class="section">
     <div class="section-glow lilac" style="top:20%;left:-100px"></div>
     <div class="section-glow blue" style="bottom:10%;right:-80px"></div>
-    <canvas class="section-particles" data-color="lilac"></canvas>
     <div class="container">
       <div class="fi" style="text-align:center;margin-bottom:56px">
         <div class="section-label" style="justify-content:center"><span class="label">{t('about.eyebrow')}</span></div>
@@ -747,6 +709,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
 
       <div class="home-about-layout">
         <div class="home-about-text fi-l">
+          <PixelArt variant="lab" alt="Frasco de laboratório em pixel art" class="home-about-img" />
           <p set:html={t('about.p1')}></p>
           <p set:html={t('about.p2')}></p>
           <p set:html={t('about.p3')}></p>

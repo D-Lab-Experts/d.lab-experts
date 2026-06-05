@@ -1,0 +1,162 @@
+---
+/**
+ * PixelBird — pássaro pixel art ambiente.
+ * Atravessa a tela voando da esquerda para a direita em intervalos
+ * randômicos (14–26s), em altura randômica na metade superior. Bate as
+ * asas em duas frames (CSS steps) e "se assusta" quando o cursor chega
+ * perto (acelera o flap e desvia subindo). Sob prefers-reduced-motion
+ * não aparece.
+ */
+interface Props {
+  /** Tamanho de cada pixel em px. */
+  cell?: number;
+}
+const { cell = 6 } = Astro.props;
+
+const FRAME_A = [
+  '.##.....##.',
+  '..##...##..',
+  '...##.##...',
+  '....###....',
+  '.....#.....',
+  '...........',
+];
+const FRAME_B = [
+  '...........',
+  '....###....',
+  '...##.##...',
+  '..##...##..',
+  '.##.....##.',
+  '#.........#',
+];
+
+const cols = FRAME_A[0].length;
+const rows = FRAME_A.length;
+const w = cols * cell;
+const h = rows * cell;
+
+function rects(map: string[]) {
+  const out: { x: number; y: number }[] = [];
+  map.forEach((line, y) => {
+    for (let x = 0; x < line.length; x++) {
+      if (line[x] === '#') out.push({ x: x * cell, y: y * cell });
+    }
+  });
+  return out;
+}
+const cellsA = rects(FRAME_A);
+const cellsB = rects(FRAME_B);
+---
+
+<div class="bird" data-bird aria-hidden="true" style={`--bw:${w}px;--bh:${h}px`}>
+  <svg class="frame frame-a" width={w} height={h} viewBox={`0 0 ${w} ${h}`} shape-rendering="crispEdges">
+    {cellsA.map((c) => <rect x={c.x} y={c.y} width={cell} height={cell} fill="#fff" />)}
+  </svg>
+  <svg class="frame frame-b" width={w} height={h} viewBox={`0 0 ${w} ${h}`} shape-rendering="crispEdges">
+    {cellsB.map((c) => <rect x={c.x} y={c.y} width={cell} height={cell} fill="#fff" />)}
+  </svg>
+</div>
+
+<style>
+  .bird {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--bw); height: var(--bh);
+    pointer-events: none;
+    z-index: 900;
+    opacity: 0;
+    will-change: transform;
+  }
+  .bird.flying { opacity: 1; }
+  .frame { position: absolute; top: 0; left: 0; }
+  .frame-a { animation: flap .14s steps(1) infinite; }
+  .frame-b { animation: flap .14s steps(1) infinite reverse; }
+  @keyframes flap { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  .bird.startled .frame-a,
+  .bird.startled .frame-b { animation-duration: .08s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bird { display: none; }
+  }
+</style>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bird = document.querySelector<HTMLElement>('[data-bird]');
+
+  if (bird && !reduce) {
+    const bw = bird.offsetWidth || 66;
+    const bh = bird.offsetHeight || 36;
+
+    let flying = false;
+    let startX = 0, baseY = 0, amp = 0, dist = 0;
+    let progress = 0, duration = 0, lastT = 0;
+    let curX = -bw, curY = 0;
+    let deflect = 0;            // desvio extra (assustado)
+    let pointerX = -9999, pointerY = -9999;
+
+    addEventListener('pointermove', (e) => {
+      pointerX = e.clientX;
+      pointerY = e.clientY;
+    }, { passive: true });
+
+    function scheduleNext() {
+      const delay = 14000 + Math.random() * 12000; // 14–26s
+      setTimeout(startCrossing, delay);
+    }
+
+    function startCrossing() {
+      const vw = innerWidth;
+      const vh = innerHeight;
+      startX = -bw;
+      dist = vw + bw * 2;
+      baseY = 40 + Math.random() * Math.max(60, vh * 0.5 - bh - 40); // metade superior
+      amp = 8 + Math.random() * 18;
+      duration = 7000 + Math.random() * 4000;
+      progress = 0;
+      deflect = 0;
+      lastT = 0;
+      flying = true;
+      bird!.classList.add('flying');
+      requestAnimationFrame(step);
+    }
+
+    function step(t: number) {
+      if (!flying) return;
+      if (!lastT) lastT = t;
+      const dt = t - lastT;
+      lastT = t;
+
+      progress += dt / duration;
+      if (progress >= 1) {
+        flying = false;
+        bird!.classList.remove('flying', 'startled');
+        scheduleNext();
+        return;
+      }
+
+      curX = startX + dist * progress;
+      const sine = Math.sin(progress * Math.PI * 4) * amp;
+
+      // Reatividade: se o cursor está perto, assusta (desvia pra cima + flap rápido).
+      const cx = curX + bw / 2;
+      const cy = baseY + sine - deflect + bh / 2;
+      const dx = pointerX - cx;
+      const dy = pointerY - cy;
+      const near = dx * dx + dy * dy < 80 * 80;
+      if (near) {
+        bird!.classList.add('startled');
+        deflect = Math.min(deflect + dt * 0.18, 70);
+      } else {
+        bird!.classList.remove('startled');
+        deflect = Math.max(deflect - dt * 0.08, 0);
+      }
+
+      curY = baseY + sine - deflect;
+      bird!.style.transform = `translate(${curX}px, ${curY}px)`;
+      requestAnimationFrame(step);
+    }
+
+    scheduleNext();
+  }
+</script>
