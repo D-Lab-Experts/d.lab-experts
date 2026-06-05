@@ -24,48 +24,56 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   active="home"
 >
   <!-- ═══════════════ HERO ══════════════════════════════════════════
-       Rebrand monocromático: wordmark D.Lab em Syne (o ponto é o mascote
-       "O ponto", que segue o mouse), eyebrow em DM Mono, tagline por
-       negação e bloco de prova com os números reais da pesquisa. -->
-  <section id="hero">
-    <div class="pixel-grid" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <div class="hero-text fi">
-        <div class="hero-eyebrow">{t('hero.eyebrow')}</div>
-        <h1 class="hero-wordmark">
-          <span class="hero-wordmark-text">D</span><span class="hero-wordmark-dot" aria-hidden="true"></span><span class="hero-wordmark-text">Lab</span>
-        </h1>
-        <p class="hero-tagline">
-          <span class="tg-faint">{t('hero.taglineLine1')}</span><br />
-          <span class="tg-faint">{t('hero.taglineLine2')}</span><br />
-          <span class="tg-ink">{t('hero.taglineLine3')}</span>
-        </p>
-        <div class="hero-ctas">
-          <a href="/contato" class="cta-invert sweep">{t('hero.ctaPrimary')}</a>
-          <a href="/blog" class="btn btn-ghost sweep">{t('hero.ctaSecondary')}</a>
-        </div>
-        <div class="hero-proof">
-          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
-            <span class="hero-proof-val">{t('hero.proof1Val')}</span>
-            <span class="hero-proof-lbl">{t('hero.proof1Lbl')}</span>
-          </a>
-          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
-            <span class="hero-proof-val">{t('hero.proof2Val')}</span>
-            <span class="hero-proof-lbl">{t('hero.proof2Lbl')}</span>
-          </a>
-          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
-            <span class="hero-proof-val">{t('hero.proof3Val')}</span>
-            <span class="hero-proof-lbl">{t('hero.proof3Lbl')}</span>
-          </a>
-          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
-            <span class="hero-proof-val">{t('hero.proof4Val')}</span>
-            <span class="hero-proof-lbl">{t('hero.proof4Lbl')}</span>
-          </a>
-          <a href="/posts/campanhas-afirmativas-gaming" class="hero-proof-item sweep">
-            <span class="hero-proof-val">{t('hero.proof5Val')}</span>
-            <span class="hero-proof-lbl">{t('hero.proof5Lbl')}</span>
-          </a>
-        </div>
+       Redesign monocromático Apple/Resend: composição editorial à
+       esquerda, headline em Inter peso leve, grid fino + glow branco no
+       topo, faixa de dados full-bleed com hairlines. Estilo escopado
+       abaixo (.hero-b-*). Alto contraste por preto×branco, sem cor. -->
+  <section id="hero" class="hero-b">
+    <div class="hero-b-grid" aria-hidden="true"></div>
+    <div class="hero-b-glow" aria-hidden="true"></div>
+
+    <div class="hero-b-wrap">
+      <div class="hero-b-brandrow fi">
+        <span class="hero-b-brand">D<span class="hero-b-dot" aria-hidden="true"></span>Lab</span>
+        <span class="hero-b-sep" aria-hidden="true"></span>
+        <span class="hero-b-eyebrow">{t('hero.eyebrow')}</span>
+      </div>
+
+      <h1 class="hero-b-headline fi d1">
+        <span class="dim">{t('hero.taglineLine1')} {t('hero.taglineLine2')}</span><br />
+        <span class="ink">{t('hero.taglineLine3')}</span>
+      </h1>
+
+      <p class="hero-b-sub fi d2">{t('hero.sub')}</p>
+
+      <div class="hero-b-ctas fi d3">
+        <a href="/contato" class="hero-b-btn hero-b-btn-solid">{t('hero.ctaPrimary')}</a>
+        <a href="/blog" class="hero-b-btn hero-b-btn-ghost">{t('hero.ctaSecondary')}</a>
+      </div>
+    </div>
+
+    <div class="hero-b-proof fi d4">
+      <div class="hero-b-proof-inner">
+        <a href="/posts/campanhas-afirmativas-gaming" class="hero-b-proof-item">
+          <span class="hero-b-proof-val">{t('hero.proof1Val')}</span>
+          <span class="hero-b-proof-lbl">{t('hero.proof1Lbl')}</span>
+        </a>
+        <a href="/posts/campanhas-afirmativas-gaming" class="hero-b-proof-item">
+          <span class="hero-b-proof-val">{t('hero.proof2Val')}</span>
+          <span class="hero-b-proof-lbl">{t('hero.proof2Lbl')}</span>
+        </a>
+        <a href="/posts/campanhas-afirmativas-gaming" class="hero-b-proof-item">
+          <span class="hero-b-proof-val">{t('hero.proof3Val')}</span>
+          <span class="hero-b-proof-lbl">{t('hero.proof3Lbl')}</span>
+        </a>
+        <a href="/posts/campanhas-afirmativas-gaming" class="hero-b-proof-item">
+          <span class="hero-b-proof-val">{t('hero.proof4Val')}</span>
+          <span class="hero-b-proof-lbl">{t('hero.proof4Lbl')}</span>
+        </a>
+        <a href="/posts/campanhas-afirmativas-gaming" class="hero-b-proof-item">
+          <span class="hero-b-proof-val">{t('hero.proof5Val')}</span>
+          <span class="hero-b-proof-lbl">{t('hero.proof5Lbl')}</span>
+        </a>
       </div>
     </div>
   </section>
@@ -839,3 +847,141 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
     </div>
   </section>
 </Layout>
+
+<style>
+  /* ── HERO B · Resend Minimal (monocromático, alto contraste) ───────
+     Composição editorial à esquerda, headline Inter peso leve, grid
+     fino + glow branco no topo, faixa de dados full-bleed com hairlines.
+     Reveals herdam do sistema global .fi (disparado pelo Layout no
+     #hero). Ênfase por escala e contraste, nunca por cor. */
+  .hero-b {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 150px 0 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .hero-b-grid {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 60% at 25% 30%, #000 10%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 25% 30%, #000 10%, transparent 72%);
+  }
+  .hero-b-glow {
+    position: absolute; z-index: 0; pointer-events: none;
+    top: -360px; left: 8%;
+    width: 760px; height: 760px;
+    background: radial-gradient(circle at center,
+      rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 40%, transparent 70%);
+    filter: blur(30px);
+  }
+
+  .hero-b-wrap {
+    position: relative; z-index: 2;
+    width: 100%; max-width: 1180px;
+    margin: 0 auto; padding: 0 40px;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .hero-b-brandrow {
+    display: inline-flex; align-items: center; gap: 16px;
+    margin-bottom: 40px;
+  }
+  .hero-b-brand {
+    display: inline-flex; align-items: flex-end;
+    font-weight: 500; font-size: 18px;
+    letter-spacing: -0.02em; color: var(--ink); line-height: 1;
+  }
+  .hero-b-dot { width: 4px; height: 4px; background: var(--ink); margin: 0 2px 3px; align-self: flex-end; }
+  .hero-b-sep { width: 1px; height: 13px; background: var(--line-strong); }
+  .hero-b-eyebrow {
+    font-size: 11.5px; font-weight: 400;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  .hero-b-headline {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(38px, 5.6vw, 78px);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    max-width: 16ch;
+    text-wrap: balance;
+    margin-bottom: 34px;
+  }
+  .hero-b-headline .dim { color: var(--ink-faint); font-weight: 200; }
+  .hero-b-headline .ink { color: var(--ink); font-weight: 400; }
+
+  .hero-b-sub {
+    font-size: 18px; font-weight: 400; line-height: 1.7;
+    color: var(--ink-dim);
+    max-width: 540px;
+    margin-bottom: 40px;
+    text-wrap: pretty;
+  }
+
+  .hero-b-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-b-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px; border-radius: 10px;
+    font-size: 15px; font-weight: 500; font-family: var(--font-sans);
+    cursor: pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .hero-b-btn-solid { background: var(--ink); color: #000; border: 1px solid var(--ink); }
+  .hero-b-btn-solid:hover { transform: translateY(-2px); background: #fff; }
+  .hero-b-btn-ghost { background: rgba(255,255,255,0.02); color: var(--ink); border: 1px solid var(--line-strong); }
+  .hero-b-btn-ghost:hover { border-color: rgba(255,255,255,0.42); background: rgba(255,255,255,0.05); transform: translateY(-2px); }
+
+  .hero-b-proof {
+    position: relative; z-index: 2;
+    width: 100%;
+    margin-top: 72px;
+    border-top: 1px solid var(--line);
+    background: rgba(255,255,255,0.015);
+  }
+  .hero-b-proof-inner {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+  }
+  .hero-b-proof-item {
+    display: flex; flex-direction: column; gap: 9px;
+    padding: 24px 28px;
+    border-right: 1px solid var(--line);
+    color: inherit; text-decoration: none;
+    transition: background .2s ease;
+  }
+  .hero-b-proof-item:last-child { border-right: none; }
+  .hero-b-proof-item:hover { background: rgba(255,255,255,0.03); }
+  .hero-b-proof-val {
+    font-size: clamp(19px, 1.9vw, 25px);
+    font-weight: 300; letter-spacing: -0.02em;
+    color: var(--ink); font-feature-settings: 'tnum' 1;
+  }
+  .hero-b-proof-lbl { font-size: 11.5px; line-height: 1.5; color: var(--ink-dim); font-weight: 400; }
+
+  @media (max-width: 1000px) {
+    .hero-b-proof-inner { grid-template-columns: repeat(3, 1fr); }
+    .hero-b-proof-item:nth-child(3) { border-right: none; }
+    .hero-b-proof-item:nth-child(n+4) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 620px) {
+    .hero-b { padding: 116px 0 0; }
+    .hero-b-wrap { padding: 0 24px; }
+    .hero-b-headline { max-width: none; }
+    .hero-b-proof-inner { grid-template-columns: repeat(2, 1fr); }
+    .hero-b-proof-item:nth-child(3) { border-right: 1px solid var(--line); }
+    .hero-b-proof-item:nth-child(2n) { border-right: none; }
+    .hero-b-proof-item:nth-child(n+3) { border-top: 1px solid var(--line); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-b-btn:hover { transform: none; }
+  }
+</style>

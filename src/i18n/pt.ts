@@ -71,6 +71,7 @@ const pt: Translation = {
     taglineLine1: 'não é consultoria.',
     taglineLine2: 'não é pesquisa de mercado.',
     taglineLine3: 'é inteligência para decisão.',
+    sub: 'Laboratório de pesquisa aplicada em Decision Intelligence, Data Engineering e Cybersecurity. Método explícito, dados primários, publicação aberta.',
     ctaPrimary: 'iniciar projeto →',
     ctaSecondary: 'ler a pesquisa',
     proof1Val: 'N=98',
