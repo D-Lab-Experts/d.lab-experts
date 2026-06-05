@@ -42,14 +42,17 @@
   --red:      rgba(255,255,255,0.72);
   --violet:   rgba(255,255,255,0.72);
   --magenta:  rgba(255,255,255,0.72);
-  /* Tipografia do rebrand (registro tech):
-     Space Grotesk (display/títulos/wordmark) · DM Mono (dados/números/UI)
-     · DM Sans (corpo) · Silkscreen (microlabels pixel, só uppercase curto).
-     --font-serif fica remapeada pra DM Sans pra manter o corpo coerente. */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-sans:    'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-mono:    'DM Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-pixel:   'Silkscreen', 'DM Mono', ui-monospace, monospace;
+  /* Tipografia do redesign (registro Apple/Resend, monocromático):
+     Inter como fonte única em todos os papéis — display, corpo e dados.
+     Pesos finos (200/300) sustentam o registro elegante e cinemático;
+     a ênfase vem de escala e contraste, nunca de cor. --font-mono fica
+     pro mono do sistema (código/tabular em posts). Aliases legados
+     (--font-display/pixel/serif) remapeados pra Inter pra não quebrar as
+     referências espalhadas no arquivo e nas outras páginas. */
+  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-pixel:   var(--font-sans);
   --font-serif:   var(--font-sans);
   /* "Gradients" achatados pra branco sólido / falloff translúcido. */
   --grad:     #FFFFFF;
