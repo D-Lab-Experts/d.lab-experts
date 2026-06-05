@@ -1,47 +1,19 @@
 <svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" fill="none" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <defs>
-    <radialGradient id="cc-bg" cx="32%" cy="36%" r="80%">
-      <stop offset="0%" stop-color="#16161c"/>
-      <stop offset="60%" stop-color="#0a0a0d"/>
+    <radialGradient id="cc-bg" cx="30%" cy="34%" r="85%">
+      <stop offset="0%" stop-color="#17171d"/>
+      <stop offset="62%" stop-color="#0a0a0d"/>
       <stop offset="100%" stop-color="#000000"/>
     </radialGradient>
-    <linearGradient id="cc-area" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="rgba(255,255,255,0.14)"/>
-      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-    </linearGradient>
   </defs>
 
   <rect width="1200" height="675" fill="url(#cc-bg)"/>
-  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
-    <line x1="0" y1="168" x2="1200" y2="168"/><line x1="0" y1="336" x2="1200" y2="336"/><line x1="0" y1="504" x2="1200" y2="504"/>
-    <line x1="300" y1="0" x2="300" y2="675"/><line x1="600" y1="0" x2="600" y2="675"/><line x1="900" y1="0" x2="900" y2="675"/>
-  </g>
 
-  <text x="80" y="96" fill="rgba(255,255,255,0.55)" font-size="20" font-weight="500" letter-spacing="4">D.LAB · RESEARCH SERIES — ESTUDO #002</text>
+  <text x="80" y="120" fill="rgba(255,255,255,0.5)" font-size="21" font-weight="500" letter-spacing="5">D.LAB RESEARCH SERIES · #002</text>
+  <text x="80" y="178" fill="rgba(245,245,247,0.62)" font-size="38" font-weight="300" letter-spacing="-1">Ciclismo no Brasil</text>
 
-  <text x="78" y="180" fill="#F5F5F7" font-size="56" font-weight="300" letter-spacing="-2">Ciclismo no Brasil</text>
-  <text x="78" y="244" fill="rgba(245,245,247,0.6)" font-size="40" font-weight="200" letter-spacing="-1">mortes estáveis, internações em alta</text>
+  <text x="74" y="470" fill="#FFFFFF" font-size="210" font-weight="200" letter-spacing="-8">+71%</text>
 
-  <text x="74" y="470" fill="#FFFFFF" font-size="160" font-weight="300" letter-spacing="-6">+71%</text>
-  <text x="80" y="528" fill="rgba(245,245,247,0.7)" font-size="26" font-weight="400">internações por acidente de bicicleta</text>
-  <text x="80" y="562" fill="rgba(245,245,247,0.7)" font-size="26" font-weight="400">ao longo da década</text>
-
-  <!-- gráfico em tesoura -->
-  <line x1="840" y1="120" x2="840" y2="560" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-  <text x="900" y="150" fill="rgba(255,255,255,0.5)" font-size="18" font-weight="500" letter-spacing="2">SÉRIE DA DÉCADA</text>
-
-  <!-- internações: sobe (área + linha) -->
-  <path d="M896,452 C960,440 1010,400 1064,330 C1096,290 1112,250 1132,224 L1132,490 L896,490 Z" fill="url(#cc-area)"/>
-  <path d="M896,452 C960,440 1010,400 1064,330 C1096,290 1112,250 1132,224" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>
-  <circle cx="1132" cy="224" r="5" fill="#FFFFFF"/>
-  <text x="1126" y="206" fill="#FFFFFF" font-size="20" font-weight="400" text-anchor="end">internações</text>
-
-  <!-- mortes: estável -->
-  <path d="M896,372 C960,370 1010,374 1064,370 C1096,368 1112,372 1132,370" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round"/>
-  <circle cx="1132" cy="370" r="4.5" fill="rgba(255,255,255,0.6)"/>
-  <text x="1126" y="402" fill="rgba(255,255,255,0.6)" font-size="20" font-weight="400" text-anchor="end">mortes · ~1.300/ano</text>
-
-  <line x1="896" y1="490" x2="1132" y2="490" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-
-  <text x="80" y="636" fill="rgba(255,255,255,0.4)" font-size="17" font-weight="500" letter-spacing="2">FONTES OFICIAIS · SÉRIE HISTÓRICA · ANÁLISE D.LAB</text>
+  <line x1="84" y1="520" x2="360" y2="520" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+  <text x="84" y="566" fill="rgba(245,245,247,0.66)" font-size="26" font-weight="400">internações por acidente de bicicleta ao longo da década</text>
 </svg>

@@ -1,44 +1,19 @@
 <svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" fill="none" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <defs>
-    <radialGradient id="cg-bg" cx="32%" cy="36%" r="80%">
-      <stop offset="0%" stop-color="#16161c"/>
-      <stop offset="60%" stop-color="#0a0a0d"/>
+    <radialGradient id="cg-bg" cx="30%" cy="34%" r="85%">
+      <stop offset="0%" stop-color="#17171d"/>
+      <stop offset="62%" stop-color="#0a0a0d"/>
       <stop offset="100%" stop-color="#000000"/>
     </radialGradient>
-    <linearGradient id="cg-bar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="rgba(255,255,255,0.85)"/>
-      <stop offset="100%" stop-color="rgba(255,255,255,0.35)"/>
-    </linearGradient>
   </defs>
 
   <rect width="1200" height="675" fill="url(#cg-bg)"/>
-  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
-    <line x1="0" y1="168" x2="1200" y2="168"/><line x1="0" y1="336" x2="1200" y2="336"/><line x1="0" y1="504" x2="1200" y2="504"/>
-    <line x1="300" y1="0" x2="300" y2="675"/><line x1="600" y1="0" x2="600" y2="675"/><line x1="900" y1="0" x2="900" y2="675"/>
-  </g>
 
-  <text x="80" y="96" fill="rgba(255,255,255,0.55)" font-size="20" font-weight="500" letter-spacing="4">D.LAB · RESEARCH SERIES — ESTUDO #001</text>
+  <text x="80" y="120" fill="rgba(255,255,255,0.5)" font-size="21" font-weight="500" letter-spacing="5">D.LAB RESEARCH SERIES · #001</text>
+  <text x="80" y="178" fill="rgba(245,245,247,0.62)" font-size="38" font-weight="300" letter-spacing="-1">Campanhas afirmativas no gaming</text>
 
-  <text x="78" y="180" fill="#F5F5F7" font-size="56" font-weight="300" letter-spacing="-2">Campanhas afirmativas</text>
-  <text x="78" y="244" fill="rgba(245,245,247,0.6)" font-size="56" font-weight="200" letter-spacing="-2">no gaming</text>
+  <text x="74" y="470" fill="#FFFFFF" font-size="210" font-weight="200" letter-spacing="-8">3.48×</text>
 
-  <text x="74" y="470" fill="#FFFFFF" font-size="170" font-weight="300" letter-spacing="-6">3.48×</text>
-  <text x="80" y="528" fill="rgba(245,245,247,0.7)" font-size="26" font-weight="400">mais propensos a trocar de marca por</text>
-  <text x="80" y="562" fill="rgba(245,245,247,0.7)" font-size="26" font-weight="400">compromisso social comprovado</text>
-
-  <line x1="840" y1="120" x2="840" y2="560" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-
-  <text x="900" y="150" fill="rgba(255,255,255,0.5)" font-size="18" font-weight="500" letter-spacing="2">PERCEPÇÃO DE IMPACTO</text>
-
-  <rect x="912" y="300" width="64" height="220" rx="6" fill="url(#cg-bar)"/>
-  <text x="944" y="285" fill="#FFFFFF" font-size="30" font-weight="300" text-anchor="middle">73%</text>
-  <text x="944" y="552" fill="rgba(255,255,255,0.5)" font-size="17" font-weight="400" text-anchor="middle">minoria</text>
-
-  <rect x="1040" y="388" width="64" height="132" rx="6" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-  <text x="1072" y="373" fill="rgba(255,255,255,0.75)" font-size="30" font-weight="300" text-anchor="middle">44%</text>
-  <text x="1072" y="552" fill="rgba(255,255,255,0.5)" font-size="17" font-weight="400" text-anchor="middle">não-minoria</text>
-
-  <line x1="900" y1="521" x2="1124" y2="521" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-
-  <text x="80" y="636" fill="rgba(255,255,255,0.4)" font-size="17" font-weight="500" letter-spacing="2">N=98 · PROTOCOLO STROBE · DADOS PRIMÁRIOS</text>
+  <line x1="84" y1="520" x2="360" y2="520" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+  <text x="84" y="566" fill="rgba(245,245,247,0.66)" font-size="26" font-weight="400">mais propensos a trocar de marca por compromisso comprovado</text>
 </svg>
