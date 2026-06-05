@@ -155,8 +155,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
        between the featured study and the brand statement so readers
        land on the tool right after seeing what we publish. -->
   <section id="diagnostic-promo" class="diag-promo-section">
-    <div class="section-glow lilac" style="top:20%;left:-100px;width:460px;height:340px"></div>
-    <div class="section-glow blue" style="bottom:-40px;right:-60px;width:520px;height:360px"></div>
+    <div class="section-glow lilac" data-parallax="0.1" style="top:20%;left:-100px;width:460px;height:340px"></div>
+    <div class="section-glow blue" data-parallax="-0.08" style="bottom:-40px;right:-60px;width:520px;height:360px"></div>
     <div class="container">
       <a class="diag-promo-card fi" href="/diagnostico" aria-label={t('diagnostic.homePromoCta')}>
         <div class="diag-promo-copy">
@@ -239,8 +239,10 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
              wireframe Earth, signaling where our research lands in
              the world. Outer rotation walks the points around the
              globe; inner counter-rotation keeps each label upright. -->
-        <div class="brand-visual fi d1">
-          <PixelArt variant="attack" alt="Radar de superfície de ataque em pixel art" />
+        <div class="brand-visual fi d1 tilt">
+          <div class="tilt-inner">
+            <PixelArt variant="attack" alt="Radar de superfície de ataque em pixel art" />
+          </div>
         </div>
       </div>
     </div>
@@ -364,8 +366,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <!-- ═══════════════ RESEARCH AGENDA ════════════════════════════════ -->
   <div class="section-sep"></div>
   <section id="segments" class="section">
-    <div class="section-glow lilac" style="top:-100px;right:-150px"></div>
-    <div class="section-glow blue" style="bottom:-80px;left:-100px"></div>
+    <div class="section-glow lilac" data-parallax="0.09" style="top:-100px;right:-150px"></div>
+    <div class="section-glow blue" data-parallax="-0.07" style="bottom:-80px;left:-100px"></div>
     <div class="container">
       <div class="seg-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">{t('segments.eyebrow')}</span></div>
@@ -519,8 +521,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
 
   <!-- ═══════════════ DEMO ══════════════════ -->
   <section id="demo" class="section">
-    <div class="section-glow green" style="top:20%;right:-100px"></div>
-    <div class="section-glow lilac" style="bottom:10%;left:-120px"></div>
+    <div class="section-glow green" data-parallax="0.1" style="top:20%;right:-100px"></div>
+    <div class="section-glow lilac" data-parallax="-0.08" style="bottom:10%;left:-120px"></div>
     <div class="container">
       <div class="demo-inner">
         <div class="fi-l">
@@ -653,7 +655,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <!-- ═══════════════ OPEN COLLABORATION ═════════════════════════════ -->
   <section id="collaborate" class="home-colab-section">
     <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:520px;height:380px"></div>
-    <div class="section-glow blue" style="bottom:-60px;right:-100px"></div>
+    <div class="section-glow blue" data-parallax="-0.08" style="bottom:-60px;right:-100px"></div>
     <div class="container">
       <div class="home-colab-inner fi">
         <div class="section-label" style="justify-content:center;margin-bottom:20px">
@@ -706,8 +708,8 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
   <div class="section-sep"></div>
   <!-- ═══════════════ SOBRE ══════════════════════════════════════════ -->
   <section id="about" class="section">
-    <div class="section-glow lilac" style="top:20%;left:-100px"></div>
-    <div class="section-glow blue" style="bottom:10%;right:-80px"></div>
+    <div class="section-glow lilac" data-parallax="0.09" style="top:20%;left:-100px"></div>
+    <div class="section-glow blue" data-parallax="-0.07" style="bottom:10%;right:-80px"></div>
     <div class="container">
       <div class="fi" style="text-align:center;margin-bottom:56px">
         <div class="section-label" style="justify-content:center"><span class="label">{t('about.eyebrow')}</span></div>
