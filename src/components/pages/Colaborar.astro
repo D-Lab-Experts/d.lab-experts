@@ -20,7 +20,7 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
   <!-- ═══════════════ HERO ═══════════════════════════════════════════ -->
   <section class="colab-hero">
     <div class="section-glow lilac" style="top:-40px;left:50%;transform:translateX(-50%)"></div>
-    <div class="section-glow blue" style="bottom:10%;right:-80px"></div>
+    <div class="section-glow blue" data-parallax="0.08" style="bottom:10%;right:-80px"></div>
     <NeuralNetwork color="white" density="low" opacity={0.12} />
 
     <div class="container">
@@ -42,7 +42,7 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
 
   <!-- ═══════════════ COLLABORATION MODES ═══════════════════════════ -->
   <section class="colab-section">
-    <div class="section-glow lilac" style="top:20%;right:-120px"></div>
+    <div class="section-glow lilac" data-parallax="0.08" style="top:20%;right:-120px"></div>
     <div class="container">
       <div class="colab-modes-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">{t('colab.modesLabel')}</span></div>
@@ -82,7 +82,7 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
 
   <!-- ═══════════════ PROCESS ═══════════════════════════════════ -->
   <section class="colab-section">
-    <div class="section-glow blue" style="top:40%;left:-100px"></div>
+    <div class="section-glow blue" data-parallax="0.08" style="top:40%;left:-100px"></div>
     <div class="container">
       <div class="colab-modes-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">{t('colab.processLabel')}</span></div>
@@ -180,7 +180,6 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
                 <option>{t('colab.linePolitics')}</option>
                 <option>{t('colab.lineTech')}</option>
                 <option>{t('colab.lineCompetitive')}</option>
-                <option>{t('colab.lineCyber')}</option>
                 <option>{t('colab.lineOther')}</option>
               </select>
             </label>
@@ -436,7 +435,7 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
     padding: 12px 14px;
     font-size: 14px;
     font-family: inherit;
-    background: rgba(34, 34, 46, 0.6);
+    background: rgba(255,255,255,0.045);
     border: 1px solid var(--border);
     border-radius: 10px;
     color: var(--white);
@@ -448,14 +447,14 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
   .colab-form select:focus,
   .colab-form textarea:focus {
     border-color: rgba(234,234,240, 0.4);
-    background: rgba(34, 34, 46, 0.85);
+    background: rgba(255,255,255,0.07);
   }
   .colab-form input::placeholder,
   .colab-form textarea::placeholder { color: var(--dimmed); }
   .colab-form select {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23B18CFF' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23EAEAF0' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
     padding-right: 36px;

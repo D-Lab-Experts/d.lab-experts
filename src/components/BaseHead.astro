@@ -52,7 +52,7 @@ const imageURL = new URL(image, Astro.site);
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#0B0B0F" />
+<meta name="theme-color" content="#000000" />
 <meta name="color-scheme" content="dark" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 
@@ -67,17 +67,14 @@ const imageURL = new URL(image, Astro.site);
 
 <link rel="alternate" type="application/rss+xml" title="D.Lab Experts · Research Hub" href="/rss.xml" />
 
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-<link
-  href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap"
-  rel="stylesheet"
-/>
-<!-- Serif editorial para corpo de leitura de publicações (post body,
-     subtítulos, blockquotes). Satoshi continua dona da UI. -->
+<!-- Redesign monocromático Apple/Resend: Inter como fonte única
+     (display + corpo + dados), pesos finos para registro elegante e
+     alto contraste. Optical sizing on. Código/tabular usa o mono do
+     sistema. font-display: swap, só os pesos usados. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,500&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,500;14..32,600&display=swap"
   rel="stylesheet"
 />
 

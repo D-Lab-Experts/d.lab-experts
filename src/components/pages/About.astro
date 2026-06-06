@@ -14,7 +14,7 @@ const t = useTranslations();
   <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
   <section class="about-hero">
     <div class="section-glow lilac" style="top:-50px;left:50%;transform:translateX(-50%)"></div>
-    <div class="section-glow blue" style="bottom:0;right:-100px"></div>
+    <div class="section-glow blue" data-parallax="0.08" style="bottom:0;right:-100px"></div>
     <NeuralNetwork color="white" density="low" opacity={0.12} />
     <div class="container">
       <div class="about-hero-inner fi">
@@ -58,7 +58,7 @@ const t = useTranslations();
           <div class="about-stat-lbl">{t('aboutPage.heroStatSmbLabel')}</div>
         </div>
         <div class="about-stat">
-          <div class="about-stat-val" style="color:var(--cyan)">$ 4.88M</div>
+          <div class="about-stat-val" style="color:var(--cyan)">23×</div>
           <div class="about-stat-lbl">{t('aboutPage.heroStatBreachLabel')}</div>
         </div>
         <div class="about-stat">
@@ -73,7 +73,7 @@ const t = useTranslations();
 
   <!-- ═══════════════ WHO WE ARE ════════════════════════════════════ -->
   <section class="about-section">
-    <div class="section-glow lilac" style="top:30%;left:-120px"></div>
+    <div class="section-glow lilac" data-parallax="0.08" style="top:30%;left:-120px"></div>
     <div class="container">
       <div class="about-split fi">
         <aside class="about-split-aside">
@@ -89,10 +89,6 @@ const t = useTranslations();
               <div class="aside-stat-val" style="color:var(--blue)">23×</div>
               <div class="aside-stat-lbl">{t('aboutPage.whoAsideCustLabel')}<br />{t('aboutPage.whoAsideCustSrc')}</div>
             </div>
-            <div class="aside-stat">
-              <div class="aside-stat-val" style="color:var(--cyan)">$ 4.88M</div>
-              <div class="aside-stat-lbl">{t('aboutPage.whoAsideBreachLabel')}<br />{t('aboutPage.whoAsideBreachSrc')}</div>
-            </div>
           </div>
         </aside>
         <div class="about-split-content">
@@ -102,7 +98,6 @@ const t = useTranslations();
             <span set:html={t('aboutBody.insight')}></span>
             <span class="src">{t('aboutBody.insightSource')}</span>
           </div>
-          <p set:html={t('aboutBody.p3')}></p>
           <p set:html={t('aboutBody.p4')}></p>
         </div>
       </div>
@@ -113,8 +108,8 @@ const t = useTranslations();
 
   <!-- ═══════════════ WHAT WE RESEARCH ══════════════════════════════ -->
   <section class="about-section">
-    <div class="section-glow blue" style="top:20%;right:-100px"></div>
-    <div class="section-glow cyan" style="bottom:10%;left:-80px"></div>
+    <div class="section-glow blue" data-parallax="0.08" style="top:20%;right:-100px"></div>
+    <div class="section-glow cyan" data-parallax="0.08" style="bottom:10%;left:-80px"></div>
     <div class="container">
       <div class="about-section-header fi">
         <div class="eyebrow">{t('aboutPage.scopeEyebrow')}</div>
@@ -122,8 +117,8 @@ const t = useTranslations();
         <p class="lead" set:html={t('aboutPage.scopeLead')}></p>
       </div>
 
-      <div class="services-split">
-        <div class="service-card data fi-l d1">
+      <div class="services-split" style="grid-template-columns:1fr;max-width:720px;margin:0 auto">
+        <div class="service-card data fi d1">
           <div class="service-card-icon lilac">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><path d="M15.5 12v7M12 15.5h7" stroke="url(#g1)" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
@@ -138,21 +133,6 @@ const t = useTranslations();
             <li>{t('aboutPage.intelItem6')}</li>
           </ul>
         </div>
-        <div class="service-card cyber fi-r d1">
-          <div class="service-card-icon cyan">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L4 5.5v5c0 4.7 3 8.5 7 10 4-1.5 7-5.3 7-10v-5L11 2z" stroke="url(#g-green)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11l2.5 2.5L14.5 9" stroke="url(#g-green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>{t('aboutPage.cyberName')}</h3>
-          <p set:html={t('aboutPage.cyberDesc')}></p>
-          <ul>
-            <li>{t('aboutPage.cyberItem1')}</li>
-            <li>{t('aboutPage.cyberItem2')}</li>
-            <li>{t('aboutPage.cyberItem3')}</li>
-            <li>{t('aboutPage.cyberItem4')}</li>
-            <li>{t('aboutPage.cyberItem5')}</li>
-            <li>{t('aboutPage.cyberItem6')}</li>
-          </ul>
-        </div>
       </div>
     </div>
   </section>
@@ -161,7 +141,7 @@ const t = useTranslations();
 
   <!-- ═══════════════ METHODOLOGY ════════════════════════════════ -->
   <section class="about-section">
-    <div class="section-glow lilac" style="top:50%;right:-100px"></div>
+    <div class="section-glow lilac" data-parallax="0.08" style="top:50%;right:-100px"></div>
     <div class="container">
       <div class="about-section-header fi">
         <div class="eyebrow">{t('aboutPage.methodEyebrow')}</div>
@@ -221,7 +201,7 @@ const t = useTranslations();
 
   <!-- ═══════════════ WHY NOW ══════════════════════════════════════ -->
   <section class="about-section">
-    <div class="section-glow cyan" style="top:30%;left:-80px"></div>
+    <div class="section-glow cyan" data-parallax="0.08" style="top:30%;left:-80px"></div>
     <div class="container">
       <div class="about-split fi">
         <aside class="about-split-aside">
@@ -234,10 +214,6 @@ const t = useTranslations();
               <div class="aside-stat-lbl">{t('aboutPage.whyAsideFailLabel')}<br />{t('aboutPage.whyAsideFailSrc')}</div>
             </div>
             <div class="aside-stat">
-              <div class="aside-stat-val" style="color:var(--cyan)">+72%</div>
-              <div class="aside-stat-lbl">{t('aboutPage.whyAsideRansomLabel')}<br />{t('aboutPage.whyAsideRansomSrc')}</div>
-            </div>
-            <div class="aside-stat">
               <div class="aside-stat-val" style="color:var(--green)">$ 33B</div>
               <div class="aside-stat-lbl">{t('aboutPage.whyAsideBiLabel')}<br />{t('aboutPage.whyAsideBiSrc')}</div>
             </div>
@@ -245,7 +221,6 @@ const t = useTranslations();
         </aside>
         <div class="about-split-content">
           <p set:html={t('aboutPage.whyP1')}></p>
-          <p set:html={t('aboutPage.whyP2')}></p>
           <div class="split-insight">
             <span set:html={t('aboutPage.whyInsight')}></span>
             <span class="src">{t('aboutPage.whyInsightSrc')}</span>

@@ -1,0 +1,43 @@
+---
+/**
+ * ImageSlot — box de imagem com placeholder.
+ * Sem `src`: renderiza um placeholder mono (cantos pixel + grid + rótulo
+ * do conteúdo e dimensões), pra marcar onde entra a arte.
+ * Com `src`: renderiza a imagem real, tratada em grayscale pra manter o
+ * sistema preto e branco. É só preencher `src` depois.
+ */
+interface Props {
+  src?: string;
+  alt?: string;
+  /** O que deve entrar aqui (aparece no placeholder). */
+  label?: string;
+  /** Proporção, ex: "16 / 9", "4 / 3", "1 / 1", "3 / 4". */
+  ratio?: string;
+  /** Dimensão sugerida, ex: "1920×1080". */
+  dims?: string;
+  class?: string;
+}
+const {
+  src,
+  alt = '',
+  label = 'imagem',
+  ratio = '16 / 9',
+  dims = '',
+  class: className = '',
+} = Astro.props;
+---
+
+{src ? (
+  <figure class={`img-slot has-img ${className}`} style={`aspect-ratio:${ratio}`}>
+    <img src={src} alt={alt} loading="lazy" />
+  </figure>
+) : (
+  <div class={`img-slot is-empty ${className}`} style={`aspect-ratio:${ratio}`} role="img" aria-label={`Placeholder: ${label}`}>
+    <div class="img-slot-grid" aria-hidden="true"></div>
+    <div class="img-slot-info">
+      <span class="img-slot-tag">IMG</span>
+      <span class="img-slot-label">{label}</span>
+      {dims && <span class="img-slot-dims">{dims} · {ratio.replace(/\s/g, '')}</span>}
+    </div>
+  </div>
+)}

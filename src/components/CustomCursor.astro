@@ -1,0 +1,65 @@
+---
+/**
+ * CustomCursor — cursor pixel opcional.
+ * Quadradinho branco de ~10px com mix-blend-mode:difference (se inverte
+ * sobre áreas claras). DESLIGADO por padrão: só monta com enabled={true},
+ * em ponteiro fino, fora de prefers-reduced-motion. Nunca esconde o
+ * cursor nativo em campos de formulário.
+ */
+interface Props {
+  enabled?: boolean;
+}
+const { enabled = false } = Astro.props;
+---
+
+{enabled && (
+  <div class="px-cursor" data-cursor aria-hidden="true"></div>
+)}
+
+{enabled && (
+  <style>
+    .px-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 10px; height: 10px;
+      background: #fff;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-100px, -100px);
+      will-change: transform;
+    }
+    /* Só em ponteiro fino; preserva o cursor nativo onde for preciso. */
+    @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+      html.px-cursor-on,
+      html.px-cursor-on a,
+      html.px-cursor-on button { cursor: none; }
+      /* Nunca esconder o cursor em inputs/textarea/contenteditable. */
+      html.px-cursor-on input,
+      html.px-cursor-on textarea,
+      html.px-cursor-on select,
+      html.px-cursor-on [contenteditable] { cursor: auto; }
+    }
+    @media not all and (pointer: fine) { .px-cursor { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .px-cursor { display: none; } }
+  </style>
+)}
+
+{enabled && (
+  <script>
+    const fine = matchMedia('(pointer: fine)').matches;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dot = document.querySelector<HTMLElement>('[data-cursor]');
+    if (dot && fine && !reduce) {
+      document.documentElement.classList.add('px-cursor-on');
+      let x = -100, y = -100, raf = 0;
+      addEventListener('pointermove', (e) => {
+        x = e.clientX; y = e.clientY;
+        if (!raf) raf = requestAnimationFrame(() => {
+          raf = 0;
+          dot.style.transform = `translate(${x - 5}px, ${y - 5}px)`;
+        });
+      }, { passive: true });
+    }
+  </script>
+)}
