@@ -34,7 +34,7 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
 
     <div class="hero-b-wrap">
       <div class="hero-b-brandrow fi">
-        <span class="hero-b-brand">D<span class="hero-b-dot" aria-hidden="true"></span>Lab</span>
+        <img src="/d.lab-logo.png" class="hero-b-logo" alt="D.Lab" width="1082" height="240" />
         <span class="hero-b-sep" aria-hidden="true"></span>
         <span class="hero-b-eyebrow">{t('hero.eyebrow')}</span>
       </div>
@@ -850,19 +850,18 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
     width: 100%; max-width: 1180px;
     margin: 0 auto; padding: 0 40px;
     flex: 1;
-    display: flex; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: column;
+    /* safe center: centraliza quando há espaço, mas alinha ao topo
+       quando o conteúdo é alto, sem comer o respiro do topo (e sem
+       encostar no menu). Degrada para topo em browsers sem `safe`. */
+    justify-content: safe center;
   }
 
   .hero-b-brandrow {
     display: inline-flex; align-items: center; gap: 16px;
     margin-bottom: 40px;
   }
-  .hero-b-brand {
-    display: inline-flex; align-items: flex-end;
-    font-weight: 500; font-size: 18px;
-    letter-spacing: -0.02em; color: var(--ink); line-height: 1;
-  }
-  .hero-b-dot { width: 4px; height: 4px; background: var(--ink); margin: 0 2px 3px; align-self: flex-end; }
+  .hero-b-logo { display: block; height: 20px; width: auto; object-fit: contain; }
   .hero-b-sep { width: 1px; height: 13px; background: var(--line-strong); }
   .hero-b-eyebrow {
     font-size: 11.5px; font-weight: 400;
