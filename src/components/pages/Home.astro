@@ -850,7 +850,11 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
     width: 100%; max-width: 1180px;
     margin: 0 auto; padding: 0 40px;
     flex: 1;
-    display: flex; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: column;
+    /* safe center: centraliza quando há espaço, mas alinha ao topo
+       quando o conteúdo é alto, sem comer o respiro do topo (e sem
+       encostar no menu). Degrada para topo em browsers sem `safe`. */
+    justify-content: safe center;
   }
 
   .hero-b-brandrow {
