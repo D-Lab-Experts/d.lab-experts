@@ -1442,7 +1442,12 @@ ul, ol { list-style: none; }
 /* ═══════════ SEGMENTOS ══════════════════════════════════════════ */
 #segments { background: var(--black); position: relative; z-index: 1; }
 .seg-head { text-align: center; margin-bottom: 56px; }
-.seg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+/* Flex centralizado em vez de grid 3-col: com 5 frentes, a última
+   fileira (2 cards) centraliza sob a primeira, sem buraco. */
+.seg-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+.seg-card { flex: 0 1 calc((100% - 32px) / 3); }
+@media (max-width: 880px) { .seg-card { flex-basis: calc((100% - 16px) / 2); } }
+@media (max-width: 560px) { .seg-card { flex-basis: 100%; } }
 .seg-card {
   background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
   border: 1px solid rgba(255,255,255,0.10); border-radius: 14px;
