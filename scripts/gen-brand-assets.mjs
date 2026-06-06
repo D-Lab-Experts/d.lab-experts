@@ -52,7 +52,12 @@ await favicon(16, 'favicon-16.png');
 await iconTransparent(256, 'd.lab-icon.webp');
 await iconTransparent(256, 'd.lab-icon2.webp');
 await iconTransparent(512, 'd.lab-icon.png');
-await sharp(LOGO).resize(2000, 2000, { fit: 'contain', background: TRANSP }).toFile('public/d.lab-logo.png');
-console.log('✓ d.lab-logo.png 2000×2000 (transparente)');
+// Logo horizontal recortado (trim das bordas transparentes) para uso
+// inline na nav, footer e hero. Altura fixa, largura natural do wordmark.
+await sharp(LOGO).trim().resize({ height: 240 }).png().toFile('public/d.lab-logo.png');
+{
+  const meta = await sharp('public/d.lab-logo.png').metadata();
+  console.log('✓ d.lab-logo.png (trim)', `${meta.width}×${meta.height}`);
+}
 await og('d.lab.png');
 console.log('Brand assets gerados.');

@@ -431,8 +431,8 @@ ul, ol { list-style: none; }
   display: flex; align-items: center;
 }
 .nav-logo { display: flex; align-items: center; gap: 12px; }
-.nav-logo-img { height: 16px; width: auto; object-fit: contain; transition: height .4s cubic-bezier(.16,1,.3,1); }
-#nav.scrolled .nav-logo-img { height: 13px; }
+.nav-logo-img { height: 22px; width: auto; object-fit: contain; display: block; transition: height .4s cubic-bezier(.16,1,.3,1); }
+#nav.scrolled .nav-logo-img { height: 18px; }
 /* Wordmark de texto no header — Space Grotesk tech; o ponto é um pixel. */
 .nav-wordmark {
   display: inline-flex; align-items: center;
@@ -1868,14 +1868,9 @@ ul, ol { list-style: none; }
 .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding: 56px 0 48px; }
 .foot-brand { display: flex; flex-direction: column; gap: 14px; }
 .foot-logo-img { height: 22px; width: auto; object-fit: contain; align-self: flex-start; }
-.foot-wordmark {
-  display: inline-flex; align-items: center; align-self: flex-start;
-  font-family: var(--font-display); font-weight: 700; font-size: 22px;
-  letter-spacing: -.03em; color: var(--ink); line-height: 1;
-}
-.foot-wordmark-dot {
-  display: inline-block; width: 5px; height: 5px;
-  background: var(--ink); margin: 0 2px; align-self: flex-end; margin-bottom: 4px;
+.foot-logo-img {
+  display: block; height: 26px; width: auto; object-fit: contain;
+  align-self: flex-start; margin-bottom: 16px;
 }
 .foot-brand p { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 250px; }
 .foot-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 20px; letter-spacing: -.01em; }
