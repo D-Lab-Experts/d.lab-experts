@@ -500,7 +500,11 @@ ul, ol { list-style: none; }
 .mobile-menu .btn { justify-content: center; }
 
 /* ═══════════ HERO ═══════════════════════════════════════════════ */
-#hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: var(--nav-h); z-index: 1; }
+/* Regra legada do hero antigo. O hero atual é o .hero-b (estilo escopado
+   em Home.astro). Mantida só com propriedades não-conflitantes — sem
+   padding-top/align-items, que (por ser seletor de ID) venciam o .hero-b
+   e colavam a brandrow no menu. */
+#hero { position: relative; overflow: hidden; z-index: 1; }
 .hero-grid {
   position: absolute; inset: 0;
   background-image:
