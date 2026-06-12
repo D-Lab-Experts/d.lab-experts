@@ -338,19 +338,31 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
       <div class="themes-head fi">
         <div class="section-label" style="justify-content:center"><span class="label">Frentes de pesquisa</span></div>
         <h2 class="section-title">Onde a inteligência<br><span class="gradient-text">encontra a decisão.</span></h2>
+        <!-- DRAFT: confirmar copy — intro que amarra as três frentes ao wedge. -->
+        <p class="section-sub" style="margin:18px auto 0">
+          Três frentes onde a pesquisa do D.Lab vira decisão de negócio: ler o concorrente real,
+          entender o comportamento que move o mercado e tratar o dado como infraestrutura da decisão.
+          O mesmo protocolo de rigor em cada uma.
+        </p>
       </div>
       <div class="themes-grid fi d1">
         <figure class="theme-tile">
           <Visual variant="market" alt="Barras ascendentes com linha de tendência, inteligência competitiva" />
           <figcaption class="theme-tile-cap">Inteligência competitiva</figcaption>
+          <!-- DRAFT: confirmar copy -->
+          <p class="theme-tile-desc">Quem é o concorrente real, onde ele é forte e o que ele ainda não viu. Força, posicionamento e pontos cegos expostos antes do seu movimento.</p>
         </figure>
         <figure class="theme-tile">
           <Visual variant="audience" alt="Ondas concêntricas e nuvem de pontos, comportamento de audiência" />
           <figcaption class="theme-tile-cap">Comportamento &amp; audiência</figcaption>
+          <!-- DRAFT: confirmar copy -->
+          <p class="theme-tile-desc">Quem é o público de verdade e o que move a decisão de compra. O padrão que a persona genérica não captura, medido com método científico.</p>
         </figure>
         <figure class="theme-tile">
           <Visual variant="data" alt="Fluxo de dados em pipeline, engenharia de dados" />
           <figcaption class="theme-tile-cap">Data &amp; engenharia de dados</figcaption>
+          <!-- DRAFT: confirmar copy -->
+          <p class="theme-tile-desc">O dado tratado como infraestrutura da decisão: coleta própria, cruzamento de fontes e modelagem para que a leitura se sustente em base auditável.</p>
         </figure>
       </div>
     </div>
@@ -398,15 +410,15 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
 
         <div class="seg-card yellow fi d3">
           <div class="icon-wrap yellow" style="margin-bottom:20px">
-            <svg viewBox="0 0 22 22" fill="none"><path d="M11 3l8 8-8 8-8-8 8-8z" stroke="url(#g-yellow)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="11" cy="11" r="3.8" stroke="url(#g-yellow)" stroke-width="1.5"/></svg>
+            <svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="3" stroke="url(#g-yellow)" stroke-width="1.5"/><path d="M11 2v3M11 17v3M2 11h3M17 11h3M4.5 4.5l2 2M15.5 15.5l2 2M17.5 4.5l-2 2M6.5 15.5l-2 2" stroke="url(#g-yellow)" stroke-width="1.4" stroke-linecap="round"/></svg>
           </div>
-          <div class="seg-tag">{t('segments.politicsTag')}</div>
-          <div class="seg-name">{t('segments.politicsName')}</div>
-          <p class="seg-desc">{t('segments.politicsDesc')}</p>
+          <div class="seg-tag">{t('segments.autoTag')}</div>
+          <div class="seg-name">{t('segments.autoName')}</div>
+          <p class="seg-desc">{t('segments.autoDesc')}</p>
           <div class="seg-samples">
-            <span class="seg-sample">{t('segments.politicsSample1')}</span>
-            <span class="seg-sample">{t('segments.politicsSample2')}</span>
-            <span class="seg-sample">{t('segments.politicsSample3')}</span>
+            <span class="seg-sample">{t('segments.autoSample1')}</span>
+            <span class="seg-sample">{t('segments.autoSample2')}</span>
+            <span class="seg-sample">{t('segments.autoSample3')}</span>
           </div>
         </div>
 
@@ -435,6 +447,20 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
             <span class="seg-sample">{t('segments.compSample1')}</span>
             <span class="seg-sample">{t('segments.compSample2')}</span>
             <span class="seg-sample">{t('segments.compSample3')}</span>
+          </div>
+        </div>
+
+        <div class="seg-card cyan fi d1">
+          <div class="icon-wrap cyan" style="margin-bottom:20px">
+            <svg viewBox="0 0 22 22" fill="none"><path d="M4 7h6M14 7h4M4 11h3M11 11h7M4 15h10M18 15h0" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="7" r="2" stroke="url(#g2)" stroke-width="1.5"/><circle cx="9" cy="11" r="2" stroke="url(#g2)" stroke-width="1.5"/><circle cx="16" cy="15" r="2" stroke="url(#g2)" stroke-width="1.5"/></svg>
+          </div>
+          <div class="seg-tag">{t('segments.optTag')}</div>
+          <div class="seg-name">{t('segments.optName')}</div>
+          <p class="seg-desc">{t('segments.optDesc')}</p>
+          <div class="seg-samples">
+            <span class="seg-sample">{t('segments.optSample1')}</span>
+            <span class="seg-sample">{t('segments.optSample2')}</span>
+            <span class="seg-sample">{t('segments.optSample3')}</span>
           </div>
         </div>
 
@@ -653,6 +679,16 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
           <a href="/colaborar" class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
           <a href="/colaborar" class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
         </div>
+        <!-- DRAFT: confirmar copy — comunidade no WhatsApp em destaque. -->
+        <a
+          class="home-colab-community"
+          href="https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="home-colab-community-dot" aria-hidden="true"></span>
+          {t('blog.colabCommunityLine')}
+        </a>
       </div>
     </div>
   </section>
@@ -776,6 +812,20 @@ const formatLabelMap: Record<'briefing' | 'report' | 'foresight' | 'sector', str
             <div class="consult-front-body">
               <h3 class="consult-front-name">{t('products.intAIName')}</h3>
               <p class="consult-front-desc">{t('products.intAIDesc')}</p>
+            </div>
+          </li>
+          <li class="consult-front">
+            <span class="consult-front-num">04</span>
+            <div class="consult-front-body">
+              <h3 class="consult-front-name">{t('products.intAutoName')}</h3>
+              <p class="consult-front-desc">{t('products.intAutoDesc')}</p>
+            </div>
+          </li>
+          <li class="consult-front">
+            <span class="consult-front-num">05</span>
+            <div class="consult-front-body">
+              <h3 class="consult-front-name">{t('products.intOptName')}</h3>
+              <p class="consult-front-desc">{t('products.intOptDesc')}</p>
             </div>
           </li>
         </ol>
