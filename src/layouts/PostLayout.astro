@@ -242,6 +242,14 @@ const keepReadingLabel = 'Continue lendo';
 const moreResearchLabel = 'Outras pesquisas do D.Lab';
 const readLabel = 'Ler';
 const originalResearchLabel = 'Pesquisa Original';
+
+// DRAFT: confirmar copy — ponte de conversão ao fim de cada estudo.
+// Sem venda agressiva: convida a enquadrar a mesma pergunta no contexto
+// do leitor. Link para o contato já existente.
+const bridgeLabel = 'Do público ao seu contexto';
+const bridgeTitle = 'Esse estudo respondeu uma pergunta pública.';
+const bridgeBody = 'Existe uma versão dessa pergunta no seu mercado? A mesma metodologia vira projeto fechado, sob NDA. A primeira conversa serve para enquadrar a pergunta.';
+const bridgeCta = 'Conversa de enquadramento →';
 ---
 
 <Layout
@@ -278,6 +286,21 @@ const originalResearchLabel = 'Pesquisa Original';
       url={canonicalURL}
     />
   )}
+
+  <!-- DRAFT: confirmar copy — ponte de conversão reutilizável (todo estudo). -->
+  <section class="study-bridge">
+    <div class="post-container">
+      <div class="study-bridge-card">
+        <div class="study-bridge-label">
+          <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
+          {bridgeLabel}
+        </div>
+        <h2 class="study-bridge-title">{bridgeTitle}</h2>
+        <p class="study-bridge-body">{bridgeBody}</p>
+        <a href="/contato" class="btn btn-primary study-bridge-cta">{bridgeCta}</a>
+      </div>
+    </div>
+  </section>
 
   {relatedPosts.length > 0 && (
     <section class="related-posts">
@@ -327,6 +350,51 @@ const originalResearchLabel = 'Pesquisa Original';
 </Layout>
 
 <style>
+  /* Ponte de conversão — discreta, ao fim do estudo, antes dos relacionados. */
+  .study-bridge {
+    padding: 56px 0 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .study-bridge-card {
+    background: linear-gradient(160deg, rgba(234,234,240,0.08), rgba(234,234,240,0.03) 70%, transparent);
+    border: 1px solid rgba(234,234,240,0.20);
+    border-radius: 20px;
+    padding: 40px 40px 36px;
+    text-align: left;
+  }
+  .study-bridge-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 16px;
+  }
+  .study-bridge-title {
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--white);
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .study-bridge-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0 0 24px;
+    max-width: 640px;
+  }
+  .study-bridge-cta { display: inline-flex; }
+  @media (max-width: 767px) {
+    .study-bridge-card { padding: 30px 24px 26px; }
+  }
+
   .related-posts {
     padding: 72px 0 40px;
     border-top: 1px solid var(--border);

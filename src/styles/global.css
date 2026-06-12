@@ -328,7 +328,11 @@ ul, ol { list-style: none; }
   font-family: var(--font-pixel); font-size: 10px; letter-spacing: .1em;
   text-transform: uppercase; color: var(--ink-dim); text-align: center;
 }
-@media (max-width: 860px) { .themes-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
+.theme-tile-desc {
+  font-size: 13.5px; line-height: 1.62; color: var(--muted);
+  text-align: center; margin: -2px auto 0; max-width: 320px; text-wrap: pretty;
+}
+@media (max-width: 860px) { .themes-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; } }
 
 .home-about-img { float: left; width: 240px; margin: 4px 26px 14px 0; }
 @media (max-width: 620px) { .home-about-img { float: none; width: 100%; max-width: 320px; margin: 0 0 22px; } }
@@ -481,6 +485,54 @@ ul, ol { list-style: none; }
   50% { opacity: 0.55; transform: scale(0.82); }
 }
 
+/* ── Nav dropdown: Research Hub (Análises · Soluções · Colaborar) ── */
+.nav-dropdown { position: relative; display: flex; align-items: center; }
+.nav-dropdown-trigger {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: inherit; font-size: 15px; font-weight: 400;
+  color: var(--muted); background: none; border: none; cursor: pointer;
+  padding: 0; line-height: 1; transition: color .25s;
+}
+.nav-dropdown:hover .nav-dropdown-trigger,
+.nav-dropdown:focus-within .nav-dropdown-trigger { color: var(--white); }
+.nav-dropdown-trigger.active { color: var(--lilac); }
+.nav-dropdown-caret { transition: transform .25s; opacity: .7; }
+.nav-dropdown:hover .nav-dropdown-caret,
+.nav-dropdown:focus-within .nav-dropdown-caret,
+.nav-dropdown.open .nav-dropdown-caret { transform: rotate(180deg); }
+
+.nav-dropdown-panel {
+  position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%) translateY(0);
+  min-width: 230px; padding: 8px; margin-top: 8px;
+  background: rgba(10, 10, 14, 0.96);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+  z-index: 1000;
+}
+/* Invisible hover bridge across the gap so the panel stays open. */
+.nav-dropdown-panel::before {
+  content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px;
+}
+.nav-dropdown:hover .nav-dropdown-panel,
+.nav-dropdown:focus-within .nav-dropdown-panel,
+.nav-dropdown.open .nav-dropdown-panel {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(6px);
+}
+.nav-dropdown-panel ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-panel a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 9px; font-size: 14px;
+  color: var(--muted); transition: color .2s, background .2s;
+}
+.nav-dropdown-panel a:hover { color: var(--white); background: rgba(255, 255, 255, 0.06); }
+.nav-dropdown-panel a.active { color: var(--lilac); }
+
 .nav-ctas { display: flex; align-items: center; gap: 10px; margin-left: 48px; }
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: all .3s; }
@@ -496,6 +548,14 @@ ul, ol { list-style: none; }
 .mobile-menu.open { display: flex; }
 .mobile-menu a { font-size: 16px; color: var(--muted); padding: 10px 0; border-bottom: 1px solid var(--border); }
 .mobile-menu a:hover { color: var(--white); }
+.mobile-menu a.active { color: var(--lilac); }
+/* Research Hub group inside the mobile menu — label + indented sublinks. */
+.mobile-menu-group { display: flex; flex-direction: column; }
+.mobile-menu-group-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--dimmed); padding: 12px 0 2px;
+}
+.mobile-menu a.mobile-menu-sublink { padding-left: 16px; }
 .mobile-menu .mobile-ctas { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
 .mobile-menu .btn { justify-content: center; }
 
@@ -1306,6 +1366,34 @@ ul, ol { list-style: none; }
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
+}
+/* Convite da comunidade no WhatsApp — destaque discreto abaixo dos CTAs. */
+.home-colab-community {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 10px 18px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+  text-decoration: none;
+  transition: border-color .25s, background .25s, gap .25s;
+}
+.home-colab-community:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  gap: 14px;
+}
+.home-colab-community-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
 }
 
 /* ═══════════ METHODOLOGY — SOURCES PILL STRIP ═══════════════════ */

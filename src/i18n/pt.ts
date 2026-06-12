@@ -9,7 +9,7 @@ const pt: Translation = {
     sealLine: 'Applied Intelligence Research',
     ogSiteName: 'D.Lab Experts',
     orgDescription:
-      'Research Hub em inteligência aplicada e cybersegurança. Publicações abertas, consultoria sob NDA.',
+      'Research Hub em inteligência aplicada. Publicações abertas, consultoria sob NDA.',
   },
 
   nav: {
@@ -21,6 +21,7 @@ const pt: Translation = {
     solucoes: 'Soluções',
     contato: 'Contato',
     collaborate: 'Colaborar',
+    hub: 'Research Hub',
     ariaLogo: 'D.Lab Experts, ir para a home',
     ariaOpenMenu: 'Abrir menu',
     ctaProblem: 'Iniciar conversa →',
@@ -28,15 +29,15 @@ const pt: Translation = {
   },
 
   pageTitles: {
-    home: 'D.Lab Experts · Research Hub em Inteligência & Cybersegurança',
+    home: 'D.Lab Experts · Research Hub em Inteligência Aplicada',
     homeDescription:
-      'D.Lab Experts · Research Hub em inteligência aplicada e cybersegurança. Publicamos pesquisa para fundamentar decisões de board, founder e gestor num mundo que moveu pra frente das próprias defesas. Análises abertas e consultoria sob NDA.',
+      'D.Lab Experts · Research Hub em inteligência aplicada. Publicamos pesquisa para fundamentar decisões de board, founder e gestor com inteligência competitiva e estudos de comportamento de método científico. Análises abertas e consultoria sob NDA.',
     about: 'Sobre | D.Lab Experts · Research Hub',
     aboutDescription:
-      'D.Lab Experts é um Research Hub em inteligência aplicada e cybersegurança. Pesquisamos, testamos e publicamos como prova de método. Consultoria sob NDA quando o contexto pede.',
+      'D.Lab Experts é um Research Hub em inteligência aplicada. Pesquisamos, testamos e publicamos como prova de método. Consultoria sob NDA quando o contexto pede.',
     blog: 'Análises Públicas | D.Lab Experts · Research Hub',
     blogDescription:
-      'Pesquisas, análises e cases publicados pelo D.Lab Experts como prova pública do método. Inteligência de dados e cybersegurança em fontes abertas, raciocínio exposto e dados auditáveis.',
+      'Pesquisas, análises e cases publicados pelo D.Lab Experts como prova pública do método. Inteligência de dados em fontes abertas, raciocínio exposto e dados auditáveis.',
     contato: 'Contato | D.Lab Experts · Research Hub',
     contatoDescription:
       'Fale com o D.Lab Experts. Para projetos de consultoria sob NDA, parcerias de pesquisa ou imprensa. Respondemos em até um dia útil.',
@@ -128,10 +129,13 @@ const pt: Translation = {
   },
 
   segments: {
-    eyebrow: 'Agenda de Pesquisa',
-    title: 'Cinco linhas de investigação.',
+    // DRAFT: confirmar copy — reenquadrado de "linhas de pesquisa" para
+    // "frentes" (pesquisa + aplicação), após sair Política e entrar
+    // Automação e Otimização.
+    eyebrow: 'Pesquisa & Aplicação',
+    title: 'Seis frentes.',
     titleAccent: 'Um único protocolo.',
-    sub: 'Frentes contínuas de pesquisa que orientam as publicações do Research Hub. Do comportamento de consumidor à inteligência competitiva, passando por IA e política, o mesmo rigor metodológico.',
+    sub: 'Da pesquisa aplicada à implementação: as frentes contínuas que orientam as publicações do Research Hub e os projetos sob NDA. Do comportamento de consumidor à automação de processos, o mesmo rigor metodológico.',
 
     marketTag: 'Mercado & Público',
     marketName: 'Mercados & Comportamento',
@@ -149,13 +153,23 @@ const pt: Translation = {
     stratSample2: 'Consultoria competitiva',
     stratSample3: 'Benchmarking setorial',
 
-    politicsTag: 'Política',
-    politicsName: 'Política, Opinião & Regulação',
-    politicsDesc:
-      'Investigação de opinião pública, eleitorado e movimento regulatório. Campanha é disputa de leitura de contexto antes de ser disputa de narrativa, e regulação decide o próximo mercado antes dele existir.',
-    politicsSample1: 'Mapeamento eleitoral',
-    politicsSample2: 'Opinião pública',
-    politicsSample3: 'Modelagem de cenários',
+    // DRAFT: confirmar copy — novo front (substitui Política).
+    autoTag: 'Automação',
+    autoName: 'Implementação & Automação',
+    autoDesc:
+      'Implementação de processos automatizados e acoplagem de IA e agentes à operação. Pesquisamos o que vale automatizar e construímos a ponte do diagnóstico até a execução em produção.',
+    autoSample1: 'Automação de processos',
+    autoSample2: 'Agentes em operação',
+    autoSample3: 'Integração de IA',
+
+    // DRAFT: confirmar copy — novo front.
+    optTag: 'Otimização',
+    optName: 'Otimização de Áreas & Setores',
+    optDesc:
+      'Diagnóstico e redesenho de áreas e setores para destravar eficiência. Gargalos mapeados com dado, prioridades claras e melhoria acompanhada até o ganho se sustentar.',
+    optSample1: 'Diagnóstico de área',
+    optSample2: 'Redesenho de processo',
+    optSample3: 'Eficiência operacional',
 
     foresightTag: 'Foresight',
     foresightName: 'Foresight Tech & IA',
@@ -186,7 +200,9 @@ const pt: Translation = {
     eyebrow: 'Frentes de Consultoria',
     title: 'Quando a pesquisa',
     titleAccent: 'vira projeto fechado.',
-    sub: 'O Research Hub é o flagship. Quando uma organização precisa de dado próprio com o mesmo rigor metodológico, a pesquisa vira projeto fechado, sob NDA, com escopo e profundidade calibrados pela decisão em jogo.',
+    // DRAFT: confirmar copy — estreita a promessa comercial ao wedge
+    // (inteligência competitiva + comportamento + método científico p/ decisão de mercado).
+    sub: 'O Research Hub é o flagship. Quando uma organização precisa de inteligência competitiva ou de um estudo de comportamento com método científico para decidir no próprio mercado, a pesquisa vira projeto fechado, sob NDA, com escopo e profundidade calibrados pela decisão em jogo.',
     lead: 'Trabalhar com o D.Lab por dentro é o que acontece quando a pesquisa pública precisa ser feita para um contexto específico. O ponto de partida não muda: a mesma hierarquia de fontes, o mesmo método documentado, a mesma honestidade sobre incerteza. O que muda é a entrega, que passa a ser confidencial e ancorada na decisão do cliente.',
     closing: 'Não temos uma grade de produtos. Cada frente abaixo é um formato de trabalho que já fizemos mais de uma vez, com escopo desenhado a partir do que a pesquisa pública não cobre. Quando o pedido é claro, a primeira conversa serve para enquadrar a pergunta. Quando o pedido ainda não está claro, ela serve para descobrir qual é.',
     oneCta: 'Apresentar um contexto →',
@@ -194,14 +210,23 @@ const pt: Translation = {
 
     intHeader: 'Inteligência aplicada',
     intBaseName: 'Relatório de Base',
+    // DRAFT: confirmar copy — porta de entrada explícita: documento + apresentação,
+    // sem sessão de interpretação (essa pertence às camadas mais profundas).
     intBaseDesc:
-      'Pesquisa aplicada focada em uma pergunta-chave. Para quando a hipótese já existe e falta o rigor antes de mover.',
+      'Pesquisa aplicada focada em uma pergunta-chave. Para quando a hipótese já existe e falta o rigor antes de mover. Entregue como documento e apresentação, sem reuniões de interpretação.',
     intDeepName: 'Relatório Aprofundado',
     intDeepDesc:
       'Pesquisa multidimensional com dados temporais, cruzamento de múltiplas fontes e sessão de interpretação com o analista. Para decisões com impacto duradouro.',
     intAIName: 'Inteligência de IA',
     intAIDesc:
       'Acoplagem de IA e agentes a processos internos, com avaliação do que vale automatizar e do que vale instrumentar. Para quando o que trava deixou de ser a decisão e passou a ser a execução.',
+    // DRAFT: confirmar copy — novas frentes de consultoria.
+    intAutoName: 'Implementação de Processos Automatizados',
+    intAutoDesc:
+      'Implementação de processos automatizados na operação: do diagnóstico do que vale automatizar até a construção, integração e medição do ganho em produção. A execução do que a Inteligência de IA enquadra.',
+    intOptName: 'Otimização de Áreas & Setores',
+    intOptDesc:
+      'Diagnóstico e redesenho de áreas e setores para destravar eficiência: gargalos mapeados com dado, prioridades claras e acompanhamento até a melhoria se sustentar.',
 
     cyberHeader: 'Cybersegurança',
     cyberPentestName: 'Cyber Research & CVE',
@@ -272,6 +297,7 @@ const pt: Translation = {
     linkForm: 'Formulário',
     linkEmail: 'E-mail direto',
     linkWhatsapp: 'WhatsApp',
+    linkCommunity: 'Comunidade no WhatsApp',
     linkLinkedin: 'LinkedIn',
     sealText: 'Applied Intelligence Research',
     copyright: 'D.Lab Experts · Research Hub em Inteligência Aplicada. Todos os direitos reservados.',
@@ -337,6 +363,8 @@ const pt: Translation = {
     colabChipReview: 'Peer review',
     colabCtaPrimary: 'Proposta de colaboração →',
     colabCtaSecondary: 'Como funciona',
+    // DRAFT: confirmar copy — convite para a comunidade no WhatsApp, em destaque no Home.
+    colabCommunityLine: 'Entrar na comunidade de pesquisadores no WhatsApp →',
   },
 
   formats: {
@@ -556,11 +584,12 @@ const pt: Translation = {
     modeSubmitTitle: 'Submeter pesquisa existente',
     modeSubmitDesc: 'Você já rodou o estudo e quer audiência estável e atribuição. Fazemos revisão metodológica e, se aceita, publicamos com coautoria explícita e raciocínio exposto.',
     modeCoTitle: 'Propor co-pesquisa',
-    modeCoDesc: 'Uma das nossas linhas de agenda (mercado, tech foresight, política, concorrência ou decisão) te interessa e você quer construir o estudo junto. Escopo, prazo e divisão de trabalho negociados no início.',
+    modeCoDesc: 'Uma das nossas linhas de agenda (mercado, tech foresight, concorrência ou decisão) te interessa e você quer construir o estudo junto. Escopo, prazo e divisão de trabalho negociados no início.',
     modeDataTitle: 'Compartilhar dados ou metodologia',
     modeDataDesc: 'Datasets novos, técnicas instrumentadas, frameworks de análise. Usamos com crédito, documentamos a procedência e, quando faz sentido, retornamos valor via publicação conjunta.',
     modePeerTitle: 'Atuar como peer reviewer',
-    modePeerDesc: 'Você tem profundidade em uma das linhas da agenda e quer contribuir com revisão técnica de pesquisas antes da publicação. Atribuição nominal opcional, metodologia sempre rastreável.',
+    // DRAFT: confirmar copy — torna explícita a trilha contribuidor → peer reviewer → consultor do bench.
+    modePeerDesc: 'Você tem profundidade em uma das linhas da agenda e quer contribuir com revisão técnica de pesquisas antes da publicação. Atribuição nominal opcional, metodologia sempre rastreável. É também a porta para o bench de consultores: contribuidores e revisores recorrentes, com curadoria sênior, podem ser acionados em engajamentos de cliente com crédito explícito.',
     processLabel: 'Processo',
     processTitleLead: 'Da proposta',
     processTitleAccent: 'à publicação.',
@@ -591,6 +620,11 @@ const pt: Translation = {
     fieldProposal: 'Proposta',
     fieldProposalPh: 'Descreva o que você está propondo: pergunta de pesquisa, hipótese, estado atual do trabalho, dados ou metodologia envolvidos, o que você espera da colaboração.',
     consentFull: 'Autorizo o D.Lab Experts a responder esta proposta e, se houver aderência, iniciar uma conversa sobre colaboração.',
+    // DRAFT: confirmar copy — CTA para a comunidade de pesquisadores no WhatsApp (já no ar).
+    communityLabel: 'Comunidade',
+    communityTitle: 'Entre na comunidade de pesquisadores',
+    communityBody: 'Discussões abertas, chamadas de pesquisa e os bastidores do método. É onde a colaboração começa antes de virar proposta formal.',
+    communityCta: 'Entrar na comunidade →',
   },
 
   obrigadoPage: {

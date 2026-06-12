@@ -10,6 +10,9 @@ const t = useTranslations();
 // env override for flexibility between environments.
 const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_COLABORAR_ID ?? 'xpqkabpk';
 const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
+
+// Comunidade de pesquisadores no WhatsApp (já no ar). Link público.
+const COMMUNITY_WA_URL = 'https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk';
 ---
 
 <Layout
@@ -74,6 +77,28 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
           <div class="colab-mode-name">{t('colab.modePeerTitle')}</div>
           <p class="colab-mode-desc">{t('colab.modePeerDesc')}</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════ COMMUNITY (WhatsApp) ═══════════════════════ -->
+  <!-- DRAFT: confirmar copy — CTA para a comunidade no WhatsApp. -->
+  <section class="colab-section">
+    <div class="container">
+      <div class="colab-community fi d1">
+        <div class="colab-community-copy">
+          <span class="label">{t('colab.communityLabel')}</span>
+          <h2 class="colab-community-title">{t('colab.communityTitle')}</h2>
+          <p class="colab-community-body">{t('colab.communityBody')}</p>
+        </div>
+        <a
+          class="btn btn-primary colab-community-cta"
+          href={COMMUNITY_WA_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >{t('colab.communityCta')}</a>
       </div>
     </div>
   </section>
@@ -177,7 +202,6 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
                 <option value="">{t('contato.fieldSelectPlaceholder')}</option>
                 <option>{t('colab.lineMarkets')}</option>
                 <option>{t('colab.lineStrategy')}</option>
-                <option>{t('colab.linePolitics')}</option>
                 <option>{t('colab.lineTech')}</option>
                 <option>{t('colab.lineCompetitive')}</option>
                 <option>{t('colab.lineOther')}</option>
@@ -394,6 +418,39 @@ const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
     font-size: 13px;
     color: var(--muted);
     line-height: 1.65;
+  }
+
+  /* Community strip — convite discreto, sem competir com o form. */
+  .colab-community {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 28px 32px;
+    background: linear-gradient(120deg, rgba(234,234,240,0.08), rgba(234,234,240,0.04) 70%, transparent);
+    border: 1px solid rgba(234,234,240,0.22);
+    border-radius: 18px;
+  }
+  .colab-community-copy { display: flex; flex-direction: column; gap: 8px; }
+  .colab-community-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--white);
+    margin: 0;
+  }
+  .colab-community-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0;
+    max-width: 560px;
+  }
+  .colab-community-cta { flex-shrink: 0; white-space: nowrap; }
+  @media (max-width: 720px) {
+    .colab-community { flex-direction: column; align-items: flex-start; padding: 24px 22px; }
   }
 
   .colab-form-section {

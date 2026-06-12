@@ -108,6 +108,33 @@ const {
         });
       }
 
+      // ══ NAV DROPDOWN (Research Hub) ═══════════════════════════════════
+      // Desktop opens on hover/focus via CSS; this adds click + keyboard
+      // toggle (touch/keyboard) plus outside-click and Escape to close.
+      const dropdowns = Array.from(document.querySelectorAll<HTMLElement>('.nav-dropdown'));
+      const closeDropdowns = () => dropdowns.forEach((dd) => {
+        dd.classList.remove('open');
+        dd.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+      dropdowns.forEach((dd) => {
+        const trigger = dd.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+        trigger?.addEventListener('click', (e) => {
+          e.preventDefault();
+          const willOpen = !dd.classList.contains('open');
+          closeDropdowns();
+          if (willOpen) {
+            dd.classList.add('open');
+            trigger.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!(e.target as HTMLElement)?.closest('.nav-dropdown')) closeDropdowns();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDropdowns();
+      });
+
       // ══ INTERSECTION OBSERVER ═════════════════════════════════════════
       const animClasses = ['.fi', '.fi-l', '.fi-r', '.fi-s'];
       const allAnim = document.querySelectorAll(animClasses.join(','));
