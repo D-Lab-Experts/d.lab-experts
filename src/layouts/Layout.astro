@@ -65,6 +65,37 @@ const {
     <slot />
     <Footer />
 
+    <!-- Botão "voltar ao topo": surge após rolar, scroll suave, acento
+         lilás, acessível. Respeita prefers-reduced-motion (salto direto). -->
+    <button id="back-to-top" class="back-to-top" type="button" aria-label="Voltar ao topo">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M9 14V4M4 9l5-5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <style>
+      .back-to-top {
+        position: fixed; right: 22px; bottom: 22px; z-index: 900;
+        width: 46px; height: 46px; border-radius: 50%;
+        display: inline-flex; align-items: center; justify-content: center;
+        background: rgba(22,19,32,0.82); color: var(--accent);
+        border: 1px solid rgba(167,139,250,0.34);
+        backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        cursor: pointer;
+        opacity: 0; visibility: hidden; transform: translateY(12px);
+        transition: opacity .25s ease, transform .25s ease, visibility .25s ease, border-color .2s ease, background .2s ease;
+      }
+      .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+      .back-to-top:hover { border-color: var(--accent); background: rgba(167,139,250,0.16); transform: translateY(-2px); }
+      .back-to-top:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      @media (prefers-reduced-motion: reduce) {
+        .back-to-top { transition: opacity .2s ease, visibility .2s ease; }
+        .back-to-top:hover { transform: none; }
+      }
+      @media (max-width: 600px) { .back-to-top { right: 14px; bottom: 14px; width: 42px; height: 42px; } }
+    </style>
+
     <script>
       // ══ NAV SCROLL + PROGRESS BAR ═════════════════════════════════════
       // Single scroll listener drives both the nav shrink state and the
@@ -95,6 +126,24 @@ const {
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', onScroll, { passive: true });
         update(); // initial paint in case page loads mid-scroll
+      }
+
+      // ══ BACK TO TOP ═══════════════════════════════════════════════════
+      const backToTop = document.getElementById('back-to-top');
+      if (backToTop) {
+        const reduceBtt = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let bttTicking = false;
+        const toggleBtt = () => {
+          backToTop.classList.toggle('show', window.scrollY > 600);
+          bttTicking = false;
+        };
+        window.addEventListener('scroll', () => {
+          if (!bttTicking) { requestAnimationFrame(toggleBtt); bttTicking = true; }
+        }, { passive: true });
+        toggleBtt();
+        backToTop.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: reduceBtt ? 'auto' : 'smooth' });
+        });
       }
 
       // ══ HAMBURGER ═════════════════════════════════════════════════════
@@ -135,24 +184,52 @@ const {
         if (e.key === 'Escape') closeDropdowns();
       });
 
-      // ══ INTERSECTION OBSERVER ═════════════════════════════════════════
-      const animClasses = ['.fi', '.fi-l', '.fi-r', '.fi-s'];
-      const allAnim = document.querySelectorAll(animClasses.join(','));
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            observer.unobserve(e.target);
+      // ══ INTERSECTION OBSERVER (scroll reveals — à prova de falha) ══════
+      // Regra de ouro: o estado final é SEMPRE visível. Se o observer não
+      // disparar (não suportado, elemento mais alto que a viewport, scroll
+      // rápido, etc.), nada pode ficar preso em opacity:0. Por isso:
+      //  • threshold 0 (qualquer sliver dispara — corrige seções altas)
+      //  • rootMargin folgado embaixo (revela um pouco antes de entrar)
+      //  • revela imediatamente o que já está na viewport no load
+      //  • prefers-reduced-motion / sem IO → revela tudo direto
+      //  • rede de segurança: nada continua escondido depois de um tempo
+      const allAnim = Array.from(document.querySelectorAll('.fi, .fi-l, .fi-r, .fi-s'));
+      const reveal = (el) => el.classList.add('visible');
+      const reduceMo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const inHeroish = (el) => el.closest('#hero') || el.closest('.post-hero') || el.closest('.about-hero') || el.closest('.blog-hero') || el.closest('.article-hero');
+
+      if (reduceMo || !('IntersectionObserver' in window)) {
+        allAnim.forEach(reveal);
+      } else {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              reveal(e.target);
+              observer.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0, rootMargin: '0px 0px 12% 0px' });
+
+        const observeOrReveal = (el) => {
+          // Já visível (ou quase) no load → revela na hora, sem esperar scroll.
+          if (inHeroish(el) || el.getBoundingClientRect().top < window.innerHeight * 0.98) {
+            reveal(el);
+          } else {
+            observer.observe(el);
           }
-        });
-      }, { threshold: 0.1 });
-      allAnim.forEach((el) => {
-        if (el.closest('#hero') || el.closest('.post-hero') || el.closest('.about-hero') || el.closest('.blog-hero') || el.closest('.article-hero')) {
-          setTimeout(() => el.classList.add('visible'), 80);
-        } else {
-          observer.observe(el);
-        }
-      });
+        };
+        allAnim.forEach(observeOrReveal);
+
+        // Re-checa no resize: layout muda, elementos podem ter entrado na tela.
+        window.addEventListener('resize', () => {
+          allAnim.forEach((el) => {
+            if (!el.classList.contains('visible') && el.getBoundingClientRect().top < window.innerHeight) reveal(el);
+          });
+        }, { passive: true });
+
+        // Rede de segurança final: aconteça o que acontecer, nada fica invisível.
+        window.setTimeout(() => allAnim.forEach((el) => { if (!el.classList.contains('visible')) reveal(el); }), 2600);
+      }
 
       // ══ BARS ══════════════════════════════════════════════════════════
       function animBars(sel: string) {

@@ -11,37 +11,59 @@
    são a base; os tokens legados ficam remapeados pra mono pra não
    quebrar as referências espalhadas no arquivo e nas outras páginas. */
 :root {
-  --bg:          #000000;
-  --ink:         #FFFFFF;
-  --ink-dim:     rgba(255,255,255,0.52);
-  --ink-faint:   rgba(255,255,255,0.22);
-  --line:        rgba(255,255,255,0.16);
-  --line-strong: rgba(255,255,255,0.32);
+  /* ── PALETA FUTURISTA · ESCURO + ACENTO LILÁS ──────────────────
+     Site escuro premium e confortável aos olhos: quase-preto (nunca
+     #000), texto off-white (nunca #FFF puro = menos glare), lilás suave
+     como acento em ÁREA PEQUENA (glows sutis, linhas, números-chave e
+     CTA), nunca em blocos grandes saturados. Ritmo entre --bg, --bg-elev
+     e --bg-tint separa as seções (evita "buracos" pretos chapados). */
+  --bg:          #0E0E12;  /* fundo base, quase-preto */
+  --bg-elev:     #16161D;  /* cards / bento, um tom acima do fundo */
+  --bg-tint:     #161320;  /* banda com leve tinta lilás */
+  --bg-dark:     #0B0B0F;  /* bandas mais fundas (CTA) */
+  --ink:         #E8E8EC;  /* texto principal (off-white) */
+  --ink-dim:     #A0A0AD;  /* texto secundário (AA no escuro) */
+  --ink-faint:   rgba(232,232,236,0.34);
+  --line:        #25252E;  /* bordas sutis no escuro */
+  --line-strong: #34343F;
 
-  /* Legados remapeados pra mono */
-  --black:    #000000;
-  --white:    #FFFFFF;
-  --graphite: #000000;
-  --surface:  #000000;
+  /* Tokens semânticos de texto — todos com contraste ≥ AA sobre --bg. */
+  --text:        #E8E8EC;
+  --text-muted:  #B4B4BF;  /* corpo secundário ~8:1 */
+  --text-dim:    #8E8E99;  /* rótulos/legendas, AA */
+
+  /* Cor de acento — LILÁS suave. Aplicado a CTA primário, links,
+     números-chave, eyebrows e glows, sempre em pouca área. */
+  --accent:        #A78BFA;  /* lilás — acento principal */
+  --accent-strong: #C4B5FD;  /* lilás claro p/ texto/hover sobre escuro */
+  --accent-soft:   #C4B5FD;  /* lilás claro p/ brilhos e links em hover */
+  --accent-deep:   #8B5CF6;  /* lilás firme — usar com MUITA parcimônia */
+  --accent-tint:   rgba(167,139,250,0.10);  /* wash de fundo lilás bem suave */
+  --accent-ink:    #15121E;  /* texto escuro sobre fundo de acento (lilás) */
+
+  /* Legados remapeados pro escuro confortável (off-black / off-white) */
+  --black:    #0E0E12;
+  --white:    #E8E8EC;
+  --graphite: #16161D;
+  --surface:  #16161D;
   --surface2: rgba(255,255,255,0.04);
-  --card:     #000000;
+  --card:     #16161D;
   --border:   var(--line);
   --border-h: var(--line-strong);
-  --muted:    var(--ink-dim);
-  --dimmed:   var(--ink-faint);
-  /* Acento cromático morto. Tudo que apontava pro lilás vira branco;
-     o destaque agora vem de inversão e hierarquia, não de cor. */
-  --lilac:    #FFFFFF;
-  /* Aliases cromáticos antigos: branco translúcido (variação de
-     profundidade, lê como mono). */
-  --blue:     rgba(255,255,255,0.75);
-  --cyan:     rgba(255,255,255,0.70);
-  --green:    rgba(255,255,255,0.78);
-  --yellow:   rgba(255,255,255,0.75);
-  --amber:    rgba(255,255,255,0.70);
-  --red:      rgba(255,255,255,0.72);
-  --violet:   rgba(255,255,255,0.72);
-  --magenta:  rgba(255,255,255,0.72);
+  --muted:    var(--text-muted);
+  --dimmed:   var(--text-dim);
+  /* Eyebrows/labels/detalhes carregam a cor de acento lilás. */
+  --lilac:    var(--accent);
+  /* Aliases cromáticos antigos: off-white translúcido (profundidade,
+     lê como mono, confortável). */
+  --blue:     rgba(232,232,236,0.74);
+  --cyan:     rgba(232,232,236,0.70);
+  --green:    rgba(232,232,236,0.78);
+  --yellow:   rgba(232,232,236,0.74);
+  --amber:    rgba(232,232,236,0.70);
+  --red:      rgba(232,232,236,0.72);
+  --violet:   rgba(232,232,236,0.72);
+  --magenta:  rgba(232,232,236,0.72);
   /* Tipografia do redesign (registro Apple/Resend, monocromático):
      Inter como fonte única em todos os papéis — display, corpo e dados.
      Pesos finos (200/300) sustentam o registro elegante e cinemático;
@@ -49,16 +71,101 @@
      pro mono do sistema (código/tabular em posts). Aliases legados
      (--font-display/pixel/serif) remapeados pra Inter pra não quebrar as
      referências espalhadas no arquivo e nas outras páginas. */
-  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Display futurista. Alternativas p/ testar (trocar a 1ª família e o
+     family no link do BaseHead): 'Chakra Petch','Unbounded','Michroma','Rajdhani'. */
+  --font-display: 'Space Grotesk', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-pixel:   var(--font-sans);
   --font-serif:   var(--font-sans);
-  /* "Gradients" achatados pra branco sólido / falloff translúcido. */
-  --grad:     #FFFFFF;
+  /* "Gradients" achatados pra off-white sólido / falloff translúcido. */
+  --grad:     #E8E8EC;
   --grad-btn: rgba(255,255,255,0.06);
+
+  /* ── LIQUID GLASS ──────────────────────────────────────────────
+     Vidro líquido translúcido: superfície clara semitransparente com
+     leve tinta lilás, blur que refrata o que está atrás (glows,
+     partículas), brilho especular no topo e sombra profunda. Tunável
+     aqui; aplicado na nav, cards, CTA e botões. */
+  --glass-bg: linear-gradient(158deg, rgba(255,255,255,0.085), rgba(255,255,255,0.028) 58%, rgba(167,139,250,0.05));
+  --glass-border: rgba(255,255,255,0.13);
+  --glass-border-h: rgba(167,139,250,0.45);
+  --glass-blur: blur(16px) saturate(150%);
+  --glass-hl: inset 0 1px 0 rgba(255,255,255,0.20), inset 0 0 0 1px rgba(255,255,255,0.02);
+  --glass-shadow: 0 18px 50px rgba(0,0,0,0.45);
   --nav-h:    72px;
   --nav-h-shrink: 58px;
+}
+
+/* ════════════ TEMA CLARO (direção de arte claro-led + roxo) ═══════════
+   Escopo aplicado ao wrapper da home (.theme-light). Reescreve os tokens
+   pro registro claro; o foreground "branco" do build mono (var(--white),
+   88 usos como cor) passa a ser tinta escura. Seções que devem ficar
+   escuras recebem .band-dark, que reverte os tokens localmente. */
+.theme-light {
+  --bg:          #F6F6F7;
+  --bg-elev:     #FFFFFF;
+  --bg-dark:     #0C0C11;
+  --ink:         #0E0E12;
+  --text:        #0E0E12;
+  --text-muted:  #5A5A66;
+  --text-dim:    #6E6E78;
+  --text-on-dark:#F5F5F7;
+  --white:       #0E0E12;   /* tinta de primeiro plano vira escura */
+  --black:       #FFFFFF;   /* legado: usado como tinta sobre claro/CTA */
+  --surface:     #FFFFFF;
+  --surface2:    rgba(0,0,0,0.03);
+  --card:        #FFFFFF;
+  --line:        rgba(0,0,0,0.10);
+  --line-strong: rgba(0,0,0,0.18);
+  --border:      rgba(0,0,0,0.10);
+  --border-h:    rgba(0,0,0,0.20);
+  --muted:       var(--text-muted);
+  --dimmed:      var(--text-dim);
+  --ink:         #0E0E12;
+  --ink-dim:     #5A5A66;
+  --ink-faint:   rgba(0,0,0,0.42);
+  --grad:        var(--accent);     /* destaques de headline em roxo */
+  --lilac:       var(--accent);
+  /* aliases cromáticos antigos (eram branco translúcido): sobre claro
+     viram tinta translúcida escura; verde vira verde real p/ checks. */
+  --blue: rgba(0,0,0,0.62); --cyan: rgba(0,0,0,0.55);
+  --green: #15A34A; --yellow: rgba(0,0,0,0.6);
+  --violet: rgba(0,0,0,0.6); --red: rgba(0,0,0,0.6); --amber: rgba(0,0,0,0.6); --magenta: rgba(0,0,0,0.6);
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Banda escura dentro do tema claro: reverte tokens pro registro escuro
+   (mantém o conteúdo construído em branco-sobre-preto legível). */
+.theme-light .band-dark,
+.band-dark {
+  --bg:          #0C0C11;
+  --bg-elev:     #15151d;
+  --ink:         #F5F5F7;
+  --text:        #F5F5F7;
+  --text-muted:  #A8A8B3;
+  --text-dim:    rgba(255,255,255,0.55);
+  --white:       #FFFFFF;
+  --black:       #0C0C11;
+  --surface:     #0C0C11;
+  --surface2:    rgba(255,255,255,0.04);
+  --card:        rgba(255,255,255,0.04);
+  --line:        rgba(255,255,255,0.14);
+  --line-strong: rgba(255,255,255,0.28);
+  --border:      rgba(255,255,255,0.14);
+  --border-h:    rgba(255,255,255,0.28);
+  --muted:       var(--text-muted);
+  --dimmed:      var(--text-dim);
+  --ink-dim:     rgba(255,255,255,0.68);
+  --ink-faint:   rgba(255,255,255,0.30);
+  --grad:        #FFFFFF;
+  --lilac:       var(--accent-soft);
+  --blue: rgba(255,255,255,0.75); --cyan: rgba(255,255,255,0.70);
+  --green: rgba(255,255,255,0.78); --yellow: rgba(255,255,255,0.75);
+  --violet: rgba(255,255,255,0.72); --red: rgba(255,255,255,0.72); --amber: rgba(255,255,255,0.70); --magenta: rgba(255,255,255,0.72);
+  background: var(--bg-dark);
+  color: var(--text-on-dark, #F5F5F7);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -117,7 +224,7 @@ ul, ol { list-style: none; }
 .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
 /* Mais respiro vertical (registro Apple): seções largas com bastante
    ar entre elas. */
-.section { padding: clamp(100px, 13vw, 180px) 0; position: relative; overflow: hidden; }
+.section { padding: clamp(72px, 9vw, 132px) 0; position: relative; overflow: hidden; }
 .section-label { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 22px; }
 /* Hairline curta no lugar do bullet pixel — registro editorial limpo. */
 .section-label::before {
@@ -161,14 +268,12 @@ ul, ol { list-style: none; }
    ambiente. Tudo degrada com prefers-reduced-motion. */
 .glass, .glass-panel {
   position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.10);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
-  backdrop-filter: blur(18px) saturate(125%);
-  -webkit-backdrop-filter: blur(18px) saturate(125%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.14),
-    0 24px 60px rgba(0,0,0,0.5);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-hl), var(--glass-shadow);
 }
 /* sheen diagonal que percorre a superfície no hover (especular de vidro) */
 .glass-panel::after {
@@ -209,6 +314,78 @@ ul, ol { list-style: none; }
   .tilt-inner { transition: none; transform: none !important; }
   .glass-panel:hover::after { opacity: 0; }
 }
+
+/* ── LIQUID GLASS · superfícies de card ───────────────────────────
+   Converte as famílias de card do site em vidro líquido: fundo
+   translúcido (refrata os glows/partículas atrás via backdrop-blur),
+   contorno hairline e brilho especular no topo (::before). !important
+   vence o `background: var(--bg-elev)` dos estilos escopados dos
+   componentes. Seções grandes (bandas) ficam de fora de propósito. */
+.caso-card, .solg-card, .prova-stat, .pq-inner,
+.cf-step, .cf-reassure, .blog-card-catalog, .blog-tool-card,
+.blog-tools-inner, .hero-b-proof, .glass-panel, .media-slot,
+.diag-strip, .seg-card, .report-card, .trust-item {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-hl), var(--glass-shadow);
+}
+/* Brilho especular líquido no topo de cada superfície de vidro. */
+.caso-card, .solg-card, .prova-stat, .cf-step,
+.blog-card-catalog, .blog-tool-card, .blog-tools-inner, .pq-inner {
+  position: relative;
+}
+.caso-card::before, .solg-card::before, .prova-stat::before,
+.cf-step::before, .blog-card-catalog::before, .blog-tool-card::before,
+.blog-tools-inner::before, .pq-inner::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(120% 80% at 18% -10%, rgba(255,255,255,0.14), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.05), transparent 28%);
+  opacity: .7;
+}
+/* Mantém o conteúdo do card acima do brilho. */
+.caso-card > *, .solg-card > *, .prova-stat > *, .cf-step > *,
+.blog-card-catalog > *, .blog-tool-card > *, .blog-tools-inner > *, .pq-inner > * {
+  position: relative; z-index: 1;
+}
+/* Hover: borda lilás (o lift/elevação já vem dos estilos de cada card). */
+.caso-card:hover, .solg-card:hover, .prova-stat:hover,
+.cf-step:hover, .blog-card-catalog:hover, .blog-tool-card:hover,
+.diag-strip:hover, .seg-card:hover {
+  border-color: var(--glass-border-h) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* blur de fundo é estático — sem custo de animação; nada a desligar. */
+}
+
+/* ── POST · CTA de ferramenta grátis (usado no corpo dos posts MDX) ──
+   Bloco de acesso destacado dentro do conteúdo: liquid glass, label
+   lilás, botão primário. Classe global pra alcançar o conteúdo MDX. */
+.post-tool-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px 28px; flex-wrap: wrap;
+  margin: 36px 0; padding: 26px 28px;
+  border: 1px solid var(--glass-border-h);
+  border-radius: 18px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-hl), var(--glass-shadow);
+}
+.post-tool-cta .ptc-body { flex: 1; min-width: 240px; }
+.post-tool-cta .ptc-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+}
+.post-tool-cta .ptc-title {
+  font-family: var(--font-display); font-weight: 600; font-size: 19px;
+  letter-spacing: -.02em; color: var(--ink); margin: 0 0 4px;
+}
+.post-tool-cta .ptc-sub { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 0; }
+.post-tool-cta .btn { flex-shrink: 0; }
+@media (max-width: 560px) { .post-tool-cta .btn { width: 100%; justify-content: center; } }
 
 /* ── BORDER SWEEP ─────────────────────────────────────────────
    Hover: um segmento de luz branca percorre o perímetro da borda.
@@ -342,24 +519,33 @@ ul, ol { list-style: none; }
    pouco arredondados (6px), peso 500, hover discreto sem aura. */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 24px; border-radius: 6px; font-size: 14px; font-weight: 500;
+  padding: 13px 26px; border-radius: 100px; font-size: 14px; font-weight: 600;
   font-family: inherit; cursor: pointer; border: none; transition: all .2s ease;
   position: relative; overflow: hidden;
 }
+/* Primário = cor de acento (item 5/7). Único CTA primário do site. */
 .btn-primary {
-  background: var(--white);
-  color: var(--black);
-  border: 1px solid var(--white);
-  font-weight: 500;
-  box-shadow: none;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: 1px solid var(--accent);
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(124,58,237,0.28);
 }
 .btn-primary:hover {
-  background: rgba(255,255,255,0.88);
-  border-color: rgba(255,255,255,0.88);
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  box-shadow: 0 12px 34px rgba(124,58,237,0.38);
   transform: translateY(-1px);
 }
-.btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.18); }
-.btn-ghost:hover { border-color: rgba(255,255,255,0.40); background: rgba(255,255,255,0.025); transform: translateY(-1px); }
+/* Secundário/ghost = "Ver pesquisa" e afins. */
+/* Botão ghost em liquid glass: vidro translúcido com blur. */
+.btn-ghost, .btn-secondary {
+  background: var(--glass-bg); color: var(--white);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-hl);
+}
+.btn-ghost:hover, .btn-secondary:hover { border-color: var(--glass-border-h); color: var(--accent-soft); transform: translateY(-1px); }
 .btn-sm { padding: 10px 18px; font-size: 13.5px; }
 
 /* ── ICONS ──────────────────────────────────────────────────── */
@@ -396,17 +582,20 @@ ul, ol { list-style: none; }
 .wave-divider { position: relative; height: 60px; overflow: hidden; z-index: 1; }
 .wave-divider svg { position: absolute; width: 100%; height: 100%; }
 
-/* ═══════════ NAV (mono, sólida — sem glass) ════════════════════ */
+/* ═══════════ NAV (liquid glass) ════════════════════════════════ */
 #nav {
   position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 1000;
-  background: rgba(0,0,0,0.88);
-  border-bottom: 1px solid var(--line);
+  background: rgba(14,14,19,0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
   transition: height .4s cubic-bezier(.16,1,.3,1), background .4s, border-color .3s;
 }
 #nav.scrolled {
   height: var(--nav-h-shrink);
-  background: #000;
-  border-color: var(--line);
+  background: rgba(12,12,16,0.72);
+  border-color: rgba(255,255,255,0.08);
 }
 
 /* Scroll progress indicator — glued to bottom edge of nav.
@@ -802,7 +991,7 @@ ul, ol { list-style: none; }
    the headline can breathe. Sits between hero and brand-statement. */
 #featured-study {
   position: relative;
-  padding: 80px 0 60px;
+  padding: 80px 0 28px;
   z-index: 1;
   overflow: hidden;
 }
@@ -851,244 +1040,121 @@ ul, ol { list-style: none; }
   background: rgba(255, 255, 255, 0.10);
 }
 
-/* ── DIAGNOSTIC PROMO CARD ────────────────────────────────────────
-   Full-width gradient card on the home announcing the /diagnostic
-   tool. Mirrors featured-study's visual weight so the research → tool
-   rhythm reads as one sequence. */
-.diag-promo-section {
-  padding: 40px 0 60px;
+/* ── DIAGNOSTIC PROMO · FAIXA FINA (ribbon) ───────────────────────
+   Rebaixado de card grande para uma faixa horizontal em pílula, logo
+   abaixo do card de estudo. Peso visual leve e formato distinto criam
+   ritmo (resolve os "dois retângulos") e leem como lead-magnet rápido. */
+.diag-strip-section {
+  padding: 4px 0 64px;
   position: relative;
-  overflow: hidden;
   z-index: 1;
 }
-.diag-promo-card {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 32px;
+.diag-strip {
+  display: flex;
   align-items: center;
-  padding: 40px 44px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.06) 60%, rgba(255, 255, 255, 0.04));
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  gap: 24px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 15px 18px 15px 24px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.16);
   text-decoration: none;
   color: inherit;
-  position: relative;
-  transition: transform 0.3s cubic-bezier(.16, 1, .3, 1), border-color 0.3s, box-shadow 0.3s;
+  transition: transform 0.25s cubic-bezier(.16, 1, .3, 1), border-color 0.25s, background 0.25s;
 }
-.diag-promo-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
+.diag-strip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
 }
-.diag-promo-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.4);
-}
-.diag-promo-card:hover::before { opacity: 1; }
-.diag-promo-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--lilac);
-  margin-bottom: 16px;
-}
-.diag-promo-pulse {
+.diag-strip-pulse {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--lilac);
-  box-shadow: none;
-  animation: diagPromoPulse 2s ease-out infinite;
+  box-shadow: 0 0 10px var(--lilac);
+  flex-shrink: 0;
+  animation: diagStripPulse 2.2s ease-in-out infinite;
 }
-@keyframes diagPromoPulse {
-  0%   { opacity: 1; }
-  80%  { opacity: 0; }
-  100% { opacity: 0; }
+@keyframes diagStripPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(1.35); }
 }
-.diag-promo-title {
-  font-family: var(--font-display);
-  font-size: clamp(30px, 3.6vw, 44px);
-  font-weight: 300;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
-  margin-bottom: 14px;
-  text-wrap: balance;
-}
-.diag-promo-sub {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.65;
-  max-width: 540px;
-  margin-bottom: 22px;
-}
-.diag-promo-stats {
+.diag-strip-main {
   display: flex;
-  gap: 28px;
-  margin-bottom: 22px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
-.diag-promo-stat-val {
-  font-size: 22px;
+.diag-strip-eyebrow {
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lilac);
+}
+.diag-strip-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  line-height: 1.3;
+}
+.diag-strip-title strong {
+  font-weight: 600;
   background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.diag-promo-stat-lbl {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--dimmed);
-  margin-top: 3px;
+.diag-strip-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
 }
-.diag-promo-cta {
+.diag-strip-stat b { color: var(--white); font-weight: 700; }
+.diag-strip-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--dimmed);
+}
+.diag-strip-cta {
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--lilac);
-  padding: 12px 22px;
+  color: var(--white);
+  padding: 11px 20px;
   border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.36);
-  background: rgba(255, 255, 255, 0.08);
-  transition: gap 0.25s, border-color 0.25s, background 0.25s;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  transition: gap 0.2s, border-color 0.2s, background 0.2s;
 }
-.diag-promo-card:hover .diag-promo-cta {
-  gap: 14px;
-  border-color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.15);
+.diag-strip:hover .diag-strip-cta {
+  gap: 12px;
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.14);
 }
-
-/* Decorative visual on the right — mini result-card preview */
-.diag-promo-visual {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 260px;
-}
-.diag-promo-cube {
-  position: relative;
-  width: 260px;
-  padding: 26px 28px;
-  background: rgba(0,0,0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 8px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-  animation: diagPromoFloat 6s ease-in-out infinite;
-  transform-origin: center;
-}
-@keyframes diagPromoFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
-}
-.diag-promo-cube-face { position: relative; }
-.diag-promo-cube-eyebrow {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--dimmed);
-  margin-bottom: 10px;
-}
-.diag-promo-cube-num {
-  font-size: 42px;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 14px;
-}
-.diag-promo-cube-bar {
-  position: relative;
-  height: 6px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-.diag-promo-cube-bar-baseline {
-  position: absolute;
-  top: -3px;
-  bottom: -3px;
-  left: 37%;
-  width: 1.5px;
-  background: var(--white);
-  opacity: 0.6;
-  z-index: 1;
-}
-.diag-promo-cube-bar-fill {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 0%;
-  background: var(--grad);
-  border-radius: 4px;
-  animation: diagPromoBar 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards infinite;
-}
-@keyframes diagPromoBar {
-  0%   { width: 0%; }
-  40%  { width: 47%; }
-  70%  { width: 47%; }
-  100% { width: 47%; }
-}
-.diag-promo-cube-lbl {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--dimmed);
-}
-
-.diag-promo-sparkles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.diag-promo-sparkle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--lilac);
-  animation: diagPromoSparkle 4s ease-in-out infinite;
-}
-.diag-promo-sparkle.s1 { top: 12%;  left: 6%;  animation-delay: 0s; }
-.diag-promo-sparkle.s2 { bottom: 18%; right: 4%; background: var(--blue); animation-delay: -1.5s; }
-.diag-promo-sparkle.s3 { top: 60%; left: 10%; background: var(--green); animation-delay: -2.8s; }
-@keyframes diagPromoSparkle {
-  0%, 100% { opacity: 0.6; transform: translate(0, 0) scale(1); }
-  50%      { opacity: 1;   transform: translate(4px, -8px) scale(1.3); }
-}
-
-@media (max-width: 900px) {
-  .diag-promo-card {
-    grid-template-columns: 1fr;
-    padding: 28px 22px;
-    gap: 24px;
+@media (max-width: 760px) {
+  .diag-strip-section { padding: 4px 0 48px; }
+  .diag-strip {
+    flex-wrap: wrap;
+    gap: 14px;
+    border-radius: 20px;
+    padding: 18px 20px;
   }
-  .diag-promo-visual { min-height: 180px; }
-  .diag-promo-cube { width: 100%; max-width: 320px; }
-  .diag-promo-stats { gap: 20px; }
+  .diag-strip-stats { display: none; }
+  .diag-strip-cta { margin-left: auto; }
 }
 
 /* Superfície/sombra/raio vêm de .glass-panel; aqui ficam só caixa e
@@ -1270,61 +1336,6 @@ ul, ol { list-style: none; }
 .section-glow.cyan { width: 300px; height: 280px; background: radial-gradient(ellipse, rgba(255,255,255,.012) 0%, transparent 70%); }
 .section-particles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .section-sep { height: 1px; position: relative; z-index: 1; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.10) 25%, rgba(255,255,255,0.10) 75%, transparent 100%); }
-
-/* ═══════════ CONTRIBUTORS HALL ══════════════════════════════════ */
-/* Whisper-thin marquee — deliberately subtle so it reads as a quiet
-   acknowledgement strip, not a hero section. No borders, no tint,
-   no prominent heading; just muted names drifting under the page
-   flow. Hover pauses the scroll so a reader can catch a name. */
-.contributors-hall {
-  padding: 28px 0;
-  position: relative;
-  overflow: hidden;
-}
-.contributors-marquee {
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-}
-.contributors-track {
-  display: inline-flex;
-  align-items: center;
-  gap: 22px;
-  white-space: nowrap;
-  animation: contributorsScroll 40s linear infinite;
-}
-.contributors-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--dimmed);
-}
-.contributor {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-  letter-spacing: 0.01em;
-}
-.contributor-postnom {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--dimmed);
-  letter-spacing: 0.03em;
-  margin-left: 2px;
-}
-.contributor-sep {
-  font-size: 12px;
-  color: var(--dimmed);
-  opacity: 0.6;
-}
-@keyframes contributorsScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.contributors-marquee:hover .contributors-track {
-  animation-play-state: paused;
-}
 
 /* ═══════════ HOME — OPEN COLLABORATION CTA ══════════════════════ */
 /* Body-level CTA inviting outside researchers to submit, co-research,
@@ -1630,7 +1641,7 @@ ul, ol { list-style: none; }
   font-family: var(--font-serif);
   font-size: 17.5px;
   line-height: 1.7;
-  color: rgba(255,255,255,0.72);
+  color: var(--text-muted);
   font-variation-settings: 'opsz' 14;
   text-align: center;
 }
@@ -1671,7 +1682,7 @@ ul, ol { list-style: none; }
   font-feature-settings: 'tnum' 1;
   line-height: 1;
 }
-.consult-front-cyber .consult-front-num { color: rgba(255,255,255,0.5); }
+.consult-front-cyber .consult-front-num { color: var(--text-dim); }
 .consult-front-body { display: flex; flex-direction: column; gap: 8px; }
 .consult-front-name {
   font-family: var(--font-serif);
@@ -1686,7 +1697,7 @@ ul, ol { list-style: none; }
   font-family: var(--font-serif);
   font-size: 15.5px;
   line-height: 1.7;
-  color: rgba(255,255,255,0.68);
+  color: var(--text-muted);
   font-variation-settings: 'opsz' 14;
   margin: 0;
 }
@@ -1696,6 +1707,23 @@ ul, ol { list-style: none; }
 }
 .consult-front-name a:hover { color: var(--lilac); }
 .consult-front-cyber .consult-front-name a:hover { color: var(--green); }
+/* Flag de "porta de entrada" no primeiro degrau da escada de IA. */
+.consult-front-flag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: rgba(234,234,240,0.08);
+  border: 1px solid rgba(234,234,240,0.24);
+  font-variation-settings: normal;
+}
 .consult-front-meta {
   font-size: 11.5px;
   color: var(--dimmed);
@@ -1730,7 +1758,7 @@ ul, ol { list-style: none; }
   font-family: var(--font-serif);
   font-size: 16.5px;
   line-height: 1.7;
-  color: rgba(255,255,255,0.65);
+  color: var(--text-muted);
   font-variation-settings: 'opsz' 14;
   margin: 0 0 24px;
 }
@@ -1937,11 +1965,12 @@ ul, ol { list-style: none; }
 .cta-box {
   max-width: 920px; margin: 0 auto; text-align: center; position: relative; z-index: 2;
   padding: 80px 64px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,.12);
+  /* glass com tint lilás um pouco mais presente que o --glass-bg padrão */
+  background: linear-gradient(158deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03) 56%, rgba(167,139,250,0.10));
+  border: 1px solid var(--glass-border);
   border-radius: 24px;
-  backdrop-filter: blur(20px) saturate(125%);
-  -webkit-backdrop-filter: blur(20px) saturate(125%);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 32px 80px rgba(0,0,0,.5);
 }
 .cta-icon { width: 48px; height: 48px; margin: 0 auto 20px; border-radius: 12px; object-fit: contain; }
@@ -2016,6 +2045,15 @@ ul, ol { list-style: none; }
 .pillar-icon { margin-bottom: 12px; }
 .pillar-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
 .pillar-desc { font-size: 13px; color: var(--dimmed); line-height: 1.55; }
+/* Frentes de implementação (sobre): grid 3×2 no lugar do card único
+   centralizado — equilíbrio visual e leitura escaneável de cada frente. */
+.fronts-intro { font-size: 16px; line-height: 1.7; color: var(--muted); max-width: 700px; margin: 0; }
+.fronts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 36px 0 0; }
+.front-card { background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; padding: 22px 22px 24px; transition: transform .3s cubic-bezier(.16,1,.3,1), border-color .3s, box-shadow .3s; }
+.front-card:hover { transform: translateY(-4px); border-color: var(--border-h); box-shadow: 0 18px 44px rgba(0,0,0,.3); }
+.front-card-num { display: block; font-family: var(--font-mono, monospace); font-size: 12px; letter-spacing: .04em; color: var(--lilac); margin-bottom: 14px; }
+.front-card-name { font-size: 15.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.3; margin: 0 0 6px; color: var(--white); }
+.front-card-desc { font-size: 13.5px; line-height: 1.55; color: var(--muted); margin: 0; }
 .services-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 40px 0; }
 .service-card { background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); border: 1px solid rgba(255,255,255,0.10); backdrop-filter: blur(12px) saturate(120%); -webkit-backdrop-filter: blur(12px) saturate(120%); border-radius: 8px; padding: 32px; transition: all .3s cubic-bezier(.16,1,.3,1); position: relative; overflow: hidden; }
 .service-card:hover { border-color: var(--border-h); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
@@ -2194,7 +2232,7 @@ ul, ol { list-style: none; }
 .blog-filter { padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; transition: all .25s; background: transparent; color: var(--muted); border: 1px solid var(--border); }
 .blog-filter:hover { border-color: var(--border-h); color: var(--white); }
 .blog-filter.active { background: rgba(255,255,255,.1); color: var(--lilac); border-color: rgba(255,255,255,.25); }
-.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; z-index: 2; padding-bottom: 80px; }
+.blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; position: relative; z-index: 2; padding-bottom: 80px; }
 .blog-card-featured {
   grid-column: 1 / -1;
   display: grid; grid-template-columns: 1fr 1fr; gap: 0;
@@ -2219,8 +2257,8 @@ ul, ol { list-style: none; }
   transition: opacity .4s, background-position .8s cubic-bezier(.16,1,.3,1);
 }
 .blog-card:hover::before { opacity: 1; background-position: -50% 0; }
-.blog-card-img { width: 100%; aspect-ratio: 16/9; background: var(--surface); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.blog-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, var(--card) 100%); }
+.blog-card-img { width: 100%; aspect-ratio: 4/3; background: var(--surface); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.blog-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 70%, var(--card) 100%); }
 .blog-card-img svg { opacity: .2; z-index: 1; }
 .blog-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
 .blog-card-tags { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
@@ -2274,6 +2312,17 @@ ul, ol { list-style: none; }
   background: linear-gradient(135deg, var(--lilac), var(--blue));
   flex-shrink: 0;
 }
+/* Tema claro (home): o badge neon branco-sobre-escuro ficaria branco no
+   branco. Vira pílula de acento (roxo) com texto legível, mantendo o pulse. */
+.theme-light .research-card-tag.original {
+  color: var(--accent-strong);
+  background: var(--accent-tint);
+  border-color: rgba(124,58,237,0.35);
+  box-shadow: 0 0 0 1px rgba(124,58,237,0.10);
+}
+.theme-light .research-card-tag.original::before {
+  background: var(--accent);
+}
 /* Cybersec variant: same pulsing neon, but flipped to the green/cyan
    palette so it stays coherent with the cyber track. */
 .blog-card-tag.original.green {
@@ -2326,7 +2375,7 @@ ul, ol { list-style: none; }
    Hover discreto, sem gloss/aura lilás. */
 .blog-card-catalog { transition: border-color .25s, transform .25s; }
 .blog-card-catalog:hover { transform: translateY(-2px); border-color: var(--border-h); box-shadow: 0 16px 40px rgba(0,0,0,.25); }
-.blog-card-catalog .blog-card-img { aspect-ratio: 16/9; }
+.blog-card-catalog .blog-card-img { aspect-ratio: 4/3; }
 .blog-card-catalog .blog-card-body { padding: 24px 26px 22px; }
 .blog-card-cataloghead {
   display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
@@ -2975,7 +3024,7 @@ ul, ol { list-style: none; }
 .key-finding:hover { background: var(--surface); }
 .key-finding-val { font-family: var(--font-mono); font-size: 26px; font-weight: 500; letter-spacing: -.02em; margin-bottom: 6px; font-feature-settings: 'tnum' 1; }
 .key-finding-lbl { font-size: 12px; color: var(--dimmed); line-height: 1.4; }
-.article-body { max-width: 740px; margin: 0 auto; padding: 40px 28px 100px; position: relative; z-index: 1; }
+.article-body { max-width: 960px; margin: 0 auto; padding: 40px 32px 100px; position: relative; z-index: 1; }
 /* Corpo do post em Source Serif 4 — registro de leitura longa.
    Larguras reduzidas (740px max) para conforto de leitura. */
 .article-body h2 { font-family: var(--font-serif); font-size: clamp(24px,3vw,32px); font-weight: 600; letter-spacing: -.02em; margin: 56px 0 20px; line-height: 1.18; padding-top: 20px; border-top: 1px solid var(--border); font-variation-settings: 'opsz' 36; color: var(--white); }
@@ -3082,6 +3131,7 @@ ul, ol { list-style: none; }
   .method-steps { grid-template-columns: 1fr 1fr; }
   .about-stats { grid-template-columns: 1fr 1fr; }
   .pillars-grid { grid-template-columns: repeat(2,1fr); }
+  .fronts-grid { grid-template-columns: repeat(2,1fr); }
   .about-split { grid-template-columns: 1fr; gap: 36px; }
   .about-split-aside { position: static; }
   .atom-container { height: 220px; }
@@ -3125,6 +3175,7 @@ ul, ol { list-style: none; }
   /* about */
   .about-hero { padding: 130px 0 60px; }
   .pillars-grid { grid-template-columns: 1fr; }
+  .fronts-grid { grid-template-columns: 1fr; }
   .method-steps { grid-template-columns: 1fr; }
   .about-stats { grid-template-columns: 1fr; }
   .atom-container { height: 190px; }
@@ -3207,3 +3258,75 @@ button:focus-visible {
   h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
   figure, img, table { break-inside: avoid; page-break-inside: avoid; }
 }
+
+/* ════════════ LIGHT SKIN — overrides p/ a home clara ═══════════════
+   Reskin das classes de card construídas em branco-sobre-preto (raw
+   rgba(255,255,255,x)) pro registro claro. Texto já vem dos tokens;
+   aqui ajusto fundos, bordas, sombras e glows. */
+.theme-light .section-glow { display: none; }  /* mata smudges cinza no claro */
+
+/* Cards genéricos → branco com borda sutil + sombra leve */
+.theme-light .seg-card,
+.theme-light .research-card,
+.theme-light .theme-tile,
+.theme-light .step,
+.theme-light .consult-front,
+.theme-light .report-card,
+.theme-light .hero-card,
+.theme-light .glass-panel,
+.theme-light .home-colab-inner,
+.theme-light .trust-item,
+.theme-light .cf-step,
+.theme-light .cf-reassure,
+.theme-light .demo-pt .icon-wrap,
+.theme-light .methodology-sources {
+  background: var(--bg-elev) !important;
+  border-color: var(--line) !important;
+  box-shadow: 0 10px 30px rgba(12,12,17,0.05);
+}
+.theme-light .seg-card:hover,
+.theme-light .research-card:hover,
+.theme-light .consult-front:hover,
+.theme-light .theme-tile:hover,
+.theme-light .cf-step:hover {
+  border-color: rgba(124,58,237,0.30) !important;
+  box-shadow: 0 22px 54px rgba(12,12,17,0.10);
+}
+/* Passo "core" do como-funciona em destaque lilás */
+.theme-light .cf-step-core {
+  background: var(--accent-tint) !important;
+  border-color: rgba(124,58,237,0.30) !important;
+}
+.theme-light .cf-step-num { background: var(--accent-tint) !important; color: var(--accent-strong) !important; border: none !important; }
+.theme-light .cf-step-core .cf-step-num { background: var(--accent) !important; color: #fff !important; }
+.theme-light .cf-arrow { color: var(--accent-soft) !important; }
+
+/* Faixa de stats / hero proof / trust → fundo claro */
+.theme-light .hero-b-proof { background: var(--bg-tint, #F3EEFF) !important; border-top-color: var(--line) !important; }
+.theme-light #logos { background: var(--bg-elev); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* Diag strip → pílula clara com leve tint */
+.theme-light .diag-strip {
+  background: var(--bg-elev) !important;
+  border-color: var(--line) !important;
+  box-shadow: 0 8px 26px rgba(12,12,17,0.05);
+}
+.theme-light .diag-strip-cta { background: var(--accent-tint) !important; border-color: rgba(124,58,237,0.25) !important; color: var(--accent-strong) !important; }
+.theme-light .diag-strip-title { color: var(--ink) !important; }
+
+/* Tints alternados pra dar ritmo entre seções claras */
+.theme-light #ai-demo,
+.theme-light #como-funciona,
+.theme-light #segments,
+.theme-light #demo { background: var(--bg-tint, #F3EEFF) !important; }
+.theme-light #ai-demo { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* Console do agente fica ESCURO (terminal) mesmo no claro — alto contraste */
+.theme-light .aid-console { background: linear-gradient(180deg,#0E0E14,#0A0A10) !important; border-color: rgba(124,58,237,0.30) !important; box-shadow: 0 24px 60px rgba(12,12,17,0.16); }
+
+/* Separadores hairline no claro */
+.theme-light .section-sep { background: linear-gradient(90deg, transparent, var(--line) 25%, var(--line) 75%, transparent) !important; }
+
+/* Botões ghost no claro (caso usem rgba branco) */
+.theme-light .btn-ghost { color: var(--ink); border-color: var(--line-strong); }
+.theme-light .btn-ghost:hover { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-tint); }

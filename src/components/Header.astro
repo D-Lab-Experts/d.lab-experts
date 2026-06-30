@@ -23,19 +23,14 @@ type Link = {
   children?: Child[];
 };
 
+// Ordem orientada à jornada de compra (item 8): como funciona →
+// o que entregamos → ferramentas → conteúdo → sobre → contato.
 const links: Array<Link> = [
-  { href: '/#hero', label: t('nav.home'), key: 'home' },
+  { href: '/', label: t('nav.home'), key: 'home' },
   { href: '/about', label: t('nav.about'), key: 'about' },
-  { href: '/#segments', label: t('nav.segments'), key: 'segments' },
-  { href: '/#products', label: t('nav.products'), key: 'products' },
-  {
-    label: t('nav.hub'),
-    children: [
-      { href: '/blog', label: t('nav.blog'), key: 'blog', highlight: true },
-      { href: '/solucoes', label: t('nav.solucoes'), key: 'solucoes' },
-      { href: '/colaborar', label: t('nav.collaborate'), key: 'colaborar' },
-    ],
-  },
+  { href: '/#como-funciona', label: t('nav.howItWorks') },
+  { href: '/solucoes', label: t('nav.solucoes'), key: 'solucoes' },
+  { href: '/blog', label: t('nav.blog'), key: 'blog', highlight: true },
   { href: '/contato', label: t('nav.contato'), key: 'contato' },
 ];
 

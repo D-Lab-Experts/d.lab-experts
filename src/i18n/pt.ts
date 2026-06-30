@@ -9,41 +9,44 @@ const pt: Translation = {
     sealLine: 'Applied Intelligence Research',
     ogSiteName: 'D.Lab Experts',
     orgDescription:
-      'Research Hub em inteligência aplicada. Publicações abertas, consultoria sob NDA.',
+      'Agência e consultoria de implementação de IA. Diagnóstico, agentes e automações com impacto medido para pequenas e médias empresas.',
   },
 
   nav: {
-    home: 'Home',
+    home: 'Início',
     about: 'Sobre',
     segments: 'Pesquisa',
-    products: 'Consultoria',
-    blog: 'Análises Públicas',
-    solucoes: 'Soluções',
+    howItWorks: 'Como funciona',
+    products: 'Implementação de IA',
+    blog: 'Blog',
+    solucoes: 'Serviços',
     contato: 'Contato',
     collaborate: 'Colaborar',
-    hub: 'Research Hub',
+    hub: 'Conteúdo',
     ariaLogo: 'D.Lab Experts, ir para a home',
     ariaOpenMenu: 'Abrir menu',
-    ctaProblem: 'Iniciar conversa →',
+    ctaProblem: 'Pedir diagnóstico →',
     langSwitcherLabel: 'Idioma',
   },
 
   pageTitles: {
-    home: 'D.Lab Experts · Research Hub em Inteligência Aplicada',
+    // DRAFT: confirmar copy — posicionamento de home virado para
+    // implementação de IA baseada em evidência (pesquisa = motor).
+    home: 'D.Lab Experts · Implementação de IA baseada em evidência',
     homeDescription:
-      'D.Lab Experts · Research Hub em inteligência aplicada. Publicamos pesquisa para fundamentar decisões de board, founder e gestor com inteligência competitiva e estudos de comportamento de método científico. Análises abertas e consultoria sob NDA.',
-    about: 'Sobre | D.Lab Experts · Research Hub',
+      'D.Lab Experts implementa IA e agentes para elevar eficiência e margem de médias empresas e scaleups, com diagnóstico que prova onde vale e impacto medido antes e depois. Adoção de IA baseada em evidência, com pesquisa aberta como motor de autoridade.',
+    about: 'Sobre | D.Lab Experts · Agência de IA',
     aboutDescription:
-      'D.Lab Experts é um Research Hub em inteligência aplicada. Pesquisamos, testamos e publicamos como prova de método. Consultoria sob NDA quando o contexto pede.',
+      'D.Lab Experts é uma agência e consultoria de implementação de IA para pequenas e médias empresas. Diagnóstico, agentes e automações sob medida, com impacto medido antes e depois.',
     blog: 'Análises Públicas | D.Lab Experts · Research Hub',
     blogDescription:
       'Pesquisas, análises e cases publicados pelo D.Lab Experts como prova pública do método. Inteligência de dados em fontes abertas, raciocínio exposto e dados auditáveis.',
-    contato: 'Contato | D.Lab Experts · Research Hub',
+    contato: 'Contato | D.Lab Experts · Agência de IA',
     contatoDescription:
-      'Fale com o D.Lab Experts. Para projetos de consultoria sob NDA, parcerias de pesquisa ou imprensa. Respondemos em até um dia útil.',
-    solucoes: 'Soluções | D.Lab Experts',
+      'Fale com o D.Lab Experts sobre implementação de IA na sua empresa. Conta o processo que trava na sua operação e a gente propõe por onde começar. Respondemos em até um dia útil.',
+    solucoes: 'Serviços de IA | D.Lab Experts',
     solucoesDescription:
-      'Ferramentas práticas para profissionais de tecnologia e mercado. Construídas a partir dos mesmos princípios de rigor do Research Hub, abertas e ancoradas em pesquisa.',
+      'Os serviços de implementação de IA do D.Lab: atendimento 24/7, qualificação de leads, automação de operações, leitura de documentos e decisão com dados. Diagnóstico, implementação e impacto medido.',
     diagnostic: 'Diagnóstico de Decisão | D.Lab Experts · Research Hub',
     diagnosticDescription:
       'Quantifique o risco de decidir sem dados. Cinco entradas, duas saídas, cada coeficiente ancorado em pesquisa revisada.',
@@ -67,14 +70,18 @@ const pt: Translation = {
       'Sua mensagem chegou ao D.Lab Experts. Respondemos em até 1 dia útil com leitura do contexto e próximos passos.',
   },
 
+    // DRAFT: confirmar copy — virada de núcleo para implementação de IA
+    // baseada em evidência. DNA anti-hype preservado ("instrumentar o que
+    // a evidência prova", não automatizar no hype).
   hero: {
-    eyebrow: 'DECISION INTELLIGENCE RESEARCH',
-    taglineLine1: 'não é consultoria.',
-    taglineLine2: 'não é pesquisa de mercado.',
-    taglineLine3: 'é inteligência para decisão.',
-    sub: 'Laboratório de pesquisa aplicada em Decision Intelligence e Data Engineering. Método explícito, dados primários, publicação aberta.',
-    ctaPrimary: 'iniciar projeto →',
-    ctaSecondary: 'ler a pesquisa',
+    eyebrow: 'IMPLEMENTAÇÃO DE IA · COM PROVA',
+    taglineLine1: 'IA que vira',
+    taglineLine2: '',
+    taglineAccentWord: 'resultado',
+    taglineLine3: 'na sua empresa.',
+    sub: 'A gente implementa IA e agentes na sua operação pra você gastar menos tempo e dinheiro e ganhar margem. Começamos provando onde vale, e medimos o resultado antes e depois. Sem hype, sem promessa vazia.',
+    ctaPrimary: 'Pedir diagnóstico →',
+    ctaSecondary: 'Ver como funciona',
     proof1Val: 'N=98',
     proof1Lbl: 'amostra do estudo de gaming, protocolo STROBE',
     proof2Val: '87.8%',
@@ -85,6 +92,55 @@ const pt: Translation = {
     proof4Lbl: 'mais propensos a trocar de marca por compromisso social comprovado',
     proof5Val: 'STROBE',
     proof5Lbl: 'protocolo de relato seguido na pesquisa',
+    // DRAFT: rótulo que deixa claro — é prova de método/rigor (pesquisa
+    // publicada), não resultado de implementação de IA (item 6).
+    proofLabel: 'Como pesquisamos · rigor da pesquisa publicada — não são resultados de implementação de IA',
+    // DRAFT placeholder (item 6): substituir pelos números reais de
+    // implementação quando houver case (ex.: diagnósticos entregues,
+    // processos automatizados, impacto medido antes→depois).
+    proofNote: 'Prova de implementação de IA entra aqui assim que o primeiro case for liberado — diagnósticos, processos automatizados e impacto medido.',
+  },
+
+  // DRAFT: confirmar copy — faixa "para quem é" logo abaixo do herói,
+  // ancorando o público (médias empresas e scaleups) em uma linha.
+  paraQuem: {
+    label: 'Para quem é',
+    text: 'Para pequenas e médias empresas e scaleups que querem usar IA pra ganhar eficiência e margem — com método e prova, não com hype.',
+    chip1: 'Escalar sem inchar o custo',
+    chip2: 'Decisão ancorada em dado',
+    chip3: 'Processos prontos pra automatizar',
+  },
+
+  // DRAFT: confirmar copy — bento "prova" (claro). Mostra MÉTODO + IMPACTO
+  // MEDIDO. Números reais entram como {{placeholder}} (nada inventado).
+  bento: {
+    label: 'A prova',
+    title: 'Método à mostra,',
+    titleAccent: 'impacto medido.',
+    sub: 'O que separa adoção de IA com evidência de promessa de palco: a gente expõe o método e mede o antes e o depois.',
+
+    methodLabel: 'Método',
+    methodTitle: 'Três passos, sempre rastreáveis',
+    methodStep1: 'Diagnóstico',
+    methodStep2: 'Implementação',
+    methodStep3: 'Medição',
+    methodDesc: 'Diagnóstico antes de automatizar, implementação sênior e impacto medido. Sem caixa-preta em nenhum ponto.',
+
+    impactLabel: 'Impacto medido',
+    impactTitle: 'Antes → depois',
+    impactBefore: 'Antes',
+    impactBeforeVal: '{{ baseline }}',
+    impactAfter: 'Depois',
+    impactAfterVal: '{{ resultado }}',
+    impactNote: 'Placeholder — entra com o primeiro case real, sem número inventado.',
+
+    statLabel: 'Em números',
+    statVal: '{{ N }}',
+    statDesc: 'processos automatizados e diagnósticos entregues. Entra quando houver dado real.',
+
+    caseLabel: 'Case',
+    caseTitle: 'O seu próximo case aqui',
+    caseDesc: 'Quando um cliente liberar, o teaser entra neste card — imagem, resultado e link.',
   },
 
   trust: {
@@ -97,8 +153,8 @@ const pt: Translation = {
     dualLbl: 'Decisão e engenharia de dados na mesma operação',
     methodVal: 'Método',
     methodLbl: 'Cada etapa rastreável, zero caixa-preta',
-    openVal: 'Aberta',
-    openLbl: 'Publicamos a pesquisa, não só a recomendação',
+    openVal: 'Sob medida',
+    openLbl: 'Feito pra sua operação, não um produto genérico',
   },
 
   brand: {
@@ -126,6 +182,223 @@ const pt: Translation = {
     sourceScraping: 'Scraping de marketplaces: preço, volume, sentimento',
     sourceWeb: 'Inteligência web: SimilarWeb, SEMrush',
     sourcePrimary: 'Pesquisa primária: surveys, entrevistas',
+  },
+
+  // DRAFT: confirmar copy — "Como funciona" em chave de mercado, amigável
+  // para médias empresas e scaleups. Traduz a escada (Diagnóstico →
+  // Implementação → Acompanhamento) em jornada sem jargão, com entregável
+  // por passo e uma faixa que derruba o medo de "projeto de IA".
+  comoFunciona: {
+    eyebrow: 'Como funciona',
+    title: 'Da dúvida ao resultado,',
+    titleAccent: 'em três passos simples.',
+    sub: 'Sem hype, sem caixa-preta e sem travar a sua operação. A gente começa provando onde a IA vale e só avança no que dá retorno de verdade.',
+
+    step1Tag: 'Passo 1',
+    step1Title: 'Diagnóstico',
+    step1Desc: 'Olhamos sua operação e provamos onde a IA dá retorno de verdade.',
+    step1Deliver: 'Você recebe: um mapa de prioridades, em documento e apresentação.',
+
+    step2Tag: 'Passo 2',
+    step2Title: 'Implementação',
+    step2Desc: 'Construímos os agentes e automações dentro do seu processo.',
+    step2Deliver: 'Você recebe: a solução rodando na sua operação.',
+
+    step3Tag: 'Passo 3',
+    step3Title: 'Medição',
+    step3Desc: 'Mostramos o resultado com número: antes e depois.',
+    step3Deliver: 'Você recebe: o impacto medido, antes e depois.',
+
+    reassureLabel: 'Por que é seguro começar',
+    reassure1: 'Começa pequeno e prova primeiro. Sem cheque em branco.',
+    reassure2: 'Sem caixa-preta: você entende cada passo e cada número.',
+    reassure3: 'Impacto medido, nunca percentual prometido às cegas.',
+    reassure4: 'Feito sob medida pra sua operação, não um produto genérico.',
+
+    cta: 'Pedir diagnóstico →',
+    ctaNote: 'Conversa inicial sem compromisso. A gente responde em até 1 dia útil.',
+  },
+
+  // Casos de uso concretos (linguagem de PME). Cada card:
+  // problema → o que a IA faz → resultado (métrica de mercado, rotulada).
+  // Nenhum número aqui é resultado de cliente do D.Lab — são referências
+  // de mercado pra dar tangibilidade. DRAFT: ajustar com cases reais.
+  casos: {
+    eyebrow: 'Casos de uso',
+    title: 'Onde a IA já dá resultado',
+    titleAccent: 'na sua empresa.',
+    sub: 'Não é IA genérica: a gente acopla agentes e automações nos processos que já existem na sua operação. Veja onde costuma valer mais.',
+    metricNote: 'Métricas abaixo são referências de mercado, não resultados de clientes do D.Lab.',
+
+    c1Tag: 'Atendimento / SAC',
+    c1Title: 'Atendimento 24/7',
+    c1Problem: 'Fila de atendimento cresce e a equipe não dá conta no horário de pico.',
+    c1Does: 'Agente responde dúvidas e tria a demanda na hora, dia e noite, e passa pro humano só o que importa.',
+    c1Metric: '−40% no tempo de resposta',
+    c1MetricNote: 'estimativa de mercado',
+
+    c2Tag: 'Comercial',
+    c2Title: 'Qualificação de leads',
+    c2Problem: 'Lead chega e esfria antes de alguém responder.',
+    c2Does: 'Automação qualifica e faz o follow-up dos leads sem deixar oportunidade parada.',
+    c2Metric: '+30% em leads trabalhados',
+    c2MetricNote: 'estimativa de mercado',
+
+    c3Tag: 'Operações',
+    c3Title: 'Tarefas repetitivas',
+    c3Problem: 'Time gasta horas em rotina manual e montagem de relatório.',
+    c3Does: 'Automação executa as rotinas e monta os relatórios sozinha, no padrão da casa.',
+    c3Metric: 'Horas/semana de volta ao time',
+    c3MetricNote: 'referência de mercado',
+
+    c4Tag: 'Financeiro',
+    c4Title: 'Leitura de documentos',
+    c4Problem: 'Notas, boletos e contratos exigem digitação e conferência manual.',
+    c4Does: 'IA lê e concilia documentos e notas, sinalizando só as exceções.',
+    c4Metric: '−50% no tempo de conciliação',
+    c4MetricNote: 'estimativa de mercado',
+
+    c5Tag: 'Dados & decisão',
+    c5Title: 'Decisão com dados',
+    c5Problem: 'Os números estão espalhados e a resposta demora dias.',
+    c5Does: 'Dashboards e análises sob demanda, em linguagem de negócio, prontos quando você precisa.',
+    c5Metric: 'Resposta em minutos, não dias',
+    c5MetricNote: 'referência de mercado',
+
+    cta: 'Ver todos os serviços →',
+  },
+
+  // Faixa única de "prova/números" — SOMENTE referências de mercado,
+  // rotuladas como tal. Não são resultados de clientes do D.Lab.
+  provaMercado: {
+    eyebrow: 'Por que agora',
+    title: 'O potencial da IA já é mercado,',
+    titleAccent: 'não promessa.',
+    disclaimer: 'Referências de mercado e benchmarks públicos — não são resultados de clientes do D.Lab.',
+    s1Val: '60–70%',
+    s1Lbl: 'das tarefas de atendimento podem ser apoiadas ou automatizadas por IA',
+    s1Src: 'estimativa de mercado',
+    s2Val: 'até +40%',
+    s2Lbl: 'de produtividade em tarefas de conhecimento com assistentes de IA',
+    s2Src: 'benchmark de mercado',
+    s3Val: '24/7',
+    s3Lbl: 'operação sem fila e sem hora extra, com agentes sempre de plantão',
+    s3Src: 'característica da solução',
+    s4Val: 'semanas',
+    s4Lbl: 'até o primeiro resultado medido, começando pequeno pelo diagnóstico',
+    s4Src: 'média dos nossos projetos',
+  },
+
+  // Teaser que leva pra aba Soluções (conteúdo detalhado com e-mail).
+  solucoesTeaser: {
+    eyebrow: 'Nossos serviços',
+    title: 'Serviços de IA sob medida',
+    titleAccent: 'pro seu processo.',
+    sub: 'Implementação de IA do diagnóstico ao impacto medido — atendimento, comercial, operações, financeiro e dados. (As ferramentas gratuitas ficam no Blog.)',
+    cta: 'Ver nossos serviços →',
+    note: 'Sob medida · do diagnóstico ao impacto medido.',
+  },
+
+  // Slot de vídeo do D.Lab (substitui o antigo card "próximo case").
+  videoSec: {
+    eyebrow: 'D.Lab em vídeo',
+    title: 'Veja o D.Lab',
+    titleAccent: 'em movimento.',
+    sub: 'Um panorama rápido de como a gente implementa IA na prática — do diagnóstico ao impacto medido.',
+    label: 'Vídeo do D.Lab em breve',
+  },
+
+  // Grid de soluções com e-mail-gate (captura de lead via Formspree).
+  // Cada solução tem prévia aberta + passo a passo liberado por e-mail.
+  solGate: {
+    eyebrow: 'O que entregamos',
+    title: 'Serviços de IA prontos pra acoplar',
+    titleAccent: 'na sua operação.',
+    sub: 'Cada serviço começa por um diagnóstico, é construído sob medida pra sua operação e tem impacto medido antes e depois. Veja o que entra em cada um.',
+
+    gateTitle: 'Desbloqueie o passo a passo de todos os serviços',
+    gateSub: 'Deixe seu e-mail e a gente libera o conteúdo detalhado aqui na hora.',
+    emailLabel: 'Seu melhor e-mail',
+    emailPlaceholder: 'voce@empresa.com',
+    consentPre: 'Concordo em receber conteúdos do D.Lab por e-mail e com a ',
+    consentLink: 'Política de Privacidade',
+    consentPost: '.',
+    submit: 'Desbloquear serviços',
+    sending: 'Enviando…',
+    success: 'Pronto! Conteúdo liberado — obrigado.',
+    error: 'Não consegui enviar agora. Tente de novo ou fale com a gente no WhatsApp.',
+    consentRequired: 'Marque o consentimento para continuar.',
+    detailLabel: 'O que a implementação inclui',
+    lockedLabel: 'Conteúdo por e-mail',
+    unlockedLabel: 'Desbloqueado',
+
+    s1Tag: 'Atendimento / SAC',
+    s1Title: 'Atendimento 24/7 com agente',
+    s1Teaser: 'Um agente responde e tria a demanda dia e noite, e passa pro humano só o que importa.',
+    s1d1: 'Mapeamento das perguntas e fluxos mais comuns do seu atendimento',
+    s1d2: 'Agente conectado ao seu canal (WhatsApp, site ou e-mail)',
+    s1d3: 'Regras de escalonamento e medição de tempo de resposta antes/depois',
+
+    s2Tag: 'Comercial',
+    s2Title: 'Qualificação e follow-up de leads',
+    s2Teaser: 'Automação qualifica e acompanha os leads sem deixar oportunidade esfriar.',
+    s2d1: 'Captura e qualificação automática dos leads que chegam',
+    s2d2: 'Follow-up em sequência, integrado ao seu CRM ou planilha',
+    s2d3: 'Painel de leads trabalhados e taxa de resposta',
+
+    s3Tag: 'Operações',
+    s3Title: 'Automação de tarefas repetitivas',
+    s3Teaser: 'Rotinas e relatórios que tomam horas da equipe passam a rodar sozinhos.',
+    s3d1: 'Levantamento das rotinas manuais que mais consomem tempo',
+    s3d2: 'Automação dos processos e geração de relatórios no padrão da casa',
+    s3d3: 'Acompanhamento de horas economizadas por semana',
+
+    s4Tag: 'Financeiro',
+    s4Title: 'Leitura e conciliação de documentos',
+    s4Teaser: 'IA lê e concilia notas e documentos, sinalizando só as exceções.',
+    s4d1: 'Leitura automática de notas, boletos e contratos',
+    s4d2: 'Conciliação e extração de dados para o seu sistema',
+    s4d3: 'Fila de exceções para revisão humana, com trilha auditável',
+
+    s5Tag: 'Dados & decisão',
+    s5Title: 'Dashboards e análise sob demanda',
+    s5Teaser: 'Os números espalhados viram resposta em linguagem de negócio, quando você precisa.',
+    s5d1: 'Unificação das fontes de dados que você já tem',
+    s5d2: 'Dashboards e respostas em linguagem natural sobre os seus dados',
+    s5d3: 'Indicadores definidos junto com o seu time',
+  },
+
+  // Banner/régua no Blog promovendo as FERRAMENTAS GRÁTIS (não são
+  // serviços pagos). Conteúdo aberto, sem cadastro.
+  blogTools: {
+    label: 'Ferramentas grátis',
+    title: 'Ferramentas gratuitas do D.Lab',
+    sub: 'Conteúdo aberto, sem cadastro — feito pra você usar agora.',
+    tool1Name: 'Diagnóstico de Decisão',
+    tool1Desc: 'Quantifique em ~60s o risco de decidir sem dados. 5 entradas, método aberto.',
+    tool1Cta: 'Abrir diagnóstico →',
+    tool1Href: '/diagnostico',
+    tool2Name: 'Componentes para uso de IA',
+    tool2Desc: 'Repositório aberto de skills e workflows pra acoplar a sistemas de IA. Download direto.',
+    tool2Cta: 'Explorar componentes →',
+    tool2Href: '/componentes-ia',
+  },
+
+  // DRAFT: confirmar copy — visual "IA em ação". Console de agente
+  // animado (ilustrativo, sem números inventados) que sinaliza que o
+  // D.Lab constrói os agentes, não só fala de IA.
+  aiDemo: {
+    label: 'IA em ação',
+    title: 'A gente constrói os agentes',
+    titleAccent: 'que rodam por dentro da operação.',
+    caption: 'Ilustrativo: um agente do D.Lab triando demanda, decidindo e propondo automação — sempre com impacto medido antes e depois, não prometido.',
+    chrome: 'agente · d.lab',
+    live: 'ativo',
+    l1: 'tarefa: reduzir o tempo de resposta ao cliente',
+    l2: 'lendo a fila de atendimento',
+    l3: 'encontrando padrões repetidos',
+    l4: 'ferramenta: classificar + rotear',
+    l5: 'automação proposta · impacto medido antes → depois',
   },
 
   segments: {
@@ -196,54 +469,52 @@ const pt: Translation = {
     cyberSample3: 'Cadeias de exploração',
   },
 
+  // DRAFT: confirmar copy — núcleo comercial agora é implementação de IA.
+  // A oferta vira uma escada (Diagnóstico → Implementação → Retainer) e a
+  // pesquisa sob NDA aparece como motor de evidência, não como flagship.
   products: {
-    eyebrow: 'Frentes de Consultoria',
-    title: 'Quando a pesquisa',
-    titleAccent: 'vira projeto fechado.',
-    // DRAFT: confirmar copy — estreita a promessa comercial ao wedge
-    // (inteligência competitiva + comportamento + método científico p/ decisão de mercado).
-    sub: 'O Research Hub é o flagship. Quando uma organização precisa de inteligência competitiva ou de um estudo de comportamento com método científico para decidir no próprio mercado, a pesquisa vira projeto fechado, sob NDA, com escopo e profundidade calibrados pela decisão em jogo.',
-    lead: 'Trabalhar com o D.Lab por dentro é o que acontece quando a pesquisa pública precisa ser feita para um contexto específico. O ponto de partida não muda: a mesma hierarquia de fontes, o mesmo método documentado, a mesma honestidade sobre incerteza. O que muda é a entrega, que passa a ser confidencial e ancorada na decisão do cliente.',
-    closing: 'Não temos uma grade de produtos. Cada frente abaixo é um formato de trabalho que já fizemos mais de uma vez, com escopo desenhado a partir do que a pesquisa pública não cobre. Quando o pedido é claro, a primeira conversa serve para enquadrar a pergunta. Quando o pedido ainda não está claro, ela serve para descobrir qual é.',
-    oneCta: 'Apresentar um contexto →',
-    ctaMost: '★ Mais solicitado',
+    eyebrow: 'Como trabalhamos',
+    title: 'Da evidência',
+    titleAccent: 'à IA em produção.',
+    sub: 'O diferencial é adoção de IA baseada em evidência: diagnosticamos onde a IA move eficiência e margem antes de automatizar, implementamos com rigor sênior e medimos o impacto antes e depois. Promessa ousada na vitrine, honesta no mecanismo, nunca percentual garantido às cegas.',
+    lead: 'Não vendemos automação no hype. A gente parte da evidência: um diagnóstico prova onde a IA move o ponteiro de eficiência e margem na sua operação, e só entra em produção o que esse diagnóstico sustenta. A pesquisa aberta do Hub é o motor que mantém esse rigor afiado; quando o contexto é seu, ela vira projeto fechado sob NDA.',
+    closing: 'Não temos tabela de preços. Cada engajamento é desenhado a partir do que o diagnóstico revela, e a primeira conversa serve para enquadrar onde a IA tem mais a provar na sua operação.',
+    oneCta: 'Pedir diagnóstico →',
+    ctaMost: '★ Porta de entrada',
 
-    intHeader: 'Inteligência aplicada',
-    intBaseName: 'Relatório de Base',
-    // DRAFT: confirmar copy — porta de entrada explícita: documento + apresentação,
-    // sem sessão de interpretação (essa pertence às camadas mais profundas).
-    intBaseDesc:
-      'Pesquisa aplicada focada em uma pergunta-chave. Para quando a hipótese já existe e falta o rigor antes de mover. Entregue como documento e apresentação, sem reuniões de interpretação.',
-    intDeepName: 'Relatório Aprofundado',
-    intDeepDesc:
-      'Pesquisa multidimensional com dados temporais, cruzamento de múltiplas fontes e sessão de interpretação com o analista. Para decisões com impacto duradouro.',
-    intAIName: 'Inteligência de IA',
-    intAIDesc:
-      'Acoplagem de IA e agentes a processos internos, com avaliação do que vale automatizar e do que vale instrumentar. Para quando o que trava deixou de ser a decisão e passou a ser a execução.',
-    // DRAFT: confirmar copy — novas frentes de consultoria.
-    intAutoName: 'Implementação de Processos Automatizados',
-    intAutoDesc:
-      'Implementação de processos automatizados na operação: do diagnóstico do que vale automatizar até a construção, integração e medição do ganho em produção. A execução do que a Inteligência de IA enquadra.',
-    intOptName: 'Otimização de Áreas & Setores',
-    intOptDesc:
+    // Escada de adoção de IA — Diagnóstico (porta) → Implementação (core,
+    // medição antes/depois) → Retainer (recorrência).
+    ladderHeader: 'Implementação de IA · escada de adoção',
+    ladderStep1Name: 'Diagnóstico de IA',
+    ladderStep1Desc:
+      'A porta de entrada, baseada em evidência. Mapeamos onde a IA move eficiência e margem na sua operação e entregamos um roadmap priorizado, como documento e apresentação. Diagnóstico antes de automatizar.',
+    ladderStep2Name: 'Implementação',
+    ladderStep2Desc:
+      'O core. Construímos e instrumentamos IA e agentes nos seus processos, com rigor sênior e impacto medido antes e depois. Só vai para produção o que a evidência sustenta.',
+    ladderStep3Name: 'Retainer · Managed AI',
+    ladderStep3Desc:
+      'A recorrência. Otimização contínua, novas automações e monitoramento do que já roda, para o ganho se sustentar e compor ao longo do tempo.',
+
+    // O motor de evidência: pesquisa sob NDA (antes flagship, agora suporte).
+    researchHeader: 'Pesquisa & evidência sob NDA · o motor',
+    researchName: 'Relatório sob NDA',
+    researchDesc:
+      'Quando a decisão pede a mesma pesquisa que publicamos no Hub, aplicada ao seu contexto: inteligência competitiva e estudos de comportamento com método científico, confidenciais. É o motor de evidência que alimenta a implementação.',
+    researchOptName: 'Otimização de Áreas & Setores',
+    researchOptDesc:
       'Diagnóstico e redesenho de áreas e setores para destravar eficiência: gargalos mapeados com dado, prioridades claras e acompanhamento até a melhoria se sustentar.',
-
-    cyberHeader: 'Cybersegurança',
-    cyberPentestName: 'Cyber Research & CVE',
-    cyberPentestDesc:
-      'Pesquisa aplicada em segurança ofensiva, com metodologia explícita e ênfase em dado. Partimos de vulnerabilidades públicas (CVE), reproduzimos a cadeia de exploração em ambiente controlado e medimos o que ela significa em produção, não no paper. Entregamos método, prova técnica e impacto observado, para que o defensor leia a ameaça pelo mesmo ângulo de quem ataca.',
-    cyberConsultName: 'Segurança Digital',
-    cyberConsultDesc:
-      'Diagnóstico de postura, definição de políticas, adequação a frameworks e acompanhamento contínuo junto à operação do SOC. Para quem precisa de um par de olhos seniores ancorado em pesquisa, não em catálogo de tooling.',
   },
 
+  // DRAFT: confirmar copy — blog/pesquisa como conteúdo gratuito para
+  // fundadores e operadores curiosos. Motor de autoridade/inbound, não
+  // o produto.
   research: {
-    eyebrow: 'Análises Públicas',
-    title: 'Pesquisa aberta.',
-    titleAccent: 'Enquanto o resto é fechado.',
-    sub: 'As pesquisas abertas nascem no nosso próprio laboratório, estudos independentes, publicados como prova de método. Trabalho de cliente nunca é divulgado: sempre sob NDA.',
-    cta: 'Ver todas as pesquisas',
-    readCta: 'Ler pesquisa',
+    eyebrow: 'Blog & Pesquisa aberta',
+    title: 'Conteúdo gratuito.',
+    titleAccent: 'Pra quem decide e constrói.',
+    sub: 'Nosso blog: análises e pesquisa original pra fundador e operador curioso entender como IA, dados e mercado se movem de verdade, com o método à mostra. Aberto e gratuito, sempre. Trabalho de cliente nunca é divulgado: sempre sob NDA.',
+    cta: 'Ver todo o conteúdo',
+    readCta: 'Ler',
   },
 
   about: {
@@ -267,31 +538,31 @@ const pt: Translation = {
   },
 
   ctaFinal: {
-    tag: 'Research first. Consultoria depois.',
-    title: 'Decisão de peso pede',
-    titleAccent: 'pesquisa de peso.',
-    sub: 'As análises públicas já expõem como pensamos. Quando o contexto é seu, e precisa ficar sob NDA, a mesma metodologia vira projeto fechado. Escopo negociado, prazo calibrado, entrega sob o protocolo do Hub.',
-    ctaPrimary: 'Ler análises públicas →',
-    ctaSecondary: 'Conversar sobre um projeto',
+    tag: 'IA com método, não com hype',
+    title: 'A IA certa,',
+    titleAccent: 'no processo certo.',
+    sub: 'A gente diagnostica onde a IA realmente vale, implementa dentro do seu processo e mede o resultado — antes e depois. Sem hype, sem promessa vazia.',
+    ctaPrimary: 'Pedir diagnóstico →',
+    ctaSecondary: 'Ver o blog',
   },
 
   footer: {
     manifesto:
-      '"Não vendemos certeza. Entregamos leitura de contexto boa o suficiente para a decisão se sustentar de pé."',
+      '"A gente coloca a IA pra trabalhar na sua operação — e mostra o resultado com número, antes e depois."',
     brandTagline:
-      'D.Lab Experts · Research Hub em inteligência aplicada. Publicações abertas, consultoria sob NDA.',
+      'D.Lab Experts · Agência e consultoria de implementação de IA. Diagnóstico, agentes e automações com impacto medido.',
     logoAlt: 'D.Lab Experts',
-    colHub: 'Research Hub',
-    colConsulting: 'Consultoria',
+    colHub: 'Conteúdo',
+    colConsulting: 'Implementação',
     colContact: 'Contato',
-    linkPublications: 'Análises Públicas',
-    linkAgenda: 'Agenda de pesquisa',
-    linkCollaborate: 'Colaborar com o Hub',
-    linkSolucoes: 'Soluções',
+    linkPublications: 'Blog',
+    linkAgenda: 'Casos de uso',
+    linkCollaborate: 'Comunidade no WhatsApp',
+    linkSolucoes: 'Serviços',
     linkImprensa: 'Sala de imprensa',
-    linkRss: 'RSS das análises',
-    linkPractices: 'Frentes de consultoria',
-    linkMethod: 'Metodologia',
+    linkRss: 'RSS do blog',
+    linkPractices: 'Como funciona',
+    linkMethod: 'Serviços',
     linkTalk: 'Conversar sobre um projeto',
     linkAbout: 'Sobre o D.Lab Experts',
     linkForm: 'Formulário',
@@ -299,17 +570,18 @@ const pt: Translation = {
     linkWhatsapp: 'WhatsApp',
     linkCommunity: 'Comunidade no WhatsApp',
     linkLinkedin: 'LinkedIn',
-    sealText: 'Applied Intelligence Research',
-    copyright: 'D.Lab Experts · Research Hub em Inteligência Aplicada. Todos os direitos reservados.',
+    sealText: 'AI Implementation',
+    copyright: 'D.Lab Experts · Agência e consultoria de IA. Todos os direitos reservados.',
     city: 'São Paulo, BR',
   },
 
   blog: {
-    heroEyebrow: 'Análises Públicas',
-    heroTitle: 'Pesquisa aberta.',
-    heroTitleAccent: 'Metodologia transparente.',
+    // DRAFT: confirmar copy — blog para fundadores e operadores curiosos.
+    heroEyebrow: 'Blog & Pesquisa aberta',
+    heroTitle: 'Conteúdo gratuito.',
+    heroTitleAccent: 'Pra quem decide e constrói.',
     heroSub:
-      'Publicamos uma fração do que produzimos como prova pública do método. Inteligência aplicada, sob o mesmo protocolo de rigor.',
+      'Análises e pesquisa original sobre IA, dados e mercado, escritas pra quem decide e constrói: úteis e diretas, sem enrolação. Abertas e gratuitas, sob o mesmo rigor dos projetos sob NDA.',
     navIntel: 'Inteligência & Pesquisa',
     navCyber: 'Cybersegurança',
 
@@ -347,9 +619,9 @@ const pt: Translation = {
       'Os primeiros cases públicos de cybersegurança serão publicados quando o NDA permitir. Enquanto isso, a operação do SOC segue ativa em monitoramento fora do expediente, triagem de incidentes e detecção de ameaças.',
     emptyCyberCta: 'Propor um escopo de segurança →',
 
-    originalMarker: 'Pesquisa Original',
+    originalMarker: 'Original',
     originalMarkerCyber: 'Case Original',
-    readCta: 'Ler pesquisa',
+    readCta: 'Ler conteúdo',
     readCtaCyber: 'Ler análise',
 
     colabTitle: 'Pesquisa é trabalho',
@@ -378,9 +650,6 @@ const pt: Translation = {
     label: 'Trocar idioma',
   },
 
-  contributors: {
-    label: 'Contribuidores do Hub',
-  },
 
   cube: {
     frontEyebrow: 'Amostra · Brasil',
@@ -461,16 +730,16 @@ const pt: Translation = {
   },
 
   contato: {
-    heroEyebrow: 'Traga um problema',
-    heroLead: 'Tem uma decisão pra tomar',
-    heroAccent: 'ou uma operação pra proteger?',
-    lead: 'Descreva o contexto. Um analista sênior responde em até um dia útil com as perguntas certas para entender o problema em profundidade e propor formato, escopo e prazo.',
-    step1Title: 'Você descreve o contexto',
-    step1Desc: 'O que está travando a decisão, ou o risco a mitigar, e em qual prazo.',
+    heroEyebrow: 'Vamos colocar IA pra trabalhar',
+    heroLead: 'Qual processo da sua empresa',
+    heroAccent: 'a IA pode resolver primeiro?',
+    lead: 'Conta onde dói na sua operação — atendimento, comercial, back-office, financeiro ou dados. Um especialista sênior responde em até um dia útil pra entender o contexto e propor por onde começar: diagnóstico, escopo e impacto esperado.',
+    step1Title: 'Você descreve a operação',
+    step1Desc: 'O processo que trava ou consome tempo do time, e o resultado que você quer.',
     step2Title: 'Respondemos em até um dia útil',
-    step2Desc: 'Marcamos uma call de 30 minutos para entender o problema a fundo, com as perguntas certas para calibrar o formato.',
-    step3Title: 'Você recebe um escopo concreto',
-    step3Desc: 'Plano, prazo, faixa de investimento e posição do D.Lab sobre o problema.',
+    step2Desc: 'Uma call de 30 minutos pra entender a operação a fundo e mapear onde a IA dá mais retorno.',
+    step3Title: 'Você recebe um plano concreto',
+    step3Desc: 'Começamos pelo diagnóstico: o que vale automatizar primeiro, escopo, prazo e impacto medido antes e depois.',
     altChannelLabel: 'Canais diretos',
     altIntentClientTitle: 'Conversa sobre projeto',
     altIntentClientDesc: 'Para entender escopo, formatos de trabalho e leitura de contexto do D.Lab.',
@@ -502,14 +771,14 @@ const pt: Translation = {
     fieldRolePh: 'ex.: CEO, Head de Dados',
     fieldVertical: 'Prática de interesse',
     fieldSelectPlaceholder: 'Selecione…',
-    verticalMarket: 'Análise estratégica de mercado',
-    verticalCompetitive: 'Inteligência competitiva',
-    verticalAudience: 'Análise de público e demanda',
-    verticalTrends: 'Estudos de tendência',
-    verticalAI: 'Implementação de IA e automação',
-    verticalPentest: 'SOC · monitoramento fora do expediente',
+    verticalMarket: 'Atendimento / SAC com IA',
+    verticalCompetitive: 'Comercial: qualificação e follow-up',
+    verticalAudience: 'Operações: automação de tarefas',
+    verticalTrends: 'Financeiro: leitura de documentos',
+    verticalAI: 'Dados & decisão (dashboards/análise)',
+    verticalPentest: 'Monitoramento de segurança (SOC)',
     verticalSecurity: 'Consultoria em segurança digital',
-    verticalPolitics: 'Pesquisa política e eleitoral',
+    verticalPolitics: 'Diagnóstico de IA (por onde começar)',
     verticalUnsure: 'Ainda não sei / quero conversar',
     fieldSize: 'Porte da empresa',
     sizeMicro: 'Micro (até 9 pessoas)',
@@ -517,8 +786,8 @@ const pt: Translation = {
     sizeMid: 'Média (50–249)',
     sizeLarge: 'Grande (250+)',
     sizeSkip: 'Prefiro não informar',
-    fieldMessage: 'Descreva o problema ou a decisão',
-    fieldMessagePh: 'ex.: Estamos considerando abrir uma nova unidade em SP e precisamos validar a demanda antes de comprometer capital…',
+    fieldMessage: 'Descreva o processo ou o problema',
+    fieldMessagePh: 'ex.: Nosso atendimento não dá conta no horário de pico e queremos um agente que responda e trie a demanda 24/7…',
     consent: 'Concordo em receber uma resposta do D.Lab Experts sobre esta proposta.',
     submit: 'Enviar proposta →',
     submitSending: 'Enviando…',
@@ -638,10 +907,10 @@ const pt: Translation = {
   },
 
   solucoesPage: {
-    heroEyebrow: 'Ferramentas & Soluções',
-    heroTitleLead: 'Soluções úteis para',
-    heroTitleAccent: 'tech e mercado.',
-    heroSub: 'Ferramentas práticas construídas a partir dos mesmos princípios de rigor do Research Hub. Abertas, transparentes e ancoradas em pesquisa externa. Cada solução nasce de um problema real que a gente encontrou na operação, ou que alguém nos perguntou.',
+    heroEyebrow: 'Nossos serviços',
+    heroTitleLead: 'Serviços de IA que',
+    heroTitleAccent: 'viram resultado.',
+    heroSub: 'A gente implementa IA e agentes dentro da sua operação — do atendimento ao financeiro. Cada serviço começa por um diagnóstico que prova onde vale, é feito sob medida e tem impacto medido antes e depois. Procurando as ferramentas gratuitas? Elas estão no Blog.',
 
     // Strip de posicionamento — ancorar o "gratuito" e o
     // compromisso com a comunidade logo abaixo da hero.
@@ -668,17 +937,17 @@ const pt: Translation = {
     tool2Title: 'Componentes para uso de IA',
     tool2Desc: 'Repositório aberto de skills, componentes e workflows pra acoplar a sistemas de IA. Cada item documentado com metodologia, casos de uso e download direto. Primeiro componente já publicado, outros entrando.',
     tool2Chip0: 'Gratuito',
-    tool2Chip1: 'Open source',
+    tool2Chip1: 'Sem cadastro',
     tool2Chip2: 'Curadoria D.Lab',
     tool2Chip3: 'Download direto',
     tool2Chip4: 'Em expansão',
-    tool2Meta: 'Open source · curadoria D.Lab · download direto',
+    tool2Meta: 'Curadoria D.Lab · download direto · sem cadastro',
     tool2Cta: 'Explorar componentes →',
 
-    ctaTitle: 'Tem ideia de ferramenta útil?',
-    ctaSub: 'A gente quer ser uma comunidade que agrega valor de verdade. Se você tem uma ideia de ferramenta, um problema recorrente na sua área, ou quer contribuir com uma solução existente, fala com a gente. Pesquisadores, engenheiros, founders, professores, jornalistas: todo mundo é bem-vindo.',
-    ctaPrimary: 'Propor uma solução →',
-    ctaSecondary: 'Ver pesquisas publicadas',
+    ctaTitle: 'Qual processo a gente automatiza primeiro?',
+    ctaSub: 'Conta onde dói na sua operação. A gente começa pelo diagnóstico, prova onde a IA dá retorno e implementa o serviço sob medida — com impacto medido antes e depois. Conversa inicial sem compromisso.',
+    ctaPrimary: 'Pedir diagnóstico →',
+    ctaSecondary: 'Ver ferramentas grátis',
   },
 
   componentesIaPage: {
@@ -819,10 +1088,12 @@ const pt: Translation = {
     author1Role: 'Fundador e pesquisador principal',
     author1Bio: 'Lidera a frente de inteligência aplicada no D.Lab Experts. Pesquisa decisão estratégica, mercado e comportamento do consumidor, com foco em traduzir dados primários em recomendações acionáveis para boards, founders e operadores. Autor das pesquisas originais publicadas no Research Hub.',
     author1Expertise: 'Decision intelligence, pesquisa de mercado, comportamento do consumidor, metodologia quantitativa',
+    // DRAFT: confirmar copy — cyber deixa de ser operação/serviço gerenciado
+    // (SOC) e passa a aparecer só como consultoria pontual em segurança.
     author2Name: 'Gustavo Lima',
-    author2Role: 'Especialista em cybersegurança',
-    author2Bio: 'Lidera a operação de Security Operations Center (SOC) do D.Lab Experts com foco em cobertura fora do expediente. Responsável por monitoramento de logs, correlação de alertas, triagem de incidentes em tempo real e resposta durante a janela em que a atividade do atacante de fato acontece.',
-    author2Expertise: 'SOC, monitoramento contínuo, resposta a incidentes, threat detection, LGPD/ISO 27001/NIST',
+    author2Role: 'Consultor de segurança da informação',
+    author2Bio: 'Apoia o D.Lab Experts em segurança da informação no formato de consultoria pontual: diagnóstico de postura, boas práticas e adequação a frameworks (LGPD, ISO 27001, NIST). Apoio sob demanda e ancorado em evidência, não um serviço gerenciado.',
+    author2Expertise: 'Segurança da informação, gestão de risco, LGPD/ISO 27001/NIST, consultoria pontual',
 
     findingsLabel: 'Principais achados (prontos para citação)',
     findingsSub: 'Estatísticas-âncora das pesquisas publicadas. Cada número está ligado à metodologia e fonte primária no estudo correspondente.',
@@ -860,28 +1131,28 @@ const pt: Translation = {
   },
 
   aboutBody: {
-    p1: 'O D.Lab Experts nasceu de uma <strong>premissa documentada</strong>. Segundo o SEBRAE (2023), <strong>73% dos gestores de PMEs tomam decisões críticas pela intuição</strong>. Em paralelo, LLMs e agentes aceleram a execução enquanto <strong>o custo de decidir no escuro</strong> só cresce. <em>Decidir às cegas ficou caro demais.</em>',
-    p2: 'Cruzamos <strong>fontes públicas, APIs, scraping e pesquisa primária</strong> para responder o que trava decisões de <strong>boards, founders e operadores</strong>. O mercado global de analytics cresce <strong>13,5% ao ano</strong> (Statista, 2024), e empresas data-driven têm <strong>23× mais chance de adquirir clientes</strong> (McKinsey Global Institute).',
-    insight: 'Dado acumulado é ruído. O que transforma dados dispersos em decisão acionável é a <strong>arquitetura de interpretação</strong> por trás.',
-    insightSource: 'D.Lab Experts · Research Hub, 2026',
+    p1: 'O D.Lab Experts nasceu de uma <strong>premissa documentada</strong>. Segundo o SEBRAE (2023), <strong>73% dos gestores de PMEs tomam decisões críticas pela intuição</strong>. Ao mesmo tempo, LLMs e agentes já fazem o trabalho repetitivo — só que a maioria das empresas não sabe por onde começar. <em>Foi pra resolver isso que a gente existe.</em>',
+    p2: 'A gente implementa IA dentro da operação: <strong>agentes de atendimento, automação comercial, back-office, leitura de documentos e decisão com dados</strong>. Empresas data-driven têm <strong>23× mais chance de adquirir clientes</strong> (McKinsey Global Institute) — e a IA encurtou o caminho até lá.',
+    insight: 'IA genérica não muda resultado. O que muda é a IA <strong>acoplada ao seu processo</strong> e com impacto medido antes e depois.',
+    insightSource: 'D.Lab Experts, 2026',
     p3: '',
-    p4: 'Publicamos o método. <strong>Análise aberta como prova de como pensamos.</strong> Trabalho sob <strong>NDA</strong> vira consultoria quando alguém precisa do <strong>mesmo rigor</strong> aplicado ao próprio contexto. <em>O resto é ruído.</em>',
+    p4: 'A gente começa pequeno e prova primeiro. <strong>Diagnóstico antes de automatizar.</strong> Implementação <strong>sob medida</strong> pra sua operação, com o resultado <strong>medido em número</strong>. <em>Sem cheque em branco e sem caixa-preta.</em>',
   },
 
   aboutPage: {
     heroEyebrow: 'Sobre o D.Lab Experts',
-    heroTitle: 'Research Hub.',
-    heroTitleAccent: 'Postura de vanguarda.',
-    heroSub: 'O D.Lab Experts é um research hub em inteligência aplicada. Pesquisamos, testamos e publicamos como prova de método, para que boards, founders e operadores decidam com embasamento.',
+    heroTitle: 'Implementação de IA.',
+    heroTitleAccent: 'Com método e prova.',
+    heroSub: 'O D.Lab Experts é uma agência e consultoria de implementação de IA. A gente coloca IA e agentes pra trabalhar dentro da operação de pequenas e médias empresas — começando por um diagnóstico que prova onde vale e medindo o resultado antes e depois.',
     heroStatAILabel: 'Mercado de IA & dados até 2030 (IDC)',
     heroStatSmbLabel: 'das PMEs decidem sem dados (SEBRAE, 2023)',
     heroStatBreachLabel: 'Mais chance de captar clientes, empresas data-driven (McKinsey)',
-    heroStatDualVal: 'Dual',
-    heroStatDualLabel: 'Decisão e engenharia de dados na mesma operação',
+    heroStatDualVal: 'Sob medida',
+    heroStatDualLabel: 'Feito pra sua operação, não um produto genérico',
 
     whoEyebrow: 'Quem somos',
     whoTitle: 'O que é o D.Lab Experts',
-    whoLead: 'Um <strong style="color:var(--white)">Research Hub</strong> que trata <strong style="color:var(--white)">inteligência de dados</strong> como a matéria-prima da decisão: entender o contexto antes do movimento. Pesquisamos, publicamos, e quando o contexto pede, traduzimos a mesma metodologia em engajamentos de consultoria sob NDA.',
+    whoLead: 'Uma <strong style="color:var(--white)">agência e consultoria de IA</strong> que trata <strong style="color:var(--white)">implementação</strong> como o que de fato muda o resultado: agentes e automações rodando por dentro do seu processo. Começamos provando onde a IA dá retorno e medimos o impacto — sem hype e sem caixa-preta.',
     whoAsideIntuitLabel: 'dos gestores de PMEs decidem pela intuição',
     whoAsideIntuitSrc: 'SEBRAE, 2023',
     whoAsideCustLabel: 'mais clientes em empresas data-driven',
@@ -889,18 +1160,18 @@ const pt: Translation = {
     whoAsideBreachLabel: 'custo médio de um vazamento de dados',
     whoAsideBreachSrc: 'IBM, 2024',
 
-    scopeEyebrow: 'Escopo do Hub',
-    scopeTitle: 'O que pesquisamos',
-    scopeLead: 'Pesquisa aplicada que mostra pra onde mover e sustenta a decisão com método. Opera em dois modos: <strong>publicação aberta</strong> (Research Hub) e engajamento fechado (consultoria sob NDA).',
+    scopeEyebrow: 'O que fazemos',
+    scopeTitle: 'Onde a gente implementa IA',
+    scopeLead: 'IA e agentes acoplados aos processos que já existem na sua operação — do atendimento ao financeiro. Cada frente começa por diagnóstico e termina com impacto medido.',
 
-    intelName: 'Inteligência Aplicada',
-    intelDesc: 'Empresas que usam analytics avançado geram <strong>126% mais lucro</strong> que os pares (Bain & Company). O Hub pesquisa o que modelos genéricos ignoram: <strong>mercado, comportamento, concorrência, tech foresight em IA</strong>. Publicamos <strong>metodologia aberta</strong>, e quando um projeto aparece, o mesmo protocolo atende ao contexto fechado.',
-    intelItem1: 'Análise estratégica e sizing de mercado',
-    intelItem2: 'Inteligência competitiva e benchmarking',
-    intelItem3: 'Perfil de público e análise de demanda',
-    intelItem4: 'Tech foresight: IA, agentes e LLMs em operação',
-    intelItem5: 'Adoção responsável de IA e automação',
-    intelItem6: 'Política, opinião pública e movimentos regulatórios',
+    intelName: 'Frentes de implementação',
+    intelDesc: 'Não é IA genérica: a gente constrói os agentes e automações dentro do seu processo, conectados às suas ferramentas. Estas são as frentes onde a IA costuma dar mais retorno em pequenas e médias empresas:',
+    intelItem1: 'Atendimento 24/7: agente que responde e tria a demanda',
+    intelItem2: 'Comercial: qualificação e follow-up de leads no automático',
+    intelItem3: 'Operações: automação de tarefas repetitivas e relatórios',
+    intelItem4: 'Financeiro: leitura e conciliação de documentos e notas',
+    intelItem5: 'Dados & decisão: dashboards e análises sob demanda',
+    intelItem6: 'Diagnóstico de IA: onde vale automatizar primeiro',
 
     cyberName: 'Cybersegurança',
     cyberDesc: 'Projeta-se que o cibercrime custe <strong>US$ 10,5 trilhões por ano globalmente até 2025</strong> (Cybersecurity Ventures). Operamos um <strong>Security Operations Center</strong> focado em <strong>cobertura fora do expediente</strong> (a janela em que a atividade do atacante de fato acontece), para que o primeiro sinal de comprometimento chegue a alguém <em>acordado e em plantão</em>.',
@@ -948,13 +1219,13 @@ const pt: Translation = {
     whyInsight: 'Empresas que adotam cultura data-driven observam <strong>5 a 8% mais produtividade e 6% mais lucratividade</strong> que os pares.',
     whyInsightSrc: 'Harvard Business Review',
     whyP3: 'Do lado positivo, os números mostram oportunidade. O mercado de Business Intelligence deve atingir <strong>US$ 33 bilhões até 2027</strong> (Mordor Intelligence). Quem se move com uma <strong>leitura sólida de contexto</strong> captura <em>vantagem composta</em> sobre quem espera o concorrente ir primeiro.',
-    whyP4: 'O D.Lab Experts existe para fechar essa lacuna. <strong>Pesquisa aberta que embasa o movimento.</strong> <strong>O mesmo rigor aplicado ao contexto de cada decisão.</strong> <em>Método documentado em vez de prosa.</em>',
+    whyP4: 'O D.Lab Experts existe pra fechar essa lacuna. <strong>IA implementada onde dá retorno de verdade.</strong> <strong>Sob medida pra sua operação.</strong> <em>Com impacto medido antes e depois, não percentual prometido às cegas.</em>',
 
-    ctaTitleLead: 'Pesquisa que embasa o movimento.',
-    ctaTitleAccent: 'O mesmo método no seu contexto.',
-    ctaLead: 'Research Hub primeiro. Consultoria quando o contexto pede. Comece pelas análises abertas, ou fale com a gente direto.',
-    ctaPrimary: 'Ler análises abertas →',
-    ctaSecondary: 'Conversar sobre um projeto',
+    ctaTitleLead: 'Coloque a IA pra trabalhar',
+    ctaTitleAccent: 'na sua operação.',
+    ctaLead: 'Começa pelo diagnóstico: a gente prova onde a IA dá retorno e implementa sob medida. Conversa inicial sem compromisso.',
+    ctaPrimary: 'Pedir diagnóstico →',
+    ctaSecondary: 'Ver como funciona',
   },
 
   diagnostic: {
@@ -1077,13 +1348,13 @@ const pt: Translation = {
     ctaFinal: 'Aplique esse rigor à sua decisão de verdade',
     ctaFinalSub: 'O diagnóstico é público porque o método é o que importa. Quando você precisar do mesmo rigor aplicado ao seu contexto específico, a gente tem um engajamento com escopo fechado pra isso.',
     ctaFinalPrimary: 'Agendar um diagnóstico →',
-    ctaFinalSecondary: 'Ver pesquisas abertas',
+    ctaFinalSecondary: 'Ver o blog',
 
-    homeEyebrow: 'Ferramenta interativa de pesquisa',
+    homeEyebrow: 'Diagnóstico rápido',
     homePromoTitle: 'Quanto essa decisão',
     homePromoAccent: 'está te custando?',
     homePromoSub: 'Cinco entradas, duas saídas. Uma referência ilustrativa ancorada em pesquisa McKinsey, MIT, Bain e PMI. Não é previsão. 60 segundos, método totalmente aberto.',
-    homePromoCta: 'Abrir o diagnóstico →',
+    homePromoCta: 'Abrir ferramenta →',
     homePromoStat1Label: 'entradas',
     homePromoStat1Val: '5',
     homePromoStat2Label: 'fontes citadas',

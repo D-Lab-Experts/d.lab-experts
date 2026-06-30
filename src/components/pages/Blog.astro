@@ -9,19 +9,8 @@ const t = useTranslations();
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
+// Grid único — sem separar pesquisa original de dados secundários.
 const intelligencePosts = allPosts.filter((p) => p.data.track === 'intelligence');
-
-type Post = (typeof allPosts)[number];
-const byType = (posts: Post[], type: 'original' | 'secondary') =>
-  posts.filter((p) => p.data.researchType === type);
-
-const intelOriginal = byType(intelligencePosts, 'original');
-const intelSecondary = byType(intelligencePosts, 'secondary');
-
-const intelGroups = [
-  { key: 'original',  label: t('blog.groupOriginalLabel'),  sub: t('blog.groupOriginalSub'),  posts: intelOriginal },
-  { key: 'secondary', label: t('blog.groupSecondaryLabel'), sub: t('blog.groupSecondarySub'), posts: intelSecondary },
-] as const;
 
 const formatDate = (d: Date) =>
   d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
@@ -52,9 +41,15 @@ const formatAuthors = (data: PostData) => {
 };
 
 const methodLabel: Record<'original' | 'secondary', string> = {
-  original: 'Pesquisa original',
-  secondary: 'Dados secundários',
+  original: 'Conteúdo original',
+  secondary: 'Análise',
 };
+
+// Materiais ricos (ferramentas e recursos abertos) não são pesquisa:
+// recebem rótulo próprio e dispensam ID de catálogo e autoria de
+// pesquisador. Discriminados pela categoria "Ferramentas".
+const isRichMaterial = (data: PostData) => data.category === 'Ferramentas';
+const richMaterialLabel = 'Material rico';
 ---
 
 <Layout
@@ -76,6 +71,31 @@ const methodLabel: Record<'original' | 'secondary', string> = {
     </div>
   </section>
 
+  <!-- ═══════════════ FERRAMENTAS GRÁTIS (régua/banner) ════════════
+       As soluções/ferramentas gratuitas do D.Lab vivem aqui no Blog,
+       separadas dos serviços pagos (aba Serviços). Conteúdo aberto. -->
+  <section class="container blog-tools fi">
+    <div class="blog-tools-inner">
+      <div class="blog-tools-head">
+        <span class="blog-tools-label">{t('blogTools.label')}</span>
+        <h2 class="blog-tools-title">{t('blogTools.title')}</h2>
+        <p class="blog-tools-sub">{t('blogTools.sub')}</p>
+      </div>
+      <div class="blog-tools-grid">
+        <a href={t('blogTools.tool1Href')} class="blog-tool-card sweep">
+          <h3 class="blog-tool-name">{t('blogTools.tool1Name')}</h3>
+          <p class="blog-tool-desc">{t('blogTools.tool1Desc')}</p>
+          <span class="blog-tool-cta">{t('blogTools.tool1Cta')}</span>
+        </a>
+        <a href={t('blogTools.tool2Href')} class="blog-tool-card sweep">
+          <h3 class="blog-tool-name">{t('blogTools.tool2Name')}</h3>
+          <p class="blog-tool-desc">{t('blogTools.tool2Desc')}</p>
+          <span class="blog-tool-cta">{t('blogTools.tool2Cta')}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════ 01 · INTELLIGENCE ══════════════════════════ -->
   <section class="container blog-track-section" id="inteligencia">
     <div class="blog-track-header fi">
@@ -87,52 +107,41 @@ const methodLabel: Record<'original' | 'secondary', string> = {
     </div>
 
     {intelligencePosts.length > 0 ? (
-      intelGroups.filter((g) => g.posts.length > 0).map((group) => (
-        <div class="blog-subtrack">
-          <div class="blog-subtrack-header fi">
-            <span class="blog-subtrack-tag lilac">
-              <span class="blog-subtrack-dot"></span>
-              {group.label}
-              <span class="blog-subtrack-count">{group.posts.length}</span>
-            </span>
-            <p class="blog-subtrack-sub">{group.sub}</p>
-          </div>
-          <div class="blog-grid">
-            {group.posts.map((post) => {
-              const cardClass = 'blog-card blog-card-catalog fi d2';
-              const catalogId = formatCatalogId(post.data.citationVolume);
-              const authors = formatAuthors(post.data);
-              const method = methodLabel[post.data.researchType];
-              return (
-                <a href={`/posts/${post.slug}`} class={cardClass}>
-                  <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
-                    {post.data.cover && (
-                      <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
-                    )}
-                  </div>
-                  <div class="blog-card-body">
-                    <div class="blog-card-cataloghead">
-                      {catalogId && <span class="blog-card-catalogid">{catalogId}</span>}
-                      <span class="blog-card-catalogdate">{formatDate(post.data.pubDate)}</span>
-                    </div>
-                    <h3 class="blog-card-title">{post.data.title}</h3>
-                    <div class="blog-card-authors">{authors}</div>
-                    <p class="blog-card-excerpt">{post.data.description}</p>
-                    <div class="blog-card-catalogfoot">
-                      <span class="blog-card-methodtag">{method}</span>
-                      <span class="blog-card-catalogmeta">
-                        {formatLabel[post.data.format]}
-                        {post.data.readingTime && <span class="blog-card-metasep">·</span>}
-                        {post.data.readingTime}
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      ))
+      <div class="blog-grid">
+        {intelligencePosts.map((post) => {
+          const cardClass = 'blog-card blog-card-catalog fi d2';
+          const material = isRichMaterial(post.data);
+          const catalogId = material ? null : formatCatalogId(post.data.citationVolume);
+          const authors = formatAuthors(post.data);
+          const method = material ? richMaterialLabel : methodLabel[post.data.researchType];
+          return (
+            <a href={`/posts/${post.slug}`} class={cardClass}>
+              <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
+                {post.data.cover && (
+                  <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
+                )}
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-card-cataloghead">
+                  {catalogId && <span class="blog-card-catalogid">{catalogId}</span>}
+                  <span class="blog-card-catalogdate">{formatDate(post.data.pubDate)}</span>
+                </div>
+                <h3 class="blog-card-title">{post.data.title}</h3>
+                {!material && <div class="blog-card-authors">{authors}</div>}
+                <p class="blog-card-excerpt">{post.data.description}</p>
+                <div class="blog-card-catalogfoot">
+                  <span class="blog-card-methodtag">{method}</span>
+                  <span class="blog-card-catalogmeta">
+                    {formatLabel[post.data.format]}
+                    {post.data.readingTime && <span class="blog-card-metasep">·</span>}
+                    {post.data.readingTime}
+                  </span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
     ) : (
       <div class="blog-empty fi">
         <div class="blog-empty-title">{t('blog.emptyIntelTitle')}</div>
@@ -223,4 +232,23 @@ const methodLabel: Record<'original' | 'secondary', string> = {
     justify-content: center;
     flex-wrap: wrap;
   }
+
+  /* ═══════════ FERRAMENTAS GRÁTIS (régua no Blog) ═════════════════ */
+  .blog-tools { margin: 4px auto 8px; max-width: 1180px; }
+  .blog-tools-inner {
+    background: var(--bg-elev);
+    border: 1px solid rgba(167,139,250,0.24);
+    border-radius: 20px; padding: 28px 30px;
+  }
+  .blog-tools-head { margin-bottom: 18px; }
+  .blog-tools-label { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .blog-tools-title { font-family:var(--font-display); font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-.02em; color:var(--ink); margin:0 0 4px; }
+  .blog-tools-sub { font-size:14px; color:var(--text-muted); margin:0; }
+  .blog-tools-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .blog-tool-card { display:flex; flex-direction:column; gap:8px; padding:20px 22px; border:1px solid var(--line); border-radius:14px; background:var(--bg); text-decoration:none; color:inherit; transition:border-color .25s, transform .25s; }
+  .blog-tool-card:hover { border-color:rgba(167,139,250,0.5); transform:translateY(-3px); }
+  .blog-tool-name { font-family:var(--font-display); font-weight:600; font-size:17px; color:var(--ink); margin:0; }
+  .blog-tool-desc { font-size:13.5px; line-height:1.55; color:var(--text-muted); margin:0; flex:1; }
+  .blog-tool-cta { font-size:13px; font-weight:600; color:var(--accent); }
+  @media (max-width:680px){ .blog-tools-grid { grid-template-columns:1fr; } }
 </style>

@@ -52,7 +52,7 @@ const imageURL = new URL(image, Astro.site);
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#000000" />
+<meta name="theme-color" content="#0E0E12" />
 <meta name="color-scheme" content="dark" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 
@@ -73,8 +73,11 @@ const imageURL = new URL(image, Astro.site);
      sistema. font-display: swap, só os pesos usados. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- Space Grotesk como display (futurista) + Inter no corpo.
+     font-display: swap, só os pesos usados. Alternativas futuristas
+     pra testar: trocar a família em --font-display (global.css). -->
 <link
-  href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,500;14..32,600&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap"
   rel="stylesheet"
 />
 
