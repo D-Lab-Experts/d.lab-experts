@@ -793,21 +793,24 @@ const t = useTranslations();
              viewport e estático sob prefers-reduced-motion. Hover destaca
              nó + linha; parallax sutil seguindo o cursor. -->
         <div class="solt-art">
-          <div class="constel" aria-hidden="true">
-            <div class="constel-glow"></div>
-            <canvas class="constel-particles"></canvas>
+          <!-- Cada nó é um link pra página da frente (/solucoes/<slug>),
+               que explica como o D.Lab ajuda naquela área. As partes
+               puramente decorativas ficam aria-hidden; os nós, não. -->
+          <div class="constel">
+            <div class="constel-glow" aria-hidden="true"></div>
+            <canvas class="constel-particles" aria-hidden="true"></canvas>
             <div class="constel-stage" data-stage>
-              <svg class="constel-links" data-links preserveAspectRatio="none"></svg>
-              <div class="constel-core">
+              <svg class="constel-links" data-links preserveAspectRatio="none" aria-hidden="true"></svg>
+              <div class="constel-core" aria-hidden="true">
                 <span class="constel-core-orb"></span>
                 <span class="constel-core-ping"></span>
                 <span class="constel-core-ping d"></span>
               </div>
-              <div class="constel-node" data-node style="--i:0; --pb:#8B5CF6; --pd:#4C1D95; --pa:rgba(221,210,255,0.55); --pg:rgba(167,139,250,0.55)"><span class="constel-dot"></span><span class="constel-label">Atendimento</span></div>
-              <div class="constel-node" data-node style="--i:1; --pb:#6366F1; --pd:#312E81; --pa:rgba(199,210,254,0.55); --pg:rgba(129,140,248,0.5)"><span class="constel-dot"></span><span class="constel-label">Comercial</span></div>
-              <div class="constel-node" data-node style="--i:2; --pb:#2DD4BF; --pd:#0F5F58; --pa:rgba(204,251,241,0.5); --pg:rgba(45,212,191,0.45)"><span class="constel-dot"></span><span class="constel-label">Operações</span></div>
-              <div class="constel-node" data-node style="--i:3; --pb:#E0A75E; --pd:#7C4310; --pa:rgba(254,238,205,0.55); --pg:rgba(240,180,110,0.42)"><span class="constel-dot"></span><span class="constel-label">Financeiro</span></div>
-              <div class="constel-node" data-node style="--i:4; --pb:#E879A8; --pd:#8B1F53; --pa:rgba(255,224,238,0.5); --pg:rgba(232,121,168,0.42)"><span class="constel-dot"></span><span class="constel-label">Dados</span></div>
+              <a class="constel-node" data-node href="/solucoes/atendimento" aria-label="Atendimento — como ajudamos com IA" style="--i:0; --pb:#8B5CF6; --pd:#4C1D95; --pa:rgba(221,210,255,0.55); --pg:rgba(167,139,250,0.55)"><span class="constel-dot"></span><span class="constel-label">Atendimento</span></a>
+              <a class="constel-node" data-node href="/solucoes/comercial" aria-label="Comercial — como ajudamos com IA" style="--i:1; --pb:#6366F1; --pd:#312E81; --pa:rgba(199,210,254,0.55); --pg:rgba(129,140,248,0.5)"><span class="constel-dot"></span><span class="constel-label">Comercial</span></a>
+              <a class="constel-node" data-node href="/solucoes/operacoes" aria-label="Operações — como ajudamos com IA" style="--i:2; --pb:#2DD4BF; --pd:#0F5F58; --pa:rgba(204,251,241,0.5); --pg:rgba(45,212,191,0.45)"><span class="constel-dot"></span><span class="constel-label">Operações</span></a>
+              <a class="constel-node" data-node href="/solucoes/financeiro" aria-label="Financeiro — como ajudamos com IA" style="--i:3; --pb:#E0A75E; --pd:#7C4310; --pa:rgba(254,238,205,0.55); --pg:rgba(240,180,110,0.42)"><span class="constel-dot"></span><span class="constel-label">Financeiro</span></a>
+              <a class="constel-node" data-node href="/solucoes/dados" aria-label="Dados — como ajudamos com IA" style="--i:4; --pb:#E879A8; --pd:#8B1F53; --pa:rgba(255,224,238,0.5); --pg:rgba(232,121,168,0.42)"><span class="constel-dot"></span><span class="constel-label">Dados</span></a>
             </div>
           </div>
         </div>
@@ -1842,8 +1845,19 @@ const t = useTranslations();
   .constel-node {
     position: absolute; top: 50%; left: 50%; z-index: 20;
     display: flex; flex-direction: column; align-items: center; gap: 7px;
-    pointer-events: auto; cursor: default; will-change: transform, opacity, filter;
+    pointer-events: auto; cursor: pointer; text-decoration: none; color: inherit;
+    will-change: transform, opacity, filter;
     transform: translate(-50%,-50%) rotate(calc(var(--i) * 72deg - 90deg)) translateY(-156px) rotate(calc(var(--i) * -72deg + 90deg));
+  }
+  .constel-node:focus-visible { outline: none; }
+  .constel-node:focus-visible .constel-label {
+    color: #F3EEFF; background: rgba(167,139,250,0.16);
+    border-color: var(--accent); box-shadow: 0 0 0 2px rgba(167,139,250,0.45);
+  }
+  .constel-node:focus-visible .constel-dot {
+    box-shadow: 0 0 0 3px rgba(167,139,250,0.5),
+      0 0 16px 2px var(--pg, rgba(167,139,250,0.55)),
+      inset -3px -4px 8px rgba(0,0,0,0.5), inset 2px 2px 6px rgba(255,255,255,0.30);
   }
   /* Cada nó é um pequeno planeta: corpo esférico com luz vinda do alto-
      esquerda, sombra do terminador (inset escuro embaixo-direita) e halo
