@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Política de Privacidade | D.Lab Experts"
+  description="Como o D.Lab Experts coleta, usa e protege os dados pessoais, em conformidade com a LGPD."
+>
+  <section class="priv-section">
+    <div class="container priv-wrap">
+      <span class="priv-eyebrow">Privacidade · LGPD</span>
+      <h1 class="priv-title">Política de Privacidade</h1>
+      <p class="priv-lead">
+        Esta política explica, em linguagem direta, como o D.Lab Experts trata
+        os dados pessoais coletados neste site, conforme a Lei Geral de Proteção
+        de Dados (LGPD, Lei nº 13.709/2018). <!-- DRAFT: revisar com jurídico. -->
+      </p>
+
+      <h2>Quais dados coletamos</h2>
+      <p>
+        Coletamos o <strong>e-mail</strong> que você informa ao desbloquear
+        conteúdos ou ao entrar em contato, além de dados de navegação anônimos
+        (analytics) usados só para melhorar o site.
+      </p>
+
+      <h2>Para que usamos</h2>
+      <p>
+        Para liberar o conteúdo solicitado, responder ao seu contato e enviar
+        materiais e novidades do D.Lab — sempre com a possibilidade de cancelar
+        o recebimento a qualquer momento.
+      </p>
+
+      <h2>Base legal e consentimento</h2>
+      <p>
+        O envio de comunicações por e-mail ocorre mediante o seu
+        <strong>consentimento</strong>, dado de forma explícita ao marcar a
+        caixa de aceite. Você pode retirar o consentimento quando quiser.
+      </p>
+
+      <h2>Compartilhamento</h2>
+      <p>
+        Não vendemos seus dados. Utilizamos processadores de e-mail e formulários
+        (ex.: Formspree) apenas para operar a captura e o envio das mensagens.
+      </p>
+
+      <h2>Seus direitos</h2>
+      <p>
+        Você pode solicitar acesso, correção ou exclusão dos seus dados, bem como
+        revogar o consentimento, pelo e-mail
+        <a href="mailto:gabriel@dlabexperts.com">gabriel@dlabexperts.com</a>.
+      </p>
+
+      <p class="priv-updated">Última atualização: 2026. <!-- DRAFT: confirmar data e revisão jurídica. --></p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .priv-section { padding: 150px 0 100px; position: relative; z-index: 1; }
+  .priv-wrap { max-width: 720px; }
+  .priv-eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 18px;
+  }
+  .priv-title {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(34px, 5vw, 52px); letter-spacing: -.03em;
+    line-height: 1.06; color: var(--ink); margin-bottom: 20px;
+  }
+  .priv-lead { font-size: 17px; line-height: 1.7; color: var(--text-muted); margin-bottom: 32px; }
+  .priv-wrap h2 {
+    font-family: var(--font-display); font-weight: 600; font-size: 20px;
+    letter-spacing: -.02em; color: var(--ink); margin: 28px 0 10px;
+  }
+  .priv-wrap p { font-size: 15px; line-height: 1.75; color: var(--text-muted); margin-bottom: 12px; }
+  .priv-wrap strong { color: var(--ink); }
+  .priv-wrap a { color: var(--accent); text-decoration: underline; }
+  .priv-updated { margin-top: 36px; font-size: 13px; color: var(--text-dim); }
+</style>

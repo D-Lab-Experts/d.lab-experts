@@ -1,0 +1,120 @@
+---
+// Slot de mídia reutilizável (item 4 do brief de UX).
+// Sem `src`, renderiza um placeholder elegante (não um buraco preto).
+// Com `src`, vira <video muted autoplay loop playsinline preload=none>
+// com poster e fallback estático. A mídia é pausada/oculta sob
+// prefers-reduced-motion via CSS (.media-slot-video).
+//
+// Uso:
+//   <MediaSlot label="Diagnóstico" ratio="16 / 9" />
+//   <MediaSlot src="/media/agente.mp4" poster="/media/agente.jpg" />
+interface Props {
+  ratio?: string;
+  label?: string;
+  src?: string;
+  img?: string;
+  poster?: string;
+  class?: string;
+  eager?: boolean;
+}
+const {
+  ratio = '16 / 9',
+  label = 'Prévia em breve',
+  src,
+  img,
+  poster,
+  class: cls = '',
+  eager = false,
+} = Astro.props;
+---
+<div class={`media-slot ${cls}`} style={`aspect-ratio:${ratio}`}>
+  {img && (
+    /* Imagem real (some sem ícone quebrado se o arquivo ainda não existe;
+       o placeholder abaixo aparece nesse caso). */
+    <img
+      src={img}
+      alt=""
+      class="media-slot-img"
+      loading={eager ? 'eager' : 'lazy'}
+      onerror="this.style.display='none'"
+    />
+  )}
+  {src ? (
+    <video
+      class="media-slot-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="none"
+      poster={poster}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  ) : (
+    <!-- MEDIA SLOT: trocar por <video> (mp4/webm) ou <img loading="lazy">. -->
+    <div class="media-slot-ph" aria-hidden="true">
+      <span class="media-slot-ph-grid"></span>
+      <span class="media-slot-ph-glow"></span>
+      <svg class="media-slot-ph-icon" width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M8 5v14l11-7L8 5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      </svg>
+      <span class="media-slot-ph-label">{label}</span>
+    </div>
+  )}
+  <slot />
+</div>
+
+<style>
+  .media-slot {
+    position: relative;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+  }
+  .media-slot-video,
+  .media-slot-img {
+    position: absolute; inset: 0; z-index: 2;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  .media-slot-ph {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px;
+    background:
+      radial-gradient(120% 120% at 50% 0%, rgba(56,197,240,0.08), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  }
+  .media-slot-ph-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 78%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 78%);
+  }
+  .media-slot-ph-glow {
+    position: absolute; width: 160px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(56,197,240,0.16), transparent 70%);
+    filter: blur(8px);
+    animation: msPulse 4s ease-in-out infinite;
+  }
+  @keyframes msPulse { 0%,100%{opacity:.5;transform:scale(1)} 50%{opacity:.9;transform:scale(1.12)} }
+  .media-slot-ph-icon { position: relative; color: var(--accent); opacity: .9; }
+  .media-slot-ph-label {
+    position: relative;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .media-slot-video { display: none; }
+    .media-slot-ph-glow { animation: none; }
+  }
+</style>

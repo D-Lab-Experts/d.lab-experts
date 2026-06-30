@@ -4,6 +4,23 @@ import NeuralNetwork from '../NeuralNetwork.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations();
+
+// Frentes de implementação: cada item vem como "Categoria: descrição".
+// Quebramos no primeiro ":" pra renderizar cada frente como um card
+// próprio (grid), em vez de uma lista dentro de um bloco único.
+const fronts = [
+  t('aboutPage.intelItem1'),
+  t('aboutPage.intelItem2'),
+  t('aboutPage.intelItem3'),
+  t('aboutPage.intelItem4'),
+  t('aboutPage.intelItem5'),
+  t('aboutPage.intelItem6'),
+].map((raw) => {
+  const i = raw.indexOf(':');
+  return i === -1
+    ? { name: raw.trim(), desc: '' }
+    : { name: raw.slice(0, i).trim(), desc: raw.slice(i + 1).trim() };
+});
 ---
 
 <Layout
@@ -117,22 +134,16 @@ const t = useTranslations();
         <p class="lead" set:html={t('aboutPage.scopeLead')}></p>
       </div>
 
-      <div class="services-split" style="grid-template-columns:1fr;max-width:720px;margin:0 auto">
-        <div class="service-card data fi d1">
-          <div class="service-card-icon lilac">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="url(#g1)" stroke-width="1.5"/><path d="M15.5 12v7M12 15.5h7" stroke="url(#g1)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <p class="fronts-intro fi" set:html={t('aboutPage.intelDesc')}></p>
+
+      <div class="fronts-grid fi d1">
+        {fronts.map((f, i) => (
+          <div class="front-card">
+            <span class="front-card-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="front-card-name">{f.name}</h3>
+            {f.desc && <p class="front-card-desc">{f.desc}</p>}
           </div>
-          <h3>{t('aboutPage.intelName')}</h3>
-          <p set:html={t('aboutPage.intelDesc')}></p>
-          <ul>
-            <li>{t('aboutPage.intelItem1')}</li>
-            <li>{t('aboutPage.intelItem2')}</li>
-            <li>{t('aboutPage.intelItem3')}</li>
-            <li>{t('aboutPage.intelItem4')}</li>
-            <li>{t('aboutPage.intelItem5')}</li>
-            <li>{t('aboutPage.intelItem6')}</li>
-          </ul>
-        </div>
+        ))}
       </div>
     </div>
   </section>
@@ -241,8 +252,8 @@ const t = useTranslations();
       <h2>{t('aboutPage.ctaTitleLead')}<br /><span class="gradient-text">{t('aboutPage.ctaTitleAccent')}</span></h2>
       <p>{t('aboutPage.ctaLead')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/blog" class="btn btn-primary">{t('aboutPage.ctaPrimary')}</a>
-        <a href="/contato" class="btn btn-ghost">{t('aboutPage.ctaSecondary')}</a>
+        <a href="/contato" class="btn btn-primary">{t('aboutPage.ctaPrimary')}</a>
+        <a href="/#como-funciona" class="btn btn-ghost">{t('aboutPage.ctaSecondary')}</a>
       </div>
     </div>
   </section>

@@ -4,6 +4,12 @@ import NeuralNetwork from '../NeuralNetwork.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations();
+
+// TODO: trocar pelo endpoint real do Formspree (https://formspree.io/forms).
+// O e-mail capturado cai na sua base do Formspree quando o lead desbloqueia.
+const FORMSPREE = 'https://formspree.io/f/SEU_ID_FORMSPREE';
+
+const solutions = ['s1', 's2', 's3', 's4', 's5'] as const;
 ---
 
 <Layout
@@ -30,67 +36,42 @@ const t = useTranslations();
     </div>
   </section>
 
-  <!-- ═══════════════ COMMITMENT STRIP ════════════════════════════ -->
-  <section class="sol-commitment">
+  <!-- (Removido) COMMITMENT STRIP — era o posicionamento "tudo grátis";
+       não cabe na aba de Serviços (pagos). O grátis vive no Blog. -->
+
+  <!-- ═══════════════ SERVIÇOS · grid aberto (sem gate) ══════════════
+       Conteúdo aberto: problema → o que entregamos → como implementamos.
+       Sem e-mail-gate (evita gatekeeping desnecessário). A captura de
+       lead acontece no CTA (diagnóstico) e no contato. -->
+  <section id="solucoes-gate" class="solg-section">
     <div class="container">
-      <div class="sol-commitment-inner fi">
-        <div class="sol-commitment-mark" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2l2.5 5L18 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L10 2z" stroke="url(#g1)" stroke-width="1.2" stroke-linejoin="round" fill="rgba(234,234,240,0.08)"/>
-          </svg>
-        </div>
-        <div class="sol-commitment-copy">
-          <span class="sol-commitment-label">{t('solucoesPage.commitmentLabel')}</span>
-          <h2 class="sol-commitment-title">{t('solucoesPage.commitmentTitle')}</h2>
-          <p class="sol-commitment-body">{t('solucoesPage.commitmentBody')}</p>
-        </div>
+      <div class="solg-grid fi d2">
+        {solutions.map((s) => (
+          <article class="solg-card">
+            <span class="solg-card-tag">{t(`solGate.${s}Tag`)}</span>
+            <h3 class="solg-card-title">{t(`solGate.${s}Title`)}</h3>
+            <p class="solg-card-teaser">{t(`solGate.${s}Teaser`)}</p>
+            <div class="solg-card-detail">
+              <div class="solg-detail-label">{t('solGate.detailLabel')}</div>
+              <ul>
+                <li>{t(`solGate.${s}d1`)}</li>
+                <li>{t(`solGate.${s}d2`)}</li>
+                <li>{t(`solGate.${s}d3`)}</li>
+              </ul>
+            </div>
+            <div class="solg-card-foot">
+              <a href="/contato" class="solg-card-link">Quero esse serviço →</a>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ TOOLS GRID ══════════════════════════════════ -->
-  <!-- Tools em registro editorial — mesma série numerada de #products.
-       Sem status pill, sem chip pile, sem icon hero. O destino do link
-       é a ferramenta em si. -->
-  <section class="sol-section">
-    <div class="container">
-      <div class="consult-track fi d1" style="max-width:880px;margin:0 auto">
-        <div class="consult-track-head">{t('solucoesPage.heroEyebrow')}</div>
-        <ol class="consult-fronts">
-          <li class="consult-front">
-            <span class="consult-front-num">01</span>
-            <div class="consult-front-body">
-              <h2 class="consult-front-name">
-                <a href="/diagnostico">{t('solucoesPage.tool1Title')}</a>
-              </h2>
-              <div class="consult-front-meta">
-                <span>{t('solucoesPage.tool1Category')}</span>
-                <span class="consult-front-metasep">·</span>
-                <span>{t('solucoesPage.tool1Meta')}</span>
-              </div>
-              <p class="consult-front-desc">{t('solucoesPage.tool1Desc')}</p>
-              <a href="/diagnostico" class="consult-front-link">{t('solucoesPage.tool1Cta')}</a>
-            </div>
-          </li>
-          <li class="consult-front consult-front-cyber">
-            <span class="consult-front-num">02</span>
-            <div class="consult-front-body">
-              <h2 class="consult-front-name">
-                <a href="/componentes-ia">{t('solucoesPage.tool2Title')}</a>
-              </h2>
-              <div class="consult-front-meta">
-                <span>{t('solucoesPage.tool2Category')}</span>
-                <span class="consult-front-metasep">·</span>
-                <span>{t('solucoesPage.tool2Meta')}</span>
-              </div>
-              <p class="consult-front-desc">{t('solucoesPage.tool2Desc')}</p>
-              <a href="/componentes-ia" class="consult-front-link">{t('solucoesPage.tool2Cta')}</a>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </section>
+  <!-- (Removido) TOOLS GRID — as ferramentas gratuitas (Diagnóstico e
+       Componentes IA) saíram da aba de Serviços e agora são promovidas
+       no Blog (banner + 1 post cada). As páginas /diagnostico e
+       /componentes-ia seguem ativas. -->
 
   <!-- ═══════════════ FINAL CTA ═══════════════════════════════════ -->
   <section class="sol-cta">
@@ -99,7 +80,7 @@ const t = useTranslations();
       <h2>{t('solucoesPage.ctaTitle')}</h2>
       <p>{t('solucoesPage.ctaSub')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/colaborar" class="btn btn-primary">{t('solucoesPage.ctaPrimary')}</a>
+        <a href="/contato" class="btn btn-primary">{t('solucoesPage.ctaPrimary')}</a>
         <a href="/blog" class="btn btn-ghost">{t('solucoesPage.ctaSecondary')}</a>
       </div>
     </div>
@@ -444,4 +425,51 @@ const t = useTranslations();
     .sol-tool-head { flex-wrap: wrap; }
     .sol-tool-title { font-size: 19px; }
   }
+
+  /* ═══════════ SOLUÇÕES · E-MAIL-GATE ═════════════════════════════ */
+  .solg-section { padding: clamp(40px,6vw,80px) 0 20px; position: relative; z-index: 1; }
+  .solg-head { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+  .solg-gate {
+    max-width: 760px; margin: 0 auto 44px;
+    background: var(--bg-elev); border: 1px solid rgba(167,139,250,0.30);
+    border-radius: 18px; padding: 24px 26px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .solg-gate.is-unlocked { display: none; }
+  .solg-gate-copy { display: flex; align-items: flex-start; gap: 14px; }
+  .solg-gate-lock { width: 40px; height: 40px; flex-shrink: 0; display:flex; align-items:center; justify-content:center; border-radius: 10px; background: var(--accent-tint); border: 1px solid rgba(167,139,250,0.3); color: var(--accent); }
+  .solg-gate-title { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -.02em; color: var(--ink); margin: 0 0 4px; }
+  .solg-gate-sub { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 0; }
+  .solg-gate-fields { display: flex; gap: 10px; flex-wrap: wrap; }
+  .solg-input {
+    flex: 1; min-width: 220px;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 100px;
+    padding: 13px 20px; color: var(--ink); font-size: 15px; font-family: inherit;
+  }
+  .solg-input:focus { outline: none; border-color: var(--accent); }
+  .solg-submit { white-space: nowrap; }
+  .solg-consent { display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; line-height: 1.5; color: var(--text-muted); cursor: pointer; }
+  .solg-consent input { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--accent); flex-shrink: 0; }
+  .solg-consent a { color: var(--accent); text-decoration: underline; }
+  .solg-msg { font-size: 13px; margin: 0; min-height: 1em; }
+  .solg-msg.is-error { color: #ff9b9b; }
+  .solg-msg.is-ok { color: var(--accent-strong); }
+  .solg-sronly { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+
+  .solg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; max-width: 1120px; margin: 0 auto; }
+  .solg-card { display: flex; flex-direction: column; padding: 24px 24px 20px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px; transition: border-color .3s, transform .3s; }
+  .solg-card:hover { border-color: rgba(167,139,250,0.4); transform: translateY(-3px); }
+  .solg-card-tag { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-strong); margin-bottom: 8px; }
+  .solg-card-title { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -.02em; color: var(--ink); margin: 0 0 10px; }
+  .solg-card-teaser { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 0 0 14px; flex: 1; }
+  .solg-card-detail { border-top: 1px dashed var(--line); padding-top: 14px; margin-bottom: 14px; }
+  .solg-detail-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .solg-card-detail ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .solg-card-detail li { position: relative; padding-left: 20px; font-size: 13px; line-height: 1.5; color: var(--ink); }
+  .solg-card-detail li::before { content: ''; position: absolute; left: 0; top: 6px; width: 10px; height: 6px; border-left: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent); transform: rotate(-45deg); }
+  .solg-card-foot { margin-top: auto; }
+  .solg-card-link { font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .solg-card-link:hover { color: var(--accent-strong); }
+  @media (max-width: 900px) { .solg-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .solg-grid { grid-template-columns: 1fr; } }
 </style>
