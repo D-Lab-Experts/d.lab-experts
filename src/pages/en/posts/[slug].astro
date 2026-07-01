@@ -1,11 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import PostLayout from '../../layouts/PostLayout.astro';
+import PostLayout from '../../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
-  // PT (default-locale) posts live at /posts/<slug>. EN posts render
-  // under /en/posts/<slug> from src/pages/en/posts/[slug].astro.
-  const posts = await getCollection('blog', ({ data }) => !data.draft && (data.lang ?? 'pt') === 'pt');
+  // Only English posts render under /en/posts/<slug>.
+  const posts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en');
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },

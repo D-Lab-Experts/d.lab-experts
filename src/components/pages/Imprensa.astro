@@ -2,14 +2,17 @@
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
 import { getCollection } from 'astro:content';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 
 // Aggregate every keyFindings entry across all publications into a
 // single flat list — journalists land here and see everything ready
 // to cite, not per-post.
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
+const posts = (await getCollection('blog', ({ data }) =>
+    !data.draft && (data.lang ?? 'pt') === locale))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 type AggregatedFinding = {
@@ -44,6 +47,7 @@ const assets = [
 <Layout
   title={t('pageTitles.imprensa')}
   description={t('pageTitles.imprensaDescription')}
+  locale={locale}
 >
   <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
   <section class="imp-hero">
@@ -142,7 +146,7 @@ const assets = [
               <dd class="imp-finding-body">
                 <p class="imp-finding-label">{f.label}</p>
                 <p class="imp-finding-source">
-                  <a href={`/posts/${f.postSlug}`}>{f.postTitle}</a>
+                  <a href={href(`/posts/${f.postSlug}`)}>{f.postTitle}</a>
                   <span class="imp-finding-dot">·</span>
                   <span>{dateStr(f.pubDate)}</span>
                 </p>
@@ -151,7 +155,7 @@ const assets = [
           ))}
         </dl>
       ) : (
-        <p class="imp-findings-empty">Novos estudos originais serão publicados em breve.</p>
+        <p class="imp-findings-empty">{t('imprensaPage.findingsEmpty')}</p>
       )}
     </div>
   </section>
@@ -203,7 +207,7 @@ const assets = [
       <p>{t('imprensaPage.ctaSub')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
         <a href={`mailto:${t('imprensaPage.contactEmail')}`} class="btn btn-primary">{t('imprensaPage.ctaPrimary')}</a>
-        <a href="/blog" class="btn btn-ghost">{t('imprensaPage.ctaSecondary')}</a>
+        <a href={href('/blog')} class="btn btn-ghost">{t('imprensaPage.ctaSecondary')}</a>
       </div>
     </div>
   </section>

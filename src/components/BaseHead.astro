@@ -1,5 +1,6 @@
 ---
-import { useTranslations } from '../i18n/utils';
+import { useTranslations, getLocalizedPath } from '../i18n/utils';
+import { locales, defaultLocale, ogLocale, type Locale } from '../i18n/ui';
 
 export interface CitationMeta {
   title: string;
@@ -22,6 +23,10 @@ export interface Props {
   modifiedTime?: string;
   author?: string;
   tags?: string[];
+  locale?: Locale;
+  // Explicit per-locale URLs (e.g. posts whose slug differs per
+  // language). When absent, alternates are derived by prefix swap.
+  alternateUrls?: Partial<Record<Locale, string>>;
   // When passed (by PostLayout), renders Google Scholar citation_* meta
   // tags in <head> so the post is indexable in academic search.
   citationMeta?: CitationMeta;
@@ -38,15 +43,28 @@ const {
   modifiedTime,
   author = 'D.Lab Experts',
   tags = [],
+  locale = defaultLocale,
+  alternateUrls,
   citationMeta,
 } = Astro.props;
 
-const t = useTranslations();
+const t = useTranslations(locale);
 
 const canonicalURL = canonical
   ? new URL(canonical, Astro.site)
   : new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
+
+// hreflang alternates: same page in each locale. Prefer an explicit
+// URL map (posts with per-locale slugs); else swap the path prefix.
+const altLinks = locales.map((loc) => ({
+  loc,
+  href: new URL(
+    alternateUrls?.[loc] ?? getLocalizedPath(Astro.url.pathname, loc),
+    Astro.site,
+  ).toString(),
+}));
+const defaultHref = altLinks.find((a) => a.loc === defaultLocale)?.href;
 ---
 
 <meta charset="UTF-8" />
@@ -60,6 +78,12 @@ const imageURL = new URL(image, Astro.site);
 <meta name="description" content={description} />
 <meta name="author" content={author} />
 <link rel="canonical" href={canonicalURL} />
+
+<!-- hreflang alternates (both locales + x-default → PT) -->
+{altLinks.map((a) => (
+  <link rel="alternate" hreflang={a.loc === 'pt' ? 'pt-BR' : a.loc} href={a.href} />
+))}
+{defaultHref && <link rel="alternate" hreflang="x-default" href={defaultHref} />}
 
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
@@ -90,7 +114,10 @@ const imageURL = new URL(image, Astro.site);
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="675" />
 {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
-<meta property="og:locale" content="pt_BR" />
+<meta property="og:locale" content={ogLocale[locale]} />
+{locales.filter((l) => l !== locale).map((l) => (
+  <meta property="og:locale:alternate" content={ogLocale[l]} />
+))}
 <meta property="og:site_name" content={t('meta.ogSiteName')} />
 
 <!-- Twitter -->

@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 
 // Formspree endpoint dedicated to research collaboration proposals.
 // Public-facing ID (visible in form action markup), so hardcoded with
@@ -19,6 +21,7 @@ const COMMUNITY_WA_URL = 'https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk';
   title={t('pageTitles.colaborar')}
   description={t('pageTitles.colaborarDescription')}
   active="colaborar"
+  locale={locale}
 >
   <!-- ═══════════════ HERO ═══════════════════════════════════════════ -->
   <section class="colab-hero">
@@ -287,7 +290,7 @@ const COMMUNITY_WA_URL = 'https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk';
         });
 
         if (response.ok) {
-          window.location.href = '/contato/obrigado';
+          window.location.href = location.pathname.startsWith('/en') ? '/en/contato/obrigado' : '/contato/obrigado';
           return;
         }
 

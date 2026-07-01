@@ -194,6 +194,10 @@ const pt: Translation = {
     titleAccent: 'em três passos simples.',
     sub: 'Sem hype, sem caixa-preta e sem travar a sua operação. A gente começa provando onde a IA vale e só avança no que dá retorno de verdade.',
 
+    // Rótulos curtos dos slots de mídia (captions dos 3 passos).
+    mediaDiagnosis: 'Diagnóstico',
+    mediaImplementation: 'Implementação',
+    mediaMeasurement: 'Medição',
     step1Tag: 'Passo 1',
     step1Title: 'Diagnóstico',
     step1Desc: 'Olhamos sua operação e provamos onde a IA dá retorno de verdade.',
@@ -329,6 +333,7 @@ const pt: Translation = {
     error: 'Não consegui enviar agora. Tente de novo ou fale com a gente no WhatsApp.',
     consentRequired: 'Marque o consentimento para continuar.',
     detailLabel: 'O que a implementação inclui',
+    cardCta: 'Quero esse serviço →',
     lockedLabel: 'Conteúdo por e-mail',
     unlockedLabel: 'Desbloqueado',
 
@@ -576,6 +581,10 @@ const pt: Translation = {
   },
 
   blog: {
+    // Rótulos de método/tipo dos cards (antes hardcoded no Blog.astro).
+    methodOriginal: 'Conteúdo original',
+    methodSecondary: 'Análise',
+    richMaterial: 'Material rico',
     // DRAFT: confirmar copy — blog para fundadores e operadores curiosos.
     heroEyebrow: 'Blog & Pesquisa aberta',
     heroTitle: 'Conteúdo gratuito.',
@@ -637,6 +646,20 @@ const pt: Translation = {
     colabCtaSecondary: 'Como funciona',
     // DRAFT: confirmar copy — convite para a comunidade no WhatsApp, em destaque no Home.
     colabCommunityLine: 'Entrar na comunidade de pesquisadores no WhatsApp →',
+  },
+
+  // Rótulos do PostLayout (breadcrumb, relacionados, ponte de conversão).
+  post: {
+    breadcrumbBlog: 'Análises Públicas',
+    keepReading: 'Continue lendo',
+    moreResearch: 'Mais conteúdo do D.Lab',
+    read: 'Ler',
+    originalContent: 'Conteúdo',
+    alsoIn: 'Também disponível em',
+    bridgeLabel: 'Do conteúdo à sua operação',
+    bridgeTitle: 'Esse conteúdo é aberto. E na sua operação?',
+    bridgeBody: 'Onde a IA move eficiência e margem no seu contexto? Vira um Diagnóstico de IA: mapeia o que vale automatizar e instrumentar, com impacto medido antes e depois.',
+    bridgeCta: 'Pedir um Diagnóstico de IA →',
   },
 
   formats: {
@@ -1070,6 +1093,7 @@ const pt: Translation = {
   },
 
   imprensaPage: {
+    findingsEmpty: 'Novos estudos originais serão publicados em breve.',
     heroEyebrow: 'Sala de imprensa',
     heroTitleLead: 'D.Lab Experts',
     heroTitleAccent: 'para jornalistas.',
@@ -1396,6 +1420,8 @@ export interface ServiceArea {
 // Rótulos fixos compartilhados por todas as páginas de área.
 export const serviceAreaChrome = {
   backToAll: '← Todos os serviços',
+  heroDiagnosisCta: 'Fazer o diagnóstico',
+  relatedCardCta: 'Ver como ajudamos →',
   problemLabel: 'O desafio',
   helpLabel: 'Como podemos ajudar',
   howLabel: 'Como implementamos',

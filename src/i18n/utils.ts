@@ -1,16 +1,39 @@
+import { locales, defaultLocale, type Locale } from './ui';
 import pt from './pt';
+import en from './en';
 
-// Site PT-only. useTranslations() devolve a função t vinculada ao
-// dicionário único — mantemos a mesma call signature dos componentes
-// pra não ter que reescrever toda chamada.
+const dictionaries = { pt, en } as const;
+
+// PT is authoritative — EN must keep the same keys.
 export type Translation = typeof pt;
 
-export function useTranslations() {
+/**
+ * Extract the active locale from a URL. Returns the default locale
+ * when the first path segment isn't a recognized locale.
+ */
+export function getLocaleFromUrl(url: URL): Locale {
+  const [, first] = url.pathname.split('/');
+  return (locales as readonly string[]).includes(first)
+    ? (first as Locale)
+    : defaultLocale;
+}
+
+/**
+ * Bind a locale and return a strongly-typed `t(key)` lookup. Falls
+ * back to the PT value if a key is missing in the requested locale —
+ * safer than throwing while translations are rolling out.
+ */
+export function useTranslations(locale: Locale = defaultLocale) {
+  const dict = dictionaries[locale] ?? dictionaries[defaultLocale];
+  const fallback = dictionaries[defaultLocale];
+
   return function t(key: TranslationKey): string {
-    const value = resolve(pt, key);
-    if (value !== undefined) return value;
+    const fromLocale = resolve(dict, key);
+    if (fromLocale !== undefined) return fromLocale;
+    const fromFallback = resolve(fallback, key);
+    if (fromFallback !== undefined) return fromFallback;
     if (import.meta.env.DEV) {
-      console.warn(`[i18n] Chave de tradução ausente: "${key}"`);
+      console.warn(`[i18n] Missing translation for key "${key}"`);
     }
     return key;
   };
@@ -27,6 +50,41 @@ function resolve(obj: unknown, key: string): string | undefined {
     }
   }
   return typeof cursor === 'string' ? cursor : undefined;
+}
+
+/**
+ * Prefix an in-site path for the given locale. The default locale (PT)
+ * lives at the root with no prefix; other locales get a `/<locale>`
+ * prefix. Hash-only and external links pass through untouched.
+ *
+ *   localize('/solucoes', 'en') → '/en/solucoes'
+ *   localize('/solucoes', 'pt') → '/solucoes'
+ *   localize('/', 'en')         → '/en/'
+ *   localize('/#hero', 'en')    → '/en/#hero'
+ */
+export function localize(path: string, locale: Locale = defaultLocale): string {
+  if (/^(https?:|mailto:|tel:|#)/.test(path)) return path;
+  if (locale === defaultLocale) return path;
+  if (path === '/') return `/${locale}/`;
+  const normalized = path.startsWith('/') ? path : `/${path}`;
+  return `/${locale}${normalized}`;
+}
+
+/**
+ * Build the URL for the same page in a different locale. Used by the
+ * LanguageSwitcher and hreflang link tags. Strips any existing locale
+ * prefix, then re-applies the target one.
+ */
+export function getLocalizedPath(pathname: string, locale: Locale): string {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length && (locales as readonly string[]).includes(segments[0])) {
+    segments.shift();
+  }
+  const rest = segments.join('/');
+  if (locale === defaultLocale) {
+    return rest ? `/${rest}` : '/';
+  }
+  return rest ? `/${locale}/${rest}` : `/${locale}/`;
 }
 
 type Join<K, P> = K extends string

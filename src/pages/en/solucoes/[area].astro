@@ -1,0 +1,22 @@
+---
+import ServiceArea from '../../../components/pages/ServiceArea.astro';
+import { serviceAreas, serviceAreaChrome } from '../../../i18n/en';
+
+// EN route for the service-area pages (/en/solucoes/<slug>). Shares the
+// ServiceArea.astro template; injects the English dictionary.
+export function getStaticPaths() {
+  return serviceAreas.map((area) => ({
+    params: { area: area.slug },
+    props: {
+      area,
+      related: area.related
+        .map((slug) => serviceAreas.find((a) => a.slug === slug))
+        .filter((a): a is (typeof serviceAreas)[number] => Boolean(a)),
+    },
+  }));
+}
+
+const { area, related } = Astro.props;
+---
+
+<ServiceArea area={area} related={related} chrome={serviceAreaChrome} locale="en" />

@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 
 const principles = [
   { title: 'principle1Title', body: 'principle1Body' },
@@ -28,6 +30,7 @@ const cases = ['case1', 'case2', 'case3', 'case4', 'case5', 'case6'] as const;
   title={t('pageTitles.componentesIaResearchStats')}
   description={t('pageTitles.componentesIaResearchStatsDescription')}
   active="solucoes"
+  locale={locale}
 >
   <!-- ═══════════════ HERO ═════════════════════════════════════ -->
   <section class="rs-hero">
@@ -36,7 +39,7 @@ const cases = ['case1', 'case2', 'case3', 'case4', 'case5', 'case6'] as const;
     <NeuralNetwork color="white" density="low" opacity={0.12} />
     <div class="container">
       <div class="rs-hero-inner fi">
-        <a class="rs-breadcrumb" href="/componentes-ia">{t('componentesIaResearchStats.breadcrumbBack')}</a>
+        <a class="rs-breadcrumb" href={href('/componentes-ia')}>{t('componentesIaResearchStats.breadcrumbBack')}</a>
 
         <div class="rs-eyebrow">
           <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
@@ -221,8 +224,8 @@ const cases = ['case1', 'case2', 'case3', 'case4', 'case5', 'case6'] as const;
       <h2>{t('componentesIaResearchStats.ctaTitle')}</h2>
       <p>{t('componentesIaResearchStats.ctaSub')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/colaborar" class="btn btn-primary">{t('componentesIaResearchStats.ctaPrimary')}</a>
-        <a href="/componentes-ia" class="btn btn-ghost">{t('componentesIaResearchStats.ctaSecondary')}</a>
+        <a href={href('/colaborar')} class="btn btn-primary">{t('componentesIaResearchStats.ctaPrimary')}</a>
+        <a href={href('/componentes-ia')} class="btn btn-ghost">{t('componentesIaResearchStats.ctaSecondary')}</a>
       </div>
     </div>
   </section>

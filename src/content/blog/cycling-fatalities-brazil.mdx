@@ -1,0 +1,586 @@
+---
+title: "Who Dies Cycling in Brazil: Crash Incidence, Severity, and the Urban-versus-Sport Profile"
+subtitle: "A D.Lab × IMPS study reconciles DATASUS, IBGE, IPEA, and WHO data to answer, with method, three questions that Brazil's official data cannot answer on its own"
+description: "A D.Lab study in partnership with IMPS on cyclist crashes in Brazil: roughly 1,300 deaths a year, hospital admissions up 71% over the decade, and an estimated 2 to 3 urban cyclists for every sport cyclist. Secondary data reconciled from DATASUS, IBGE, IPEA, and WHO."
+excerpt: "Brazil records roughly 1,300 cyclist deaths a year, a figure stable for more than a decade, while hospital admissions have grown 71%. Three independent methods converge on the range of 1,250 to 1,380 deaths a year. The typical victim is not the athlete: it is the lower-income urban worker in a collision with a motor vehicle. A D.Lab × IMPS secondary-data study, open access."
+pubDate: 2026-05-31
+author: "D.Lab Experts & Instituto Movimento Pedal Seguro"
+citationAuthors:
+  - "D.Lab Experts"
+  - "Instituto Movimento Pedal Seguro (IMPS)"
+citationVolume: "2"
+citationLanguage: "en"
+lang: "en"
+translationOf: "ciclismo-brasil"
+authorsMeta:
+  - name: "D.Lab Experts"
+    jobTitle: "Decision Intelligence Research laboratory"
+  - name: "Instituto Movimento Pedal Seguro (IMPS)"
+    jobTitle: "Cyclist-safety advocacy organization"
+keyFindings:
+  - stat: "~1.300"
+    label: "cyclist deaths per year in Brazil, according to SIM (DATASUS)"
+    id: "mortes-ano"
+    color: "lilac"
+  - stat: "+71%"
+    label: "rise in hospital admissions for bicycle crashes over the decade (SIH)"
+    id: "internacoes-decada"
+    color: "yellow"
+  - stat: "~12:1"
+    label: "ratio of admissions to deaths in 2023, versus 6.8:1 in 2014"
+    id: "razao-12-1"
+    color: "blue"
+  - stat: "60%"
+    label: "of deaths are pedestrian-style collisions, the dominant mechanism on shared roads"
+    id: "atropelamentos"
+    color: "green"
+mentions:
+  - name: "ABRAMET. Associação Brasileira de Medicina de Tráfego. Survey of cyclist crashes drawn from SIM and SIH. 2020."
+  - name: "BRASIL. Ministério da Saúde. Sistema de Informação sobre Mortalidade (SIM) e Sistema de Informações Hospitalares (SIH). DATASUS."
+  - name: "IBGE. Pesquisa Nacional por Amostra de Domicílios, PNAD 2015: Práticas de Esporte e Atividade Física. Rio de Janeiro, 2017."
+  - name: "IBGE. Pesquisa de Orçamentos Familiares, POF 2017-2018."
+  - name: "IBGE. Pesquisa Nacional de Saúde (PNS) 2019."
+  - name: "IPEA. Studies on the costs and modal share of road crashes."
+  - name: "WORLD HEALTH ORGANIZATION. Global Status Report on Road Safety. Geneva: WHO, 2016 and subsequent editions."
+  - name: "SOUSA, M. H.; BAHIA, C. A.; CONSTANTINO, P. Análise dos fatores associados aos acidentes de trânsito envolvendo ciclistas atendidos nas capitais brasileiras. Ciência & Saúde Coletiva, 2016."
+  - name: "TRANSPORTE ATIVO; OBSERVATÓRIO DAS METRÓPOLES. Pesquisa Nacional sobre o Perfil do Ciclista Brasileiro, 4th edition. 2024."
+  - name: "Aliança Bike. Sector surveys on the bicycle fleet and bicycle use in Brazil."
+researchType: secondary
+track: intelligence
+format: report
+category: "Mobility and Road Safety"
+tags: ["Urban Mobility", "Road Safety", "Public Health", "Mobility Policy"]
+keywords:
+  - "cyclist deaths in Brazil"
+  - "cyclist crashes DATASUS"
+  - "cyclist road safety"
+  - "urban cycling Brazil statistics"
+  - "bicycle crash hospital admissions SIH"
+  - "urban versus sport cyclists"
+  - "active mobility Brazil"
+  - "Movimento Pedal Seguro IMPS"
+  - "D.Lab cycling study"
+  - "cyclist collisions in Brazil"
+cover: "/pesquisaciclistas.webp"
+coverAlt: "Cover of D.Lab study #002 · Mobility: +71% in bicycle-crash hospital admissions over the decade, with a bicycle on a dark background"
+readingTime: "14 min read"
+featured: true
+faq:
+  - q: "How many cyclists die each year in Brazil?"
+    a: "About 1,300 cyclists die each year in Brazilian traffic, according to the Mortality Information System (SIM) at DATASUS. The series shows a trough in 2016 (1,262 deaths) and a rebound to 1,381 in 2021. The count was validated by three independent methods (direct SIM, the WHO method applied to 2016, and 2023 SIM), with a consensus range of 1,250 to 1,380 deaths a year."
+  - q: "Are cyclist deaths in Brazil rising?"
+    a: "No. Deaths have been stable for more than a decade, around 1,300 a year. But hospital admissions for bicycle crashes have grown 71% over the same period, from 9,238 in 2014 to 15,573 in 2023. The admissions-to-deaths ratio rose from 6.8 to 12.1. The serious tier is growing; the fatal tier is not. The likely reading: more people cycling, more exposure, without a proportional worsening in lethality per event."
+  - q: "How many Brazilians are urban cyclists and how many are sport cyclists?"
+    a: "There is no official count by purpose. Triangulating public sources, we estimate 7 to 17 million urban (utility) cyclists, with a working base of roughly 12 million, against 3.5 to 5.5 million sport or recreational cyclists. The urban-to-sport ratio falls between 2 and 3 to 1. The reading is directionally stable and gains support from the mechanism of the crashes."
+  - q: "Who is the typical victim in fatal cyclist crashes in Brazil?"
+    a: "A man, aged 50 to 59, in the Southeast or South, struck by a motor vehicle on a shared road. About 80% of fatal victims are men and about 60% of deaths occur in vehicle-strike collisions. The profile points to the urban utility cyclist, generally of lower income, sharing the street with cars, and not to the athlete in a segregated riding environment."
+  - q: "How was this study done? Is it auditable?"
+    a: "It is a secondary-data study, with no primary collection, that gathers and reconciles public sources: DATASUS (SIM and SIH), IBGE (PNAD 2015, PNS, POF), IPEA, WHO, and peer-reviewed literature. Each finding was classified by the confidence level of its source and subjected to seven consistency checks, all passed. Commercial surveys and online panels were discarded as anchors. Scripts and CSVs are available for replication."
+---
+
+import Chart from '../../components/Chart.astro';
+
+<section class="article-hero">
+  <div class="article-hero-glow"></div>
+  <div class="container">
+    <div class="article-hero-inner fi">
+      <div class="article-meta">
+        <span class="article-tag lilac">Secondary-data study</span>
+        <span class="article-tag blue">D.Lab × IMPS</span>
+        <span class="article-tag green">Open access</span>
+        <span class="article-date">May 2026</span>
+      </div>
+      <h1 class="article-title">Who dies cycling in Brazil:<br /><span class="gradient-text">crash incidence, severity, and the urban-versus-sport profile</span></h1>
+      <p class="article-subtitle">About <strong>1,300 deaths a year</strong>, a figure stable for more than a decade, and hospital admissions up <strong>71% over the decade</strong>. The typical victim is not the athlete: it is the <strong>lower-income urban worker</strong> in a collision with a motor vehicle on a shared road.</p>
+      <div class="article-authors">
+        <span>D.Lab Experts &amp; Instituto Movimento Pedal Seguro (IMPS)</span>
+        <span style="opacity:.3">|</span>
+        <span>D.Lab Research Series · Vol. 2</span>
+        <span style="opacity:.3">|</span>
+        <span class="article-read-time">14 min read</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container fi d1">
+  <div class="key-findings">
+    <div class="key-finding">
+      <div class="key-finding-val" style="color:var(--lilac)">~1.300</div>
+      <div class="key-finding-lbl">cyclist deaths per year (SIM)</div>
+    </div>
+    <div class="key-finding">
+      <div class="key-finding-val" style="color:var(--yellow)">+71%</div>
+      <div class="key-finding-lbl">rise in admissions over the decade (SIH)</div>
+    </div>
+    <div class="key-finding">
+      <div class="key-finding-val" style="color:var(--blue)">~12:1</div>
+      <div class="key-finding-lbl">admissions-to-deaths ratio in 2023</div>
+    </div>
+    <div class="key-finding">
+      <div class="key-finding-val" style="color:var(--green)">60%</div>
+      <div class="key-finding-lbl">of deaths are vehicle-strike collisions</div>
+    </div>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <div class="tldr-card fi">
+    <div class="tldr-eyebrow">Executive summary (TL;DR)</div>
+    <h3>What this study lets us assert in 4 sentences</h3>
+    <ul>
+      <li><span class="hl-bg-lilac">Mortality is stable at a high level.</span> Brazil has recorded about 1,300 cyclist deaths a year for more than a decade. Three independent methods (direct SIM, the WHO method on 2016, 2023 SIM) converge on the range of 1,250 to 1,380.</li>
+      <li><span class="hl-bg-yellow">The serious tier is surging.</span> Hospital admissions grew 71% over the decade (9,238 in 2014 to 15,573 in 2023). The admissions-to-deaths ratio rose from 6.8 to 12.1. The severity pyramid is changing shape, and minor injuries remain uncounted nationally.</li>
+      <li><span class="hl-bg-blue">The risk is concentrated in the urban cyclist.</span> An estimated 7 to 17 million utility cyclists (base ~12 M) against 3.5 to 5.5 million sport cyclists. Urban-to-sport ratio: 2 to 3 to 1. Death happens on the road shared with cars, not on the trail.</li>
+      <li><span class="hl-bg-green">Policy should target the utility rider.</span> 60% of deaths are vehicle-strike collisions. The direct annual cost to the public health system (SUS) for injured cyclists, about R$ 15 million, is a fraction of the true social cost. Making the urban cyclist visible, in the data and in policy, is the turning point.</li>
+    </ul>
+  </div>
+
+  <div class="toc fi">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#contexto">Why this study exists</a></li>
+      <li><a href="#metodo">Question, method, and source hierarchy</a></li>
+      <li><a href="#mortalidade">Mortality: stable at a high level</a></li>
+      <li><a href="#validacao">Cross-validation by three methods</a></li>
+      <li><a href="#gravidade">Severity: the minor, serious, fatal pyramid</a></li>
+      <li><a href="#perfil">Who dies and who gets hurt</a></li>
+      <li><a href="#populacao">Urban and sport: how many there are</a></li>
+      <li><a href="#armadilha">The method trap: why subtracting isn't enough</a></li>
+      <li><a href="#tesoura">The scissors: 12 admissions per death and rising</a></li>
+      <li><a href="#confianca">Confidence map: what is solid and what is an estimate</a></li>
+      <li><a href="#implicacoes">Implications for public policy and mobility</a></li>
+      <li><a href="#limitacoes">Limitations and transparency</a></li>
+      <li><a href="#reproducibilidade">Reproducibility</a></li>
+      <li><a href="#referencias">References</a></li>
+    </ol>
+  </div>
+
+  <h2 id="contexto">1. Why this study exists</h2>
+
+  <p>Cycling in Brazil <span class="hl-white">kills about four people a day, and the number isn't falling</span>. Despite this, the country has an information problem: no official database classifies the crash by the <strong>purpose of the ride</strong>. The data does not tell us who crashed on the way to work and who crashed while training. Health systems record the mechanism of the crash, not the purpose of the person cycling.</p>
+
+  <p>IMPS lives with this gap in practice: it maintains a collaborative mapping of incidents precisely because the official record is incomplete. This study formalizes, with method, what can be asserted from what already exists, and <span class="hl-lilac">makes explicit what still cannot be measured</span>.</p>
+
+  <p>The D.Lab reading treats road safety as <span class="term-def" data-def="An analytical framework in which each agent (pedestrian, cyclist, driver, public manager) chooses a route, time, equipment, or policy from a perception of risk that may or may not be calibrated to the real risk. When perception drifts from the data, the decision gets worse.">decision-making under uncertainty</span>: a person chooses route, time, and equipment from a perception of risk that may or may not be calibrated to the real risk. Calibrating that perception, with auditable public data, is part of what makes an applied study deliver policy value.</p>
+
+  <div class="biz-insight">
+    <div class="biz-insight-eyebrow">Why you should read this</div>
+    <div class="biz-insight-title">If you work in mobility, public health, road safety, or urban policy, this study delivers three things that matter:</div>
+    <ul>
+      <li>An auditable count of deaths and hospital admissions, with three independent methods that converge.</li>
+      <li>The separation between urban and sport cyclists, with the uncertainty range made explicit and the correct algebra for combining sources.</li>
+      <li>A reading of where policy effort should go, anchored in mechanism, victim profile, and geography.</li>
+    </ul>
+  </div>
+
+  <h2 id="metodo">2. Question, method, and source hierarchy</h2>
+
+  <p><strong>Central question.</strong> What can public data reliably assert about cyclist crash incidence in Brazil, its severity, and the split between urban and sport use?</p>
+
+  <h3>Objectives</h3>
+  <ol style="padding-left:22px;color:var(--muted);line-height:1.85;margin-bottom:24px">
+    <li>Estimate cyclist mortality and morbidity and validate those counts through independent methods.</li>
+    <li>Describe the severity of events across three levels: minor, serious, and fatal.</li>
+    <li>Characterize who dies and who gets hurt (age, sex, geography, mechanism).</li>
+    <li>Estimate the proportion between urban and sport cyclists.</li>
+    <li>Document the confidence level of each finding and the remaining gaps.</li>
+  </ol>
+
+  <h3>How we classified the sources</h3>
+  <p>A <span class="term-def" data-def="Research that gathers and re-analyzes data already produced by third parties (official agencies, scientific literature, industry), without primary collection. It requires an explicit method for selecting and reconciling sources.">secondary-data</span> study, with no primary collection and no submission to a journal, published open access. Every figure was classified by the reliability level of its source, and the conclusions rest only on the most robust sources.</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Source hierarchy adopted</div>
+    <table class="stat-table">
+      <thead><tr><th>Tier</th><th>Confidence</th><th>Sources</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tier 1</strong></td><td>High</td><td>SIM and SIH (DATASUS), PNAD 2015 (IBGE), PNS (IBGE), IPEA, WHO / PAHO, peer-reviewed articles</td><td>Anchor for all high-confidence claims.</td></tr>
+        <tr><td><strong>Tier 2</strong></td><td>Medium</td><td>Abramet, Aliança Bike, Abraciclo, Perfil do Ciclista, fleet estimated via POF / IBGE</td><td>Triangulation and context.</td></tr>
+        <tr><td><strong>Tier 3</strong></td><td>Discarded</td><td>Commercial surveys, online panels, market lists and rankings</td><td>Context at most. Never an anchor.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The set of methods used</h3>
+  <p>The reconciliation combined direct counting of microdata, application of WHO proportions, set algebra, and a <span class="term-def" data-def="A procedure to check the study's internal consistency by recomputing each key figure through two or more paths and verifying that the orders of magnitude match. It works as a cross-check on the cited sources.">consistency audit</span> with seven independent checks. Each is described in the reproducibility section.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px">
+    <span class="method-badge term-def" data-def="A direct count of the microdata from the Mortality Information System (SIM), filtering victims coded as cyclists in the ICD-10 underlying cause.">SIM count</span>
+    <span class="method-badge term-def" data-def="Applies the WHO proportion of cyclists in total road deaths to the total number of deaths in the reference year, producing an estimate independent of the microdata.">WHO method</span>
+    <span class="method-badge term-def" data-def="A count of hospital admissions in SIH, with the caveat that SIH only captures those who reach the public health system (SUS). It does not add to SIM; they measure different things.">SIH count</span>
+    <span class="method-badge term-def" data-def="Set algebra to estimate overlapping populations: Total = A + B − Both, rather than A = Total − B.">Set algebra</span>
+    <span class="method-badge term-def" data-def="Triangulation across independent estimates to identify the consensus range and discard outliers.">Triangulation</span>
+    <span class="method-badge term-def" data-def="A list of cross-checks that recomputes each finding by more than one route and verifies that the orders of magnitude match one another.">Consistency audit</span>
+  </div>
+
+  <h2 id="mortalidade">3. Mortality: stable at a high level</h2>
+
+  <p>SIM records close to 1,300 cyclist deaths a year. The series shows a trough in 2016 (1,262) and a rebound to 1,381 in 2021. Between 2014 and 2024, there were <span class="hl-white">14,834 deaths</span>. In historical perspective, cyclists' share of road deaths rose from 1% (396 deaths) in 1998 to 4% (1,556) in 2008, and stabilized at the current level.</p>
+
+  <Chart
+    title="Cyclist road deaths in Brazil, 2010 to 2021"
+    note="Annual underlying-cause series. 2020 value derived."
+    source="SIM/DATASUS · D.Lab compilation from official microdata"
+    accent="lilac"
+  >
+    <svg viewBox="0 0 700 300" role="img" aria-label="Series of cyclist deaths in Brazil from 2010 to 2021, stable around 1,300 to 1,500.">
+      <line x1="60" y1="280" x2="680" y2="280" stroke="rgba(234,234,240,0.18)" stroke-width="1"/>
+      <line x1="60" y1="200" x2="680" y2="200" stroke="rgba(234,234,240,0.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="60" y1="120" x2="680" y2="120" stroke="rgba(234,234,240,0.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <polyline fill="none" stroke="rgba(234,234,240,0.85)" stroke-width="2.4"
+        points="60,86 114,107 169,98 224,174 278,170 333,194 387,220 442,197 496,166 551,169 605,172 660,157"/>
+      <circle cx="60"  cy="86"  r="3.2" fill="rgba(234,234,240,0.85)"/>
+      <circle cx="387" cy="220" r="4.5" fill="rgba(234,234,240,0.65)"/>
+      <circle cx="660" cy="157" r="3.2" fill="rgba(234,234,240,0.85)"/>
+      <text x="387" y="245" fill="rgba(234,234,240,0.65)" font-size="10" text-anchor="middle">trough: 1,262 in 2016</text>
+      <g fill="rgba(234,234,240,0.55)" font-size="10" text-anchor="middle">
+        <text x="60" y="296">2010</text><text x="169" y="296">2012</text>
+        <text x="278" y="296">2014</text><text x="387" y="296">2016</text>
+        <text x="496" y="296">2018</text><text x="605" y="296">2020</text>
+      </g>
+      <g fill="#EAEAF0" font-size="10" text-anchor="middle">
+        <text x="60" y="76">1.513</text><text x="660" y="147">1.381</text>
+      </g>
+      <text x="40" y="124" fill="rgba(234,234,240,0.40)" font-size="9" text-anchor="end">1.500</text>
+      <text x="40" y="204" fill="rgba(234,234,240,0.40)" font-size="9" text-anchor="end">1.200</text>
+      <text x="40" y="284" fill="rgba(234,234,240,0.40)" font-size="9" text-anchor="end">900</text>
+    </svg>
+  </Chart>
+
+  <h2 id="validacao">4. Cross-validation by three methods</h2>
+
+  <p>The count does not come from a single source. Three independent methods converge on a narrow range:</p>
+
+  <ul style="color:var(--muted);line-height:1.85;padding-left:0;list-style:none;margin-bottom:24px">
+    <li style="padding-left:22px;position:relative;margin-bottom:10px"><span style="position:absolute;left:0;color:var(--lilac);font-weight:700">→</span> <strong>Direct SIM:</strong> ~1,300 deaths/year, underlying-cause count.</li>
+    <li style="padding-left:22px;position:relative;margin-bottom:10px"><span style="position:absolute;left:0;color:var(--blue);font-weight:700">→</span> <strong>WHO method:</strong> 3.4% of road deaths × 38,651 deaths in 2016 = 1,314.</li>
+    <li style="padding-left:22px;position:relative;margin-bottom:10px"><span style="position:absolute;left:0;color:var(--green);font-weight:700">→</span> <strong>2023 SIM:</strong> direct count in the most recent reference year = 1,288.</li>
+  </ul>
+
+  <div class="data-card">
+    <div class="data-card-title">Three independent methods, the same answer</div>
+    <svg viewBox="0 0 700 220" role="img" aria-label="Three estimates of cyclist deaths converging between 1,250 and 1,380." style="display:block;width:100%;height:auto">
+      <rect x="345" y="20" width="120" height="170" fill="rgba(234,234,240,0.65)" opacity="0.08"/>
+      <line x1="345" y1="20" x2="345" y2="190" stroke="rgba(234,234,240,0.55)" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+      <line x1="465" y1="20" x2="465" y2="190" stroke="rgba(234,234,240,0.55)" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+      <g font-size="12" fill="rgba(234,234,240,0.65)" text-anchor="end">
+        <text x="250" y="50">Direct SIM</text>
+        <text x="250" y="100">WHO 3.4% × total</text>
+        <text x="250" y="150">2023 SIM</text>
+      </g>
+      <circle cx="405" cy="46" r="9" fill="rgba(234,234,240,0.85)"/><text x="425" y="50" fill="#EAEAF0" font-size="13" font-weight="700">1.300</text>
+      <circle cx="419" cy="96" r="9" fill="rgba(234,234,240,0.65)"/><text x="439" y="100" fill="#EAEAF0" font-size="13" font-weight="700">1.314</text>
+      <circle cx="391" cy="146" r="9" fill="rgba(234,234,240,0.65)"/><text x="411" y="150" fill="#EAEAF0" font-size="13" font-weight="700">1.288</text>
+      <text x="405" y="208" fill="rgba(234,234,240,0.65)" font-size="11" text-anchor="middle" font-weight="700">consensus range: 1,250 to 1,380</text>
+    </svg>
+  </div>
+
+  <div class="callout success">
+    <div class="callout-icon">&#10004;</div>
+    <div class="callout-body"><strong>High confidence in the order of magnitude.</strong> When three methods with different assumptions point to the same range, the number withstands challenges to any single assumption. The residual uncertainty is in the decimals, not the order of magnitude.</div>
+  </div>
+
+  <h2 id="gravidade">5. Severity: the minor, serious, fatal pyramid</h2>
+
+  <p>Looking only at deaths hides the size of the problem. An honest reading requires the severity pyramid:</p>
+
+  <ul style="color:var(--muted);line-height:1.85;padding-left:0;list-style:none;margin-bottom:24px">
+    <li style="padding-left:22px;position:relative;margin-bottom:10px"><span style="position:absolute;left:0;color:var(--red);font-weight:700">●</span> <strong>Fatal:</strong> about 1,300 a year (SIM).</li>
+    <li style="padding-left:22px;position:relative;margin-bottom:10px"><span style="position:absolute;left:0;color:var(--yellow);font-weight:700">●</span> <strong>Serious (SUS hospital admissions):</strong> from 9,238 in 2014 to 15,573 in 2023, a 71% rise over the decade (SIH).</li>
+    <li style="padding-left:22px;position:relative;margin-bottom:10px"><span style="position:absolute;left:0;color:var(--blue);font-weight:700">●</span> <strong>Minor injuries and near misses:</strong> not measured nationally. The outpatient database does not allow isolating the road victim, so this tier, probably the largest, remains invisible in the official data.</li>
+  </ul>
+
+  <div class="data-card">
+    <div class="data-card-title">Severity pyramid of cyclist crashes</div>
+    <svg viewBox="0 0 700 320" role="img" aria-label="Severity pyramid: fatal 1,300, serious 15,000, and minor not measured." style="display:block;width:100%;height:auto">
+      <polygon points="310,30 390,30 420,120 280,120" fill="rgba(234,234,240,0.85)" opacity="0.92"/>
+      <text x="350" y="68" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">FATAL</text>
+      <text x="350" y="92" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">~1.300 / year</text>
+
+      <polygon points="280,128 420,128 510,218 190,218" fill="rgba(234,234,240,0.70)" opacity="0.85"/>
+      <text x="350" y="162" fill="#0B0B0F" font-size="13" font-weight="700" text-anchor="middle">SERIOUS (SUS admissions)</text>
+      <text x="350" y="188" fill="#0B0B0F" font-size="14" font-weight="700" text-anchor="middle">~15,000 / year</text>
+
+      <polygon points="190,226 510,226 580,300 120,300" fill="rgba(234,234,240,0.06)" opacity="0.95"/>
+      <text x="350" y="252" fill="#EAEAF0" font-size="13" font-weight="700" text-anchor="middle">MINOR injuries and near misses</text>
+      <text x="350" y="275" fill="#EAEAF0" font-size="13" font-weight="700" text-anchor="middle">not measured nationally</text>
+
+      <g font-size="11" fill="rgba(234,234,240,0.55)">
+        <text x="90" y="80">Tier 1</text>
+        <text x="90" y="170">Tier 1</text>
+        <text x="90" y="260">Gap</text>
+      </g>
+      <text x="600" y="170" fill="rgba(234,234,240,0.55)" font-size="11" text-anchor="middle">ratio ~12 : 1</text>
+    </svg>
+    <p style="font-size:12px;color:var(--dimmed);margin-top:10px">Sources: Fatal, SIM. Serious, SIH (9,238 in 2014 and 15,573 in 2023). Minor, no consolidated national count.</p>
+  </div>
+
+  <p>The ratio is approximately <span class="hl-bg-blue">12 hospital admissions for every death</span>, and beneath it lies a base of minor injuries that no one measures.</p>
+
+  <h2 id="perfil">6. Who dies and who gets hurt</h2>
+
+  <p>About <span class="hl-white">80% of fatal victims are men</span>. Deaths are concentrated in the <strong>50-to-59</strong> age band, whereas the injured who receive care tend to be younger (peak between 25 and 34), which suggests distinct exposure profiles by age. Geographically, about 60% of deaths occur in the South and Southeast, with São Paulo leading in hospital admissions.</p>
+
+  <div class="comparison-grid">
+    <div class="comparison-card">
+      <div class="comparison-card-label">Fatal victims</div>
+      <div class="comparison-card-val" style="color:var(--lilac)">~80%</div>
+      <div class="comparison-card-sub">are men</div>
+    </div>
+    <div class="comparison-card">
+      <div class="comparison-card-label">Peak of deaths</div>
+      <div class="comparison-card-val" style="color:var(--blue)">50–59</div>
+      <div class="comparison-card-sub">years</div>
+    </div>
+    <div class="comparison-card">
+      <div class="comparison-card-label">Peak of injuries</div>
+      <div class="comparison-card-val" style="color:var(--green)">25–34</div>
+      <div class="comparison-card-sub">years</div>
+    </div>
+    <div class="comparison-card">
+      <div class="comparison-card-label">Concentration</div>
+      <div class="comparison-card-val" style="color:var(--yellow)">~60%</div>
+      <div class="comparison-card-sub">South + Southeast</div>
+    </div>
+  </div>
+
+  <div class="article-body-callout">
+    <div class="callout insight">
+      <div class="callout-icon">&#9670;</div>
+      <div class="callout-body"><strong>Mechanism.</strong> About 60% of deaths are vehicle-strike collisions, and the main event type is a bicycle colliding with cars. Traffic shared with motor vehicles is the dominant safety hazard. This is the link between the crash mechanism and the victim profile: death happens, predominantly, in the environment of the <span class="hl-white">urban cyclist who shares the road with cars</span>, not on the athlete's trail.</div>
+    </div>
+  </div>
+
+  <h2 id="populacao">7. Urban and sport: how many there are</h2>
+
+  <p>There is no official count by purpose, so the estimate is a triangulation of sources, presented as a range.</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Estimated range of Brazilian cyclists (15+)</div>
+    <div class="chart-bars">
+      <div class="chart-bar">
+        <div class="chart-bar-label">Urban<br /><span style="font-size:11px;color:var(--dimmed)">utility</span></div>
+        <div class="chart-bar-track">
+          <div class="chart-bar-fill lilac" style="width:78%">
+            <span class="chart-bar-val" style="color:var(--lilac)">12 M</span>
+          </div>
+        </div>
+        <div class="chart-bar-val" style="color:var(--muted);text-align:right">7 to 17 M</div>
+      </div>
+      <div class="chart-bar">
+        <div class="chart-bar-label">Sport<br /><span style="font-size:11px;color:var(--dimmed)">recreational</span></div>
+        <div class="chart-bar-track">
+          <div class="chart-bar-fill blue" style="width:32%">
+            <span class="chart-bar-val" style="color:var(--blue)">4.5 M</span>
+          </div>
+        </div>
+        <div class="chart-bar-val" style="color:var(--muted);text-align:right">3.5 to 5.5 M</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--dimmed);margin-top:14px">Sport, anchor: PNAD 2015 (IBGE), cycling ~9% of people who practice sport and physical activity. Urban, anchors: IPEA (7% use a bicycle as their main mode of transport) and prevalence of use for commuting measured in a population-based study.</p>
+  </div>
+
+  <div class="biz-insight">
+    <div class="biz-insight-eyebrow">Central finding</div>
+    <div class="biz-insight-title">Urban-to-sport ratio: 2 to 3 to 1</div>
+    <p>The reading is directionally stable and gains support from the mechanism of the crashes. The <span class="hl-white">urban utility cyclist, generally of lower income, is the majority and is the one who dies most</span>, contrary to the imagery that associates the bicycle above all with leisure. Policy and infrastructure designed for the sport cyclist miss the public that most needs protection.</p>
+  </div>
+
+  <h2 id="armadilha">8. The method trap: why subtracting isn't enough</h2>
+
+  <p>Trying to obtain the urban figure by subtracting the sport figure from the total <strong>does not work</strong>, because the groups overlap. Someone who bikes to work and rides for leisure on weekends is in both. The correct approach is set algebra:</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Why subtracting isn't enough: the groups overlap</div>
+    <svg viewBox="0 0 700 280" role="img" aria-label="Venn diagram of urban and sport cyclists, with unmeasured overlap." style="display:block;width:100%;height:auto">
+      <circle cx="290" cy="140" r="105" fill="rgba(234,234,240,0.85)" opacity="0.20" stroke="rgba(234,234,240,0.85)" stroke-width="1.5"/>
+      <circle cx="410" cy="140" r="85"  fill="rgba(234,234,240,0.65)" opacity="0.20" stroke="rgba(234,234,240,0.55)" stroke-width="1.5"/>
+      <text x="230" y="100" fill="#EAEAF0" font-size="13" font-weight="700">Urban</text>
+      <text x="230" y="120" fill="rgba(234,234,240,0.65)" font-size="11">utility</text>
+      <text x="445" y="100" fill="#EAEAF0" font-size="13" font-weight="700">Sport</text>
+      <text x="445" y="120" fill="rgba(234,234,240,0.65)" font-size="11">recreational</text>
+      <text x="350" y="138" fill="#EAEAF0" font-size="13" font-weight="700" text-anchor="middle">Both</text>
+      <text x="350" y="158" fill="rgba(234,234,240,0.65)" font-size="11" text-anchor="middle">not measured</text>
+
+      <text x="350" y="240" fill="rgba(234,234,240,0.65)" font-size="13" text-anchor="middle">Total = Urban + Sport − Both</text>
+      <text x="350" y="262" fill="rgba(234,234,240,0.40)" font-size="11" text-anchor="middle">The overlap can only be measured with a source that records both behaviors in the same person</text>
+    </svg>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-icon">&#9888;</div>
+    <div class="callout-body"><strong>Why this matters.</strong> Subtracting without acknowledging the overlap artificially inflates one of the groups and yields poorly calibrated policy. The honest path is to state the range and the remaining structural uncertainty until a source with per-respondent microdata (PNS, PNAD) allows the intersection to be measured.</div>
+  </div>
+
+  <h2 id="tesoura">9. The scissors: 12 admissions per death and rising</h2>
+
+  <p>Deaths stayed stable while hospital admissions surged. The admissions-to-deaths ratio rose from <span class="hl-white">6.8 in 2014 to 12.1 in 2023</span>. The serious tier is growing faster than the fatal one, which is consistent with more people cycling, more exposure, without a proportional worsening in lethality per event.</p>
+
+  <Chart
+    title="The scissors: admissions rise, deaths stay stable"
+    note="Admissions in yellow (SIH), deaths in red (SIM). The admissions-to-deaths ratio rises from 6.8 to 12.1 over the decade."
+    source="SIM and SIH/DATASUS · D.Lab compilation"
+    accent="yellow"
+  >
+    <svg viewBox="0 0 700 280" role="img" aria-label="Scissors chart: admissions rise from 9,238 in 2014 to 15,573 in 2023, while deaths stay stable.">
+      <line x1="60" y1="240" x2="680" y2="240" stroke="rgba(234,234,240,0.18)" stroke-width="1"/>
+      <line x1="60" y1="170" x2="680" y2="170" stroke="rgba(234,234,240,0.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="60" y1="100" x2="680" y2="100" stroke="rgba(234,234,240,0.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="60" y1="30"  x2="680" y2="30"  stroke="rgba(234,234,240,0.06)" stroke-width="1" stroke-dasharray="3 4"/>
+
+      <polyline fill="none" stroke="rgba(234,234,240,0.65)" stroke-width="1.8" stroke-dasharray="6 4"
+        points="80,200 148,184 216,166 284,148 352,128 420,108 488,86 556,68 624,52"/>
+      <polyline fill="none" stroke="rgba(234,234,240,0.95)" stroke-width="2.4"
+        points="80,212 148,210 216,214 284,210 352,206 420,210 488,206 556,208 624,204"/>
+
+      <circle cx="80"  cy="200" r="3.2" fill="rgba(234,234,240,0.70)"/>
+      <circle cx="624" cy="52"  r="4.5" fill="rgba(234,234,240,0.70)"/>
+      <circle cx="80"  cy="212" r="3.2" fill="rgba(234,234,240,0.85)"/>
+      <circle cx="624" cy="204" r="4.5" fill="rgba(234,234,240,0.85)"/>
+
+      <text x="80"  y="194" fill="rgba(234,234,240,0.70)" font-size="10" text-anchor="middle">9.238</text>
+      <text x="624" y="42"  fill="rgba(234,234,240,0.70)" font-size="11" text-anchor="middle" font-weight="700">15.573</text>
+      <text x="80"  y="228" fill="rgba(234,234,240,0.85)" font-size="10" text-anchor="middle">1.350</text>
+      <text x="624" y="222" fill="rgba(234,234,240,0.85)" font-size="11" text-anchor="middle" font-weight="700">1.288</text>
+
+      <g font-size="10" fill="rgba(234,234,240,0.55)" text-anchor="middle">
+        <text x="80"  y="260">2014</text>
+        <text x="216" y="260">2016</text>
+        <text x="352" y="260">2019</text>
+        <text x="488" y="260">2021</text>
+        <text x="624" y="260">2023</text>
+      </g>
+
+      <text x="640" y="32" fill="rgba(234,234,240,0.70)" font-size="10" font-weight="700" text-anchor="end" class="chart-label">Admissions +71%</text>
+      <text x="640" y="190" fill="rgba(234,234,240,0.85)" font-size="10" font-weight="700" text-anchor="end" class="chart-label">Deaths stable</text>
+    </svg>
+  </Chart>
+
+  <h2 id="confianca">10. Confidence map</h2>
+
+  <p>Each finding was consolidated into a record with source and confidence level, and subjected to an <strong>automated consistency audit</strong> with seven checks, all passed. Commercial surveys and online panels were discarded as anchors.</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Reliability dossier of the findings</div>
+    <table class="stat-table">
+      <thead><tr><th>Finding</th><th>Value</th><th>Confidence</th></tr></thead>
+      <tbody>
+        <tr><td>Cyclist deaths per year</td><td>~1.300</td><td><span class="sig yes">High</span></td></tr>
+        <tr><td>Mortality plateau over the decade</td><td>stable</td><td><span class="sig yes">High</span></td></tr>
+        <tr><td>Rise in admissions over the decade</td><td>+71%</td><td><span class="sig yes">High</span></td></tr>
+        <tr><td>Admissions-to-deaths ratio (2023)</td><td>~12 : 1</td><td><span class="sig yes">High</span></td></tr>
+        <tr><td>Deaths in vehicle-strike collisions</td><td>~60%</td><td><span class="sig yes">High</span></td></tr>
+        <tr><td>Cyclists' share of total road deaths</td><td>3,4%</td><td><span class="sig yes">High</span></td></tr>
+        <tr><td>Rate per 100,000 inhabitants</td><td>0,64</td><td><span class="sig yes">High</span></td></tr>
+        <tr><td>Sport cyclists</td><td>3.5 to 5.5 M</td><td><span style="background:rgba(177,140,255,.1);color:var(--lilac);padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.05em">Medium-high</span></td></tr>
+        <tr><td>Urban : sport ratio</td><td>~2 to 3 : 1</td><td><span style="background:rgba(177,140,255,.1);color:var(--lilac);padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.05em">Medium-high</span></td></tr>
+        <tr><td>Urban cyclists</td><td>7 to 17 M</td><td><span style="background:rgba(77,163,255,.1);color:var(--blue);padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.05em">Medium</span></td></tr>
+        <tr><td>Rate per 100,000 cyclists</td><td>~6 to 11</td><td><span style="background:rgba(77,163,255,.1);color:var(--blue);padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.05em">Medium</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout insight">
+    <div class="callout-icon">&#9670;</div>
+    <div class="callout-body"><strong>Remaining structural uncertainty.</strong> The overlap between urban and sport can only be measured by cross-referencing microdata (PNS and PNAD by respondent). Until that exists, any claim that "X% are urban" without a range is an overstatement.</div>
+  </div>
+
+  <h2 id="implicacoes">11. Implications for public policy and mobility</h2>
+
+  <blockquote><p>Campaigns and infrastructure designed for the sport cyclist do not capture the public that dies most. Policy should target utility commuting on shared roads.</p></blockquote>
+
+  <div class="biz-insight">
+    <div class="biz-insight-eyebrow">Recommendation 1 · For municipal managers</div>
+    <div class="biz-insight-title">Focus on the shared road, not the weekend bike path</div>
+    <p>60% of deaths are vehicle-strike collisions with cars. The marginal safety gain from segregation on the main road is greater than that of new bike paths in parks. Prioritize <span class="hl-white">bike lanes in commuting corridors</span>, speed reduction on shared roads, and treatment of intersections with a crash history.</p>
+  </div>
+
+  <div class="biz-insight">
+    <div class="biz-insight-eyebrow">Recommendation 2 · For the Ministry of Health and IBGE</div>
+    <div class="biz-insight-title">Measuring the cyclist by purpose is a prerequisite</div>
+    <p>As long as the official database does not classify the crash by the purpose of the ride, any national policy operates on incomplete data. Adding a purpose variable to PNAD, PNS, or the VIVA form itself would be <span class="hl-white">the only cheap, structural intervention</span> that unlocks the remaining uncertainty in this study.</p>
+  </div>
+
+  <div class="biz-insight">
+    <div class="biz-insight-eyebrow">Recommendation 3 · For media and public communication</div>
+    <div class="biz-insight-title">The athlete narrative hides the real victim</div>
+    <p>Media coverage that frames cycling as a sport tends to reinforce the imagery of a middle-class hobby. The typical victim is <span class="hl-white">the lower-income urban worker</span> going to or from work. Recalibrating the framing is part of the public health effort.</p>
+  </div>
+
+  <div class="biz-insight">
+    <div class="biz-insight-eyebrow">Recommendation 4 · For advocacy organizations</div>
+    <div class="biz-insight-title">Collaborative mapping is a legitimate complementary source</div>
+    <p>The direct cost to the public health system (SUS) for injured cyclists, about R$ 15 million a year, is a fraction of the <span class="term-def" data-def="The total cost of road crashes estimated by IPEA, which includes lost productivity, property damage, pre-hospital care, and insurance. The cyclist's share is not broken out, but the ~R$ 15 M from SUS is a proven floor, not a ceiling.">true social cost</span>, since it does not include deaths or lost productivity. The total cost of road crashes is estimated by IPEA at R$ 28 billion a year. While the official record is incomplete, initiatives such as the IMPS collaborative mapping are a legitimate complementary source.</p>
+  </div>
+
+  <h2 id="limitacoes">12. Limitations and transparency</h2>
+
+  <div class="data-card">
+    <div class="data-card-title">What this study does not claim</div>
+    <table class="stat-table">
+      <thead><tr><th>#</th><th>Limitation</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Underreporting</strong></td><td>The official numbers are a floor, not a complete portrait. There is recognized underreporting of cyclist crashes.</td></tr>
+        <tr><td>2</td><td><strong>Divergent definitions</strong></td><td>Total mortality (SIM), hospital death (SIH), and vehicle-strike subsets measure different things and cannot be added without a caveat.</td></tr>
+        <tr><td>3</td><td><strong>No purpose variable</strong></td><td>The urban-versus-sport split is indirect inference. The overlap between the two groups was not measured, and the range reflects that uncertainty.</td></tr>
+        <tr><td>4</td><td><strong>Sample-based sources</strong></td><td>Surveys such as VIVA do not generalize to the entire country.</td></tr>
+        <tr><td>5</td><td><strong>Secondary data</strong></td><td>This is a reconciliation study. It does not replace dedicated primary research (a representative survey, road instrumentation, cross-referenced microdata).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-icon">&#9888;</div>
+    <div class="callout-body"><strong>Sensitive topic.</strong> This study deals with deaths and injuries. The numbers should be communicated carefully in public framing. Avoid headlines that personalize the victim without the family's consent and that reinforce blaming the cyclist.</div>
+  </div>
+
+  <div class="callout insight">
+    <div class="callout-icon">&#9670;</div>
+    <div class="callout-body"><strong>Transparency and conflict of interest.</strong> Independent research, with no dedicated external funding. IMPS has a cyclist-safety advocacy agenda. D.Lab is a decision intelligence laboratory. Neither organization has any stake in manufacturers, retail, or insurers in the sector. The data, scripts, and methodological note are available for replication.</div>
+  </div>
+
+  <h2 id="reproducibilidade">13. Reproducibility</h2>
+
+  <p>Every claim in this study can be reconstructed from public sources. The analysis pipeline is organized into components:</p>
+
+  <div class="data-card">
+    <div class="data-card-title">Analysis components and published data</div>
+    <table class="stat-table">
+      <thead><tr><th>Component</th><th>What it does</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td><strong>DATASUS extraction</strong></td><td>Pipeline for SIM and SIH microdata, isolating cyclists by ICD-10.</td><td>Annual CSVs by state and age band.</td></tr>
+        <tr><td><strong>Mortality</strong></td><td>Time series of deaths, trough and rebound, with a validation chart.</td><td>2010-2024 series, trend chart.</td></tr>
+        <tr><td><strong>Population estimate</strong></td><td>Triangulation of PNAD 2015, IPEA, prevalence of use for commuting.</td><td>Urban and sport range, urban-to-sport ratio.</td></tr>
+        <tr><td><strong>Reliability</strong></td><td>SIM × WHO × SIH reconciliation, cross-validation, rates per 100,000.</td><td>Reconciliation table and confidence map.</td></tr>
+        <tr><td><strong>Method trap</strong></td><td>Set algebra over overlapping populations.</td><td>Venn diagram and methodological note.</td></tr>
+        <tr><td><strong>Source hierarchy</strong></td><td>Classification of sources by confidence level and discard rule.</td><td>Source register and tier 1, 2, 3 table.</td></tr>
+        <tr><td><strong>Audit</strong></td><td>Seven cross-checks of internal consistency.</td><td>Findings dossier and 7/7 audit report.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;color:var(--dimmed);margin-top:10px">Reference datasets: <code style="font-family:'DM Mono',monospace;background:rgba(177,140,255,.06);padding:2px 6px;border-radius:4px;font-size:12px">serie_obitos_ciclistas_BR.csv</code>, <code style="font-family:'DM Mono',monospace;background:rgba(177,140,255,.06);padding:2px 6px;border-radius:4px;font-size:12px">estimativa_urbano_vs_esportivo.csv</code>, <code style="font-family:'DM Mono',monospace;background:rgba(177,140,255,.06);padding:2px 6px;border-radius:4px;font-size:12px">reconciliacao_indicadores.csv</code>, <code style="font-family:'DM Mono',monospace;background:rgba(177,140,255,.06);padding:2px 6px;border-radius:4px;font-size:12px">registro_de_fontes.csv</code>, <code style="font-family:'DM Mono',monospace;background:rgba(177,140,255,.06);padding:2px 6px;border-radius:4px;font-size:12px">dossie_achados.csv</code>. For access to the scripts and CSVs, get in touch.</p>
+
+  <h2 id="referencias">14. References</h2>
+
+  <div class="references">
+    <p>ABRAMET. Associação Brasileira de Medicina de Tráfego. <em>Survey of cyclist crashes drawn from SIM and SIH</em>. 2020.</p>
+    <p>BRASIL. Ministério da Saúde. <em>Sistema de Informação sobre Mortalidade (SIM) e Sistema de Informações Hospitalares (SIH)</em>. DATASUS.</p>
+    <p>IBGE. Instituto Brasileiro de Geografia e Estatística. <em>Pesquisa Nacional por Amostra de Domicílios, PNAD 2015: Práticas de Esporte e Atividade Física</em>. Rio de Janeiro, 2017.</p>
+    <p>IBGE. <em>Pesquisa de Orçamentos Familiares, POF 2017-2018</em> (basis for the bicycle-fleet estimate).</p>
+    <p>IBGE. <em>Pesquisa Nacional de Saúde (PNS) 2019</em>.</p>
+    <p>IPEA. Instituto de Pesquisa Econômica Aplicada. <em>Studies on the costs and modal share of road crashes</em>.</p>
+    <p>WORLD HEALTH ORGANIZATION. <em>Global Status Report on Road Safety</em>. Geneva: WHO, 2016 and subsequent editions.</p>
+    <p>SOUSA, M. H.; BAHIA, C. A.; CONSTANTINO, P. Análise dos fatores associados aos acidentes de trânsito envolvendo ciclistas atendidos nas capitais brasileiras. <em>Ciência &amp; Saúde Coletiva</em>, 2016.</p>
+    <p>TRANSPORTE ATIVO; OBSERVATÓRIO DAS METRÓPOLES. <em>Pesquisa Nacional sobre o Perfil do Ciclista Brasileiro</em>, 4th edition. 2024.</p>
+    <p>Aliança Bike. <em>Sector surveys on the bicycle fleet and bicycle use in Brazil</em>.</p>
+  </div>
+
+  <div style="margin-top:60px;padding:32px;border-radius:16px;background:rgba(177,140,255,.03);border:1px solid rgba(177,140,255,.1);text-align:center">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:16px">This study was produced by <strong style="color:var(--white)">D.Lab Research</strong> in partnership with the <strong style="color:var(--white)">Instituto Movimento Pedal Seguro (IMPS)</strong> as part of the open-research initiative in mobility and road safety. Want to apply this level of analysis to a decision at your organization?</p>
+    <a href="/en/contato" class="btn btn-primary">Talk to D.Lab &rarr;</a>
+  </div>
+
+</div>

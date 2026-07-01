@@ -2,18 +2,23 @@
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
 import { getCollection } from 'astro:content';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 
-const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+// Show only the posts written in the active locale. Legacy PT posts
+// have no `lang` field → schema defaults them to 'pt'.
+const allPosts = (await getCollection('blog', ({ data }) =>
+    !data.draft && (data.lang ?? 'pt') === locale))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Grid único — sem separar pesquisa original de dados secundários.
 const intelligencePosts = allPosts.filter((p) => p.data.track === 'intelligence');
 
 const formatDate = (d: Date) =>
-  d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
+  d.toLocaleDateString(locale === 'en' ? 'en-US' : 'pt-BR', { year: 'numeric', month: 'long' });
 
 const formatLabel: Record<'briefing' | 'report' | 'foresight' | 'sector', string> = {
   briefing: t('formats.briefing'),
@@ -41,21 +46,22 @@ const formatAuthors = (data: PostData) => {
 };
 
 const methodLabel: Record<'original' | 'secondary', string> = {
-  original: 'Conteúdo original',
-  secondary: 'Análise',
+  original: t('blog.methodOriginal'),
+  secondary: t('blog.methodSecondary'),
 };
 
 // Materiais ricos (ferramentas e recursos abertos) não são pesquisa:
 // recebem rótulo próprio e dispensam ID de catálogo e autoria de
-// pesquisador. Discriminados pela categoria "Ferramentas".
-const isRichMaterial = (data: PostData) => data.category === 'Ferramentas';
-const richMaterialLabel = 'Material rico';
+// pesquisador. Discriminados pela categoria de ferramentas (PT ou EN).
+const isRichMaterial = (data: PostData) => data.category === 'Ferramentas' || data.category === 'Tools';
+const richMaterialLabel = t('blog.richMaterial');
 ---
 
 <Layout
   title={t('pageTitles.blog')}
   description={t('pageTitles.blogDescription')}
   active="blog"
+  locale={locale}
 >
   <!-- ═══════════════ BLOG HERO ═══════════════════════════════════ -->
   <section class="blog-hero">
@@ -82,12 +88,12 @@ const richMaterialLabel = 'Material rico';
         <p class="blog-tools-sub">{t('blogTools.sub')}</p>
       </div>
       <div class="blog-tools-grid">
-        <a href={t('blogTools.tool1Href')} class="blog-tool-card sweep">
+        <a href={href(t('blogTools.tool1Href'))} class="blog-tool-card sweep">
           <h3 class="blog-tool-name">{t('blogTools.tool1Name')}</h3>
           <p class="blog-tool-desc">{t('blogTools.tool1Desc')}</p>
           <span class="blog-tool-cta">{t('blogTools.tool1Cta')}</span>
         </a>
-        <a href={t('blogTools.tool2Href')} class="blog-tool-card sweep">
+        <a href={href(t('blogTools.tool2Href'))} class="blog-tool-card sweep">
           <h3 class="blog-tool-name">{t('blogTools.tool2Name')}</h3>
           <p class="blog-tool-desc">{t('blogTools.tool2Desc')}</p>
           <span class="blog-tool-cta">{t('blogTools.tool2Cta')}</span>
@@ -115,7 +121,7 @@ const richMaterialLabel = 'Material rico';
           const authors = formatAuthors(post.data);
           const method = material ? richMaterialLabel : methodLabel[post.data.researchType];
           return (
-            <a href={`/posts/${post.slug}`} class={cardClass}>
+            <a href={href(`/posts/${post.slug}`)} class={cardClass}>
               <div class="blog-card-img" style={`padding:0;background:${post.data.cover ? 'none' : 'var(--surface)'}`}>
                 {post.data.cover && (
                   <img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" width="800" height="450" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" />
@@ -172,8 +178,8 @@ const richMaterialLabel = 'Material rico';
           <span class="blog-colab-chip">{t('blog.colabChipPeer')}</span>
         </div>
         <div class="blog-colab-ctas">
-          <a href="/colaborar" class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
-          <a href="/colaborar" class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
+          <a href={href('/colaborar')} class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
+          <a href={href('/colaborar')} class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
         </div>
       </div>
     </div>

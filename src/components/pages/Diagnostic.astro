@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 
 // Decision size tiers. Midpoint is what the model multiplies by, so
 // the result is a single representative figure per tier instead of a
@@ -15,6 +17,7 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
   title={t('pageTitles.diagnostic')}
   description={t('pageTitles.diagnosticDescription')}
   active="solucoes"
+  locale={locale}
 >
   <!-- ═══════════════ HERO ═══════════════════════════════════════ -->
   <section class="diag-hero">
@@ -266,8 +269,8 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
       <h2>{t('diagnostic.ctaFinal')}</h2>
       <p>{t('diagnostic.ctaFinalSub')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/contato" class="btn btn-primary">{t('diagnostic.ctaFinalPrimary')}</a>
-        <a href="/blog" class="btn btn-ghost">{t('diagnostic.ctaFinalSecondary')}</a>
+        <a href={href('/contato')} class="btn btn-primary">{t('diagnostic.ctaFinalPrimary')}</a>
+        <a href={href('/blog')} class="btn btn-ghost">{t('diagnostic.ctaFinalSecondary')}</a>
       </div>
     </div>
   </section>
@@ -276,10 +279,10 @@ const q1Values = [50_000, 500_000, 5_000_000, 30_000_000];
 <script define:vars={{
   q1Values,
   urls: {
-    briefing: '/blog',
-    contato: '/contato',
-    framework: '/blog',
-    sprint: '/colaborar',
+    briefing: href('/blog'),
+    contato: href('/contato'),
+    framework: href('/blog'),
+    sprint: href('/colaborar'),
   },
   labels: {
     currency: 'R$',
