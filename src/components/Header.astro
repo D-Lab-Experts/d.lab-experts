@@ -1,11 +1,19 @@
 ---
-import { useTranslations } from '../i18n/utils';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { defaultLocale, type Locale } from '../i18n/ui';
+import { useTranslations, localize } from '../i18n/utils';
 
 export interface Props {
   active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar' | 'solucoes';
+  locale?: Locale;
+  alternateUrls?: Partial<Record<Locale, string>>;
 }
-const { active } = Astro.props;
-const t = useTranslations();
+const { active, locale = defaultLocale, alternateUrls } = Astro.props;
+const t = useTranslations(locale);
+
+// Locale-aware in-site URLs. Hash anchors keep pointing at the locale
+// home so /en/#como-funciona scrolls on the EN homepage.
+const href = (path: string) => localize(path, locale);
 
 type Child = {
   href: string;
@@ -26,12 +34,12 @@ type Link = {
 // Ordem orientada à jornada de compra (item 8): como funciona →
 // o que entregamos → ferramentas → conteúdo → sobre → contato.
 const links: Array<Link> = [
-  { href: '/', label: t('nav.home'), key: 'home' },
-  { href: '/about', label: t('nav.about'), key: 'about' },
-  { href: '/#como-funciona', label: t('nav.howItWorks') },
-  { href: '/solucoes', label: t('nav.solucoes'), key: 'solucoes' },
-  { href: '/blog', label: t('nav.blog'), key: 'blog', highlight: true },
-  { href: '/contato', label: t('nav.contato'), key: 'contato' },
+  { href: href('/'), label: t('nav.home'), key: 'home' },
+  { href: href('/about'), label: t('nav.about'), key: 'about' },
+  { href: href('/#como-funciona'), label: t('nav.howItWorks') },
+  { href: href('/solucoes'), label: t('nav.solucoes'), key: 'solucoes' },
+  { href: href('/blog'), label: t('nav.blog'), key: 'blog', highlight: true },
+  { href: href('/contato'), label: t('nav.contato'), key: 'contato' },
 ];
 
 const isChildActive = (children: Child[] = []) => children.some((c) => c.key === active);
@@ -39,7 +47,7 @@ const isChildActive = (children: Child[] = []) => children.some((c) => c.key ===
 
 <nav id="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label={t('nav.ariaLogo')}>
+    <a href={href('/')} class="nav-logo" aria-label={t('nav.ariaLogo')}>
       <img src="/d.lab-logo.png" class="nav-logo-img" alt="D.Lab" width="1082" height="240" />
     </a>
     <ul class="nav-links">
@@ -93,7 +101,8 @@ const isChildActive = (children: Child[] = []) => children.some((c) => c.key ===
       })}
     </ul>
     <div class="nav-ctas">
-      <a href="/contato" class="btn btn-primary btn-sm">{t('nav.ctaProblem')}</a>
+      <LanguageSwitcher locale={locale} alternateUrls={alternateUrls} />
+      <a href={href('/contato')} class="btn btn-primary btn-sm">{t('nav.ctaProblem')}</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label={t('nav.ariaOpenMenu')}>
       <span></span><span></span><span></span>
@@ -133,7 +142,8 @@ const isChildActive = (children: Child[] = []) => children.some((c) => c.key ===
     )
   )}
   <div class="mobile-ctas">
-    <a href="/contato" class="btn btn-primary">{t('nav.ctaProblem')}</a>
+    <div class="mobile-lang"><LanguageSwitcher locale={locale} alternateUrls={alternateUrls} /></div>
+    <a href={href('/contato')} class="btn btn-primary">{t('nav.ctaProblem')}</a>
   </div>
 </div>
 

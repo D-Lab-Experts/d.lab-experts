@@ -1,13 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 ---
 
 <Layout
   title={t('pageTitles.notFound')}
   description={t('pageTitles.notFoundDescription')}
+  locale={locale}
 >
   <section class="nf-hero">
     <div class="section-glow lilac" style="top:0;left:50%;transform:translateX(-50%);width:500px;height:400px"></div>
@@ -20,17 +23,17 @@ const t = useTranslations();
         <h1 class="nf-title">{t('notFoundPage.title')}</h1>
         <p class="nf-sub">{t('notFoundPage.sub')}</p>
         <div class="nf-ctas">
-          <a href="/" class="btn btn-primary">{t('notFoundPage.ctaHome')}</a>
-          <a href="/blog" class="btn btn-ghost">{t('notFoundPage.ctaPublications')}</a>
+          <a href={href('/')} class="btn btn-primary">{t('notFoundPage.ctaHome')}</a>
+          <a href={href('/blog')} class="btn btn-ghost">{t('notFoundPage.ctaPublications')}</a>
         </div>
 
         <div class="nf-search-hint">
           <div class="label" style="margin-bottom:12px">{t('notFoundPage.shortcutsLabel')}</div>
           <ul class="nf-links">
-            <li><a href="/#segments">{t('notFoundPage.shortcutAgenda')}</a></li>
-            <li><a href="/#products">{t('notFoundPage.shortcutProducts')}</a></li>
-            <li><a href="/about">{t('notFoundPage.shortcutAbout')}</a></li>
-            <li><a href="/blog">{t('notFoundPage.shortcutPublications')}</a></li>
+            <li><a href={href('/#segments')}>{t('notFoundPage.shortcutAgenda')}</a></li>
+            <li><a href={href('/#products')}>{t('notFoundPage.shortcutProducts')}</a></li>
+            <li><a href={href('/about')}>{t('notFoundPage.shortcutAbout')}</a></li>
+            <li><a href={href('/blog')}>{t('notFoundPage.shortcutPublications')}</a></li>
             <li><a href="/rss.xml">{t('notFoundPage.shortcutRss')}</a></li>
           </ul>
         </div>

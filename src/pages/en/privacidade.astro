@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy Policy | D.Lab Experts"
+  description="How D.Lab Experts collects, uses and protects personal data, in line with Brazil's LGPD data-protection law."
+  locale="en"
+>
+  <section class="priv-section">
+    <div class="container priv-wrap">
+      <span class="priv-eyebrow">Privacy · LGPD</span>
+      <h1 class="priv-title">Privacy Policy</h1>
+      <p class="priv-lead">
+        This policy explains, in plain language, how D.Lab Experts handles the
+        personal data collected on this site, under Brazil's General Data
+        Protection Law (LGPD, Law No. 13,709/2018). <!-- DRAFT: review with legal. -->
+      </p>
+
+      <h2>What data we collect</h2>
+      <p>
+        We collect the <strong>email address</strong> you provide when unlocking
+        content or getting in touch, plus anonymous browsing data (analytics)
+        used only to improve the site.
+      </p>
+
+      <h2>How we use it</h2>
+      <p>
+        To deliver the content you requested, respond to your message, and send
+        D.Lab materials and updates — always with the option to unsubscribe at
+        any time.
+      </p>
+
+      <h2>Legal basis and consent</h2>
+      <p>
+        Email communications are sent based on your explicit
+        <strong>consent</strong>, given when you check the opt-in box. You can
+        withdraw that consent whenever you like.
+      </p>
+
+      <h2>Sharing</h2>
+      <p>
+        We do not sell your data. We use email and form processors (e.g.
+        Formspree) solely to operate the capture and delivery of messages.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        You can request access to, correction of, or deletion of your data, as
+        well as revoke consent, by emailing
+        <a href="mailto:gabriel@dlabexperts.com">gabriel@dlabexperts.com</a>.
+      </p>
+
+      <p class="priv-updated">Last updated: 2026. <!-- DRAFT: confirm date and legal review. --></p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .priv-section { padding: 150px 0 100px; position: relative; z-index: 1; }
+  .priv-wrap { max-width: 720px; }
+  .priv-eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 18px;
+  }
+  .priv-title {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(34px, 5vw, 52px); letter-spacing: -.03em;
+    line-height: 1.06; color: var(--ink); margin-bottom: 20px;
+  }
+  .priv-lead { font-size: 17px; line-height: 1.7; color: var(--text-muted); margin-bottom: 32px; }
+  .priv-wrap h2 {
+    font-family: var(--font-display); font-weight: 600; font-size: 20px;
+    letter-spacing: -.02em; color: var(--ink); margin: 28px 0 10px;
+  }
+  .priv-wrap p { font-size: 15px; line-height: 1.75; color: var(--text-muted); margin-bottom: 12px; }
+  .priv-wrap strong { color: var(--ink); }
+  .priv-wrap a { color: var(--accent); text-decoration: underline; }
+  .priv-updated { margin-top: 36px; font-size: 13px; color: var(--text-dim); }
+</style>

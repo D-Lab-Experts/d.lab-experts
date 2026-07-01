@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 
 // Formspree form ID. This is a public identifier (visible in the rendered
 // form action to any visitor), so there is no security benefit to reading
@@ -30,6 +32,7 @@ const colabMailUrl = `mailto:${EMAIL_ADDR}?subject=${encodeURIComponent(t('conta
   title={t('pageTitles.contato')}
   description={t('pageTitles.contatoDescription')}
   active="contato"
+  locale={locale}
 >
   <section class="contact-hero">
     <div class="section-glow lilac" style="top:-40px;left:50%;transform:translateX(-50%)"></div>
@@ -256,7 +259,7 @@ const colabMailUrl = `mailto:${EMAIL_ADDR}?subject=${encodeURIComponent(t('conta
         });
 
         if (response.ok) {
-          window.location.href = '/contato/obrigado';
+          window.location.href = location.pathname.startsWith('/en') ? '/en/contato/obrigado' : '/contato/obrigado';
           return;
         }
 

@@ -194,6 +194,10 @@ const pt: Translation = {
     titleAccent: 'em três passos simples.',
     sub: 'Sem hype, sem caixa-preta e sem travar a sua operação. A gente começa provando onde a IA vale e só avança no que dá retorno de verdade.',
 
+    // Rótulos curtos dos slots de mídia (captions dos 3 passos).
+    mediaDiagnosis: 'Diagnóstico',
+    mediaImplementation: 'Implementação',
+    mediaMeasurement: 'Medição',
     step1Tag: 'Passo 1',
     step1Title: 'Diagnóstico',
     step1Desc: 'Olhamos sua operação e provamos onde a IA dá retorno de verdade.',
@@ -329,6 +333,7 @@ const pt: Translation = {
     error: 'Não consegui enviar agora. Tente de novo ou fale com a gente no WhatsApp.',
     consentRequired: 'Marque o consentimento para continuar.',
     detailLabel: 'O que a implementação inclui',
+    cardCta: 'Quero esse serviço →',
     lockedLabel: 'Conteúdo por e-mail',
     unlockedLabel: 'Desbloqueado',
 
@@ -576,6 +581,10 @@ const pt: Translation = {
   },
 
   blog: {
+    // Rótulos de método/tipo dos cards (antes hardcoded no Blog.astro).
+    methodOriginal: 'Conteúdo original',
+    methodSecondary: 'Análise',
+    richMaterial: 'Material rico',
     // DRAFT: confirmar copy — blog para fundadores e operadores curiosos.
     heroEyebrow: 'Blog & Pesquisa aberta',
     heroTitle: 'Conteúdo gratuito.',
@@ -637,6 +646,20 @@ const pt: Translation = {
     colabCtaSecondary: 'Como funciona',
     // DRAFT: confirmar copy — convite para a comunidade no WhatsApp, em destaque no Home.
     colabCommunityLine: 'Entrar na comunidade de pesquisadores no WhatsApp →',
+  },
+
+  // Rótulos do PostLayout (breadcrumb, relacionados, ponte de conversão).
+  post: {
+    breadcrumbBlog: 'Análises Públicas',
+    keepReading: 'Continue lendo',
+    moreResearch: 'Mais conteúdo do D.Lab',
+    read: 'Ler',
+    originalContent: 'Conteúdo',
+    alsoIn: 'Também disponível em',
+    bridgeLabel: 'Do conteúdo à sua operação',
+    bridgeTitle: 'Esse conteúdo é aberto. E na sua operação?',
+    bridgeBody: 'Onde a IA move eficiência e margem no seu contexto? Vira um Diagnóstico de IA: mapeia o que vale automatizar e instrumentar, com impacto medido antes e depois.',
+    bridgeCta: 'Pedir um Diagnóstico de IA →',
   },
 
   formats: {
@@ -1070,6 +1093,7 @@ const pt: Translation = {
   },
 
   imprensaPage: {
+    findingsEmpty: 'Novos estudos originais serão publicados em breve.',
     heroEyebrow: 'Sala de imprensa',
     heroTitleLead: 'D.Lab Experts',
     heroTitleAccent: 'para jornalistas.',
@@ -1365,3 +1389,184 @@ const pt: Translation = {
 };
 
 export default pt;
+
+// ── Páginas de área (constelação de serviços) ─────────────────────────
+// Cada nó da constelação na home (Atendimento, Comercial, Operações,
+// Financeiro, Dados) leva a /solucoes/<slug>, uma página dedicada que
+// explica como o D.Lab ajuda naquela frente: o desafio, como ajudamos,
+// como implementamos (diagnóstico → sob medida → impacto medido) e uma
+// referência de mercado (rotulada, nunca como resultado de cliente).
+// Mantido aqui, junto da demais copy PT-BR, mas como export nomeado para
+// ser consumido direto pela rota (sem passar pelo resolver tipado de t()).
+export interface ServiceArea {
+  slug: string;
+  label: string;          // rótulo curto, igual ao nó da constelação
+  tag: string;            // eyebrow / categoria
+  /** Cor do "planeta" do nó, reaproveitada como acento da página. */
+  accent: string;
+  accentDeep: string;
+  title: string;          // parte neutra do H1
+  titleAccent: string;    // parte em gradiente do H1
+  sub: string;            // subtítulo do hero
+  problem: string;        // o desafio, em linguagem de PME
+  help: string[];         // como podemos ajudar (entregáveis)
+  metricVal: string;      // número de referência de mercado
+  metricNote: string;     // rótulo da fonte (sempre referência, não case)
+  related: string[];      // slugs de áreas correlatas
+  seoTitle: string;
+  seoDescription: string;
+}
+
+// Rótulos fixos compartilhados por todas as páginas de área.
+export const serviceAreaChrome = {
+  backToAll: '← Todos os serviços',
+  heroDiagnosisCta: 'Fazer o diagnóstico',
+  relatedCardCta: 'Ver como ajudamos →',
+  problemLabel: 'O desafio',
+  helpLabel: 'Como podemos ajudar',
+  howLabel: 'Como implementamos',
+  metricLabel: 'Referência de mercado',
+  metricDisclaimer: 'Número de referência de mercado — não é resultado de cliente do D.Lab.',
+  relatedLabel: 'Outras frentes onde ajudamos',
+  ctaTitle: 'Quer ver isso rodando na sua operação?',
+  ctaSub: 'Conta onde dói e um especialista sênior responde em até um dia útil com um caminho claro: diagnóstico, escopo e impacto esperado.',
+  ctaPrimary: 'Falar com um especialista',
+  ctaSecondary: 'Ver todos os serviços',
+  steps: [
+    {
+      title: 'Diagnóstico',
+      body: 'Começamos provando onde a IA vale na sua operação — escopo pequeno e impacto claro, antes de qualquer construção.',
+    },
+    {
+      title: 'Implementação sob medida',
+      body: 'Construímos a solução acoplada aos processos e às ferramentas que você já usa, com a voz e as regras da sua marca.',
+    },
+    {
+      title: 'Impacto medido',
+      body: 'Medimos o resultado antes e depois e ajustamos. Você enxerga o ganho em número, não em promessa.',
+    },
+  ],
+} as const;
+
+export const serviceAreas: ServiceArea[] = [
+  {
+    slug: 'atendimento',
+    label: 'Atendimento',
+    tag: 'Atendimento / SAC',
+    accent: '#8B5CF6',
+    accentDeep: '#4C1D95',
+    title: 'Atendimento 24/7,',
+    titleAccent: 'sem fila e sem hora extra.',
+    sub: 'Um agente de IA responde e tria a demanda dia e noite, resolve o repetitivo na hora e passa pro seu time só o que precisa de gente.',
+    problem:
+      'A fila cresce no horário de pico, o cliente espera e a equipe se esgota respondendo a mesma pergunta dezenas de vezes. Fora do expediente ninguém atende — e a oportunidade esfria.',
+    help: [
+      'Mapeamos as perguntas e os fluxos mais comuns do seu atendimento e o que dá pra resolver sem humano.',
+      'Conectamos um agente ao seu canal — WhatsApp, site ou e-mail — com a voz e as regras da sua marca.',
+      'Definimos quando e como escalar pro time, pra que uma pessoa entre só no que realmente precisa.',
+      'Medimos tempo de resposta e volume resolvido antes e depois, pra provar o ganho.',
+    ],
+    metricVal: '−40% no tempo de resposta',
+    metricNote: 'estimativa de mercado',
+    related: ['comercial', 'operacoes'],
+    seoTitle: 'Atendimento 24/7 com IA | Serviços D.Lab',
+    seoDescription:
+      'Agente de IA que responde e tria o atendimento dia e noite, resolve o repetitivo na hora e escala pro time só o que precisa de gente. Diagnóstico e impacto medido.',
+  },
+  {
+    slug: 'comercial',
+    label: 'Comercial',
+    tag: 'Comercial',
+    accent: '#6366F1',
+    accentDeep: '#312E81',
+    title: 'Nenhum lead',
+    titleAccent: 'esfriando na fila.',
+    sub: 'Automação que qualifica e faz o follow-up dos leads na hora em que chegam, integrada ao CRM ou à planilha que você já usa.',
+    problem:
+      'O lead chega com a intenção quente e esfria esperando alguém responder. Sem follow-up consistente, oportunidade boa vira número perdido no fim do mês.',
+    help: [
+      'Capturamos e qualificamos automaticamente cada lead que entra, por qualquer canal.',
+      'Disparamos follow-up em sequência, no tom certo, sem depender de alguém lembrar.',
+      'Integramos ao seu CRM ou planilha — sem trocar as ferramentas que o time já usa.',
+      'Montamos um painel de leads trabalhados e taxa de resposta pra enxergar o funil.',
+    ],
+    metricVal: '+30% em leads trabalhados',
+    metricNote: 'estimativa de mercado',
+    related: ['atendimento', 'dados'],
+    seoTitle: 'Qualificação e follow-up de leads com IA | Serviços D.Lab',
+    seoDescription:
+      'Automação comercial que qualifica e faz o follow-up dos leads na hora, integrada ao seu CRM ou planilha. Sem oportunidade esfriando. Diagnóstico e impacto medido.',
+  },
+  {
+    slug: 'operacoes',
+    label: 'Operações',
+    tag: 'Operações',
+    accent: '#2DD4BF',
+    accentDeep: '#0F5F58',
+    title: 'Rotina manual',
+    titleAccent: 'rodando sozinha.',
+    sub: 'A IA executa as tarefas repetitivas e monta os relatórios no padrão da casa, devolvendo horas por semana pro seu time.',
+    problem:
+      'Boa parte da semana some em copiar-e-colar, montar relatório e tocar processo manual. É trabalho que cansa, atrasa e abre espaço pra erro — sem agregar valor.',
+    help: [
+      'Levantamos as rotinas manuais que mais consomem tempo e fazem sentido automatizar.',
+      'Automatizamos os processos ponta a ponta e geramos os relatórios no padrão da casa.',
+      'Conectamos os sistemas que você já tem, sem migração forçada.',
+      'Acompanhamos as horas economizadas por semana pra mostrar o retorno.',
+    ],
+    metricVal: 'Horas/semana de volta ao time',
+    metricNote: 'referência de mercado',
+    related: ['financeiro', 'dados'],
+    seoTitle: 'Automação de tarefas repetitivas com IA | Serviços D.Lab',
+    seoDescription:
+      'A IA executa as rotinas manuais e monta os relatórios no padrão da casa, devolvendo horas por semana pro seu time. Diagnóstico e impacto medido antes e depois.',
+  },
+  {
+    slug: 'financeiro',
+    label: 'Financeiro',
+    tag: 'Financeiro',
+    accent: '#E0A75E',
+    accentDeep: '#7C4310',
+    title: 'Documentos lidos',
+    titleAccent: 'e conciliados sozinhos.',
+    sub: 'A IA lê notas, boletos e contratos, concilia e extrai os dados pro seu sistema — e sinaliza só as exceções pra revisão humana.',
+    problem:
+      'Nota, boleto e contrato chegam em formatos diferentes e exigem digitação e conferência manual. É lento, dá erro e trava o fechamento.',
+    help: [
+      'Lemos automaticamente notas, boletos e contratos, em qualquer layout.',
+      'Conciliamos e extraímos os dados direto pro seu sistema ou planilha.',
+      'Montamos uma fila de exceções pra revisão humana, com trilha auditável.',
+      'Medimos o tempo de conciliação antes e depois, pra provar o ganho.',
+    ],
+    metricVal: '−50% no tempo de conciliação',
+    metricNote: 'estimativa de mercado',
+    related: ['operacoes', 'dados'],
+    seoTitle: 'Leitura e conciliação de documentos com IA | Serviços D.Lab',
+    seoDescription:
+      'A IA lê notas, boletos e contratos, concilia e extrai os dados pro seu sistema e sinaliza só as exceções. Menos digitação e erro no financeiro. Impacto medido.',
+  },
+  {
+    slug: 'dados',
+    label: 'Dados',
+    tag: 'Dados & decisão',
+    accent: '#E879A8',
+    accentDeep: '#8B1F53',
+    title: 'Resposta em minutos,',
+    titleAccent: 'não em dias.',
+    sub: 'Seus números espalhados viram dashboards e respostas em linguagem de negócio, prontos na hora em que você precisa decidir.',
+    problem:
+      'Os dados estão em planilhas, sistemas e abas diferentes. Cada pergunta vira um pedido pra alguém, a resposta demora dias — e a decisão sai no escuro ou no atraso.',
+    help: [
+      'Unificamos as fontes de dados que você já tem, sem reescrever tudo.',
+      'Entregamos dashboards e respostas em linguagem natural sobre os seus dados.',
+      'Definimos os indicadores junto com o seu time, no vocabulário do negócio.',
+      'Deixamos a resposta a um clique, pra decidir com dado em vez de achismo.',
+    ],
+    metricVal: 'Resposta em minutos, não dias',
+    metricNote: 'referência de mercado',
+    related: ['comercial', 'operacoes'],
+    seoTitle: 'Dashboards e análise de dados sob demanda com IA | Serviços D.Lab',
+    seoDescription:
+      'Seus números espalhados viram dashboards e respostas em linguagem de negócio, prontos quando você precisa decidir. Decisão com dado, não achismo. Impacto medido.',
+  },
+];

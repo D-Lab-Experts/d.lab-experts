@@ -3,6 +3,12 @@ import { defineCollection, z } from 'astro:content';
 const blog = defineCollection({
   type: 'content',
   schema: z.object({
+    // Locale of the post + optional link to its sibling translation.
+    // PT is canonical at /posts/<slug>; EN lives at /en/posts/<slug>.
+    // `translationOf` on an EN post holds the PT post's slug, powering
+    // the hreflang alternates and the language switcher on posts.
+    lang: z.enum(['pt', 'en']).default('pt'),
+    translationOf: z.string().optional(),
     title: z.string(),
     subtitle: z.string().optional(),
     description: z.string(),

@@ -1,0 +1,23 @@
+---
+import ServiceArea from '../../components/pages/ServiceArea.astro';
+import { serviceAreas, serviceAreaChrome } from '../../i18n/pt';
+
+// Rota PT das páginas por frente (/solucoes/<slug>). O template mora em
+// ServiceArea.astro; aqui só injetamos o dicionário PT. A versão EN vive
+// em src/pages/en/solucoes/[area].astro com o dicionário en.
+export function getStaticPaths() {
+  return serviceAreas.map((area) => ({
+    params: { area: area.slug },
+    props: {
+      area,
+      related: area.related
+        .map((slug) => serviceAreas.find((a) => a.slug === slug))
+        .filter((a): a is (typeof serviceAreas)[number] => Boolean(a)),
+    },
+  }));
+}
+
+const { area, related } = Astro.props;
+---
+
+<ServiceArea area={area} related={related} chrome={serviceAreaChrome} locale="pt" />

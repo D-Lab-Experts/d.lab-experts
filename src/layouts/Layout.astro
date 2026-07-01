@@ -7,13 +7,16 @@ import CustomCursor from '../components/CustomCursor.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
-import { htmlLang } from '../i18n/ui';
+import { htmlLang, defaultLocale, type Locale } from '../i18n/ui';
+import { getLocaleFromUrl } from '../i18n/utils';
 import type { CitationMeta } from '../components/BaseHead.astro';
 
 export interface Props {
   title: string;
   description: string;
   active?: 'home' | 'about' | 'segments' | 'products' | 'blog' | 'contato' | 'colaborar' | 'solucoes';
+  locale?: Locale;
+  alternateUrls?: Partial<Record<Locale, string>>;
   image?: string;
   imageAlt?: string;
   type?: 'website' | 'article';
@@ -28,6 +31,8 @@ const {
   title,
   description,
   active,
+  locale: explicitLocale,
+  alternateUrls,
   image,
   imageAlt,
   type,
@@ -37,14 +42,19 @@ const {
   tags,
   citationMeta,
 } = Astro.props;
+
+// Pages pass `locale` explicitly; fall back to URL-based detection.
+const locale: Locale = explicitLocale ?? getLocaleFromUrl(Astro.url) ?? defaultLocale;
 ---
 
 <!DOCTYPE html>
-<html lang={htmlLang}>
+<html lang={htmlLang[locale]}>
   <head>
     <BaseHead
       title={title}
       description={description}
+      locale={locale}
+      alternateUrls={alternateUrls}
       image={image}
       imageAlt={imageAlt}
       type={type}
@@ -61,9 +71,9 @@ const {
         minimalista Apple/Resend do redesign. Reintroduzir aqui se
         a marca quiser o mascote ambiente de volta. */}
     <CustomCursor enabled={false} />
-    <Header active={active} />
+    <Header active={active} locale={locale} alternateUrls={alternateUrls} />
     <slot />
-    <Footer />
+    <Footer locale={locale} />
 
     <!-- Botão "voltar ao topo": surge após rolar, scroll suave, acento
          lilás, acessível. Respeita prefers-reduced-motion (salto direto). -->

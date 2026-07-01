@@ -2,15 +2,34 @@
 import Layout from '../../layouts/Layout.astro';
 import Visual from '../Visual.astro';
 import MediaSlot from '../MediaSlot.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
+import { serviceAreas as ptAreas } from '../../i18n/pt';
+import { serviceAreas as enAreas } from '../../i18n/en';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
+
+// Nós da constelação de serviços: rótulos localizados (do dicionário do
+// locale ativo) + estilo do "planeta" por nó. A ordem/cores são fixas; o
+// texto vem de serviceAreas pra não vazar PT na home em inglês.
+const areaLabels = Object.fromEntries(
+  (locale === 'en' ? enAreas : ptAreas).map((a) => [a.slug, a.label]),
+) as Record<string, string>;
+const constelNodes = [
+  { slug: 'atendimento', style: '--i:0; --pb:#8B5CF6; --pd:#4C1D95; --pa:rgba(221,210,255,0.55); --pg:rgba(167,139,250,0.55)' },
+  { slug: 'comercial', style: '--i:1; --pb:#6366F1; --pd:#312E81; --pa:rgba(199,210,254,0.55); --pg:rgba(129,140,248,0.5)' },
+  { slug: 'operacoes', style: '--i:2; --pb:#2DD4BF; --pd:#0F5F58; --pa:rgba(204,251,241,0.5); --pg:rgba(45,212,191,0.45)' },
+  { slug: 'financeiro', style: '--i:3; --pb:#E0A75E; --pd:#7C4310; --pa:rgba(254,238,205,0.55); --pg:rgba(240,180,110,0.42)' },
+  { slug: 'dados', style: '--i:4; --pb:#E879A8; --pd:#8B1F53; --pa:rgba(255,224,238,0.5); --pg:rgba(232,121,168,0.42)' },
+];
 ---
 
 <Layout
   title={t('pageTitles.home')}
   description={t('pageTitles.homeDescription')}
   active="home"
+  locale={locale}
 >
   <!-- Wrapper do site escuro futurista (acento lilás). Os tokens dark
        vêm do :root; .band-dark aprofunda bandas específicas (CTA). -->
@@ -61,8 +80,8 @@ const t = useTranslations();
       <p class="hero-b-sub fi d2">{t('hero.sub')}</p>
 
       <div class="hero-b-ctas fi d3">
-        <a href="/contato" class="hero-b-btn hero-b-btn-solid">{t('hero.ctaPrimary')}</a>
-        <a href="/#como-funciona" class="hero-b-btn hero-b-btn-ghost">{t('hero.ctaSecondary')}</a>
+        <a href={href('/contato')} class="hero-b-btn hero-b-btn-solid">{t('hero.ctaPrimary')}</a>
+        <a href={href('/#como-funciona')} class="hero-b-btn hero-b-btn-ghost">{t('hero.ctaSecondary')}</a>
       </div>
     </div>
 
@@ -144,7 +163,7 @@ const t = useTranslations();
           <div class="caso-metric"><span class="caso-metric-val">{t('casos.c5Metric')}</span><span class="caso-metric-note">{t('casos.c5MetricNote')}</span></div>
         </article>
 
-        <a href="/solucoes" class="caso-card caso-card-cta sweep">
+        <a href={href('/solucoes')} class="caso-card caso-card-cta sweep">
           <span class="caso-cta-text">{t('casos.cta')}</span>
         </a>
       </div>
@@ -162,7 +181,7 @@ const t = useTranslations();
        como lead-magnet de baixo atrito. -->
   <section id="diagnostic-promo" class="diag-strip-section">
     <div class="container">
-      <a class="diag-strip fi" href="/diagnostico" aria-label={t('diagnostic.homePromoCta')}>
+      <a class="diag-strip fi" href={href('/diagnostico')} aria-label={t('diagnostic.homePromoCta')}>
         <span class="diag-strip-pulse" aria-hidden="true"></span>
         <span class="diag-strip-main">
           <span class="diag-strip-eyebrow">{t('diagnostic.homeEyebrow')}</span>
@@ -232,7 +251,7 @@ const t = useTranslations();
       <div class="cf-steps fi d1">
         <div class="cf-step">
           <!-- MEDIA SLOT: mini-clipe do passo 1 (diagnóstico). -->
-          <MediaSlot img="/diagnosis.png" label="Diagnóstico" ratio="16 / 9" class="cf-step-media" />
+          <MediaSlot img="/diagnosis.png" label={t('comoFunciona.mediaDiagnosis')} ratio="16 / 9" class="cf-step-media" />
           <div class="cf-step-num">1</div>
           <div class="cf-step-tag">{t('comoFunciona.step1Tag')}</div>
           <h3 class="cf-step-title">{t('comoFunciona.step1Title')}</h3>
@@ -244,7 +263,7 @@ const t = useTranslations();
         </div>
         <div class="cf-step cf-step-core">
           <!-- MEDIA SLOT: mini-clipe do passo 2 (implementação). -->
-          <MediaSlot img="/implementation.png" label="Implementação" ratio="16 / 9" class="cf-step-media" />
+          <MediaSlot img="/implementation.png" label={t('comoFunciona.mediaImplementation')} ratio="16 / 9" class="cf-step-media" />
           <div class="cf-step-num">2</div>
           <div class="cf-step-tag">{t('comoFunciona.step2Tag')}</div>
           <h3 class="cf-step-title">{t('comoFunciona.step2Title')}</h3>
@@ -256,7 +275,7 @@ const t = useTranslations();
         </div>
         <div class="cf-step">
           <!-- MEDIA SLOT: mini-clipe do passo 3 (medição/acompanhamento). -->
-          <MediaSlot img="/mesurement.png" label="Medição" ratio="16 / 9" class="cf-step-media" />
+          <MediaSlot img="/mesurement.png" label={t('comoFunciona.mediaMeasurement')} ratio="16 / 9" class="cf-step-media" />
           <div class="cf-step-num">3</div>
           <div class="cf-step-tag">{t('comoFunciona.step3Tag')}</div>
           <h3 class="cf-step-title">{t('comoFunciona.step3Title')}</h3>
@@ -276,7 +295,7 @@ const t = useTranslations();
       </div>
 
       <div class="cf-cta fi d2">
-        <a href="/contato" class="btn btn-primary">{t('comoFunciona.cta')}</a>
+        <a href={href('/contato')} class="btn btn-primary">{t('comoFunciona.cta')}</a>
         <span class="cf-cta-note">{t('comoFunciona.ctaNote')}</span>
       </div>
     </div>
@@ -628,8 +647,8 @@ const t = useTranslations();
           <span class="home-colab-chip">{t('blog.colabChipReview')}</span>
         </div>
         <div class="home-colab-ctas">
-          <a href="/colaborar" class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
-          <a href="/colaborar" class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
+          <a href={href('/colaborar')} class="btn btn-primary">{t('blog.colabCtaPrimary')}</a>
+          <a href={href('/colaborar')} class="btn btn-ghost">{t('blog.colabCtaSecondary')}</a>
         </div>
         <!-- DRAFT: confirmar copy — comunidade no WhatsApp em destaque. -->
         <a
@@ -688,7 +707,7 @@ const t = useTranslations();
             </div>
           </div>
           <div class="home-about-cta">
-            <a href="/about" class="btn btn-ghost">{t('about.ctaAbout')}</a>
+            <a href={href('/about')} class="btn btn-ghost">{t('about.ctaAbout')}</a>
           </div>
         </div>
       </div>
@@ -767,7 +786,7 @@ const t = useTranslations();
 
       <div class="consult-closing fi d2">
         <p>{t('products.closing')}</p>
-        <a href="/contato" class="btn btn-primary">{t('products.oneCta')}</a>
+        <a href={href('/contato')} class="btn btn-primary">{t('products.oneCta')}</a>
       </div>
     </div>
   </section>
@@ -783,7 +802,7 @@ const t = useTranslations();
           <h2 class="section-title">{t('solucoesTeaser.title')} <span class="gradient-text">{t('solucoesTeaser.titleAccent')}</span></h2>
           <p class="section-sub">{t('solucoesTeaser.sub')}</p>
           <div class="solt-cta-row">
-            <a href="/solucoes" class="btn btn-primary">{t('solucoesTeaser.cta')}</a>
+            <a href={href('/solucoes')} class="btn btn-primary">{t('solucoesTeaser.cta')}</a>
             <span class="solt-note">{t('solucoesTeaser.note')}</span>
           </div>
         </div>
@@ -793,21 +812,22 @@ const t = useTranslations();
              viewport e estático sob prefers-reduced-motion. Hover destaca
              nó + linha; parallax sutil seguindo o cursor. -->
         <div class="solt-art">
-          <div class="constel" aria-hidden="true">
-            <div class="constel-glow"></div>
-            <canvas class="constel-particles"></canvas>
+          <!-- Cada nó é um link pra página da frente (/solucoes/<slug>),
+               que explica como o D.Lab ajuda naquela área. As partes
+               puramente decorativas ficam aria-hidden; os nós, não. -->
+          <div class="constel">
+            <div class="constel-glow" aria-hidden="true"></div>
+            <canvas class="constel-particles" aria-hidden="true"></canvas>
             <div class="constel-stage" data-stage>
-              <svg class="constel-links" data-links preserveAspectRatio="none"></svg>
-              <div class="constel-core">
+              <svg class="constel-links" data-links preserveAspectRatio="none" aria-hidden="true"></svg>
+              <div class="constel-core" aria-hidden="true">
                 <span class="constel-core-orb"></span>
                 <span class="constel-core-ping"></span>
                 <span class="constel-core-ping d"></span>
               </div>
-              <div class="constel-node" data-node style="--i:0; --pb:#8B5CF6; --pd:#4C1D95; --pa:rgba(221,210,255,0.55); --pg:rgba(167,139,250,0.55)"><span class="constel-dot"></span><span class="constel-label">Atendimento</span></div>
-              <div class="constel-node" data-node style="--i:1; --pb:#6366F1; --pd:#312E81; --pa:rgba(199,210,254,0.55); --pg:rgba(129,140,248,0.5)"><span class="constel-dot"></span><span class="constel-label">Comercial</span></div>
-              <div class="constel-node" data-node style="--i:2; --pb:#2DD4BF; --pd:#0F5F58; --pa:rgba(204,251,241,0.5); --pg:rgba(45,212,191,0.45)"><span class="constel-dot"></span><span class="constel-label">Operações</span></div>
-              <div class="constel-node" data-node style="--i:3; --pb:#E0A75E; --pd:#7C4310; --pa:rgba(254,238,205,0.55); --pg:rgba(240,180,110,0.42)"><span class="constel-dot"></span><span class="constel-label">Financeiro</span></div>
-              <div class="constel-node" data-node style="--i:4; --pb:#E879A8; --pd:#8B1F53; --pa:rgba(255,224,238,0.5); --pg:rgba(232,121,168,0.42)"><span class="constel-dot"></span><span class="constel-label">Dados</span></div>
+              {constelNodes.map((n) => (
+                <a class="constel-node" data-node href={href(`/solucoes/${n.slug}`)} aria-label={areaLabels[n.slug]} style={n.style}><span class="constel-dot"></span><span class="constel-label">{areaLabels[n.slug]}</span></a>
+              ))}
             </div>
           </div>
         </div>
@@ -848,8 +868,8 @@ const t = useTranslations();
           <h2>{t('ctaFinal.title')}<br><span class="gradient-text">{t('ctaFinal.titleAccent')}</span></h2>
           <p>{t('ctaFinal.sub')}</p>
           <div class="cta-btns">
-            <a href="/contato" class="btn btn-primary">{t('ctaFinal.ctaPrimary')}</a>
-            <a href="/blog" class="btn btn-ghost">{t('ctaFinal.ctaSecondary')}</a>
+            <a href={href('/contato')} class="btn btn-primary">{t('ctaFinal.ctaPrimary')}</a>
+            <a href={href('/blog')} class="btn btn-ghost">{t('ctaFinal.ctaSecondary')}</a>
           </div>
         </div>
       </div>
@@ -1842,8 +1862,19 @@ const t = useTranslations();
   .constel-node {
     position: absolute; top: 50%; left: 50%; z-index: 20;
     display: flex; flex-direction: column; align-items: center; gap: 7px;
-    pointer-events: auto; cursor: default; will-change: transform, opacity, filter;
+    pointer-events: auto; cursor: pointer; text-decoration: none; color: inherit;
+    will-change: transform, opacity, filter;
     transform: translate(-50%,-50%) rotate(calc(var(--i) * 72deg - 90deg)) translateY(-156px) rotate(calc(var(--i) * -72deg + 90deg));
+  }
+  .constel-node:focus-visible { outline: none; }
+  .constel-node:focus-visible .constel-label {
+    color: #F3EEFF; background: rgba(167,139,250,0.16);
+    border-color: var(--accent); box-shadow: 0 0 0 2px rgba(167,139,250,0.45);
+  }
+  .constel-node:focus-visible .constel-dot {
+    box-shadow: 0 0 0 3px rgba(167,139,250,0.5),
+      0 0 16px 2px var(--pg, rgba(167,139,250,0.55)),
+      inset -3px -4px 8px rgba(0,0,0,0.5), inset 2px 2px 6px rgba(255,255,255,0.30);
   }
   /* Cada nó é um pequeno planeta: corpo esférico com luz vinda do alto-
      esquerda, sombra do terminador (inset escuro embaixo-direita) e halo

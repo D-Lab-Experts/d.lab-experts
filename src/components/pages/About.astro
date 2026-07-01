@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 
 // Frentes de implementação: cada item vem como "Categoria: descrição".
 // Quebramos no primeiro ":" pra renderizar cada frente como um card
@@ -27,6 +29,7 @@ const fronts = [
   title={t('pageTitles.about')}
   description={t('pageTitles.aboutDescription')}
   active="about"
+  locale={locale}
 >
   <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
   <section class="about-hero">
@@ -252,8 +255,8 @@ const fronts = [
       <h2>{t('aboutPage.ctaTitleLead')}<br /><span class="gradient-text">{t('aboutPage.ctaTitleAccent')}</span></h2>
       <p>{t('aboutPage.ctaLead')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/contato" class="btn btn-primary">{t('aboutPage.ctaPrimary')}</a>
-        <a href="/#como-funciona" class="btn btn-ghost">{t('aboutPage.ctaSecondary')}</a>
+        <a href={href('/contato')} class="btn btn-primary">{t('aboutPage.ctaPrimary')}</a>
+        <a href={href('/#como-funciona')} class="btn btn-ghost">{t('aboutPage.ctaSecondary')}</a>
       </div>
     </div>
   </section>

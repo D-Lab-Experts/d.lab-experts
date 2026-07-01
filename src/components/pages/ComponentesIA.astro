@@ -1,15 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NeuralNetwork from '../NeuralNetwork.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
 
-const t = useTranslations();
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 ---
 
 <Layout
   title={t('pageTitles.componentesIa')}
   description={t('pageTitles.componentesIaDescription')}
   active="solucoes"
+  locale={locale}
 >
   <!-- ═══════════════ HERO ═════════════════════════════════════════ -->
   <section class="cia-hero">
@@ -18,7 +21,7 @@ const t = useTranslations();
     <NeuralNetwork color="white" density="low" opacity={0.12} />
     <div class="container">
       <div class="cia-hero-inner fi">
-        <a class="cia-breadcrumb" href="/solucoes">{t('componentesIaPage.heroBreadcrumbBack')}</a>
+        <a class="cia-breadcrumb" href={href('/solucoes')}>{t('componentesIaPage.heroBreadcrumbBack')}</a>
         <div class="cia-eyebrow">
           <span style="width:22px;height:1px;background:var(--grad);display:block"></span>
           {t('componentesIaPage.heroEyebrow')}
@@ -59,7 +62,7 @@ const t = useTranslations();
 
       <div class="cia-grid">
         <!-- SKILL 1 — Research & Statistics Engine -->
-        <a class="cia-card fi" href="/componentes-ia/research-statistics-engine">
+        <a class="cia-card fi" href={href('/componentes-ia/research-statistics-engine')}>
           <div class="cia-card-head">
             <span class="cia-card-status">
               <span class="cia-card-dot"></span>
@@ -119,8 +122,8 @@ const t = useTranslations();
       <h2>{t('componentesIaPage.ctaTitle')}</h2>
       <p>{t('componentesIaPage.ctaSub')}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/colaborar" class="btn btn-primary">{t('componentesIaPage.ctaPrimary')}</a>
-        <a href="/solucoes" class="btn btn-ghost">{t('componentesIaPage.ctaSecondary')}</a>
+        <a href={href('/colaborar')} class="btn btn-primary">{t('componentesIaPage.ctaPrimary')}</a>
+        <a href={href('/solucoes')} class="btn btn-ghost">{t('componentesIaPage.ctaSecondary')}</a>
       </div>
     </div>
   </section>

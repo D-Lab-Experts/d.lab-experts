@@ -2,12 +2,19 @@
 import Layout from './Layout.astro';
 import CitationBlock from '../components/CitationBlock.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { useTranslations, localize } from '../i18n/utils';
+import { htmlLang, localeNames, defaultLocale, type Locale } from '../i18n/ui';
 
 export interface Props {
   post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props;
+// A post's locale is intrinsic to the post (its `lang` field), not the
+// URL — legacy PT posts default to 'pt'.
+const locale: Locale = (post.data.lang as Locale | undefined) ?? defaultLocale;
+const t = useTranslations(locale);
+const href = (path: string) => localize(path, locale);
 const {
   title,
   subtitle,
@@ -30,7 +37,9 @@ const {
   mentions,
 } = post.data;
 
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+// Only surface siblings in the same locale for "related" + fallback.
+const allPosts = await getCollection('blog', ({ data }) =>
+  !data.draft && ((data.lang as Locale | undefined) ?? defaultLocale) === locale);
 
 const relatedPosts = allPosts
   .filter((p) => p.slug !== post.slug)
@@ -52,17 +61,32 @@ if (relatedPosts.length === 0) {
   relatedPosts.push(...fallback);
 }
 
+// Cross-locale sibling → powers the language switcher + hreflang on
+// posts. PT post: its EN sibling declares `translationOf === slug`.
+// EN post: its PT sibling has `slug === translationOf`.
+const everyPost = await getCollection('blog', ({ data }) => !data.draft);
+const sibling = locale === defaultLocale
+  ? everyPost.find((p) => p.data.translationOf === post.slug)
+  : everyPost.find((p) => p.slug === post.data.translationOf);
+const alternateUrls: Partial<Record<Locale, string>> = {
+  [locale]: localize(`/posts/${post.slug}`, locale),
+};
+if (sibling) {
+  const sibLocale: Locale = (sibling.data.lang as Locale | undefined) ?? defaultLocale;
+  alternateUrls[sibLocale] = localize(`/posts/${sibling.slug}`, sibLocale);
+}
+
 const formatRelDate = (d: Date) =>
-  d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
+  d.toLocaleDateString(locale === 'en' ? 'en-US' : 'pt-BR', { year: 'numeric', month: 'long' });
 
 const isoPub = pubDate.toISOString();
 const isoMod = (updatedDate ?? pubDate).toISOString();
-const canonicalURL = new URL(`/posts/${post.slug}/`, Astro.site).toString();
+const canonicalURL = new URL(`${localize(`/posts/${post.slug}`, locale)}/`, Astro.site).toString();
 const imageURL = cover ? new URL(cover, Astro.site).toString() : new URL('/d.lab.png', Astro.site).toString();
 
 const allKeywords = Array.from(new Set([...(keywords ?? []), ...(tags ?? [])]));
 
-const articleInLang = 'pt-BR';
+const articleInLang = htmlLang[locale];
 
 // Google Scholar citation metadata — passed to Layout/BaseHead which
 // renders <meta name="citation_*"> tags in <head>. Also powers the
@@ -220,7 +244,7 @@ const breadcrumbLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'D.Lab', item: new URL('/', Astro.site).toString() },
-    { '@type': 'ListItem', position: 2, name: 'Análises Públicas', item: new URL('/blog', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: t('post.breadcrumbBlog'), item: new URL(href('/blog'), Astro.site).toString() },
     { '@type': 'ListItem', position: 3, name: title, item: canonicalURL },
   ],
 };
@@ -238,19 +262,16 @@ const faqLd =
       }
     : null;
 
-const keepReadingLabel = 'Continue lendo';
-const moreResearchLabel = 'Mais conteúdo do D.Lab';
-const readLabel = 'Ler';
-const originalResearchLabel = 'Conteúdo';
+const keepReadingLabel = t('post.keepReading');
+const moreResearchLabel = t('post.moreResearch');
+const readLabel = t('post.read');
+const originalResearchLabel = t('post.originalContent');
 
-// DRAFT: confirmar copy — ponte de conversão ao fim de cada estudo.
-// Sem venda agressiva: o estudo é a evidência pública; a ponte convida a
-// enquadrar onde a IA move eficiência e margem na operação do leitor.
-// Link para o contato já existente (Formspree → ImproveMX).
-const bridgeLabel = 'Do conteúdo à sua operação';
-const bridgeTitle = 'Esse conteúdo é aberto. E na sua operação?';
-const bridgeBody = 'Onde a IA move eficiência e margem no seu contexto? Vira um Diagnóstico de IA: mapeia o que vale automatizar e instrumentar, com impacto medido antes e depois.';
-const bridgeCta = 'Pedir um Diagnóstico de IA →';
+// Ponte de conversão ao fim de cada estudo. Copy no dicionário (post.*).
+const bridgeLabel = t('post.bridgeLabel');
+const bridgeTitle = t('post.bridgeTitle');
+const bridgeBody = t('post.bridgeBody');
+const bridgeCta = t('post.bridgeCta');
 ---
 
 <Layout
@@ -259,6 +280,8 @@ const bridgeCta = 'Pedir um Diagnóstico de IA →';
   image={cover}
   imageAlt={coverAlt}
   active="blog"
+  locale={locale}
+  alternateUrls={alternateUrls}
   type="article"
   publishedTime={isoPub}
   modifiedTime={isoMod}
@@ -298,7 +321,7 @@ const bridgeCta = 'Pedir um Diagnóstico de IA →';
         </div>
         <h2 class="study-bridge-title">{bridgeTitle}</h2>
         <p class="study-bridge-body">{bridgeBody}</p>
-        <a href="/contato" class="btn btn-primary study-bridge-cta">{bridgeCta}</a>
+        <a href={href('/contato')} class="btn btn-primary study-bridge-cta">{bridgeCta}</a>
       </div>
     </div>
   </section>
@@ -316,7 +339,7 @@ const bridgeCta = 'Pedir um Diagnóstico de IA →';
         <div class="related-grid">
           {relatedPosts.map((rp) => {
             return (
-              <a href={`/posts/${rp.slug}`} class="related-card">
+              <a href={href(`/posts/${rp.slug}`)} class="related-card">
                 {rp.data.cover && (
                   <div class="related-card-img">
                     <img src={rp.data.cover} alt={rp.data.coverAlt ?? ''} loading="lazy" />

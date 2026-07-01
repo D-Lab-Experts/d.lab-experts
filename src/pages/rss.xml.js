@@ -2,7 +2,9 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 
 export async function GET(context) {
-  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  // Single PT-BR feed — EN posts (data.lang === 'en') are excluded so
+  // the feed stays monolingual and every link resolves under /posts/.
+  const posts = (await getCollection('blog', ({ data }) => !data.draft && (data.lang ?? 'pt') === 'pt'))
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   return rss({
