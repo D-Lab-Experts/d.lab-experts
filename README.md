@@ -20,6 +20,8 @@
 
 ---
 
+> **Trabalho de Conclusão de Curso (TCC)** do curso de **Branding, Marketing & Growth** da **PUCRS**, de autoria de Gabriel Olegário.
+
 ## O que é o D.Lab
 
 Laboratório brasileiro de pesquisa aplicada em **inteligência de dados** e **cybersegurança**. Trabalhamos sob NDA para empresas que não podem errar a próxima decisão, nem a próxima exposição.
