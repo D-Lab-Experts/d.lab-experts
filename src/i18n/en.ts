@@ -562,7 +562,6 @@ const en: Translation = {
     colContact: 'Contact',
     linkPublications: 'Blog',
     linkAgenda: 'Use cases',
-    linkCollaborate: 'WhatsApp community',
     linkSolucoes: 'Services',
     linkImprensa: 'Press room',
     linkRss: 'Blog RSS',
@@ -573,7 +572,6 @@ const en: Translation = {
     linkForm: 'Form',
     linkEmail: 'Direct email',
     linkWhatsapp: 'WhatsApp',
-    linkCommunity: 'WhatsApp community',
     linkLinkedin: 'LinkedIn',
     sealText: 'AI Implementation',
     copyright: 'D.Lab Experts · AI agency and consultancy. All rights reserved.',
@@ -644,8 +642,6 @@ const en: Translation = {
     colabChipReview: 'Peer review',
     colabCtaPrimary: 'Collaboration proposal →',
     colabCtaSecondary: 'How it works',
-    // DRAFT: confirm copy — invitation to the WhatsApp community, featured on the Home.
-    colabCommunityLine: 'Join the researcher community on WhatsApp →',
   },
 
   // PostLayout labels (breadcrumb, related, conversion bridge).
@@ -781,7 +777,7 @@ const en: Translation = {
     altColabMailBody:
       'Hi Gabriel,\n\nI wanted to talk about collaborating with D.Lab. Below is a bit of my interest, even though I do not yet have anything structured to propose.\n\nWho is speaking:\nAffiliation (institution, field, career stage):\nWhat interests me in the D.Lab agenda:\nResearch, dataset, or question I bring (optional):\n\nThank you.',
     altRawLabel: 'Direct',
-    altRawEmail: 'gabriel@dlabexperts.com',
+    altRawEmail: 'olegas@4real.ventures',
     altRawWhatsapp: '+55 11 93327-9420',
     formSubject: '[D.Lab Experts] New contact from the site',
     fieldName: 'Full name',
@@ -896,6 +892,8 @@ const en: Translation = {
     formLabel: 'Proposal',
     formTitle: 'Propose a collaboration',
     formSub: 'The more context you bring, the faster we reply. But even a raw idea goes through screening.',
+    emailLead: 'Send your collaboration proposal straight to our inbox — tell us the context, the front you’re interested in, and the format. We reply personally.',
+    emailCta: 'Send proposal by email →',
     fieldFieldWork: 'Field of work',
     fieldFieldWorkPh: 'e.g., economist, researcher, founder',
     fieldLine: 'Research agenda line',
@@ -912,21 +910,6 @@ const en: Translation = {
     fieldProposal: 'Proposal',
     fieldProposalPh: 'Describe what you are proposing: research question, hypothesis, current state of the work, data or methodology involved, what you expect from the collaboration.',
     consentFull: 'I authorize D.Lab Experts to respond to this proposal and, if there is a fit, to start a conversation about collaboration.',
-    // DRAFT: confirm copy — CTA for the researcher community on WhatsApp (already live).
-    communityLabel: 'Community',
-    communityTitle: 'Join the researcher community',
-    communityBody: 'Open discussions, research calls, and the behind-the-scenes of the method. It is where collaboration starts before it becomes a formal proposal.',
-    communityCta: 'Join the community →',
-  },
-
-  obrigadoPage: {
-    heading: 'Message received.',
-    subPrefix: 'Thank you for reaching out. A senior analyst at D.Lab Experts replies within',
-    subStrong: '1 business day',
-    subTail: '. Keep an eye on your inbox, and the spam folder too just in case.',
-    nextLabel: 'In the meantime, explore',
-    ctaPrimary: 'Read the open analyses →',
-    ctaSecondary: 'Back to home',
   },
 
   solucoesPage: {
@@ -1101,7 +1084,7 @@ const en: Translation = {
 
     contactLabel: 'Press contact',
     contactEmailLabel: 'Direct email',
-    contactEmail: 'gabriel@dlabexperts.com',
+    contactEmail: 'olegas@4real.ventures',
     contactResponse: 'Response within 1 business day',
     contactLinkedinLabel: 'LinkedIn',
     contactLinkedinHandle: '@d-lab-intelligence',

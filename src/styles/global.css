@@ -1378,35 +1378,6 @@ ul, ol { list-style: none; }
   justify-content: center;
   flex-wrap: wrap;
 }
-/* Convite da comunidade no WhatsApp — destaque discreto abaixo dos CTAs. */
-.home-colab-community {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 22px;
-  padding: 10px 18px;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.04);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--white);
-  text-decoration: none;
-  transition: border-color .25s, background .25s, gap .25s;
-}
-.home-colab-community:hover {
-  border-color: rgba(255, 255, 255, 0.45);
-  background: rgba(255, 255, 255, 0.08);
-  gap: 14px;
-}
-.home-colab-community-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 10px var(--green);
-}
-
 /* ═══════════ METHODOLOGY — SOURCES PILL STRIP ═══════════════════ */
 /* Compact source inventory inside the methodology section. Replaces
    the old six-card "Data Sources" grid: sources are part of "how we
@@ -2008,6 +1979,76 @@ ul, ol { list-style: none; }
 .foot-seal-icon { width: 16px; height: 16px; border-radius: 4px; object-fit: contain; }
 .foot-bottom { border-top: 1px solid var(--border); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; }
 .foot-bottom p { font-size: 13px; color: var(--dimmed); }
+
+/* Selo "A venture of 4/RL Co." — lockup de marca na base do rodapé,
+   separado por uma hairline. É o ÚNICO ponto do rodapé com o lime do
+   4/RL (#C6FF3A): só no mark e na "/". As letras do wordmark e o kicker
+   usam os tokens do D.Lab (ink/muted) e se adaptam ao tema. */
+.foot-venture {
+  border-top: 1px solid var(--border);
+  padding: 16px 0 4px;
+  text-align: center;
+}
+.venture-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 4px 6px;
+  transition: transform 0.2s ease;
+}
+.venture-mark {
+  display: inline-flex;
+  line-height: 0;
+  transition: filter 0.2s ease;
+}
+.venture-mark svg { display: block; }
+.venture-copy {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+  text-align: left;
+}
+.venture-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 1.1;
+}
+.venture-wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15.5px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+/* A "/" acompanha exatamente altura e peso das letras — só a cor muda. */
+.venture-slash { color: #C6FF3A; }
+.venture-co { color: var(--text-dim); font-weight: 700; }
+/* Hover/focus: leve elevação + brilho, sem movimento grande. Wordmark
+   vai a branco pleno; o mark ganha um glow lime sutil. */
+.venture-lockup:hover { transform: translateY(-1px); }
+.venture-lockup:hover .venture-wordmark { color: #fff; }
+.venture-lockup:hover .venture-mark { filter: drop-shadow(0 0 6px rgba(198, 255, 58, 0.5)); }
+.venture-lockup:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .venture-lockup { transition: none; }
+  .venture-lockup:hover { transform: none; }
+}
+/* Mobile: encolhe um tico, permanece legível e centralizado. */
+@media (max-width: 480px) {
+  .venture-wordmark { font-size: 14.5px; }
+  .venture-lockup { gap: 9px; }
+}
 
 /* ═══════════════════════════════════════════════════════════════
    ABOUT PAGE

@@ -7,10 +7,6 @@ const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const href = (path: string) => localize(path, locale);
 
-// TODO: trocar pelo endpoint real do Formspree (https://formspree.io/forms).
-// O e-mail capturado cai na sua base do Formspree quando o lead desbloqueia.
-const FORMSPREE = 'https://formspree.io/f/SEU_ID_FORMSPREE';
-
 const solutions = ['s1', 's2', 's3', 's4', 's5'] as const;
 ---
 

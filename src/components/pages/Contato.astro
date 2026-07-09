@@ -7,20 +7,22 @@ const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const href = (path: string) => localize(path, locale);
 
-// Formspree form ID. This is a public identifier (visible in the rendered
-// form action to any visitor), so there is no security benefit to reading
-// it from env vars. Hardcoded here for build-time reliability across
-// local dev, Vercel Preview and Production without env var config.
-// Override via PUBLIC_FORMSPREE_ID if you ever need a different target
-// (e.g. a staging form with separate notifications).
-const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_ID ?? 'mqegrdql';
-const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
+// Formulário de contato: embed inline do Tally. Cada idioma usa um form
+// próprio (o contato em inglês é um form separado). Substitui o antigo
+// Formspree; o script do widget é carregado só nesta página (is:inline).
+const PT_TALLY_ID = 'aQoWOv'; // form "D.Lab Experts - Proposta"
+const EN_TALLY_ID = 'dWV71A'; // form "D.Lab Experts - Services" (inglês)
+const TALLY_FORM_ID = locale === 'en' ? EN_TALLY_ID : PT_TALLY_ID;
+// Sem transparentBackground: o form usa o próprio fundo dark (#0E0E12) do
+// tema D.Lab. Com transparentBackground=1 o fundo saía branco (anulava o
+// dark do tema e revelava o branco padrão do iframe).
+const tallyEmbedSrc = `https://tally.so/embed/${TALLY_FORM_ID}?alignLeft=1&hideTitle=1&dynamicHeight=1`;
 
 // Canais diretos. WhatsApp e e-mail com mensagens pré-preenchidas,
 // segmentadas por intent (cliente / colaborador). O usuário pode
 // editar a mensagem antes de mandar.
 const WA_NUMBER = '5511933279420';
-const EMAIL_ADDR = 'gabriel@dlabexperts.com';
+const EMAIL_ADDR = 'olegas@4real.ventures';
 
 const clientWaUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t('contato.altClientWaText'))}`;
 const clientMailUrl = `mailto:${EMAIL_ADDR}?subject=${encodeURIComponent(t('contato.altClientMailSubject'))}&body=${encodeURIComponent(t('contato.altClientMailBody'))}`;
@@ -128,153 +130,57 @@ const colabMailUrl = `mailto:${EMAIL_ADDR}?subject=${encodeURIComponent(t('conta
         </aside>
 
         <div class="contact-form-wrap">
-          <form
-            class="contact-form"
-            action={formAction}
-            method="POST"
-            data-track="contact_form_submit"
-          >
-            <input type="hidden" name="_subject" value={t('contato.formSubject')} />
-            <!-- Honeypot anti-spam (Formspree ignores if filled) -->
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-
-            <div class="cf-row">
-              <label class="cf-field">
-                <span class="cf-label">{t('contato.fieldName')}</span>
-                <input type="text" name="name" required placeholder={t('contato.fieldNamePh')} autocomplete="name" />
-              </label>
-              <label class="cf-field">
-                <span class="cf-label">{t('contato.fieldEmail')}</span>
-                <input type="email" name="email" required placeholder={t('contato.fieldEmailPh')} autocomplete="email" />
-              </label>
-            </div>
-
-            <div class="cf-row">
-              <label class="cf-field">
-                <span class="cf-label">{t('contato.fieldCompany')}</span>
-                <input type="text" name="company" required placeholder={t('contato.fieldCompanyPh')} autocomplete="organization" />
-              </label>
-              <label class="cf-field">
-                <span class="cf-label">{t('contato.fieldRole')}</span>
-                <input type="text" name="role" placeholder={t('contato.fieldRolePh')} />
-              </label>
-            </div>
-
-            <div class="cf-row">
-              <label class="cf-field">
-                <span class="cf-label">{t('contato.fieldVertical')}</span>
-                <select name="vertical" required>
-                  <option value="">{t('contato.fieldSelectPlaceholder')}</option>
-                  <option>{t('contato.verticalMarket')}</option>
-                  <option>{t('contato.verticalCompetitive')}</option>
-                  <option>{t('contato.verticalAudience')}</option>
-                  <option>{t('contato.verticalTrends')}</option>
-                  <option>{t('contato.verticalAI')}</option>
-                  <option>{t('contato.verticalUnsure')}</option>
-                </select>
-              </label>
-              <label class="cf-field">
-                <span class="cf-label">{t('contato.fieldSize')}</span>
-                <select name="size" required>
-                  <option value="">{t('contato.fieldSelectPlaceholder')}</option>
-                  <option>{t('contato.sizeMicro')}</option>
-                  <option>{t('contato.sizeSmall')}</option>
-                  <option>{t('contato.sizeMid')}</option>
-                  <option>{t('contato.sizeLarge')}</option>
-                  <option>{t('contato.sizeSkip')}</option>
-                </select>
-              </label>
-            </div>
-
-            <label class="cf-field">
-              <span class="cf-label">{t('contato.fieldMessage')}</span>
-              <textarea
-                name="message"
-                rows="5"
-                required
-                placeholder={t('contato.fieldMessagePh')}
-              ></textarea>
-            </label>
-
-            <div class="cf-consent">
-              <label>
-                <input type="checkbox" name="consent" required />
-                <span>{t('contato.consent')}</span>
-              </label>
-            </div>
-
-            <button type="submit" class="btn btn-primary cf-submit" data-sending={t('contato.submitSending')}>
-              {t('contato.submit')}
-            </button>
-
-            <div class="cf-error" role="alert" hidden>
-              {t('contato.errorLead')}
-              <a href="mailto:gabriel@dlabexperts.com">gabriel@dlabexperts.com</a>.
-            </div>
-
-            <p class="cf-footnote">{t('contato.footnote')}</p>
-          </form>
+          <!-- Formulário via Tally (embed inline). O form já vem estilizado
+               com as cores do D.Lab (dark + lilás) na conta do Tally, e
+               transparentBackground=1 deixa o fundo da seção aparecer, então
+               o container não usa card de cor própria. dynamicHeight=1 faz o
+               iframe se ajustar sozinho — sem altura fixa que brigue. -->
+          <iframe
+            data-tally-src={tallyEmbedSrc}
+            loading="lazy"
+            width="100%"
+            height="500"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="D.Lab Experts - Proposta"
+            class="contact-tally-iframe"
+          ></iframe>
+          <p class="cf-footnote">{t('contato.footnote')}</p>
         </div>
       </div>
     </div>
   </section>
 </Layout>
 
-<script>
-  // ── Formspree AJAX submit with custom redirect ──────────────────
-  // Formspree's free tier does NOT honor the `_next` redirect field, so we
-  // intercept the submit, POST via fetch with Accept: application/json, and
-  // handle navigation ourselves. Native submit remains as fallback if JS is
-  // blocked (in that degraded case, user lands on Formspree's own thanks page).
-  const form = document.querySelector<HTMLFormElement>('.contact-form');
-  const submitBtn = form?.querySelector<HTMLButtonElement>('.cf-submit');
-  const errorBox = form?.querySelector<HTMLDivElement>('.cf-error');
-
-  if (form && submitBtn && errorBox) {
-    const originalBtnText = submitBtn.textContent?.trim() ?? 'Send proposal →';
-    const sendingText = submitBtn.dataset.sending ?? 'Sending…';
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      errorBox.hidden = true;
-      submitBtn.disabled = true;
-      submitBtn.textContent = sendingText;
-
-      // Fire Vercel Analytics custom event (non-blocking, guarded).
-      const vertical = (form.querySelector('select[name="vertical"]') as HTMLSelectElement | null)?.value;
-      // @ts-ignore — va is injected globally by @vercel/analytics
-      if (typeof window.va === 'function') {
-        // @ts-ignore
-        window.va('event', {
-          name: form.dataset.track || 'contact_form_submit',
-          data: { vertical: vertical || 'not_set' },
-        });
+<!-- Loader do Tally (embed inline). Snippet dinâmico oficial: injeta o
+     widget uma vez e inicializa os iframes [data-tally-src]. Como fallback
+     (se o script não carregar), aponta o iframe direto pro src. Escopado a
+     esta página; roda a cada carga (o site é MPA). -->
+<script is:inline>
+  (function () {
+    var widget = 'https://tally.so/widgets/embed.js';
+    var load = function () {
+      if (typeof Tally !== 'undefined') {
+        Tally.loadEmbeds();
+        return;
       }
-
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' },
+      document
+        .querySelectorAll('iframe[data-tally-src]:not([src])')
+        .forEach(function (el) {
+          el.src = el.dataset.tallySrc;
         });
-
-        if (response.ok) {
-          window.location.href = location.pathname.startsWith('/en') ? '/en/contato/obrigado' : '/contato/obrigado';
-          return;
-        }
-
-        // Formspree returns 4xx/5xx with a JSON body describing the error.
-        // We don't surface the raw message (spam detection etc) — just a
-        // generic retry prompt with mailto fallback.
-        throw new Error(`Formspree responded ${response.status}`);
-      } catch (err) {
-        console.error('[contact form]', err);
-        errorBox.hidden = false;
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
-      }
-    });
-  }
+    };
+    if (typeof Tally !== 'undefined') {
+      load();
+    } else if (document.querySelector('script[src="' + widget + '"]') === null) {
+      var s = document.createElement('script');
+      s.src = widget;
+      s.onload = load;
+      s.onerror = load;
+      document.body.appendChild(s);
+    }
+  })();
 </script>
 
 <style>
@@ -410,14 +316,22 @@ const colabMailUrl = `mailto:${EMAIL_ADDR}?subject=${encodeURIComponent(t('conta
   .contact-raw-line a:hover { color: var(--lilac); }
 
   /* ── Form ────────────────────────────────────────────────────── */
+  /* Container do embed do Tally: flush, sem card de cor própria — o
+     form do Tally já é dark e transparentBackground=1 deixa o fundo da
+     seção aparecer. Sem altura fixa que brigue com dynamicHeight. */
   .contact-form-wrap {
-    background: rgba(30, 30, 42, 0.55);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(234,234,240, 0.12);
-    border-radius: 22px;
-    padding: 38px 36px;
-    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.3), 0 0 40px rgba(234,234,240, 0.03);
+    background: transparent;
+    border: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  .contact-tally-iframe {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    margin: 0;
+    color-scheme: dark;
   }
   .contact-form { display: flex; flex-direction: column; gap: 18px; }
   .cf-row {
@@ -505,7 +419,5 @@ const colabMailUrl = `mailto:${EMAIL_ADDR}?subject=${encodeURIComponent(t('conta
   @media (max-width: 1023px) {
     .contact-layout { grid-template-columns: 1fr; gap: 40px; }
     .contact-aside { position: static; }
-    .contact-form-wrap { padding: 28px 24px; }
-    .cf-row { grid-template-columns: 1fr; }
   }
 </style>

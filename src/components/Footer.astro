@@ -28,7 +28,6 @@ const year = new Date().getFullYear();
         <ul>
           <li><a href={href('/blog')}>{t('footer.linkPublications')}</a></li>
           <li><a href={href('/#casos')}>{t('footer.linkAgenda')}</a></li>
-          <li><a href="https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk" target="_blank" rel="noopener noreferrer">{t('footer.linkCollaborate')}</a></li>
           <li><a href={href('/solucoes')}>{t('footer.linkSolucoes')}</a></li>
           <li><a href="/rss.xml">{t('footer.linkRss')}</a></li>
         </ul>
@@ -46,9 +45,8 @@ const year = new Date().getFullYear();
         <h4>{t('footer.colContact')}</h4>
         <ul>
           <li><a href={href('/contato')}>{t('footer.linkForm')}</a></li>
-          <li><a href="mailto:gabriel@dlabexperts.com">{t('footer.linkEmail')}</a></li>
+          <li><a href="mailto:olegas@4real.ventures">{t('footer.linkEmail')}</a></li>
           <li><a href="https://wa.me/5511933279420" target="_blank" rel="noopener noreferrer">{t('footer.linkWhatsapp')}</a></li>
-          <li><a href="https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk" target="_blank" rel="noopener noreferrer">{t('footer.linkCommunity')}</a></li>
           <li><a href={href('/imprensa')}>{t('footer.linkImprensa')}</a></li>
           <li><a href="https://www.linkedin.com/company/d-lab-intelligence" target="_blank" rel="noopener noreferrer">{t('footer.linkLinkedin')}</a></li>
         </ul>
@@ -65,6 +63,36 @@ const year = new Date().getFullYear();
     <div class="foot-bottom">
       <p>&copy; {year} {t('footer.copyright')}</p>
       <p>{t('footer.city')}</p>
+    </div>
+
+    <!-- Selo de venture: lockup de marca do 4/RL. Unico ponto do rodape
+         com o lime do 4/RL — so no mark e na "/" do wordmark. Nada mais e
+         recolorido; separado do conteudo do D.Lab por uma hairline.
+         Bloco isolado e reversivel. -->
+    <div class="foot-venture">
+      <a
+        class="venture-lockup"
+        href="https://4real.ventures"
+        target="_blank"
+        rel="noopener"
+        aria-label="A venture of 4/RL Co. — opens in a new tab"
+      >
+        <span class="venture-mark" aria-hidden="true">
+          <svg viewBox="0 0 100 100" width="26" height="26" aria-hidden="true">
+            <mask id="ventureCut">
+              <rect x="10" y="10" width="80" height="80" rx="16" fill="#fff" />
+              <path d="M60 17 L73 17 L40 83 L27 83 Z" fill="#000" />
+            </mask>
+            <rect x="10" y="10" width="80" height="80" rx="16" fill="#C6FF3A" mask="url(#ventureCut)" />
+          </svg>
+        </span>
+        <span class="venture-copy">
+          <span class="venture-kicker">A venture of</span>
+          <span class="venture-wordmark"
+            ><span class="venture-word">4</span><span class="venture-slash">/</span><span class="venture-word">RL</span> <span class="venture-co">Co.</span></span
+          >
+        </span>
+      </a>
     </div>
   </div>
 </footer>
