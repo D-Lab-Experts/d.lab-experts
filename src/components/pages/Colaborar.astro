@@ -7,14 +7,10 @@ const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const href = (path: string) => localize(path, locale);
 
-// Formspree endpoint dedicated to research collaboration proposals.
-// Public-facing ID (visible in form action markup), so hardcoded with
-// env override for flexibility between environments.
-const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_COLABORAR_ID ?? 'xpqkabpk';
-const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
-
-// Comunidade de pesquisadores no WhatsApp (já no ar). Link público.
-const COMMUNITY_WA_URL = 'https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk';
+// Colaboração agora é por e-mail direto (sem form): CTA que abre um
+// mailto pré-preenchido pro nosso inbox central.
+const EMAIL_ADDR = 'olegas@4real.ventures';
+const colabMailUrl = `mailto:${EMAIL_ADDR}?subject=${encodeURIComponent(t('colab.formSubject'))}`;
 ---
 
 <Layout
@@ -86,28 +82,6 @@ const COMMUNITY_WA_URL = 'https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk';
 
   <div class="section-sep"></div>
 
-  <!-- ═══════════════ COMMUNITY (WhatsApp) ═══════════════════════ -->
-  <!-- DRAFT: confirmar copy — CTA para a comunidade no WhatsApp. -->
-  <section class="colab-section">
-    <div class="container">
-      <div class="colab-community fi d1">
-        <div class="colab-community-copy">
-          <span class="label">{t('colab.communityLabel')}</span>
-          <h2 class="colab-community-title">{t('colab.communityTitle')}</h2>
-          <p class="colab-community-body">{t('colab.communityBody')}</p>
-        </div>
-        <a
-          class="btn btn-primary colab-community-cta"
-          href={COMMUNITY_WA_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-        >{t('colab.communityCta')}</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-sep"></div>
-
   <!-- ═══════════════ PROCESS ═══════════════════════════════════ -->
   <section class="colab-section">
     <div class="section-glow blue" data-parallax="0.08" style="top:40%;left:-100px"></div>
@@ -155,155 +129,18 @@ const COMMUNITY_WA_URL = 'https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk';
       </div>
 
       <div class="colab-form-wrap fi d1">
-        <form
-          class="colab-form"
-          action={formAction}
-          method="POST"
-          data-track="collaboration_form_submit"
-        >
-          <input type="hidden" name="_subject" value={t('colab.formSubject')} />
-          <!-- Honeypot anti-spam (Formspree ignores submissions that fill it) -->
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-
-          <div class="cf-row">
-            <label class="cf-field">
-              <span class="cf-label">{t('colab.fieldName')}</span>
-              <input type="text" name="name" required placeholder={t('colab.fieldNamePh')} autocomplete="name" />
-            </label>
-            <label class="cf-field">
-              <span class="cf-label">{t('colab.fieldEmail')}</span>
-              <input type="email" name="email" required placeholder={t('colab.fieldEmailPh')} autocomplete="email" />
-            </label>
-          </div>
-
-          <div class="cf-row">
-            <label class="cf-field">
-              <span class="cf-label">{t('colab.fieldAffiliation')}</span>
-              <input type="text" name="affiliation" placeholder={t('colab.fieldAffiliationPh')} autocomplete="organization" />
-            </label>
-            <label class="cf-field">
-              <span class="cf-label">{t('colab.fieldFieldWork')}</span>
-              <input type="text" name="field" placeholder={t('colab.fieldFieldWorkPh')} />
-            </label>
-          </div>
-
-          <div class="cf-row">
-            <label class="cf-field">
-              <span class="cf-label">{t('colab.fieldMode')}</span>
-              <select name="mode" required>
-                <option value="">{t('contato.fieldSelectPlaceholder')}</option>
-                <option>{t('colab.modeOptSubmit')}</option>
-                <option>{t('colab.modeOptCo')}</option>
-                <option>{t('colab.modeOptData')}</option>
-                <option>{t('colab.modeOptPeer')}</option>
-                <option>{t('colab.modeOptIdea')}</option>
-              </select>
-            </label>
-            <label class="cf-field">
-              <span class="cf-label">{t('colab.fieldLine')}</span>
-              <select name="line" required>
-                <option value="">{t('contato.fieldSelectPlaceholder')}</option>
-                <option>{t('colab.lineMarkets')}</option>
-                <option>{t('colab.lineStrategy')}</option>
-                <option>{t('colab.lineTech')}</option>
-                <option>{t('colab.lineCompetitive')}</option>
-                <option>{t('colab.lineOther')}</option>
-              </select>
-            </label>
-          </div>
-
-          <label class="cf-field">
-            <span class="cf-label">{t('colab.fieldProposal')}</span>
-            <textarea
-              name="proposal"
-              rows="6"
-              required
-              placeholder={t('colab.fieldProposalPh')}
-            ></textarea>
-          </label>
-
-          <label class="cf-field">
-            <span class="cf-label">{t('colab.fieldLinks')}</span>
-            <input type="text" name="links" placeholder={t('colab.fieldLinksPh')} />
-          </label>
-
-          <div class="cf-consent">
-            <label>
-              <input type="checkbox" name="consent" required />
-              <span>{t('colab.consentFull')}</span>
-            </label>
-          </div>
-
-          <button type="submit" class="btn btn-primary cf-submit" data-sending={t('colab.submitSending')}>
-            {t('colab.submit')}
-          </button>
-
-          <div class="cf-error" role="alert" hidden>
-            {t('colab.errorLead')}
-            <a href="mailto:gabriel@dlabexperts.com">gabriel@dlabexperts.com</a>.
-          </div>
-
-          <p class="cf-footnote">{t('colab.footnote')}</p>
-        </form>
+        <!-- Colaboração por e-mail direto (sem form). CTA abre um mailto
+             pré-preenchido pro inbox central. -->
+        <div class="colab-email-cta">
+          <p class="colab-email-lead">{t('colab.emailLead')}</p>
+          <a class="btn btn-primary colab-email-btn" href={colabMailUrl}>{t('colab.emailCta')}</a>
+          <p class="colab-email-addr"><a href={`mailto:${EMAIL_ADDR}`}>{EMAIL_ADDR}</a></p>
+        </div>
       </div>
     </div>
   </section>
 
 </Layout>
-
-<script>
-  // ── Formspree AJAX submit with custom redirect ──────────────────
-  // Same pattern as /contato: intercept submit, POST via fetch with
-  // Accept: application/json, handle navigation ourselves. Native submit
-  // remains as JS-disabled fallback.
-  const form = document.querySelector<HTMLFormElement>('.colab-form');
-  const submitBtn = form?.querySelector<HTMLButtonElement>('.cf-submit');
-  const errorBox = form?.querySelector<HTMLDivElement>('.cf-error');
-
-  if (form && submitBtn && errorBox) {
-    const originalBtnText = submitBtn.textContent?.trim() ?? 'Send proposal →';
-    const sendingText = submitBtn.dataset.sending ?? 'Sending…';
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      errorBox.hidden = true;
-      submitBtn.disabled = true;
-      submitBtn.textContent = sendingText;
-
-      // Fire Vercel Analytics custom event (non-blocking, guarded).
-      const modo = (form.querySelector('select[name="modo"]') as HTMLSelectElement | null)?.value;
-      const linha = (form.querySelector('select[name="linha"]') as HTMLSelectElement | null)?.value;
-      // @ts-ignore, va is injected globally by @vercel/analytics
-      if (typeof window.va === 'function') {
-        // @ts-ignore
-        window.va('event', {
-          name: form.dataset.track || 'collaboration_form_submit',
-          data: { modo: modo || 'not_set', linha: linha || 'not_set' },
-        });
-      }
-
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' },
-        });
-
-        if (response.ok) {
-          window.location.href = location.pathname.startsWith('/en') ? '/en/contato/obrigado' : '/contato/obrigado';
-          return;
-        }
-
-        throw new Error(`Formspree responded ${response.status}`);
-      } catch (err) {
-        console.error('[collaboration form]', err);
-        errorBox.hidden = false;
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
-      }
-    });
-  }
-</script>
 
 <style>
   .colab-hero {
@@ -423,39 +260,6 @@ const COMMUNITY_WA_URL = 'https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk';
     line-height: 1.65;
   }
 
-  /* Community strip — convite discreto, sem competir com o form. */
-  .colab-community {
-    max-width: 980px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-    padding: 28px 32px;
-    background: linear-gradient(120deg, rgba(234,234,240,0.08), rgba(234,234,240,0.04) 70%, transparent);
-    border: 1px solid rgba(234,234,240,0.22);
-    border-radius: 18px;
-  }
-  .colab-community-copy { display: flex; flex-direction: column; gap: 8px; }
-  .colab-community-title {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    color: var(--white);
-    margin: 0;
-  }
-  .colab-community-body {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--muted);
-    margin: 0;
-    max-width: 560px;
-  }
-  .colab-community-cta { flex-shrink: 0; white-space: nowrap; }
-  @media (max-width: 720px) {
-    .colab-community { flex-direction: column; align-items: flex-start; padding: 24px 22px; }
-  }
-
   .colab-form-section {
     padding: 72px 28px 120px;
     position: relative;
@@ -476,6 +280,13 @@ const COMMUNITY_WA_URL = 'https://chat.whatsapp.com/C85TJhrlPHPE7UAJkXTAgk';
     padding: 40px 40px;
     box-shadow: 0 32px 80px rgba(0, 0, 0, 0.3), 0 0 40px rgba(234,234,240, 0.03);
   }
+  /* CTA de e-mail (substitui o antigo form) — centralizado no card. */
+  .colab-email-cta { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; }
+  .colab-email-lead { font-size: 16px; line-height: 1.7; color: var(--muted); margin: 0; max-width: 560px; }
+  .colab-email-addr { margin: 0; font-family: var(--font-mono); font-size: 13px; }
+  .colab-email-addr a { color: var(--lilac); text-decoration: none; }
+  .colab-email-addr a:hover { text-decoration: underline; }
+
   .colab-form { display: flex; flex-direction: column; gap: 18px; }
 
   .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
