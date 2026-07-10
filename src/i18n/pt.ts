@@ -34,7 +34,7 @@ const pt: Translation = {
     // implementação de IA baseada em evidência (pesquisa = motor).
     home: 'D.Lab Experts · Implementação de IA baseada em evidência',
     homeDescription:
-      'D.Lab Experts implementa IA e agentes para elevar eficiência e margem de médias empresas e scaleups, com diagnóstico que prova onde vale e impacto medido antes e depois. Adoção de IA baseada em evidência, com pesquisa aberta como motor de autoridade.',
+      'D.Lab Experts implementa IA e agentes para elevar a eficiência e a margem de médias empresas e scaleups, com diagnóstico que prova onde vale e impacto medido antes e depois.',
     about: 'Sobre | D.Lab Experts · Agência de IA',
     aboutDescription:
       'D.Lab Experts é uma agência e consultoria de implementação de IA para pequenas e médias empresas. Diagnóstico, agentes e automações sob medida, com impacto medido antes e depois.',
@@ -74,6 +74,7 @@ const pt: Translation = {
     // baseada em evidência. DNA anti-hype preservado ("instrumentar o que
     // a evidência prova", não automatizar no hype).
   hero: {
+    figureAlt: 'Ilustração futurista da marca D.Lab Experts: figura sobre fundo escuro com brilho lilás.',
     eyebrow: 'IMPLEMENTAÇÃO DE IA · COM PROVA',
     taglineLine1: 'IA que vira',
     taglineLine2: '',
@@ -198,6 +199,10 @@ const pt: Translation = {
     mediaDiagnosis: 'Diagnóstico',
     mediaImplementation: 'Implementação',
     mediaMeasurement: 'Medição',
+    // Alt text descritivo das mesmas mídias (acessibilidade + AEO).
+    mediaDiagnosisAlt: 'Etapa de diagnóstico: mapa do processo da empresa apontando onde a IA gera retorno.',
+    mediaImplementationAlt: 'Etapa de implementação: agentes e automações de IA integrados à operação.',
+    mediaMeasurementAlt: 'Etapa de medição: painel comparando indicadores da operação antes e depois da IA.',
     step1Tag: 'Passo 1',
     step1Title: 'Diagnóstico',
     step1Desc: 'Olhamos sua operação e provamos onde a IA dá retorno de verdade.',
@@ -1372,6 +1377,38 @@ const pt: Translation = {
 };
 
 export default pt;
+
+// ── FAQ da home (FAQPage JSON-LD + AEO) ───────────────────────────────
+// Perguntas reais que prospects fazem sobre o D.Lab. Renderizado como
+// schema.org/FAQPage no <head> da home (ver Home.astro). Boa prática:
+// respostas completas e autossuficientes (o motor de IA cita a resposta
+// sem precisar do resto da página), 40–320 caracteres, sem markup.
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+export const homeFaq: FaqItem[] = [
+  {
+    q: 'O que o D.Lab Experts faz?',
+    a: 'O D.Lab Experts é uma agência de implementação de IA para médias empresas e scaleups. Diagnosticamos onde a IA gera retorno, implementamos agentes e automações sob medida e medimos o impacto na eficiência e na margem antes e depois.',
+  },
+  {
+    q: 'Como funciona o processo de implementação de IA?',
+    a: 'Em três etapas: (1) diagnóstico, que prova onde a IA vale na sua operação; (2) implementação sob medida de agentes e automações integrados aos seus sistemas; (3) medição do impacto, comparando indicadores antes e depois.',
+  },
+  {
+    q: 'Para que tipo de empresa a IA do D.Lab é indicada?',
+    a: 'Para médias empresas e scaleups que querem elevar eficiência e margem sem hype nem caixa-preta. Atuamos em atendimento, comercial, operações, financeiro e dados, começando sempre por onde há retorno comprovado.',
+  },
+  {
+    q: 'Em quanto tempo aparecem resultados?',
+    a: 'O diagnóstico entrega em poucas semanas um mapa do que vale automatizar. A partir daí, cada frente implementada é medida contra a linha de base, então o retorno é acompanhado com número, não com promessa.',
+  },
+  {
+    q: 'O D.Lab troca ou trava a minha operação atual?',
+    a: 'Não. A IA e os agentes são acoplados às ferramentas e aos dados que você já usa, sem reescrever tudo. Começamos provando valor num escopo controlado e só avançamos no que dá retorno de verdade.',
+  },
+];
 
 // ── Páginas de área (constelação de serviços) ─────────────────────────
 // Cada nó da constelação na home (Atendimento, Comercial, Operações,

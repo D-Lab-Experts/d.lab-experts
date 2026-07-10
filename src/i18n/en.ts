@@ -35,7 +35,7 @@ const en: Translation = {
     // evidence-based AI implementation (research = the engine).
     home: 'D.Lab Experts · Evidence-based AI implementation',
     homeDescription:
-      'D.Lab Experts implements AI and agents to raise efficiency and margin for mid-sized companies and scaleups, with a diagnosis that proves where it pays off and measured impact, before and after. Evidence-based AI adoption, with open research as its engine of authority.',
+      'D.Lab Experts implements AI and agents to raise efficiency and margin for mid-sized companies and scaleups, with a diagnosis that proves where it pays off and impact measured before and after.',
     about: 'About | D.Lab Experts · AI Agency',
     aboutDescription:
       'D.Lab Experts is an AI implementation agency and consultancy for small and mid-sized businesses. Custom-built diagnosis, agents, and automations, with measured impact, before and after.',
@@ -75,6 +75,7 @@ const en: Translation = {
     // implementation. Anti-hype DNA preserved ("instrument what the
     // evidence proves", not automating on hype).
   hero: {
+    figureAlt: 'Futuristic D.Lab Experts brand illustration: a figure on a dark background with a lilac glow.',
     eyebrow: 'AI IMPLEMENTATION · WITH PROOF',
     taglineLine1: 'AI that turns into',
     taglineLine2: '',
@@ -199,6 +200,10 @@ const en: Translation = {
     mediaDiagnosis: 'Diagnosis',
     mediaImplementation: 'Implementation',
     mediaMeasurement: 'Measurement',
+    // Descriptive alt text for the same media (accessibility + AEO).
+    mediaDiagnosisAlt: 'Diagnosis step: a map of the company process pinpointing where AI pays off.',
+    mediaImplementationAlt: 'Implementation step: AI agents and automations wired into the operation.',
+    mediaMeasurementAlt: 'Measurement step: a dashboard comparing operational metrics before and after AI.',
     step1Tag: 'Step 1',
     step1Title: 'Diagnosis',
     step1Desc: 'We look at your operation and prove where AI truly returns.',
@@ -1372,6 +1377,38 @@ const en: Translation = {
 };
 
 export default en;
+
+// ── Home FAQ (FAQPage JSON-LD + AEO) ──────────────────────────────────
+// Real questions prospects ask about D.Lab. Rendered as a
+// schema.org/FAQPage in the home <head> (see Home.astro). Best practice:
+// self-contained answers (an AI engine can cite the answer without the
+// rest of the page), 40–320 characters, no markup.
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+export const homeFaq: FaqItem[] = [
+  {
+    q: 'What does D.Lab Experts do?',
+    a: 'D.Lab Experts is an AI implementation agency for mid-sized companies and scaleups. We diagnose where AI pays off, implement custom-built agents and automations, and measure the impact on efficiency and margin before and after.',
+  },
+  {
+    q: 'How does the AI implementation process work?',
+    a: 'In three steps: (1) a diagnosis that proves where AI pays off in your operation; (2) custom-built implementation of agents and automations wired into your systems; (3) impact measurement, comparing metrics before and after.',
+  },
+  {
+    q: 'What kind of company is D.Lab’s AI for?',
+    a: 'For mid-sized companies and scaleups that want to raise efficiency and margin with no hype and no black box. We work across support, sales, operations, finance, and data, always starting where the return is proven.',
+  },
+  {
+    q: 'How soon do results show up?',
+    a: 'The diagnosis delivers a map of what is worth automating within a few weeks. From there, every implemented workstream is measured against the baseline, so the return is tracked with numbers, not promises.',
+  },
+  {
+    q: 'Does D.Lab replace or disrupt my current operation?',
+    a: 'No. The AI and agents plug into the tools and data you already use, without rewriting everything. We start by proving value in a controlled scope and only scale what delivers real return.',
+  },
+];
 
 // ── Service area pages (services constellation) ───────────────────────
 // Each node of the constellation on the home (Support, Sales, Operations,
