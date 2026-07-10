@@ -3,8 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import Visual from '../Visual.astro';
 import MediaSlot from '../MediaSlot.astro';
 import { useTranslations, getLocaleFromUrl, localize } from '../../i18n/utils';
-import { serviceAreas as ptAreas } from '../../i18n/pt';
-import { serviceAreas as enAreas } from '../../i18n/en';
+import { serviceAreas as ptAreas, homeFaq as ptFaq } from '../../i18n/pt';
+import { serviceAreas as enAreas, homeFaq as enFaq } from '../../i18n/en';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
@@ -16,6 +16,21 @@ const href = (path: string) => localize(path, locale);
 const areaLabels = Object.fromEntries(
   (locale === 'en' ? enAreas : ptAreas).map((a) => [a.slug, a.label]),
 ) as Record<string, string>;
+// FAQPage structured data (schema.org). Boosts AI citation rate and is
+// eligible for FAQ rich results. Same Q&As shown to users could be
+// surfaced on-page later; for now the schema alone is a valid signal.
+const faqItems = locale === 'en' ? enFaq : ptFaq;
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': new URL(locale === 'en' ? '/en/' : '/', Astro.site).toString() + '#faq',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
 const constelNodes = [
   { slug: 'atendimento', style: '--i:0; --pb:#8B5CF6; --pd:#4C1D95; --pa:rgba(221,210,255,0.55); --pg:rgba(167,139,250,0.55)' },
   { slug: 'comercial', style: '--i:1; --pb:#6366F1; --pd:#312E81; --pa:rgba(199,210,254,0.55); --pg:rgba(129,140,248,0.5)' },
@@ -31,6 +46,10 @@ const constelNodes = [
   active="home"
   locale={locale}
 >
+  <!-- FAQPage structured data — impulsiona citação por motores de IA
+       e habilita rich results de FAQ. -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+
   <!-- Wrapper do site escuro futurista (acento lilás). Os tokens dark
        vêm do :root; .band-dark aprofunda bandas específicas (CTA). -->
   <div class="home-dark">
@@ -47,9 +66,9 @@ const constelNodes = [
 
     <!-- Figura futurista (lado direito). Arquivo fornecido depois; se
          ausente, esconde sem ícone quebrado e fica só o glow + wordmark. -->
-    <div class="hero-b-figure" aria-hidden="true">
-      <div class="hero-b-figure-glow"></div>
-      <img src="/herohat.png" alt="" class="hero-b-figure-img" width="900" height="1200" loading="eager" onerror="this.style.display='none'" />
+    <div class="hero-b-figure">
+      <div class="hero-b-figure-glow" aria-hidden="true"></div>
+      <img src="/herohat.png" alt={t('hero.figureAlt')} class="hero-b-figure-img" width="900" height="1200" loading="eager" onerror="this.style.display='none'" />
     </div>
 
     <!-- MEDIA SLOT: loop de fundo do herói. Descomente o <video> e
@@ -251,7 +270,7 @@ const constelNodes = [
       <div class="cf-steps fi d1">
         <div class="cf-step">
           <!-- MEDIA SLOT: mini-clipe do passo 1 (diagnóstico). -->
-          <MediaSlot img="/diagnosis.png" label={t('comoFunciona.mediaDiagnosis')} ratio="16 / 9" class="cf-step-media" />
+          <MediaSlot img="/diagnosis.png" label={t('comoFunciona.mediaDiagnosis')} alt={t('comoFunciona.mediaDiagnosisAlt')} ratio="16 / 9" class="cf-step-media" />
           <div class="cf-step-num">1</div>
           <div class="cf-step-tag">{t('comoFunciona.step1Tag')}</div>
           <h3 class="cf-step-title">{t('comoFunciona.step1Title')}</h3>
@@ -263,7 +282,7 @@ const constelNodes = [
         </div>
         <div class="cf-step cf-step-core">
           <!-- MEDIA SLOT: mini-clipe do passo 2 (implementação). -->
-          <MediaSlot img="/implementation.png" label={t('comoFunciona.mediaImplementation')} ratio="16 / 9" class="cf-step-media" />
+          <MediaSlot img="/implementation.png" label={t('comoFunciona.mediaImplementation')} alt={t('comoFunciona.mediaImplementationAlt')} ratio="16 / 9" class="cf-step-media" />
           <div class="cf-step-num">2</div>
           <div class="cf-step-tag">{t('comoFunciona.step2Tag')}</div>
           <h3 class="cf-step-title">{t('comoFunciona.step2Title')}</h3>
@@ -275,7 +294,7 @@ const constelNodes = [
         </div>
         <div class="cf-step">
           <!-- MEDIA SLOT: mini-clipe do passo 3 (medição/acompanhamento). -->
-          <MediaSlot img="/mesurement.png" label={t('comoFunciona.mediaMeasurement')} ratio="16 / 9" class="cf-step-media" />
+          <MediaSlot img="/mesurement.png" label={t('comoFunciona.mediaMeasurement')} alt={t('comoFunciona.mediaMeasurementAlt')} ratio="16 / 9" class="cf-step-media" />
           <div class="cf-step-num">3</div>
           <div class="cf-step-tag">{t('comoFunciona.step3Tag')}</div>
           <h3 class="cf-step-title">{t('comoFunciona.step3Title')}</h3>

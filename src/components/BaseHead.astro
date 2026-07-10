@@ -162,9 +162,38 @@ const defaultHref = altLinks.find((a) => a.loc === defaultLocale)?.href;
 <script type="application/ld+json" set:html={JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': new URL('/', Astro.site).toString() + '#org',
   name: t('meta.siteName'),
   url: Astro.site?.toString(),
   logo: new URL('/d.lab.png', Astro.site).toString(),
   description: t('meta.orgDescription'),
   sameAs: ['https://www.linkedin.com/company/d-lab-intelligence'],
 })} />
+
+<!-- Structured data: WebPage. Emitted for every content page except
+     articles (PostLayout already ships a richer Article schema, so we
+     skip WebPage there to avoid a competing mainEntity signal). Ties
+     the page to the Organization + a site-wide WebSite node so AI/search
+     crawlers can resolve author, publisher and language in one graph. -->
+{type !== 'article' && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': canonicalURL.toString() + '#webpage',
+    url: canonicalURL.toString(),
+    name: title,
+    description,
+    inLanguage: locale === 'pt' ? 'pt-BR' : 'en',
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': new URL('/', Astro.site).toString() + '#website',
+      url: new URL('/', Astro.site).toString(),
+      name: t('meta.ogSiteName'),
+      publisher: { '@id': new URL('/', Astro.site).toString() + '#org' },
+    },
+    about: { '@id': new URL('/', Astro.site).toString() + '#org' },
+    primaryImageOfPage: imageURL.toString(),
+    ...(modifiedTime ? { dateModified: modifiedTime } : {}),
+    ...(publishedTime ? { datePublished: publishedTime } : {}),
+  })} />
+)}

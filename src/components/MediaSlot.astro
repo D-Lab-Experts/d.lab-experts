@@ -11,6 +11,9 @@
 interface Props {
   ratio?: string;
   label?: string;
+  /** Descriptive alt text for the real image. Falls back to `label`
+      when omitted; decorative use can pass alt="" explicitly. */
+  alt?: string;
   src?: string;
   img?: string;
   poster?: string;
@@ -20,12 +23,16 @@ interface Props {
 const {
   ratio = '16 / 9',
   label = 'Prévia em breve',
+  alt,
   src,
   img,
   poster,
   class: cls = '',
   eager = false,
 } = Astro.props;
+// Use the explicit alt when provided (including an intentional ""),
+// otherwise describe the image with the localized label.
+const imgAlt = alt ?? label;
 ---
 <div class={`media-slot ${cls}`} style={`aspect-ratio:${ratio}`}>
   {img && (
@@ -33,7 +40,7 @@ const {
        o placeholder abaixo aparece nesse caso). */
     <img
       src={img}
-      alt=""
+      alt={imgAlt}
       class="media-slot-img"
       loading={eager ? 'eager' : 'lazy'}
       onerror="this.style.display='none'"
